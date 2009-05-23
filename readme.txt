@@ -3,13 +3,13 @@ Contributors: sudar
 Tags: post, bulk, move
 Requires at least: 2.5
 Tested up to: 2.7.1
-Stable tag: 0.1
+Stable tag: 0.2
 	
 Bulk move posts from selected categories or tags
 
 == Description ==
 
-Bulk Move is a WordPress Plugin which can be used to move posts in bulk from one category to anodther. This Plugin can also be used to remove posts from a certain category.
+Bulk Move is a WordPress Plugin which can be used to move posts in bulk from one category to another. This Plugin can also be used to remove posts from a certain category.
 
 You can get more information about the Plugin from the [Plugins Home Page][1].
 

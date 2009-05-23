@@ -2,15 +2,16 @@
 /*
 Plugin Name: Bulk Move
 Plugin Script: bulk-move.php
-Plugin URI: http://sudarmuthu.com/wordpress/
+Plugin URI: http://sudarmuthu.com/wordpress/bulk-move
 Description: Bulk move posts from selected categories or tags.
-Version: 0.1
+Version: 0.2
 License: GPL
 Author: Sudar
 Author URI: http://sudarmuthu.com/
 
 === RELEASE NOTES ===
 2009-02-04 - v0.1 - first version
+2009-05-08 - v0.2 - first version
 
 */
 
