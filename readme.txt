@@ -1,6 +1,7 @@
 === Bulk Move ===
 Contributors: sudar 
 Tags: post, bulk, move
+Donate Link: http://sudarmuthu.com/if-you-wanna-thank-me
 Requires at least: 2.5
 Tested up to: 3.0.1
 Stable tag: 0.3
