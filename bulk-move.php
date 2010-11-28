@@ -4,7 +4,7 @@ Plugin Name: Bulk Move
 Plugin Script: bulk-move.php
 Plugin URI: http://sudarmuthu.com/wordpress/bulk-move
 Description: Bulk move posts from selected categories or tags.
-Version: 0.2
+Version: 0.3
 License: GPL
 Author: Sudar
 Author URI: http://sudarmuthu.com/
@@ -12,9 +12,9 @@ Author URI: http://sudarmuthu.com/
 === RELEASE NOTES ===
 2009-02-04 - v0.1 - first version
 2009-05-08 - v0.2 - first version
+2010-11-28 - v0.3 - Fixes for blank screen issue. Thanks Carlos
 
 */
-
 
 /**
  * Request Handler
@@ -104,7 +104,7 @@ if (!function_exists('smbm_displayOptions')) {
 ?>
                     <option value="<?php echo $category->cat_ID; ?>">
                     <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e("Posts"); ?>)
-                    </option
+                    </option>
 <?php
         }
 ?>
@@ -119,7 +119,7 @@ if (!function_exists('smbm_displayOptions')) {
 ?>
                     <option value="<?php echo $category->cat_ID; ?>">
                     <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e("Posts"); ?>)
-                    </option
+                    </option>
 <?php
         }
 ?>
