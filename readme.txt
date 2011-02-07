@@ -3,8 +3,8 @@ Contributors: sudar
 Tags: post, bulk, move
 Donate Link: http://sudarmuthu.com/if-you-wanna-thank-me
 Requires at least: 2.5
-Tested up to: 3.0.1
-Stable tag: 0.3
+Tested up to: 3.0.4
+Stable tag: 0.4
 	
 Bulk move posts from selected categories or tags
 
@@ -12,9 +12,13 @@ Bulk move posts from selected categories or tags
 
 Bulk Move is a WordPress Plugin which can be used to move posts in bulk from one category to another. This Plugin can also be used to remove posts from a certain category.
 
+### Translation
+
+*   Brazilian Portuguese (Thanks Marcelo of [Criacao de Sites em Ribeirao Preto][6])
+
 ### Support
 
-Support for the Plugin is available from the [Plugin's home page][1]. If you have any questions or suggestions, do leave a comment there.
+Support for the Plugin is available from the [Plugin's home page][1]. If you have any questions or suggestions, do leave a comment there or contact me in [twitter][5].
 
 ### Links
 
@@ -28,7 +32,9 @@ If you looking for deleting posts, instead of just moving them, then use [Bulk D
 [2]: http://sudarmuthu.com/blog
 [3]: http://sudarmuthu.com/wordpress/
 [4]: http://sudarmuthu.com/wordpress/bulk-delete
-	
+[5]: http://twitter.com/sudarmuthu
+[6]: http://www.techload.com.br/
+
 == Installation ==
 
 Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page.
@@ -47,6 +53,10 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 *   Fixes for blank screen issue. Thanks Carlos
 
+###v0.4 (2011-02-07)
+
+*   Added Brazilian Portuguese translation
+
 ==Readme Generator== 
 
-This Readme file was generated using <a href = 'http://sudarmuthu.com/projects/wp-readme.php'>wp-readme</a>, which generates readme files for WordPress Plugins.
+This Readme file was generated using <a href = 'http://sudarmuthu.com/wordpress/wp-readme'>wp-readme</a>, which generates readme files for WordPress Plugins.

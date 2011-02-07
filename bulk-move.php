@@ -4,7 +4,8 @@ Plugin Name: Bulk Move
 Plugin Script: bulk-move.php
 Plugin URI: http://sudarmuthu.com/wordpress/bulk-move
 Description: Bulk move posts from selected categories or tags.
-Version: 0.3
+Version: 0.4
+Donate Link: http://sudarmuthu.com/if-you-wanna-thank-me
 License: GPL
 Author: Sudar
 Author URI: http://sudarmuthu.com/
@@ -13,7 +14,22 @@ Author URI: http://sudarmuthu.com/
 2009-02-04 - v0.1 - first version
 2009-05-08 - v0.2 - first version
 2010-11-28 - v0.3 - Fixes for blank screen issue. Thanks Carlos
+2011-02-08 - v0.4 - Added Brazilian Portuguese translation
 
+/*  Copyright 2009  Sudar Muthu  (email : sudar@sudarmuthu.com)
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License, version 2, as
+    published by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /**
@@ -72,7 +88,7 @@ if (!function_exists('smbm_request_handler')) {
  * Show moved notice messages
  */
 function smbm_moved_notice() {
-    echo "<div class = 'updated'><p>" . __("All the selected posts have been sucessfully moved.") ."</p></div>";
+    echo "<div class = 'updated'><p>" . __("All the selected posts have been sucessfully moved.", 'bulk-move') ."</p></div>";
 }
 
 /**
@@ -82,12 +98,12 @@ if (!function_exists('smbm_displayOptions')) {
     function smbm_displayOptions() {
         global $wpdb;
 ?>
-	<div class="updated fade" style="background:#ff0;text-align:center;color: red;"><p><strong><?php _e("WARNING: Posts moved once cannot be undone. Use with caution."); ?></strong></p></div>
+	<div class="updated fade" style="background:#ff0;text-align:center;color: red;"><p><strong><?php _e("WARNING: Posts moved once cannot be undone. Use with caution.", 'bulk-move'); ?></strong></p></div>
     <div class="wrap">
 		<h2>Bulk Move</h2>
 
-        <h3><?php _e("By Category"); ?></h3>
-        <h4><?php _e("On the left side, select the category whose post you want to move. In the right side select the category to which you want the posts to be moved.") ?></h4>
+        <h3><?php _e("By Category", 'bulk-move'); ?></h3>
+        <h4><?php _e("On the left side, select the category whose post you want to move. In the right side select the category to which you want the posts to be moved.", 'bulk-move') ?></h4>
 
         <form name="smbm_form" id = "smbm_cat_form"
         action="<?php echo get_bloginfo("wpurl"); ?>/wp-admin/options-general.php?page=bulk-move.php" method="post"
@@ -103,7 +119,7 @@ if (!function_exists('smbm_displayOptions')) {
         foreach ($categories as $category) {
 ?>
                     <option value="<?php echo $category->cat_ID; ?>">
-                    <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e("Posts"); ?>)
+                    <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e("Posts", 'bulk-move'); ?>)
                     </option>
 <?php
         }
@@ -113,12 +129,12 @@ if (!function_exists('smbm_displayOptions')) {
                 </td>
                 <td scope="row" >
                 <select name="smbm_mapped_cat">
-                <option value="-1"><?php _e("Remove Category"); ?></option>
+                <option value="-1"><?php _e("Remove Category", 'bulk-move'); ?></option>
 <?php
         foreach ($categories as $category) {
 ?>
                     <option value="<?php echo $category->cat_ID; ?>">
-                    <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e("Posts"); ?>)
+                    <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e("Posts", 'bulk-move'); ?>)
                     </option>
 <?php
         }
@@ -130,14 +146,14 @@ if (!function_exists('smbm_displayOptions')) {
 		</table>
 		</fieldset>
         <p class="submit">
-				<input type="submit" name="submit" value="<?php _e("Bulk Move ") ?>&raquo;">
+				<input type="submit" name="submit" value="<?php _e("Bulk Move ", 'bulk-move') ?>&raquo;">
         </p>
 
 <?php wp_nonce_field('bulk-move-cats'); ?>
 
 		<input type="hidden" name="smbm_action" value="bulk-move-cats" />
 		</form>
-        <p><em><?php _e("If you are looking to delete posts in bulk, try out my "); ?> <a href = "http://sudarmuthu.com/wordpress/bulk-delete"><?php _e("Bulk Delete Plugin");?></a>.</em></p>
+        <p><em><?php _e("If you are looking to delete posts in bulk, try out my ", 'bulk-move'); ?> <a href = "http://sudarmuthu.com/wordpress/bulk-delete"><?php _e("Bulk Delete Plugin", 'bulk-move');?></a>.</em></p>
     </div>
 <?php
 
@@ -169,9 +185,9 @@ function smbm_print_scripts() {
         }
 
         if (valid) {
-            return confirm("<?php _e('Are you sure you want to move all the selected posts'); ?>");
+            return confirm("<?php _e('Are you sure you want to move all the selected posts', 'bulk-move'); ?>");
         } else {
-            alert ("<?php _e('Please select atleast one'); ?>");
+            alert ("<?php _e('Please select at least one', 'bulk-move'); ?>");
             return false;
         }
     }
@@ -200,7 +216,7 @@ function smbm_filter_plugin_actions($links, $file) {
     if( ! $this_plugin ) $this_plugin = plugin_basename(__FILE__);
 
     if( $file == $this_plugin ) {
-        $settings_link = '<a href="options-general.php?page=bulk-move.php">' . _('Manage') . '</a>';
+        $settings_link = '<a href="options-general.php?page=bulk-move.php">' . _('Manage', 'bulk-move') . '</a>';
         array_unshift( $links, $settings_link ); // before other links
     }
     return $links;
@@ -211,7 +227,7 @@ function smbm_filter_plugin_actions($links, $file) {
  */
 function smbm_admin_footer() {
 	$plugin_data = get_plugin_data( __FILE__ );
-    printf('%1$s ' . __("plugin") .' | ' . __("Version") . ' %2$s | '. __('by') . ' %3$s<br />', $plugin_data['Title'], $plugin_data['Version'], $plugin_data['Author']);
+    printf('%1$s ' . __("plugin", 'bulk-move') .' | ' . __("Version", 'bulk-move') . ' %2$s | '. __('by', 'bulk-move') . ' %3$s<br />', $plugin_data['Title'], $plugin_data['Version'], $plugin_data['Author']);
 }
 
 add_filter( 'plugin_action_links', 'smbm_filter_plugin_actions', 10, 2 );

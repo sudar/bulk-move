@@ -1,0 +1,95 @@
+# Copyright (C) 2010 Bulk Move
+# This file is distributed under the same license as the Bulk Move package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Bulk Move 0.4\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/bulk-move\n"
+"POT-Creation-Date: 2011-02-07 16:20:41+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: bulk-move.php:91
+msgid "All the selected posts have been sucessfully moved."
+msgstr ""
+
+#: bulk-move.php:101
+msgid "WARNING: Posts moved once cannot be undone. Use with caution."
+msgstr ""
+
+#: bulk-move.php:105
+msgid "By Category"
+msgstr ""
+
+#: bulk-move.php:106
+msgid ""
+"On the left side, select the category whose post you want to move. In the "
+"right side select the category to which you want the posts to be moved."
+msgstr ""
+
+#: bulk-move.php:122 bulk-move.php:137
+msgid "Posts"
+msgstr ""
+
+#: bulk-move.php:132
+msgid "Remove Category"
+msgstr ""
+
+#: bulk-move.php:149
+msgid "Bulk Move "
+msgstr ""
+
+#: bulk-move.php:156
+msgid "If you are looking to delete posts in bulk, try out my "
+msgstr ""
+
+#: bulk-move.php:156
+msgid "Bulk Delete Plugin"
+msgstr ""
+
+#: bulk-move.php:188
+msgid "Are you sure you want to move all the selected posts"
+msgstr ""
+
+#: bulk-move.php:190
+msgid "Please select at least one"
+msgstr ""
+
+#: bulk-move.php:219
+msgid "Manage"
+msgstr ""
+
+#: bulk-move.php:230
+msgid "plugin"
+msgstr ""
+
+#: bulk-move.php:230
+msgid "Version"
+msgstr ""
+
+#: bulk-move.php:230
+msgid "by"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Bulk Move"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://sudarmuthu.com/wordpress/bulk-move"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Bulk move posts from selected categories or tags."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Sudar"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://sudarmuthu.com/"
+msgstr ""
