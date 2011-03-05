@@ -3,7 +3,7 @@ Contributors: sudar
 Tags: post, bulk, move
 Donate Link: http://sudarmuthu.com/if-you-wanna-thank-me
 Requires at least: 2.5
-Tested up to: 3.0.4
+Tested up to: 3.1
 Stable tag: 0.4
 	
 Bulk move posts from selected categories or tags
@@ -53,7 +53,7 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 *   Fixes for blank screen issue. Thanks Carlos
 
-###v0.4 (2011-02-07)
+###v0.4 (2011-02-08)
 
 *   Added Brazilian Portuguese translation
 
