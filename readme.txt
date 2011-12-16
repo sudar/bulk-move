@@ -3,8 +3,8 @@ Contributors: sudar
 Tags: post, bulk, move
 Donate Link: http://sudarmuthu.com/if-you-wanna-thank-me
 Requires at least: 2.5
-Tested up to: 3.2.1
-Stable tag: 0.6
+Tested up to: 3.3
+Stable tag: 0.7
 	
 Bulk move posts from selected categories or tags
 
@@ -68,6 +68,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 ###v0.6 (2011-11-19)
 
 *   Added Spanish translation
+###v0.7 (2011-12-16)
+
+*   Removed spaces from first line which was starting the output
 
 ==Readme Generator== 
 
