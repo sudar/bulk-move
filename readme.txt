@@ -3,8 +3,8 @@ Contributors: sudar
 Tags: post, bulk, move
 Donate Link: http://sudarmuthu.com/if-you-wanna-thank-me
 Requires at least: 2.5
-Tested up to: 3.3
-Stable tag: 0.7
+Tested up to: 3.3.1
+Stable tag: 0.8
 	
 Bulk move posts from selected categories or tags
 
@@ -17,6 +17,7 @@ Bulk Move is a WordPress Plugin which can be used to move posts in bulk from one
 *   Brazilian Portuguese (Thanks Marcelo of [Criacao de Sites em Ribeirao Preto][6])
 *   Turkish Portuguese (Thanks [Bahadir Yildiz][7])
 *   Spanish (Thanks Brian Flores of [InMotion Hosting][8])
+*   Bulgarian (Thanks Nikolay Nikolov of [Skype Fan Blog][9])
 
 ### Support
 
@@ -38,6 +39,7 @@ If you looking for deleting posts, instead of just moving them, then use [Bulk D
 [6]: http://www.techload.com.br/
 [7]: http://www.matematik.us
 [8]: http://www.inmotionhosting.com/
+[9]: http://en.chat4o.com/ 
 
 == Installation ==
 
@@ -68,9 +70,13 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 ###v0.6 (2011-11-19)
 
 *   Added Spanish translation
+
 ###v0.7 (2011-12-16)
 
 *   Removed spaces from first line which was starting the output
+
+###v0.8 (2012-01-13)
+*   Added Bulgarian translations
 
 ==Readme Generator== 
 
