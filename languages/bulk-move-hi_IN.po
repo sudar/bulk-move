@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Bulk Move\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-06 13:23-0300\n"
+"PO-Revision-Date: 2012-07-10 11:13+0530\n"
+"Last-Translator: shivangi <shivangi@outshinesolutions.com>\n"
+"Language-Team: Outshine Solutions <ash.pr@outshinesolutions.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: C:\\Users\\Benso\\Desktop\\bulk-move\n"
+"X-Poedit-Language: Hindi\n"
+"X-Poedit-Country: INDIA\n"
+"X-Poedit-SearchPath-0: C:\\Users\\Benso\\Desktop\\bulk-move\n"
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:75
+msgid "All the selected posts have been sucessfully moved."
+msgstr "सभी चयनित प्रविष्टियाँ सफलतापूर्वक स्थानांतरित कर दिया गया है."
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:85
+msgid "WARNING: Posts moved once cannot be undone. Use with caution."
+msgstr "चेतावनी: पोस्ट एक बार चले गए लौटाया नहीं जा सकता. सावधानी से प्रयोग करें."
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:89
+msgid "By Category"
+msgstr "श्रेणी के द्वारा"
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:90
+msgid "On the left side, select the category whose post you want to move. In the right side select the category to which you want the posts to be moved."
+msgstr "बाईं ओर, जिसका श्रेणी पोस्ट आप ले जाना चाहते का चयन करें. सही पक्ष में श्रेणी का चयन करें जो आप पोस्ट ले जाया जा करना चाहते हैं."
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:106
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:121
+msgid "Posts"
+msgstr "पोस्ट"
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:116
+msgid "Remove Category"
+msgstr "श्रेणी हटायें"
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:133
+msgid "Bulk Move "
+msgstr "थोक ले जाएँ"
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:140
+msgid "If you are looking to delete posts in bulk, try out my "
+msgstr "यदि आप थोक में पदों को नष्ट करने के लिए देख रहे हैं, बाहर की कोशिश करो"
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:140
+msgid "Bulk Delete Plugin"
+msgstr "थोक प्लगइन हटाएँ "
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:172
+msgid "Are you sure you want to move all the selected posts"
+msgstr "क्या आप सुनिश्चित हैं कि आप के लिए सभी चयनित पदों को ले जाना चाहते हैं"
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:174
+msgid "Please select atleast one"
+msgstr " कम से कम एक का चयन करें"
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:203
+msgid "Manage"
+msgstr "प्रबंधित करें"
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:214
+msgid "plugin"
+msgstr "प्लगइन"
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:214
+msgid "Version"
+msgstr "संस्करण"
+
+#: C:\Users\Benso\Desktop\bulk-move/bulk-move.php:214
+msgid "by"
+msgstr "द्वारा"
+
