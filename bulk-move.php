@@ -21,6 +21,7 @@ Author URI: http://sudarmuthu.com/
 2012-01-13 - v0.8 - Added Bulgarian translations
 2012-07-10 - v0.6 - (Dev time: 0.5 hour)
                   - Added Hindi translations
+                  - Added Lithuanian translations
 
 /*  Copyright 2009  Sudar Muthu  (email : sudar@sudarmuthu.com)
 

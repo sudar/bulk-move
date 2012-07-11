@@ -19,6 +19,7 @@ Bulk Move is a WordPress Plugin which can be used to move posts in bulk from one
 *   Spanish (Thanks Brian Flores of [InMotion Hosting][8])
 *   Bulgarian (Thanks Nikolay Nikolov of [Skype Fan Blog][9])
 *   Hindi (Thanks Love Chandel)
+*   Lithuanian (Thanks Vincent G)
 
 ### Support
 
@@ -80,7 +81,8 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 *   Added Bulgarian translations
 
 ### v0.6 (2012-07-10) (Dev time: 0.5 hour)
-* Added Hindi translations
+*   Added Hindi translations
+*   Added Lithuanian translations
 
 ==Readme Generator== 
 
