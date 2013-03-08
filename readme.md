@@ -1,14 +1,14 @@
-=== Bulk Move ===
-Contributors: sudar 
-Tags: post, bulk, move
-Donate Link: http://sudarmuthu.com/if-you-wanna-thank-me
-Requires at least: 2.5
-Tested up to: 3.4.1
-Stable tag: 0.9
+# Bulk Move #
+**Contributors:** sudar 
+**Tags:** post, bulk, move
+**Donate Link:** http://sudarmuthu.com/if-you-wanna-thank-me
+**Requires at least:** 2.5
+**Tested up to:** 3.4.1
+**Stable tag:** 0.9
 	
 Bulk move posts from selected categories or tags
 
-== Description ==
+## Description ##
 
 Bulk Move is a WordPress Plugin which can be used to move posts in bulk from one category to another. This Plugin can also be used to remove posts from a certain category.
 
@@ -43,11 +43,11 @@ If you looking for deleting posts, instead of just moving them, then use [Bulk D
 [8]: http://www.inmotionhosting.com/
 [9]: http://en.chat4o.com/ 
 
-== Installation ==
+## Installation ##
 
 Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page.
 
-== Changelog ==
+## Changelog ##
 
 ###v0.1 (2009-02-04)
 
@@ -84,6 +84,6 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 *   Added Hindi translations
 *   Added Lithuanian translations
 
-==Readme Generator== 
+##Readme Generator## 
 
 This Readme file was generated using <a href = 'http://sudarmuthu.com/wordpress/wp-readme'>wp-readme</a>, which generates readme files for WordPress Plugins.
