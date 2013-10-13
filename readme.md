@@ -3,8 +3,8 @@
 **Tags:** post, bulk, move  
 **Donate Link:** http://sudarmuthu.com/if-you-wanna-thank-me  
 **Requires at least:** 2.5  
-**Tested up to:** 3.5.1  
-**Stable tag:** 0.9  
+**Tested up to:** 3.6.1  
+**Stable tag:** 1.0  
 	
 Bulk move posts from selected categories or tags
 
@@ -58,6 +58,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 ## Changelog ##
 
+### v1.0 (2013-10-13) (Dev time: 3 hours)
+- Revamped GUI
+
 ### v0.9 (2012-07-10) (Dev time: 0.5 hour)
 *   Added Hindi translations
 *   Added Lithuanian translations
@@ -85,6 +88,11 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 ### v0.1 (2009-02-04) ###
 *   First version
+
+## Upgrade Notice ##
+
+### 1.0 ###
+Revamped GUI
 
 ## Readme Generator ##
 
