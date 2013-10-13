@@ -198,7 +198,7 @@ function smbm_print_scripts() {
 if(!function_exists('smbm_add_menu')) {
 	function smbm_add_menu() {
 	    //Add a submenu to Manage
-        add_options_page("Bulk Move", "Bulk Move", 8, basename(__FILE__), "smbm_displayOptions");
+        add_options_page( __( 'Bulk Move' ), __( 'Bulk Move' ), 'edit_posts', basename( __FILE__ ), 'smbm_displayOptions' );
 	}
 }
 
