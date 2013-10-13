@@ -60,7 +60,7 @@ class Bulk_Move {
      */
 	function add_menu() {
 
-        $this->post_page = add_submenu_page( 'tools.php', __( 'Bulk Move' ), __( 'Bulk Move' ), 'edit_posts', self::POSTS_PAGE_SLUG, array( &$this, 'display_posts_page' ) );
+        $this->post_page = add_submenu_page( 'tools.php', __( 'Bulk Move' , 'bulk-move'), __( 'Bulk Move' , 'bulk-move'), 'edit_posts', self::POSTS_PAGE_SLUG, array( &$this, 'display_posts_page' ) );
 
         // enqueue JavaScript
         add_action( 'admin_print_scripts-' . $this->post_page, array( &$this, 'add_script') );
