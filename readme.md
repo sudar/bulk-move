@@ -45,17 +45,12 @@ If you are looking for ideas, then you can start with one of the following TODO 
 
 ## Translation ##
 
-*   Brazilian Portuguese (Thanks Marcelo of [Criacao de Sites em Ribeirao Preto][6])
-*   Turkish Portuguese (Thanks [Bahadir Yildiz][7])
-*   Spanish (Thanks Brian Flores of [InMotion Hosting][8])
-*   Bulgarian (Thanks Nikolay Nikolov of [Skype Fan Blog][9])
+*   Brazilian Portuguese (Thanks Marcelo of Criacao de Sites em Ribeirao Preto)
+*   Turkish Portuguese (Thanks Bahadir Yildiz)
+*   Spanish (Thanks Brian Flores of InMotion Hosting)
+*   Bulgarian (Thanks Nikolay Nikolov of Skype Fan Blog)
 *   Hindi (Thanks Love Chandel)
 *   Lithuanian (Thanks Vincent G)
-
-[6]: http://www.techload.com.br/
-[7]: http://www.matematik.us
-[8]: http://www.inmotionhosting.com/
-[9]: http://en.chat4o.com/ 
 
 ## Installation ##
 
