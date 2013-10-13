@@ -102,9 +102,7 @@ if (!function_exists('smbm_displayOptions')) {
         <h3><?php _e("By Category", 'bulk-move'); ?></h3>
         <h4><?php _e("On the left side, select the category whose post you want to move. In the right side select the category to which you want the posts to be moved.", 'bulk-move') ?></h4>
 
-        <form name="smbm_form" id = "smbm_cat_form"
-        action="<?php echo get_bloginfo("wpurl"); ?>/wp-admin/options-general.php?page=bulk-move.php" method="post"
-        onsubmit="return bd_validateForm(this);">
+        <form name="smbm_form" id = "smbm_cat_form" method="post" onsubmit="return bd_validateForm(this);">
 
         <fieldset class="options">
 		<table class="optiontable">
@@ -197,8 +195,7 @@ function smbm_print_scripts() {
  */
 if(!function_exists('smbm_add_menu')) {
 	function smbm_add_menu() {
-	    //Add a submenu to Manage
-        add_options_page( __( 'Bulk Move' ), __( 'Bulk Move' ), 'edit_posts', basename( __FILE__ ), 'smbm_displayOptions' );
+        add_submenu_page( 'tools.php', __( 'Bulk Move' ), __( 'Bulk Move' ), 'edit_posts', basename( __FILE__ ), 'smbm_displayOptions' );
 	}
 }
 
@@ -213,7 +210,7 @@ function smbm_filter_plugin_actions($links, $file) {
     if( ! $this_plugin ) $this_plugin = plugin_basename(__FILE__);
 
     if( $file == $this_plugin ) {
-        $settings_link = '<a href="options-general.php?page=bulk-move.php">' . __('Manage', 'bulk-move') . '</a>';
+        $settings_link = '<a href="tools.php?page=bulk-move.php">' . __('Manage', 'bulk-move') . '</a>';
         array_unshift( $links, $settings_link ); // before other links
     }
     return $links;
