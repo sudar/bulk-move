@@ -32,6 +32,14 @@ Checkout readme file for release notes
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+if ( !class_exists( 'Bulk_Move_Posts' ) ) {
+    require_once dirname( __FILE__ ) . '/include/class-bulk-move-posts.php';
+}
+
+if ( !class_exists( 'Bulk_Move_Util' ) ) {
+    require_once dirname( __FILE__ ) . '/include/class-bulk-move-util.php';
+}
+
 class Bulk_Move {
     const VERSION               = '1.0';
 
@@ -41,6 +49,10 @@ class Bulk_Move {
     // JS constants
     const JS_HANDLE             = 'bulk-move';
     const JS_VARIABLE           = 'BULK_MOVE';
+
+    // meta boxes for delete posts
+    const BOX_CATEGORY          = 'bm_move_category';
+    const BOX_DEBUG             = 'bm_debug';
 
     /**
      * Default constructor
@@ -67,73 +79,102 @@ class Bulk_Move {
 
         // enqueue JavaScript
         add_action( 'admin_print_scripts-' . $this->post_page, array( &$this, 'add_script') );
+
+        // meta boxes
+		add_action( "load-{$this->post_page}", array( &$this, 'add_move_posts_settings_panel' ) );
+        add_action( "add_meta_boxes_{$this->post_page}", array( &$this, 'add_move_posts_meta_boxes' ) );
 	}
+
+    /**
+     * Add settings Panel for move posts page
+     *
+     * @since 1.1
+     */ 
+	function add_move_posts_settings_panel() {
+ 
+		/** 
+		 * Create the WP_Screen object using page handle
+		 */
+		$this->move_posts_screen = WP_Screen::get( $this->post_page );
+ 
+		/**
+		 * Content specified inline
+		 */
+		$this->move_posts_screen->add_help_tab(
+			array(
+				'title'    => __( 'About Plugin', 'bulk-move' ),
+				'id'       => 'about_tab',
+				'content'  => '<p>' . __( 'This plugin allows you to move posts in bulk from selected categories to another category', 'bulk-move' ) . '</p>',
+				'callback' => false
+			)
+		);
+ 
+        // Add help sidebar
+		$this->move_posts_screen->set_help_sidebar(
+            '<p><strong>' . __( 'More information', 'bulk-move' ) . '</strong></p>' .
+            '<p><a href = "http://sudarmuthu.com/wordpress/bulk-move">' . __( 'Plugin Homepage/support', 'bulk-move' ) . '</a></p>' .
+            '<p><a href = "http://sudarmuthu.com/blog">' . __( "Plugin author's blog", 'bulk-move' ) . '</a></p>' .
+            '<p><a href = "http://sudarmuthu.com/wordpress/">' . __( "Other Plugin's by Author", 'bulk-move' ) . '</a></p>'
+        );
+
+        /* Trigger the add_meta_boxes hooks to allow meta boxes to be added */
+        do_action( 'add_meta_boxes_' . $this->post_page, null );
+        do_action( 'add_meta_boxes', $this->post_page, null );
+    
+        /* Enqueue WordPress' script for handling the meta boxes */
+        wp_enqueue_script( 'postbox' );
+	}
+
+    /**
+     * Register meta boxes for move posts page
+     *
+     * @since 1.1
+     */
+    function add_move_posts_meta_boxes() {
+        add_meta_box( self::BOX_CATEGORY, __( 'Bulk Move By Category', 'bulk-move' ), 'Bulk_Move_Posts::render_move_category_box', $this->post_page, 'advanced' );
+        add_meta_box( self::BOX_DEBUG, __( 'Debug Information', 'bulk-move' ), 'Bulk_Move_Posts::render_debug_box', $this->post_page, 'advanced', 'low' );
+    }
 
     /**
      * Show the Admin page
      */
     function display_posts_page() {
 ?>
-    <div class="wrap">
-        <?php screen_icon(); ?>
-        <h2><?php _e( 'Bulk Move Posts', 'bulk-move' );?></h2>
+<div class="wrap">
+    <?php screen_icon(); ?>
+    <h2><?php _e( 'Bulk Move Posts', 'bulk-move' );?></h2>
 
-        <div id="post-body-content">
-            <div class="updated" >
-                <p><strong><?php _e( 'WARNING: Posts moved once cannot be undone. Use with caution.', 'bulk-move' ); ?></strong></p>
+    <form method = "post">
+<?php
+        // nonce for bulk move
+        wp_nonce_field( 'sm-bulk-move-posts', 'sm-bulk-move-posts-nonce' );
+
+        /* Used to save closed meta boxes and their order */
+        wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
+        wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
+?>
+    <div id = "poststuff">
+        <div id="post-body" class="metabox-holder columns-2">
+
+            <div id="post-body-content">
+                <div class="updated" >
+                    <p><strong><?php _e( 'WARNING: Posts moved once cannot be retrieved back. Use with caution.', 'bulk-move' ); ?></strong></p>
+                </div>
+            </div><!-- #post-body-content -->
+
+            <div id="postbox-container-1" class="postbox-container">
+                <iframe frameBorder="0" height = "1000" src = "http://sudarmuthu.com/projects/wordpress/bulk-delete/sidebar.php?color=<?php echo get_user_option( 'admin_color' ); ?>&version=<?php echo self::VERSION; ?>"></iframe>
             </div>
-        </div><!-- #post-body-content -->
 
-        <form method = "post">
+            <div id="postbox-container-2" class="postbox-container">
+                <?php do_meta_boxes( '', 'advanced', null ); ?>
+            </div> <!-- #postbox-container-2 -->
 
-        <h3><?php _e('By Category', 'bulk-move'); ?></h3>
-        <h4><?php _e('On the left side, select the category whose post you want to move. In the right side select the category to which you want the posts to be moved.', 'bulk-move') ?></h4>
+        </div> <!-- #post-body -->
+    </div><!-- #poststuff -->
 
-        <fieldset class="options">
-		<table class="optiontable">
-            <tr>
-                <td scope="row" >
-                <select name="smbm_selected_cat">
-<?php
-        $categories =  get_categories(array('hide_empty' => false));
-        foreach ($categories as $category) {
-?>
-                    <option value="<?php echo $category->cat_ID; ?>">
-                    <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e("Posts", 'bulk-move'); ?>)
-                    </option>
-<?php
-        }
-?>
-                </select>
-                ==>
-                </td>
-                <td scope="row" >
-                <select name="smbm_mapped_cat">
-                <option value="-1"><?php _e("Remove Category", 'bulk-move'); ?></option>
-<?php
-        foreach ($categories as $category) {
-?>
-                    <option value="<?php echo $category->cat_ID; ?>">
-                    <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e("Posts", 'bulk-move'); ?>)
-                    </option>
-<?php
-        }
-?>
-                </select>
-                </td>
-            </tr>
-
-		</table>
-		</fieldset>
-        <p class="submit">
-            <button type="submit" name="smbm_action" value = "bulk-move-cats" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
-        </p>
-
-<?php wp_nonce_field('bulk-move-cats'); ?>
-
-		</form>
-        <p><em><?php _e("If you are looking to delete posts in bulk, try out my ", 'bulk-move'); ?> <a href = "http://sudarmuthu.com/wordpress/bulk-delete"><?php _e("Bulk Delete Plugin", 'bulk-move');?></a>.</em></p>
-    </div>
+    </form>
+</div><!-- .wrap -->
 <?php
         // Display credits in Footer
         add_action( 'in_admin_footer', array( &$this, 'admin_footer' ) );
@@ -174,8 +215,8 @@ class Bulk_Move {
     function request_handler() {
         if (isset($_POST['smbm_action'])) {
 
+            wp_nonce_field( 'sm-bulk-move-posts', 'sm-bulk-move-posts-nonce' );
             $my_query = new WP_Query;
-            check_admin_referer( 'bulk-move-cats');
 
             switch($_POST['smbm_action']) {
 

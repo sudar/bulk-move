@@ -13,4 +13,7 @@ jQuery(document).ready(function () {
     jQuery('button').click(function () {
         return confirm(BULK_MOVE.msg.move_warning);
     });
+
+    // for post boxes
+    postboxes.add_postbox_toggles(pagenow);
 });
