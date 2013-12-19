@@ -88,7 +88,7 @@ class Bulk_Move {
     /**
      * Add settings Panel for move posts page
      *
-     * @since 1.1
+     * @since 1.0
      */ 
 	function add_move_posts_settings_panel() {
  
@@ -128,7 +128,7 @@ class Bulk_Move {
     /**
      * Register meta boxes for move posts page
      *
-     * @since 1.1
+     * @since 1.0
      */
     function add_move_posts_meta_boxes() {
         add_meta_box( self::BOX_CATEGORY, __( 'Bulk Move By Category', 'bulk-move' ), 'Bulk_Move_Posts::render_move_category_box', $this->post_page, 'advanced' );

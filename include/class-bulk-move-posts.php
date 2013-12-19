@@ -3,7 +3,7 @@
  * Utility class for moving posts
  *
  * @package Bulk Move
- * @since 1.1
+ * @since 1.0
  * @author Sudar
  */
 class Bulk_Move_Posts {
@@ -11,7 +11,7 @@ class Bulk_Move_Posts {
     /**
      * Render move categories box
      *
-     * @since 1.1
+     * @since 1.0
      */
     public static function render_move_category_box() {
 
@@ -73,7 +73,7 @@ class Bulk_Move_Posts {
     /**
      * Render debug box
      *
-     * @since 1.1
+     * @since 1.0
      */
     public static function render_debug_box() {
 ?>
