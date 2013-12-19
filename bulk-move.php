@@ -163,7 +163,7 @@ class Bulk_Move {
             </div><!-- #post-body-content -->
 
             <div id="postbox-container-1" class="postbox-container">
-                <iframe frameBorder="0" height = "1000" src = "http://sudarmuthu.com/projects/wordpress/bulk-delete/sidebar.php?color=<?php echo get_user_option( 'admin_color' ); ?>&version=<?php echo self::VERSION; ?>"></iframe>
+                <iframe frameBorder="0" height = "1000" src = "http://sudarmuthu.com/projects/wordpress/bulk-move/sidebar.php?color=<?php echo get_user_option( 'admin_color' ); ?>&version=<?php echo self::VERSION; ?>"></iframe>
             </div>
 
             <div id="postbox-container-2" class="postbox-container">
