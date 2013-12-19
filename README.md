@@ -12,7 +12,7 @@ Move or remove posts in bulk by category or by tag.
 
 Bulk Move is a WordPress Plugin which can be used to move posts in bulk from one category or tag to another. This Plugin can also be used to remove posts from a certain category or tag.
 
-If you looking for deleting posts, instead of just moving them, then use [Bulk Delete Plugin][2] instead.
+If you looking for deleting posts, instead of just moving them, then use [Bulk Delete Plugin][2] instead.
 
 ### Development
 
