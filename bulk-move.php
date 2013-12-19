@@ -141,7 +141,6 @@ class Bulk_Move {
     function display_posts_page() {
 ?>
 <div class="wrap">
-    <?php screen_icon(); ?>
     <h2><?php _e( 'Bulk Move Posts', 'bulk-move' );?></h2>
 
     <form method = "post">

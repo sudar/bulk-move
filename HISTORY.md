@@ -2,6 +2,7 @@
 
 ### v1.1 (2013-12-19) (Dev time: 3 hours)
 - Fix: Change the content displayed in sidebar
+- Tweak: Remove `screen_icon` which is not used in WordPress 3.8
 
 ### v1.0 (2013-10-13) (Dev time: 3 hours)
 - Revamped GUI
