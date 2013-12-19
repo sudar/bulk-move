@@ -3,7 +3,7 @@
 Plugin Name: Bulk Move
 Plugin Script: bulk-move.php
 Plugin URI: http://sudarmuthu.com/wordpress/bulk-move
-Description: Move or remove posts in bulk from one category to another
+Description: Move or remove posts in bulk from one category or tag to another
 Version: 1.0
 Donate Link: http://sudarmuthu.com/if-you-wanna-thank-me
 License: GPL
@@ -52,6 +52,7 @@ class Bulk_Move {
 
     // meta boxes for delete posts
     const BOX_CATEGORY          = 'bm_move_category';
+    const BOX_TAG               = 'bm_move_tag';
     const BOX_DEBUG             = 'bm_debug';
 
     /**
@@ -132,6 +133,7 @@ class Bulk_Move {
      */
     function add_move_posts_meta_boxes() {
         add_meta_box( self::BOX_CATEGORY, __( 'Bulk Move By Category', 'bulk-move' ), 'Bulk_Move_Posts::render_move_category_box', $this->post_page, 'advanced' );
+        add_meta_box( self::BOX_TAG, __( 'Bulk Move By Tag', 'bulk-move' ), 'Bulk_Move_Posts::render_move_tag_box', $this->post_page, 'advanced' );
         add_meta_box( self::BOX_DEBUG, __( 'Debug Information', 'bulk-move' ), 'Bulk_Move_Posts::render_debug_box', $this->post_page, 'advanced', 'low' );
     }
 
@@ -222,8 +224,9 @@ class Bulk_Move {
                 case "bulk-move-cats":
                     // move by cats
                     $old_cat = absint($_POST['smbm_selected_cat']);
-                    $new_cat   = ($_POST['smbm_mapped_cat'] == -1) ? -1 : absint($_POST['smbm_mapped_cat']);
-                    $posts = $my_query->query(array('category__in'=>array($old_cat), 'post_type'=>'post', 'nopaging'=>'true'));
+                    $new_cat = ($_POST['smbm_mapped_cat'] == -1) ? -1 : absint($_POST['smbm_mapped_cat']);
+                    $posts   = $my_query->query(array('category__in'=>array($old_cat), 'post_type'=>'post', 'nopaging'=>'true'));
+
                     foreach ($posts as $post) {
                         
                         $current_cats = wp_get_post_categories($post->ID);
@@ -245,12 +248,28 @@ class Bulk_Move {
 
                 case "bulk-move-tags":
                     // move by tags
-                    $selected_tags = $_POST['smbm_tags'];
-                    $posts = $my_query->query(array('tag__in'=>$selected_tags, 'post_type'=>'post', 'nopaging'=>'true'));
+                    $old_tag = absint( $_POST['smbm_old_tag'] );
+                    $new_tag = ( $_POST['smbm_new_tag'] == -1 ) ? -1 : absint( $_POST['smbm_new_tag'] );
 
-                    foreach ($posts as $post) {
-                        wp_move_post($post->ID);
+                    $posts = $my_query->query( array( 
+                        'tag__in'   => $old_tag,
+                        'post_type' => 'post',
+                        'nopaging'  => 'true'
+                    ));
+
+                    foreach ( $posts as $post ) {
+                        $current_tags = wp_get_post_tags( $post->ID, array( 'fields' => 'ids' ) );
+                        $current_tags = array_diff( $current_tags, array( $old_tag ) );
+
+                        if ( $new_tag != -1 ) {
+                            $current_tags[] = $new_tag;
+                        }
+
+                        $current_tags = array_values( $current_tags );
+                        wp_set_post_tags( $post->ID, $current_tags );
                     }
+
+                    $this->msg = sprintf( _n( 'Moved %d post from the selected tag', 'Moved %d posts from the selected tag' , count( $posts ), 'bulk-move' ), count( $posts ) );
                     
                     break;
             }

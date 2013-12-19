@@ -62,11 +62,67 @@ class Bulk_Move_Posts {
         <p class="submit">
             <button type="submit" name="smbm_action" value = "bulk-move-cats" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
         </p>
-
-<?php wp_nonce_field( 'bulk-move-cats' ); ?>
-
-        <p><em><?php _e( "If you are looking to move posts in bulk, try out my ", 'bulk-move' ); ?> <a href = "http://sudarmuthu.com/wordpress/bulk-move"><?php _e( "Bulk move Plugin", 'bulk-move' );?></a>.</em></p>
         <!-- Category end-->
+<?php
+    }
+
+    /**
+     * Render move by tag box
+     *
+     * @since 1.1
+     * @static
+     * @access public
+     */
+    public static function render_move_tag_box() {
+
+        if ( Bulk_Move_Util::is_posts_box_hidden( Bulk_Move::BOX_TAG ) ) {
+            printf( __( 'This section just got enabled. Kindly <a href = "%1$s">refresh</a> the page to fully enable it.', 'bulk-move' ), 'tools.php?page=' . Bulk_Move::POSTS_PAGE_SLUG );
+            return;
+        }
+?>
+        <!-- Tag Start-->
+        <h4><?php _e( 'On the left side, select the tag whose post you want to move. In the right side select the tag to which you want the posts to be moved.', 'bulk-move' ) ?></h4>
+
+        <fieldset class="options">
+		<table class="optiontable">
+            <tr>
+                <td scope="row" >
+                <select name="smbm_old_tag">
+<?php
+                $tags =  get_tags( array( 'hide_empty' => false ) );
+                foreach ( $tags as $tag ) {
+?>
+                    <option value="<?php echo $tag->term_id; ?>">
+                    <?php echo $tag->name; ?> (<?php echo $tag->count . ' '; _e( 'Posts', 'bulk-move' ); ?>)
+                    </option>
+<?php
+                }
+?>
+                </select>
+                ==>
+                </td>
+                <td scope="row" >
+                <select name="smbm_new_tag">
+                    <option value="-1"><?php _e( 'Remove Tag', 'bulk-move' ); ?></option>
+<?php
+                foreach ($tags as $tag) {
+?>
+                    <option value="<?php echo $tag->term_id; ?>">
+                        <?php echo $tag->name; ?> (<?php echo $tag->count . ' '; _e( 'Posts', 'bulk-move' ); ?>)
+                    </option>
+<?php
+                }
+?>
+                </select>
+                </td>
+            </tr>
+
+		</table>
+		</fieldset>
+        <p class="submit">
+            <button type="submit" name="smbm_action" value = "bulk-move-tags" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
+        </p>
+        <!-- Tag end-->
 <?php
     }
 
@@ -105,6 +161,8 @@ class Bulk_Move_Posts {
                 <td><?php echo ini_get( 'max_input_time' ); ?></td>
             </tr>
         </table>
+
+        <p><em><?php _e( "If you are looking to move posts in bulk, try out my ", 'bulk-move' ); ?> <a href = "http://sudarmuthu.com/wordpress/bulk-move"><?php _e( "Bulk move Plugin", 'bulk-move' );?></a>.</em></p>
         <!-- Debug box end-->
 <?php
     }
