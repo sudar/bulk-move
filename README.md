@@ -2,9 +2,9 @@
 **Contributors:** sudar  
 **Tags:** post, bulk, move  
 **Donate Link:** http://sudarmuthu.com/if-you-wanna-thank-me  
-**Requires at least:** 2.5  
-**Tested up to:** 3.6.1  
-**Stable tag:** 1.0  
+**Requires at least:** 3.8  
+**Tested up to:** 3.8  
+**Stable tag:** 1.1  
 	
 Move or remove posts in bulk by category or by tag.
 
