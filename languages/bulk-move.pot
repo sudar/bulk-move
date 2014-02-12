@@ -1,18 +1,18 @@
-# Copyright (C) 2013 Bulk Move
+# Copyright (C) 2014 Bulk Move
 # This file is distributed under the same license as the Bulk Move package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Bulk Move 1.1\n"
+"Project-Id-Version: Bulk Move 1.1.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bulk-move\n"
-"POT-Creation-Date: 2013-12-19 06:07:38+00:00\n"
+"POT-Creation-Date: 2014-02-12 09:56:31+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#. #-#-#-#-#  bulk-move.pot (Bulk Move 1.1)  #-#-#-#-#
+#. #-#-#-#-#  bulk-move.pot (Bulk Move 1.1.1)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: bulk-move.php:79
 msgid "Bulk Move"
@@ -169,11 +169,11 @@ msgid "Script input time "
 msgstr ""
 
 #: include/class-bulk-move-posts.php:165
-msgid "If you are looking to move posts in bulk, try out my "
+msgid "If you are looking to delete posts in bulk, try out my "
 msgstr ""
 
 #: include/class-bulk-move-posts.php:165
-msgid "Bulk move Plugin"
+msgid "Bulk Delete Plugin"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
