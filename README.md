@@ -4,7 +4,7 @@
 **Donate Link:** http://sudarmuthu.com/if-you-wanna-thank-me  
 **Requires at least:** 3.8  
 **Tested up to:** 3.8  
-**Stable tag:** 1.1  
+**Stable tag:** 1.1.1  
 	
 Move or remove posts in bulk by category or by tag.
 
