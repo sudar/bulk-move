@@ -50,7 +50,7 @@ class Bulk_Move {
     const JS_HANDLE             = 'bulk-move';
     const JS_VARIABLE           = 'BULK_MOVE';
 
-    // meta boxes for delete posts
+    // meta boxes for move posts
     const BOX_CATEGORY          = 'bm_move_category';
     const BOX_TAG               = 'bm_move_tag';
     const BOX_DEBUG             = 'bm_debug';

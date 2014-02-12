@@ -162,7 +162,7 @@ class Bulk_Move_Posts {
             </tr>
         </table>
 
-        <p><em><?php _e( "If you are looking to move posts in bulk, try out my ", 'bulk-move' ); ?> <a href = "http://sudarmuthu.com/wordpress/bulk-move"><?php _e( "Bulk move Plugin", 'bulk-move' );?></a>.</em></p>
+        <p><em><?php _e( 'If you are looking to delete posts in bulk, try out my ', 'bulk-move' ); ?> <a href = "http://sudarmuthu.com/wordpress/bulk-delete"><?php _e( 'Bulk Delete Plugin', 'bulk-move' );?></a>.</em></p>
         <!-- Debug box end-->
 <?php
     }

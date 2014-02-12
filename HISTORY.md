@@ -1,5 +1,9 @@
 ## Changelog ##
 
+### v1.1.1 (2014-02-12) (Dev time: 0.5 hours)
+- Add: Add German translation
+- Fix: Fix link to Bulk Delete plugin
+
 ### v1.1 (2013-12-19) (Dev time: 3 hours)
 - Fix: Change the content displayed in sidebar
 - Tweak: Remove `screen_icon` which is not used in WordPress 3.8
