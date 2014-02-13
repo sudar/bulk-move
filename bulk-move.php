@@ -62,6 +62,7 @@ class Bulk_Move {
 
     // meta boxes for move posts
     const BOX_CATEGORY           = 'bm_move_category';
+    const BOX_CATEGORY_BY_TAG    = 'bm_move_category_by_tag';
     const BOX_TAG                = 'bm_move_tag';
     const BOX_DEBUG              = 'bm_debug';
 
@@ -150,6 +151,7 @@ class Bulk_Move {
     function add_move_posts_meta_boxes() {
         add_meta_box( self::BOX_CATEGORY, __( 'Bulk Move By Category', 'bulk-move' ), 'Bulk_Move_Posts::render_move_category_box', $this->post_page, 'advanced' );
         add_meta_box( self::BOX_TAG, __( 'Bulk Move By Tag', 'bulk-move' ), 'Bulk_Move_Posts::render_move_tag_box', $this->post_page, 'advanced' );
+        add_meta_box( self::BOX_CATEGORY_BY_TAG, __( 'Bulk Move Category By Tag', 'bulk-move' ), 'Bulk_Move_Posts::render_move_category_by_tag_box', $this->post_page, 'advanced' );
         add_meta_box( self::BOX_DEBUG, __( 'Debug Information', 'bulk-move' ), 'Bulk_Move_Posts::render_debug_box', $this->post_page, 'advanced', 'low' );
     }
 
@@ -254,16 +256,22 @@ class Bulk_Move {
                 case "bulk-move-cats":
 
                     // move by cats
-                    $old_cat = absint($_POST['smbm_selected_cat']);
-                    $new_cat = ($_POST['smbm_mapped_cat'] == -1) ? -1 : absint($_POST['smbm_mapped_cat']);
+                    $old_cat = absint($_POST['smbm_mc_selected_cat']);
+                    $new_cat = ($_POST['smbm_mc_mapped_cat'] == -1) ? -1 : absint($_POST['smbm_mc_mapped_cat']);
+
                     $posts   = $my_query->query(array('category__in'=>array($old_cat), 'post_type'=>'post', 'nopaging'=>'true'));
 
                     foreach ($posts as $post) {
-                        
-                        $current_cats = wp_get_post_categories($post->ID);
-                        $current_cats = array_diff($current_cats, array($old_cat));
-                        if ($new_cat != -1) {
-                            $current_cats[] = $new_cat;
+                        $current_cats = array_diff( wp_get_post_categories( $post->ID ), array( $old_cat ) );
+
+                        if ( $new_cat != -1 ) {
+                            if ( isset( $_POST['smbm_mc_overwrite'] ) && 'overwrite' == $_POST['smbm_mc_overwrite'] ) {
+                                // Remove old categories
+                                $current_cats = array( $new_cat );
+                            } else {
+                                // Add to existing categories
+                                $current_cats[] = $new_cat;
+                            }
                         }
 
                         if (count($current_cats) == 0) {
@@ -280,8 +288,8 @@ class Bulk_Move {
                 case "bulk-move-tags":
 
                     // move by tags
-                    $old_tag = absint( $_POST['smbm_old_tag'] );
-                    $new_tag = ( $_POST['smbm_new_tag'] == -1 ) ? -1 : absint( $_POST['smbm_new_tag'] );
+                    $old_tag = absint( $_POST['smbm_mt_old_tag'] );
+                    $new_tag = ( $_POST['smbm_mt_new_tag'] == -1 ) ? -1 : absint( $_POST['smbm_mt_new_tag'] );
 
                     $posts = $my_query->query( array( 
                         'tag__in'   => $old_tag,
@@ -294,7 +302,13 @@ class Bulk_Move {
                         $current_tags = array_diff( $current_tags, array( $old_tag ) );
 
                         if ( $new_tag != -1 ) {
-                            $current_tags[] = $new_tag;
+                            if ( isset( $_POST['smbm_mt_overwrite'] ) && 'overwrite' == $_POST['smbm_mt_overwrite'] ) {
+                                // Remove old tags
+                                $current_tags = array( $new_tag );
+                            } else {
+                                // add to existing tags
+                                $current_tags[] = $new_tag;
+                            }
                         }
 
                         $current_tags = array_values( $current_tags );
@@ -303,6 +317,42 @@ class Bulk_Move {
 
                     $this->msg = sprintf( _n( 'Moved %d post from the selected tag', 'Moved %d posts from the selected tag' , count( $posts ), 'bulk-move' ), count( $posts ) );
                     
+                    break;
+
+                case "bulk-move-category-by-tag":
+
+                    // move by tags
+                    $old_tag = absint( $_POST['smbm_mct_old_tag'] );
+                    $new_cat = ($_POST['smbm_mct_mapped_cat'] == -1) ? -1 : absint($_POST['smbm_mct_mapped_cat']);
+
+                    $posts = $my_query->query( array(
+                        'tag__in'   => $old_tag,
+                        'post_type' => 'post',
+                        'nopaging'  => 'true'
+                    ));
+
+                    foreach ( $posts as $post ) {
+                        $current_cats = wp_get_post_categories($post->ID);
+
+                        if ($new_cat != -1) {
+                            if ( isset( $_POST['smbm_mct_overwrite'] ) && 'overwrite' == $_POST['smbm_mct_overwrite'] ) {
+                                // Remove old categories
+                                $current_cats = array( $new_cat );
+                            } else {
+                                // Add to existing categories
+                                $current_cats[] = $new_cat;
+                            }
+                        }
+
+                        if (count($current_cats) == 0) {
+                            $current_cats = array(get_option('default_category'));
+                        }
+                        $current_cats = array_values($current_cats);
+                        wp_update_post(array('ID'=>$post->ID,'post_category'=>$current_cats));
+                    }
+
+                    $this->msg = sprintf( _n( 'Moved %d post from the selected tag to the new category.', 'Moved %d posts from the selected tag to the new category.' , count( $posts ), 'bulk-move' ), count( $posts ) );
+
                     break;
 
                 case "bulk-move-save-max-execution-time":

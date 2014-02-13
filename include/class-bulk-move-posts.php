@@ -27,9 +27,9 @@ class Bulk_Move_Posts {
 		<table class="optiontable">
             <tr>
                 <td scope="row" >
-                <select name="smbm_selected_cat">
+                <select name="smbm_mc_selected_cat">
 <?php
-        $categories =  get_categories(array( 'hide_empty' => false));
+        $categories =  get_categories(array( 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC'));
         foreach ($categories as $category) {
 ?>
                     <option value="<?php echo $category->cat_ID; ?>">
@@ -42,7 +42,7 @@ class Bulk_Move_Posts {
                 ==>
                 </td>
                 <td scope="row" >
-                <select name="smbm_mapped_cat">
+                <select name="smbm_mc_mapped_cat">
                 <option value="-1"><?php _e( "Remove Category", 'bulk-move' ); ?></option>
 <?php
         foreach ($categories as $category) {
@@ -58,6 +58,12 @@ class Bulk_Move_Posts {
             </tr>
 
 		</table>
+        <p>
+            <?php _e( 'If the post contains other categories, then', 'bulk-move' ); ?>
+            <input type="radio" name="smbm_mc_overwrite" value="overwrite" checked><?php _e ( 'Remove them', 'bulk-move' ); ?>
+            <input type="radio" name="smbm_mc_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
+        </p>
+
 		</fieldset>
         <p class="submit">
             <button type="submit" name="smbm_action" value="bulk-move-cats" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
@@ -87,7 +93,7 @@ class Bulk_Move_Posts {
 		<table class="optiontable">
             <tr>
                 <td scope="row" >
-                <select name="smbm_old_tag">
+                <select name="smbm_mt_old_tag">
 <?php
                 $tags =  get_tags( array( 'hide_empty' => false ) );
                 foreach ( $tags as $tag ) {
@@ -102,7 +108,7 @@ class Bulk_Move_Posts {
                 ==>
                 </td>
                 <td scope="row" >
-                <select name="smbm_new_tag">
+                <select name="smbm_mt_new_tag">
                     <option value="-1"><?php _e( 'Remove Tag', 'bulk-move' ); ?></option>
 <?php
                 foreach ($tags as $tag) {
@@ -118,9 +124,80 @@ class Bulk_Move_Posts {
             </tr>
 
 		</table>
+        <p>
+            <?php _e( 'If the post contains other tags, then', 'bulk-move' ); ?>
+            <input type="radio" name="smbm_mt_overwrite" value="overwrite" checked><?php _e ( 'Remove them', 'bulk-move' ); ?>
+            <input type="radio" name="smbm_mt_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
+        </p>
 		</fieldset>
         <p class="submit">
             <button type="submit" name="smbm_action" value="bulk-move-tags" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
+        </p>
+        <!-- Tag end-->
+<?php
+    }
+
+    /**
+     * Render move category by tag box
+     *
+     * @since 1.2
+     * @static
+     * @access public
+     */
+    public static function render_move_category_by_tag_box() {
+
+        if ( Bulk_Move_Util::is_posts_box_hidden( Bulk_Move::BOX_CATEGORY_BY_TAG ) ) {
+            printf( __( 'This section just got enabled. Kindly <a href = "%1$s">refresh</a> the page to fully enable it.', 'bulk-move' ), 'tools.php?page=' . Bulk_Move::POSTS_PAGE_SLUG );
+            return;
+        }
+        ?>
+        <!-- Tag Start-->
+        <h4><?php _e( 'On the left side, select the tag whose post you want to move. In the right side select the category to which you want the posts to be moved.', 'bulk-move' ) ?></h4>
+
+        <fieldset class="options">
+            <table class="optiontable">
+                <tr>
+                    <td scope="row" >
+                        <select name="smbm_mct_old_tag">
+<?php
+                            $tags =  get_tags( array( 'hide_empty' => false ) );
+                            foreach ( $tags as $tag ) {
+?>
+                                <option value="<?php echo $tag->term_id; ?>">
+                                    <?php echo $tag->name; ?> (<?php echo $tag->count . ' '; _e( 'Posts', 'bulk-move' ); ?>)
+                                </option>
+<?php
+                            }
+?>
+                        </select>
+                        ==>
+                    </td>
+                    <td scope="row" >
+                        <select name="smbm_mct_mapped_cat">
+                            <option value="-1"><?php _e( 'Choose Category', 'bulk-move' ); ?></option>
+<?php
+                            $categories =  get_categories(array( 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC'));
+                            foreach ($categories as $category) {
+                                ?>
+                                <option value="<?php echo $category->cat_ID; ?>">
+                                    <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e( "Posts", 'bulk-move' ); ?>)
+                                </option>
+<?php
+                            }
+?>
+                        </select>
+                    </td>
+                </tr>
+
+            </table>
+        <p>
+            <?php _e( 'If the post contains other categories, then', 'bulk-move' ); ?>
+            <input type="radio" name="smbm_mct_overwrite" value="overwrite" checked><?php _e ( 'Remove them', 'bulk-move' ); ?>
+            <input type="radio" name="smbm_mct_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
+        </p>
+        </fieldset>
+        <p class="submit">
+            <button type="submit" name="smbm_action" value="bulk-move-category-by-tag" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
         </p>
         <!-- Tag end-->
 <?php
