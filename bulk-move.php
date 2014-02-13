@@ -4,7 +4,7 @@ Plugin Name: Bulk Move
 Plugin Script: bulk-move.php
 Plugin URI: http://sudarmuthu.com/wordpress/bulk-move
 Description: Move or remove posts in bulk from one category or tag to another
-Version: 1.1.1
+Version: 1.1.1-grantnorwood
 Donate Link: http://sudarmuthu.com/if-you-wanna-thank-me
 License: GPL
 Author: Sudar
@@ -32,6 +32,33 @@ Checkout readme file for release notes
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+
+
+// Define some global constants.
+define('BULK_MOVE_OPTION_MAX_EXECUTION_TIME', 'bm_max_execution_time');
+define('BULK_MOVE_DEFAULT_MAX_EXECUTION_TIME', 60);
+
+
+
+
+/**
+ * Set default options upon activation.
+ */
+function bulk_move_activation() {
+
+    //Does current option exist?
+    $max_execution_time = get_option(BULK_MOVE_OPTION_MAX_EXECUTION_TIME);
+
+    if ($max_execution_time === false) {
+        update_option(BULK_MOVE_OPTION_MAX_EXECUTION_TIME, BULK_MOVE_DEFAULT_MAX_EXECUTION_TIME);
+    }
+
+}
+register_activation_hook( __FILE__, 'bulk_move_activation' );
+
+
+
+
 if ( !class_exists( 'Bulk_Move_Posts' ) ) {
     require_once dirname( __FILE__ ) . '/include/class-bulk-move-posts.php';
 }
@@ -41,7 +68,7 @@ if ( !class_exists( 'Bulk_Move_Util' ) ) {
 }
 
 class Bulk_Move {
-    const VERSION               = '1.1.1';
+    const VERSION               = '1.1.1-grantnorwood';
 
     // page slugs
     const POSTS_PAGE_SLUG       = 'bulk-move-posts';
@@ -50,8 +77,12 @@ class Bulk_Move {
     const JS_HANDLE             = 'bulk-move';
     const JS_VARIABLE           = 'BULK_MOVE';
 
+    // CSS constants
+    const CSS_HANDLE             = 'bulk-move';
+
     // meta boxes for move posts
     const BOX_CATEGORY          = 'bm_move_category';
+    const BOX_CATEGORY_BY_TAG   = 'bm_move_category_by_tag';
     const BOX_TAG               = 'bm_move_tag';
     const BOX_DEBUG             = 'bm_debug';
 
@@ -80,6 +111,7 @@ class Bulk_Move {
 
         // enqueue JavaScript
         add_action( 'admin_print_scripts-' . $this->post_page, array( &$this, 'add_script') );
+        add_action( 'admin_print_scripts-' . $this->post_page, array( &$this, 'add_styles') );
 
         // meta boxes
 		add_action( "load-{$this->post_page}", array( &$this, 'add_move_posts_settings_panel' ) );
@@ -134,6 +166,7 @@ class Bulk_Move {
     function add_move_posts_meta_boxes() {
         add_meta_box( self::BOX_CATEGORY, __( 'Bulk Move By Category', 'bulk-move' ), 'Bulk_Move_Posts::render_move_category_box', $this->post_page, 'advanced' );
         add_meta_box( self::BOX_TAG, __( 'Bulk Move By Tag', 'bulk-move' ), 'Bulk_Move_Posts::render_move_tag_box', $this->post_page, 'advanced' );
+        add_meta_box( self::BOX_CATEGORY_BY_TAG, __( 'Bulk Move Category By Tag', 'bulk-move' ), 'Bulk_Move_Posts::render_move_category_by_tag_box', $this->post_page, 'advanced' );
         add_meta_box( self::BOX_DEBUG, __( 'Debug Information', 'bulk-move' ), 'Bulk_Move_Posts::render_debug_box', $this->post_page, 'advanced', 'low' );
     }
 
@@ -193,8 +226,6 @@ class Bulk_Move {
      * Enqueue JavaScript
      */
     function add_script() {
-        global $wp_scripts;
-
         wp_enqueue_script( self::JS_HANDLE, plugins_url( '/js/bulk-move.js', __FILE__ ), array( 'jquery' ), self::VERSION, TRUE );
 
         // JavaScript messages
@@ -211,6 +242,15 @@ class Bulk_Move {
     }
 
     /**
+     * Enqueue styles
+     */
+    function add_styles() {
+
+        wp_enqueue_style( self::CSS_HANDLE, plugins_url( '/css/bulk-move.css', __FILE__ ), false, self::VERSION );
+
+    }
+
+    /**
      * Request Handler
      */
     function request_handler() {
@@ -219,9 +259,16 @@ class Bulk_Move {
             wp_nonce_field( 'sm-bulk-move-posts', 'sm-bulk-move-posts-nonce' );
             $my_query = new WP_Query;
 
+            //Get max script execution time from option.
+            $max_execution_time = get_option(BULK_MOVE_OPTION_MAX_EXECUTION_TIME, BULK_MOVE_DEFAULT_MAX_EXECUTION_TIME);
+
             switch($_POST['smbm_action']) {
 
                 case "bulk-move-cats":
+
+                    //Increase script timeout in order to handle many posts.
+                    ini_set( 'max_execution_time', $max_execution_time );
+
                     // move by cats
                     $old_cat = absint($_POST['smbm_selected_cat']);
                     $new_cat = ($_POST['smbm_mapped_cat'] == -1) ? -1 : absint($_POST['smbm_mapped_cat']);
@@ -232,7 +279,15 @@ class Bulk_Move {
                         $current_cats = wp_get_post_categories($post->ID);
                         $current_cats = array_diff($current_cats, array($old_cat));
                         if ($new_cat != -1) {
-                            $current_cats[] = $new_cat;
+
+                            //TODO: Add "overwrite" checkbox for users to select.
+
+                            //Add new cat to existing cats.
+                            //$current_cats[] = $new_cat;
+
+                            //Or, overwrite with just the new cat instead.
+                            $current_cats = array($new_cat);
+
                         }
 
                         if (count($current_cats) == 0) {
@@ -247,6 +302,10 @@ class Bulk_Move {
                     break;
 
                 case "bulk-move-tags":
+
+                    //Increase script timeout in order to handle many posts.
+                    ini_set( 'max_execution_time', $max_execution_time );
+
                     // move by tags
                     $old_tag = absint( $_POST['smbm_old_tag'] );
                     $new_tag = ( $_POST['smbm_new_tag'] == -1 ) ? -1 : absint( $_POST['smbm_new_tag'] );
@@ -271,6 +330,76 @@ class Bulk_Move {
 
                     $this->msg = sprintf( _n( 'Moved %d post from the selected tag', 'Moved %d posts from the selected tag' , count( $posts ), 'bulk-move' ), count( $posts ) );
                     
+                    break;
+
+                case "bulk-move-category-by-tag":
+
+                    //Increase script timeout in order to handle many posts.
+                    ini_set( 'max_execution_time', $max_execution_time );
+
+                    // move by tags
+                    $old_tag = absint( $_POST['smbm_old_tag'] );
+                    $new_cat = ($_POST['smbm_mapped_cat'] == -1) ? -1 : absint($_POST['smbm_mapped_cat']);
+
+                    $posts = $my_query->query( array(
+                        'tag__in'   => $old_tag,
+                        'post_type' => 'post',
+                        'nopaging'  => 'true'
+                    ));
+
+                    foreach ( $posts as $post ) {
+                        $current_cats = wp_get_post_categories($post->ID);
+
+                        if ($new_cat != -1) {
+
+                            //TODO: Add "overwrite" checkbox for users to select.
+
+                            //Add new cat to existing cats.
+                            //$current_cats[] = $new_cat;
+
+                            //Or, overwrite with just the new cat instead.
+                            $current_cats = array($new_cat);
+
+                        }
+
+                        if (count($current_cats) == 0) {
+                            $current_cats = array(get_option('default_category'));
+                        }
+                        $current_cats = array_values($current_cats);
+                        wp_update_post(array('ID'=>$post->ID,'post_category'=>$current_cats));
+                    }
+
+                    $this->msg = sprintf( _n( 'Moved %d post from the selected tag to the new category.', 'Moved %d posts from the selected tag to the new category.' , count( $posts ), 'bulk-move' ), count( $posts ) );
+
+                    break;
+
+                case "bulk-move-save-max-execution-time":
+
+                    $new_max_execution_time = $_POST['smbm_max_execution_time'];
+                    if (is_numeric($new_max_execution_time)) {
+
+                        //Update option.
+                        $option_updated = update_option(BULK_MOVE_OPTION_MAX_EXECUTION_TIME, $new_max_execution_time);
+
+                        if ($option_updated === true) {
+
+                            //Success.
+                            $this->msg = sprintf( __( 'Max execution time was successfully saved as %s seconds.', 'bulk-move' ), $new_max_execution_time);
+
+                        } else {
+
+                            //Error saving option.
+                            $this->msg = __( 'An unknown error occurred while saving your options.', 'bulk-move' );
+
+                        }
+
+                    } else {
+
+                        //Error, value was not numeric.
+                        $this->msg = sprintf( __( 'Could not update the max execution time to %s, it was not numeric.  Enter the max number of seconds this script should run.', 'bulk-move' ), $new_max_execution_time);
+
+                    }
+
                     break;
             }
 
@@ -312,4 +441,3 @@ class Bulk_Move {
 
 // Start this plugin once all other plugins are fully loaded
 add_action( 'init', 'Bulk_Move' ); function Bulk_Move() { global $Bulk_Move; $Bulk_Move = new Bulk_Move(); }
-?>

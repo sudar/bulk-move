@@ -29,7 +29,7 @@ class Bulk_Move_Posts {
                 <td scope="row" >
                 <select name="smbm_selected_cat">
 <?php
-        $categories =  get_categories(array( 'hide_empty' => false));
+        $categories =  get_categories(array( 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC'));
         foreach ($categories as $category) {
 ?>
                     <option value="<?php echo $category->cat_ID; ?>">
@@ -60,7 +60,7 @@ class Bulk_Move_Posts {
 		</table>
 		</fieldset>
         <p class="submit">
-            <button type="submit" name="smbm_action" value = "bulk-move-cats" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
+            <button type="submit" name="smbm_action" value="bulk-move-cats" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
         </p>
         <!-- Category end-->
 <?php
@@ -120,10 +120,71 @@ class Bulk_Move_Posts {
 		</table>
 		</fieldset>
         <p class="submit">
-            <button type="submit" name="smbm_action" value = "bulk-move-tags" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
+            <button type="submit" name="smbm_action" value="bulk-move-tags" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
         </p>
         <!-- Tag end-->
 <?php
+    }
+
+    /**
+     * Render move category by tag box
+     *
+     * @since 1.1
+     * @static
+     * @access public
+     */
+    public static function render_move_category_by_tag_box() {
+
+        if ( Bulk_Move_Util::is_posts_box_hidden( Bulk_Move::BOX_CATEGORY_BY_TAG ) ) {
+            printf( __( 'This section just got enabled. Kindly <a href = "%1$s">refresh</a> the page to fully enable it.', 'bulk-move' ), 'tools.php?page=' . Bulk_Move::POSTS_PAGE_SLUG );
+            return;
+        }
+        ?>
+        <!-- Tag Start-->
+        <h4><?php _e( 'On the left side, select the tag whose post you want to move. In the right side select the category to which you want the posts to be moved.', 'bulk-move' ) ?></h4>
+
+        <fieldset class="options">
+            <table class="optiontable">
+                <tr>
+                    <td scope="row" >
+                        <select name="smbm_old_tag">
+                            <?php
+                            $tags =  get_tags( array( 'hide_empty' => false ) );
+                            foreach ( $tags as $tag ) {
+                                ?>
+                                <option value="<?php echo $tag->term_id; ?>">
+                                    <?php echo $tag->name; ?> (<?php echo $tag->count . ' '; _e( 'Posts', 'bulk-move' ); ?>)
+                                </option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                        ==>
+                    </td>
+                    <td scope="row" >
+                        <select name="smbm_mapped_cat">
+                            <option value="-1"><?php _e( "Remove Category", 'bulk-move' ); ?></option>
+                            <?php
+                            $categories =  get_categories(array( 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC'));
+                            foreach ($categories as $category) {
+                                ?>
+                                <option value="<?php echo $category->cat_ID; ?>">
+                                    <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e( "Posts", 'bulk-move' ); ?>)
+                                </option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+
+            </table>
+        </fieldset>
+        <p class="submit">
+            <button type="submit" name="smbm_action" value="bulk-move-category-by-tag" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
+        </p>
+        <!-- Tag end-->
+    <?php
     }
 
     /**
@@ -132,6 +193,12 @@ class Bulk_Move_Posts {
      * @since 1.0
      */
     public static function render_debug_box() {
+
+        //Get max script execution time from option.
+        $max_execution_time = get_option(BULK_MOVE_OPTION_MAX_EXECUTION_TIME, BULK_MOVE_DEFAULT_MAX_EXECUTION_TIME);
+
+        ini_set( 'max_execution_time', $max_execution_time );
+
 ?>
         <!-- Debug box start-->
         <p>
@@ -141,23 +208,23 @@ class Bulk_Move_Posts {
         </p>
         <table cellspacing="10">
             <tr>
-                <th align = "right"><?php _e( 'PHP Version ', 'bulk-move' ); ?></th>
+                <th align="right"><?php _e( 'PHP Version ', 'bulk-move' ); ?></th>
                 <td><?php echo phpversion(); ?></td>
             </tr>
             <tr>
-                <th align = "right"><?php _e( 'Plugin Version ', 'bulk-move' ); ?></th>
+                <th align="right"><?php _e( 'Plugin Version ', 'bulk-move' ); ?></th>
                 <td><?php echo Bulk_move::VERSION; ?></td>
             </tr>
             <tr>
-                <th align = "right"><?php _e( 'Available memory size ', 'bulk-move' );?></th>
+                <th align="right"><?php _e( 'Available memory size ', 'bulk-move' );?></th>
                 <td><?php echo ini_get( 'memory_limit' ); ?></td>
             </tr>
             <tr>
-                <th align = "right"><?php _e( 'Script time out ', 'bulk-move' );?></th>
-                <td><?php echo ini_get( 'max_execution_time' ); ?></td>
+                <th align="right"><?php _e( 'Script time out ', 'bulk-move' );?></th>
+                <td><input type="text" id="smbm_max_execution_time" name="smbm_max_execution_time" value="<?php echo ini_get( 'max_execution_time' ); ?>" /> <button type="submit" name="smbm_action" value="bulk-move-save-max-execution-time" class="button-primary"><?php _e( 'Save', 'bulk-move' ) ?> &raquo;</button></td>
             </tr>
             <tr>
-                <th align = "right"><?php _e( 'Script input time ', 'bulk-move' ); ?></th>
+                <th align="right"><?php _e( 'Script input time ', 'bulk-move' ); ?></th>
                 <td><?php echo ini_get( 'max_input_time' ); ?></td>
             </tr>
         </table>
