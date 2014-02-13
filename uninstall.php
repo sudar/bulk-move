@@ -4,7 +4,7 @@
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
 exit();
 
-$option_name = BULK_MOVE_OPTION_MAX_EXECUTION_TIME;
+$option_name = 'bm_max_execution_time';
 
 // For Single site
 if ( !is_multisite() )
