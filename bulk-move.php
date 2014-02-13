@@ -82,6 +82,7 @@ class Bulk_Move {
 
     // meta boxes for move posts
     const BOX_CATEGORY          = 'bm_move_category';
+    const BOX_CATEGORY_BY_TAG   = 'bm_move_category_by_tag';
     const BOX_TAG               = 'bm_move_tag';
     const BOX_DEBUG             = 'bm_debug';
 
@@ -165,6 +166,7 @@ class Bulk_Move {
     function add_move_posts_meta_boxes() {
         add_meta_box( self::BOX_CATEGORY, __( 'Bulk Move By Category', 'bulk-move' ), 'Bulk_Move_Posts::render_move_category_box', $this->post_page, 'advanced' );
         add_meta_box( self::BOX_TAG, __( 'Bulk Move By Tag', 'bulk-move' ), 'Bulk_Move_Posts::render_move_tag_box', $this->post_page, 'advanced' );
+        add_meta_box( self::BOX_CATEGORY_BY_TAG, __( 'Bulk Move Category By Tag', 'bulk-move' ), 'Bulk_Move_Posts::render_move_category_by_tag_box', $this->post_page, 'advanced' );
         add_meta_box( self::BOX_DEBUG, __( 'Debug Information', 'bulk-move' ), 'Bulk_Move_Posts::render_debug_box', $this->post_page, 'advanced', 'low' );
     }
 
@@ -277,7 +279,15 @@ class Bulk_Move {
                         $current_cats = wp_get_post_categories($post->ID);
                         $current_cats = array_diff($current_cats, array($old_cat));
                         if ($new_cat != -1) {
-                            $current_cats[] = $new_cat;
+
+                            //TODO: Add "overwrite" checkbox for users to select.
+
+                            //Add new cat to existing cats.
+                            //$current_cats[] = $new_cat;
+
+                            //Or, overwrite with just the new cat instead.
+                            $current_cats = array($new_cat);
+
                         }
 
                         if (count($current_cats) == 0) {
@@ -320,6 +330,47 @@ class Bulk_Move {
 
                     $this->msg = sprintf( _n( 'Moved %d post from the selected tag', 'Moved %d posts from the selected tag' , count( $posts ), 'bulk-move' ), count( $posts ) );
                     
+                    break;
+
+                case "bulk-move-category-by-tag":
+
+                    //Increase script timeout in order to handle many posts.
+                    ini_set( 'max_execution_time', $max_execution_time );
+
+                    // move by tags
+                    $old_tag = absint( $_POST['smbm_old_tag'] );
+                    $new_cat = ($_POST['smbm_mapped_cat'] == -1) ? -1 : absint($_POST['smbm_mapped_cat']);
+
+                    $posts = $my_query->query( array(
+                        'tag__in'   => $old_tag,
+                        'post_type' => 'post',
+                        'nopaging'  => 'true'
+                    ));
+
+                    foreach ( $posts as $post ) {
+                        $current_cats = wp_get_post_categories($post->ID);
+
+                        if ($new_cat != -1) {
+
+                            //TODO: Add "overwrite" checkbox for users to select.
+
+                            //Add new cat to existing cats.
+                            //$current_cats[] = $new_cat;
+
+                            //Or, overwrite with just the new cat instead.
+                            $current_cats = array($new_cat);
+
+                        }
+
+                        if (count($current_cats) == 0) {
+                            $current_cats = array(get_option('default_category'));
+                        }
+                        $current_cats = array_values($current_cats);
+                        wp_update_post(array('ID'=>$post->ID,'post_category'=>$current_cats));
+                    }
+
+                    $this->msg = sprintf( _n( 'Moved %d post from the selected tag to the new category.', 'Moved %d posts from the selected tag to the new category.' , count( $posts ), 'bulk-move' ), count( $posts ) );
+
                     break;
 
                 case "bulk-move-save-max-execution-time":
