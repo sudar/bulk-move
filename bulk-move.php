@@ -209,8 +209,6 @@ class Bulk_Move {
      * Enqueue JavaScript
      */
     function add_script() {
-        global $wp_scripts;
-
         wp_enqueue_script( self::JS_HANDLE, plugins_url( '/js/bulk-move.js', __FILE__ ), array( 'jquery' ), self::VERSION, TRUE );
 
         // JavaScript messages

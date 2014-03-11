@@ -60,7 +60,7 @@ class Bulk_Move_Posts {
 		</table>
 		</fieldset>
         <p class="submit">
-            <button type="submit" name="smbm_action" value = "bulk-move-cats" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
+            <button type="submit" name="smbm_action" value="bulk-move-cats" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
         </p>
         <!-- Category end-->
 <?php
@@ -120,7 +120,7 @@ class Bulk_Move_Posts {
 		</table>
 		</fieldset>
         <p class="submit">
-            <button type="submit" name="smbm_action" value = "bulk-move-tags" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
+            <button type="submit" name="smbm_action" value="bulk-move-tags" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
         </p>
         <!-- Tag end-->
 <?php
@@ -147,15 +147,15 @@ class Bulk_Move_Posts {
         </p>
         <table cellspacing="10">
             <tr>
-                <th align = "right"><?php _e( 'PHP Version ', 'bulk-move' ); ?></th>
+                <th align="right"><?php _e( 'PHP Version ', 'bulk-move' ); ?></th>
                 <td><?php echo phpversion(); ?></td>
             </tr>
             <tr>
-                <th align = "right"><?php _e( 'Plugin Version ', 'bulk-move' ); ?></th>
+                <th align="right"><?php _e( 'Plugin Version ', 'bulk-move' ); ?></th>
                 <td><?php echo Bulk_move::VERSION; ?></td>
             </tr>
             <tr>
-                <th align = "right"><?php _e( 'Available memory size ', 'bulk-move' );?></th>
+                <th align="right"><?php _e( 'Available memory size ', 'bulk-move' );?></th>
                 <td><?php echo ini_get( 'memory_limit' ); ?></td>
             </tr>
             <tr>
@@ -163,7 +163,7 @@ class Bulk_Move_Posts {
                 <td><strong><?php echo ini_get( 'max_execution_time' );?></strong> (<?php _e( 'In php.ini', 'bulk-move' );?>). <?php _e( 'Custom value: ', 'bulk-move' );?><input type="text" id="smbm_max_execution_time" name="smbm_max_execution_time" value="<?php echo $max_execution_time; ?>" > <button type="submit" name="smbm_action" value="bulk-move-save-max-execution-time" class="button-primary"><?php _e( 'Save', 'bulk-move' ) ?> &raquo;</button></td>
             </tr>
             <tr>
-                <th align = "right"><?php _e( 'Script input time ', 'bulk-move' ); ?></th>
+                <th align="right"><?php _e( 'Script input time ', 'bulk-move' ); ?></th>
                 <td><?php echo ini_get( 'max_input_time' ); ?></td>
             </tr>
         </table>
