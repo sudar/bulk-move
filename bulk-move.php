@@ -40,20 +40,33 @@ if ( !class_exists( 'Bulk_Move_Util' ) ) {
     require_once dirname( __FILE__ ) . '/include/class-bulk-move-util.php';
 }
 
+/**
+ * Bulk Move Main Plugin class
+ *
+ * @package Bulk Move
+ * @author Sudar
+ */
 class Bulk_Move {
-    const VERSION               = '1.1.1';
+    // version
+    const VERSION                = '1.1.1';
 
     // page slugs
-    const POSTS_PAGE_SLUG       = 'bulk-move-posts';
+    const POSTS_PAGE_SLUG        = 'bulk-move-posts';
 
     // JS constants
-    const JS_HANDLE             = 'bulk-move';
-    const JS_VARIABLE           = 'BULK_MOVE';
+    const JS_HANDLE              = 'bulk-move';
+    const JS_VARIABLE            = 'BULK_MOVE';
+
+    // CSS constants
+    const CSS_HANDLE             = 'bulk-move';
 
     // meta boxes for move posts
-    const BOX_CATEGORY          = 'bm_move_category';
-    const BOX_TAG               = 'bm_move_tag';
-    const BOX_DEBUG             = 'bm_debug';
+    const BOX_CATEGORY           = 'bm_move_category';
+    const BOX_TAG                = 'bm_move_tag';
+    const BOX_DEBUG              = 'bm_debug';
+
+    // options
+    const SCRIPT_TIMEOUT_OPTION  = 'bm_max_execution_time';
 
     /**
      * Default constructor
@@ -80,6 +93,9 @@ class Bulk_Move {
 
         // enqueue JavaScript
         add_action( 'admin_print_scripts-' . $this->post_page, array( &$this, 'add_script') );
+
+        // enqueue CSS
+        add_action( 'admin_print_scripts-' . $this->post_page, array( &$this, 'add_styles') );
 
         // meta boxes
 		add_action( "load-{$this->post_page}", array( &$this, 'add_move_posts_settings_panel' ) );
@@ -211,6 +227,15 @@ class Bulk_Move {
     }
 
     /**
+     * Enqueue styles
+     * 
+     * @since 1.2
+     */
+    function add_styles() {
+        wp_enqueue_style( self::CSS_HANDLE, plugins_url( '/css/bulk-move.css', __FILE__ ), false, self::VERSION );
+    }
+
+    /**
      * Request Handler
      */
     function request_handler() {
@@ -219,9 +244,17 @@ class Bulk_Move {
             wp_nonce_field( 'sm-bulk-move-posts', 'sm-bulk-move-posts-nonce' );
             $my_query = new WP_Query;
 
+            // get max script execution time from option.
+            $max_execution_time = get_option( self::SCRIPT_TIMEOUT_OPTION );
+            if ( !$max_execution_time ) {
+                //Increase script timeout in order to handle many posts.
+                ini_set( 'max_execution_time', $max_execution_time );
+            }
+
             switch($_POST['smbm_action']) {
 
                 case "bulk-move-cats":
+
                     // move by cats
                     $old_cat = absint($_POST['smbm_selected_cat']);
                     $new_cat = ($_POST['smbm_mapped_cat'] == -1) ? -1 : absint($_POST['smbm_mapped_cat']);
@@ -247,6 +280,7 @@ class Bulk_Move {
                     break;
 
                 case "bulk-move-tags":
+
                     // move by tags
                     $old_tag = absint( $_POST['smbm_old_tag'] );
                     $new_tag = ( $_POST['smbm_new_tag'] == -1 ) ? -1 : absint( $_POST['smbm_new_tag'] );
@@ -271,6 +305,28 @@ class Bulk_Move {
 
                     $this->msg = sprintf( _n( 'Moved %d post from the selected tag', 'Moved %d posts from the selected tag' , count( $posts ), 'bulk-move' ), count( $posts ) );
                     
+                    break;
+
+                case "bulk-move-save-max-execution-time":
+
+                    $new_max_execution_time = $_POST['smbm_max_execution_time'];
+
+                    if (is_numeric( $new_max_execution_time ) ) {
+                        //Update option.
+                        $option_updated = update_option( self::SCRIPT_TIMEOUT_OPTION, $new_max_execution_time );
+
+                        if ( $option_updated === true ) {
+                            //Success.
+                            $this->msg = sprintf( __( 'Max execution time was successfully saved as %s seconds.', 'bulk-move' ), $new_max_execution_time );
+                        } else {
+                            //Error saving option.
+                            $this->msg = __( 'An unknown error occurred while saving your options.', 'bulk-move' );
+                        }
+                    } else {
+                        //Error, value was not numeric.
+                        $this->msg = sprintf( __( 'Could not update the max execution time to %s, it was not numeric.  Enter the max number of seconds this script should run.', 'bulk-move' ), $new_max_execution_time );
+                    }
+
                     break;
             }
 

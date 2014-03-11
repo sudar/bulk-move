@@ -10,7 +10,7 @@
 /*jslint browser: true, devel: true*/
 /*global BULK_MOVE, jQuery, document, postboxes, pagenow*/
 jQuery(document).ready(function () {
-    jQuery('button').click(function () {
+    jQuery('button[value="bulk-move-tags"], button[value="bulk-move-cats"]').click(function () {
         return confirm(BULK_MOVE.msg.move_warning);
     });
 

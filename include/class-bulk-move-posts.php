@@ -132,6 +132,12 @@ class Bulk_Move_Posts {
      * @since 1.0
      */
     public static function render_debug_box() {
+
+        // Get max script execution time from option.
+        $max_execution_time = get_option( Bulk_Move::SCRIPT_TIMEOUT_OPTION );
+        if ( !$max_execution_time ) {
+            $max_execution_time = '';
+        }
 ?>
         <!-- Debug box start-->
         <p>
@@ -153,8 +159,8 @@ class Bulk_Move_Posts {
                 <td><?php echo ini_get( 'memory_limit' ); ?></td>
             </tr>
             <tr>
-                <th align = "right"><?php _e( 'Script time out ', 'bulk-move' );?></th>
-                <td><?php echo ini_get( 'max_execution_time' ); ?></td>
+                <th align="right"><?php _e( 'Script time out ', 'bulk-move' );?></th>
+                <td><strong><?php echo ini_get( 'max_execution_time' );?></strong> (<?php _e( 'In php.ini', 'bulk-move' );?>). <?php _e( 'Custom value: ', 'bulk-move' );?><input type="text" id="smbm_max_execution_time" name="smbm_max_execution_time" value="<?php echo $max_execution_time; ?>" > <button type="submit" name="smbm_action" value="bulk-move-save-max-execution-time" class="button-primary"><?php _e( 'Save', 'bulk-move' ) ?> &raquo;</button></td>
             </tr>
             <tr>
                 <th align = "right"><?php _e( 'Script input time ', 'bulk-move' ); ?></th>
