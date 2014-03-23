@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Bulk Move v1.1\n"
+"Project-Id-Version: Bulk Move v1.1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-02-12 00:00:06+0000\n"
+"PO-Revision-Date: 2014-03-21 20:44:23+0000\n"
 "Last-Translator: Alexander Ihrig <github@alexander-ihrig.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #. translators: plugin header field 'Name'
 #: bulk-move.php:0
-#: bulk-move.php:79
+#: bulk-move.php:93
 #@ bulk-move
 msgid "Bulk Move"
 msgstr "Massenverschieben"
@@ -51,93 +51,87 @@ msgstr ""
 msgid "http://sudarmuthu.com/"
 msgstr ""
 
-#. translators: plugin header field 'Version'
-#: bulk-move.php:0
-#@ bulk-move
-msgid "1.1"
-msgstr ""
-
-#: bulk-move.php:106
+#: bulk-move.php:123
 #@ bulk-move
 msgid "About Plugin"
 msgstr "Über das Plug-in"
 
-#: bulk-move.php:108
+#: bulk-move.php:125
 #@ bulk-move
 msgid "This plugin allows you to move posts in bulk from selected categories to another category"
 msgstr "Dieses Plug-in ermöglicht es Ihnen, um massenweise Beiträge bestimmter Kategorien in eine andere Kategorie zu verschieben."
 
-#: bulk-move.php:115
+#: bulk-move.php:132
 #@ bulk-move
 msgid "More information"
 msgstr "Weitere Informationen"
 
-#: bulk-move.php:116
+#: bulk-move.php:133
 #@ bulk-move
 msgid "Plugin Homepage/support"
 msgstr "Plug-in-Homepage und -Unterstützung"
 
-#: bulk-move.php:117
+#: bulk-move.php:134
 #@ bulk-move
 msgid "Plugin author's blog"
 msgstr "Autoren-Blog des Plug-ins"
 
-#: bulk-move.php:118
+#: bulk-move.php:135
 #@ bulk-move
 msgid "Other Plugin's by Author"
 msgstr "Weitere Plug-ins des Autors"
 
-#: bulk-move.php:135
+#: bulk-move.php:152
 #@ bulk-move
 msgid "Bulk Move By Category"
-msgstr "Nach Kategorie"
+msgstr "Abhängig von der Kategorie"
 
-#: bulk-move.php:136
+#: bulk-move.php:153
 #@ bulk-move
 msgid "Bulk Move By Tag"
-msgstr "Nach Schlagwort"
+msgstr "Abhängig vom Schlagwort"
 
-#: bulk-move.php:137
+#: bulk-move.php:155
 #@ bulk-move
 msgid "Debug Information"
 msgstr "Debug-Informationen"
 
-#: bulk-move.php:146
+#: bulk-move.php:164
 #@ bulk-move
 msgid "Bulk Move Posts"
 msgstr "Beiträge massenweise verschieben"
 
-#: bulk-move.php:162
+#: bulk-move.php:180
 #@ bulk-move
 msgid "WARNING: Posts moved once cannot be retrieved back. Use with caution."
 msgstr "WARNUNG: Das Verschieben der Beiträge kann nicht rückgängig gemacht werden. Seien Sie vorsichtig!"
 
-#: bulk-move.php:189
+#: bulk-move.php:207
 #@ bulk-move
 msgid "plugin"
 msgstr "Plug-in"
 
-#: bulk-move.php:189
+#: bulk-move.php:207
 #@ bulk-move
 msgid "Version"
 msgstr ""
 
-#: bulk-move.php:189
+#: bulk-move.php:207
 #@ bulk-move
 msgid "by"
 msgstr "von"
 
-#: bulk-move.php:202
+#: bulk-move.php:218
 #@ bulk-move
 msgid "Are you sure you want to move all the selected posts"
 msgstr "Sind Sie sicher, dass Sie alle gewählten Beiträge verschieben möchten?"
 
-#: bulk-move.php:206
+#: bulk-move.php:222
 #@ bulk-move
 msgid "Please select least one option"
 msgstr "Bitte wählen Sie zumindest eine Option"
 
-#: bulk-move.php:245
+#: bulk-move.php:284
 #, php-format
 #@ bulk-move
 msgid "Moved %d post from the selected category"
@@ -145,7 +139,7 @@ msgid_plural "Moved %d posts from the selected category"
 msgstr[0] "%d Beitrag aus der gewählten Kategorie verschoben"
 msgstr[1] "%d Beiträge aus der gewählten Kategorie verschoben"
 
-#: bulk-move.php:272
+#: bulk-move.php:318
 #, php-format
 #@ bulk-move
 msgid "Moved %d post from the selected tag"
@@ -153,13 +147,14 @@ msgid_plural "Moved %d posts from the selected tag"
 msgstr[0] "%d Beitrag von dem gewählten Schlagwort verschoben"
 msgstr[1] "%d Beiträge von dem gewählten Schlagwort verschoben"
 
-#: bulk-move.php:306
+#: bulk-move.php:410
 #@ bulk-move
 msgid "Manage"
 msgstr "Verwalten"
 
 #: include/class-bulk-move-posts.php:19
-#: include/class-bulk-move-posts.php:79
+#: include/class-bulk-move-posts.php:85
+#: include/class-bulk-move-posts.php:150
 #, php-format
 #@ bulk-move
 msgid "This section just got enabled. Kindly <a href = \"%1$s\">refresh</a> the page to fully enable it."
@@ -172,8 +167,10 @@ msgstr "Wählen Sie auf der linken Seite die Kategorie, deren Beiträge verschob
 
 #: include/class-bulk-move-posts.php:36
 #: include/class-bulk-move-posts.php:51
-#: include/class-bulk-move-posts.php:96
-#: include/class-bulk-move-posts.php:111
+#: include/class-bulk-move-posts.php:102
+#: include/class-bulk-move-posts.php:117
+#: include/class-bulk-move-posts.php:167
+#: include/class-bulk-move-posts.php:183
 #@ bulk-move
 msgid "Posts"
 msgstr "Beiträge"
@@ -183,69 +180,156 @@ msgstr "Beiträge"
 msgid "Remove Category"
 msgstr "Kategorie entfernen"
 
-#: include/class-bulk-move-posts.php:63
-#: include/class-bulk-move-posts.php:123
+#: include/class-bulk-move-posts.php:69
+#: include/class-bulk-move-posts.php:134
+#: include/class-bulk-move-posts.php:200
 #@ bulk-move
 msgid "Bulk Move "
 msgstr "Massenverschieben "
 
-#: include/class-bulk-move-posts.php:84
+#: include/class-bulk-move-posts.php:90
 #@ bulk-move
 msgid "On the left side, select the tag whose post you want to move. In the right side select the tag to which you want the posts to be moved."
 msgstr "Wählen Sie auf der linken Seite das Schlagwort, dessen Beiträge verschoben werden sollen. Auf der rechten Seite wählen Sie das Ziel-Schlagwort."
 
-#: include/class-bulk-move-posts.php:106
+#: include/class-bulk-move-posts.php:112
 #@ bulk-move
 msgid "Remove Tag"
 msgstr "Schlagwort entfernen"
 
-#: include/class-bulk-move-posts.php:138
+#: include/class-bulk-move-posts.php:221
 #@ bulk-move
 msgid "If you are seeing a blank page after clicking the Bulk Move button, then "
 msgstr "Wenn Sie eine leere Seite sehen, nachdem Sie auf die Schaltfläche Massenverschieben geklickt haben, dann "
 
-#: include/class-bulk-move-posts.php:139
+#: include/class-bulk-move-posts.php:222
 #@ bulk-move
 msgid "check out this FAQ"
 msgstr "lesen Sie in den FAQ"
 
-#: include/class-bulk-move-posts.php:140
+#: include/class-bulk-move-posts.php:223
 #@ bulk-move
 msgid "You also need need the following debug information."
 msgstr "Sie benötigen außerdem die folgenden Debug-Informationen."
 
-#: include/class-bulk-move-posts.php:144
+#: include/class-bulk-move-posts.php:227
 #@ bulk-move
 msgid "PHP Version "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:148
+#: include/class-bulk-move-posts.php:231
 #@ bulk-move
 msgid "Plugin Version "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:152
+#: include/class-bulk-move-posts.php:235
 #@ bulk-move
 msgid "Available memory size "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:156
+#: include/class-bulk-move-posts.php:239
 #@ bulk-move
 msgid "Script time out "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:160
+#: include/class-bulk-move-posts.php:243
 #@ bulk-move
 msgid "Script input time "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:165
+#. translators: plugin header field 'Version'
+#: bulk-move.php:0
 #@ bulk-move
-msgid "If you are looking to move posts in bulk, try out my "
+msgid "1.1.1"
 msgstr ""
 
-#: include/class-bulk-move-posts.php:165
+#: bulk-move.php:154
 #@ bulk-move
-msgid "Bulk move Plugin"
+msgid "Bulk Move Category By Tag"
+msgstr "Abhängig vom Schlagwort zu einer Kategorie verschieben"
+
+#: bulk-move.php:354
+#, php-format
+#@ bulk-move
+msgid "Moved %d post from the selected tag to the new category."
+msgid_plural "Moved %d posts from the selected tag to the new category."
+msgstr[0] "%d Beitrag von dem gewählten Schlagwort zur neuen Kategorie verschoben"
+msgstr[1] "%d Beiträge von dem gewählten Schlagwort zur neuen Kategorie verschoben"
+
+#: bulk-move.php:368
+#, php-format
+#@ bulk-move
+msgid "Max execution time was successfully saved as %s seconds."
+msgstr "Maximale Script-Laufzeit erfolgreich auf %s Sekunden geändert."
+
+#: bulk-move.php:371
+#@ bulk-move
+msgid "An unknown error occurred while saving your options."
+msgstr "Beim Speichern Ihres Werts ist ein unbekannter Fehler aufgetreten."
+
+#: bulk-move.php:375
+#, php-format
+#@ bulk-move
+msgid "Could not update the max execution time to %s, it was not numeric.  Enter the max number of seconds this script should run."
+msgstr "Die maximale Script-Laufzeit konnte nicht auf %s geändert werden, da dies kein nummerischer Wert ist. Geben Sie die maximale Zahl der Sekunden ein."
+
+#: include/class-bulk-move-posts.php:62
+#: include/class-bulk-move-posts.php:194
+#@ bulk-move
+msgid "If the post contains other categories, then"
+msgstr "Wenn ein Beitrag weitere Kategorien hat, dann"
+
+#: include/class-bulk-move-posts.php:63
+#: include/class-bulk-move-posts.php:129
+#: include/class-bulk-move-posts.php:195
+#@ bulk-move
+msgid "Remove them"
+msgstr "entferne sie"
+
+#: include/class-bulk-move-posts.php:64
+#: include/class-bulk-move-posts.php:130
+#: include/class-bulk-move-posts.php:196
+#@ bulk-move
+msgid "Don't remove them"
+msgstr "erhalte sie"
+
+#: include/class-bulk-move-posts.php:128
+#@ bulk-move
+msgid "If the post contains other tags, then"
+msgstr "Wenn ein Beitrag weitere Schlagwörter hat, dann"
+
+#: include/class-bulk-move-posts.php:155
+#@ bulk-move
+msgid "On the left side, select the tag whose post you want to move. In the right side select the category to which you want the posts to be moved."
+msgstr "Wählen Sie auf der linken Seite das Schlagwort, dessen Beiträge verschoben werden sollen. Auf der rechten Seite wählen Sie die Ziel-Kategorie."
+
+#: include/class-bulk-move-posts.php:177
+#@ bulk-move
+msgid "Choose Category"
+msgstr "Kategorie wählen"
+
+#: include/class-bulk-move-posts.php:240
+#@ bulk-move
+msgid "In php.ini"
+msgstr "in php.ini"
+
+#: include/class-bulk-move-posts.php:240
+#@ bulk-move
+msgid "Custom value: "
+msgstr "Wert anpassen: "
+
+#: include/class-bulk-move-posts.php:240
+#@ bulk-move
+msgid "Save"
+msgstr "Speichern"
+
+#: include/class-bulk-move-posts.php:248
+#@ bulk-move
+msgid "If you are looking to delete posts in bulk, try out my "
+msgstr "Wenn Sie Beiträge massenweise löschen möchten, testen Sie das "
+
+#: include/class-bulk-move-posts.php:248
+#@ bulk-move
+msgid "Bulk Delete Plugin"
 msgstr ""
 
