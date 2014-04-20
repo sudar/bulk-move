@@ -5,6 +5,7 @@
 - Add: Add uninstall.php file to remove option when plugin is removed. Thanks https://github.com/grantnorwood
 - Fix: Clean whitespace in HTML attributes. Thanks https://github.com/grantnorwood
 - Add: Add the ability to move categories by tag. Thanks https://github.com/grantnorwood
+- Tweak: Change the capability to `edit_others_posts`. (issue #7)
 
 ### v1.1.1 (2014-02-12) (Dev time: 0.5 hours)
 - Add: Add German translation
