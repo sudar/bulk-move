@@ -32,21 +32,28 @@ Checkout readme file for release notes
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if ( !class_exists( 'Bulk_Move_Posts' ) ) {
-    require_once dirname( __FILE__ ) . '/include/class-bulk-move-posts.php';
-}
+/**
+ * @package    Bulk_Move
+ * @subpackage core
+ * @author     Sudar
+ * @version    1.1.1
+ */
 
-if ( !class_exists( 'Bulk_Move_Util' ) ) {
-    require_once dirname( __FILE__ ) . '/include/class-bulk-move-util.php';
-}
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Bulk Move Main Plugin class
+ * Main Plugin class for Bulk Move
  *
- * @package Bulk Move
- * @author Sudar
+ * Singleton @since 1.2.0
  */
-class Bulk_Move {
+final class Bulk_Move {
+    /**
+     * @var Bulk_Move The one true Bulk_Move
+     * @since 1.2.0
+     */
+    private static $instance;
+
     // version
     const VERSION                = '1.1.1';
 
@@ -69,14 +76,115 @@ class Bulk_Move {
     // options
     const SCRIPT_TIMEOUT_OPTION  = 'bm_max_execution_time';
 
-    /**
-     * Default constructor
-     */
-    public function __construct() {
-        // Load localization domain
-        $this->translations = dirname( plugin_basename( __FILE__ ) ) . '/languages/' ;
-        load_plugin_textdomain( 'bulk-move', FALSE, $this->translations );
+    // path variables
+    // Ideally these should be constants, but because of PHP's limitations, these are static varaibles
+    static $PLUGIN_DIR;
+    static $PLUGIN_URL;
+    static $PLUGIN_FILE;
 
+    /**
+     * Main Bulk_Move Instance
+     *
+     * Insures that only one instance of Bulk_Move exists in memory at any one
+     * time. Also prevents needing to define globals all over the place.
+     *
+     * @since 1.2.0
+     * @static
+     * @staticvar array $instance
+     * @uses Bulk_Move::setup_paths() Setup the plugin paths
+     * @uses Bulk_Move::includes() Include the required files
+     * @uses Bulk_Move::load_textdomain() Load text domain for translation
+     * @uses Bulk_Move::setup_actions() Setup the hooks and actions
+     * @see BULK_MOVE()
+     * @return The one true BULK_MOVE
+     */
+    public static function instance() {
+        if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Bulk_Move ) ) {
+            self::$instance = new Bulk_Move;
+            self::$instance->setup_paths();
+            self::$instance->includes();
+            self::$instance->load_textdomain();
+            self::$instance->setup_actions();
+        }
+        return self::$instance;
+    }
+
+    /**
+     * Throw error on object clone
+     *
+     * The whole idea of the singleton design pattern is that there is a single
+     * object therefore, we don't want the object to be cloned.
+     *
+     * @since  1.2.0
+     * @access protected
+     * @return void
+     */
+    public function __clone() {
+        // Cloning instances of the class is forbidden
+        _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'bulk-move' ), '1.2.0' );
+    }
+
+    /**
+     * Disable unserializing of the class
+     *
+     * @since  1.2.0
+     * @access protected
+     * @return void
+     */
+    public function __wakeup() {
+        // Unserializing instances of the class is forbidden
+        _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'bulk-move' ), '1.2.0' );
+    }
+
+    /**
+     * Setup plugin constants
+     *
+     * @access private
+     * @since  1.2.0
+     * @return void
+     */
+    private function setup_paths() {
+        // Plugin Folder Path
+        self::$PLUGIN_DIR = plugin_dir_path( __FILE__ );
+
+        // Plugin Folder URL
+        self::$PLUGIN_URL = plugin_dir_url( __FILE__ );
+
+        // Plugin Root File
+        self::$PLUGIN_FILE = __FILE__;
+    }
+
+    /**
+     * Include required files
+     *
+     * @access private
+     * @since  1.2.0
+     * @return void
+     */
+    private function includes() {
+        require_once self::$PLUGIN_DIR . '/include/class-bulk-move-posts.php';
+        require_once self::$PLUGIN_DIR . '/include/class-bulk-move-util.php';
+    }
+
+    /**
+     * Loads the plugin language files
+     *
+     * @since  1.2.0
+     */
+    public function load_textdomain() {
+        // Load localization domain
+        $this->translations = dirname( plugin_basename( self::$PLUGIN_FILE ) ) . '/languages/';
+        load_plugin_textdomain( 'bulk-move', FALSE, $this->translations );
+    }
+
+    /**
+     * Loads the plugin's actions and hooks
+     *
+     * @access private
+     * @since  1.2.0
+     * @return void
+     */
+    private function setup_actions() {
         // Register hooks
         add_action( 'admin_menu', array( &$this, 'add_menu' ) );
         add_action( 'admin_init', array( &$this, 'request_handler' ) );
@@ -109,12 +217,12 @@ class Bulk_Move {
      * @since 1.0
      */
 	function add_move_posts_settings_panel() {
- 
-		/** 
+
+		/**
 		 * Create the WP_Screen object using page handle
 		 */
 		$this->move_posts_screen = WP_Screen::get( $this->post_page );
- 
+
 		/**
 		 * Content specified inline
 		 */
@@ -126,7 +234,7 @@ class Bulk_Move {
 				'callback' => false
 			)
 		);
- 
+
         // Add help sidebar
 		$this->move_posts_screen->set_help_sidebar(
             '<p><strong>' . __( 'More information', 'bulk-move' ) . '</strong></p>' .
@@ -138,7 +246,7 @@ class Bulk_Move {
         /* Trigger the add_meta_boxes hooks to allow meta boxes to be added */
         do_action( 'add_meta_boxes_' . $this->post_page, null );
         do_action( 'add_meta_boxes', $this->post_page, null );
-    
+
         /* Enqueue WordPress' script for handling the meta boxes */
         wp_enqueue_script( 'postbox' );
 	}
@@ -215,7 +323,7 @@ class Bulk_Move {
 
         // JavaScript messages
         $msg = array(
-            'move_warning'      => __( 'Are you sure you want to move all the selected posts', 'bulk-move' )
+            'move_warning'  => __( 'Are you sure you want to move all the selected posts', 'bulk-move' )
         );
 
         $error = array(
@@ -228,8 +336,8 @@ class Bulk_Move {
 
     /**
      * Enqueue styles
-     * 
-     * @since 1.2
+     *
+     * @since 1.2.0
      */
     function add_styles() {
         wp_enqueue_style( self::CSS_HANDLE, plugins_url( '/css/bulk-move.css', __FILE__ ), false, self::VERSION );
@@ -239,148 +347,13 @@ class Bulk_Move {
      * Request Handler
      */
     function request_handler() {
-        if (isset($_POST['smbm_action'])) {
-
-            wp_nonce_field( 'sm-bulk-move-posts', 'sm-bulk-move-posts-nonce' );
-            $my_query = new WP_Query;
-
-            // get max script execution time from option.
-            $max_execution_time = get_option( self::SCRIPT_TIMEOUT_OPTION );
-            if ( !$max_execution_time ) {
-                //Increase script timeout in order to handle many posts.
-                ini_set( 'max_execution_time', $max_execution_time );
-            }
-
-            switch($_POST['smbm_action']) {
-
-                case "bulk-move-cats":
-
-                    // move by cats
-                    $old_cat = absint($_POST['smbm_mc_selected_cat']);
-                    $new_cat = ($_POST['smbm_mc_mapped_cat'] == -1) ? -1 : absint($_POST['smbm_mc_mapped_cat']);
-
-                    $posts   = $my_query->query(array('category__in'=>array($old_cat), 'post_type'=>'post', 'nopaging'=>'true'));
-
-                    foreach ($posts as $post) {
-                        $current_cats = array_diff( wp_get_post_categories( $post->ID ), array( $old_cat ) );
-
-                        if ( $new_cat != -1 ) {
-                            if ( isset( $_POST['smbm_mc_overwrite'] ) && 'overwrite' == $_POST['smbm_mc_overwrite'] ) {
-                                // Remove old categories
-                                $current_cats = array( $new_cat );
-                            } else {
-                                // Add to existing categories
-                                $current_cats[] = $new_cat;
-                            }
-                        }
-
-                        if (count($current_cats) == 0) {
-                            $current_cats = array(get_option('default_category'));
-                        }
-                        $current_cats = array_values($current_cats);
-                        wp_update_post(array('ID'=>$post->ID,'post_category'=>$current_cats));
-                    }
-
-                    $this->msg = sprintf( _n( 'Moved %d post from the selected category', 'Moved %d posts from the selected category' , count( $posts ), 'bulk-move' ), count( $posts ) );
-
-                    break;
-
-                case "bulk-move-tags":
-
-                    // move by tags
-                    $old_tag = absint( $_POST['smbm_mt_old_tag'] );
-                    $new_tag = ( $_POST['smbm_mt_new_tag'] == -1 ) ? -1 : absint( $_POST['smbm_mt_new_tag'] );
-
-                    $posts = $my_query->query( array( 
-                        'tag__in'   => $old_tag,
-                        'post_type' => 'post',
-                        'nopaging'  => 'true'
-                    ));
-
-                    foreach ( $posts as $post ) {
-                        $current_tags = wp_get_post_tags( $post->ID, array( 'fields' => 'ids' ) );
-                        $current_tags = array_diff( $current_tags, array( $old_tag ) );
-
-                        if ( $new_tag != -1 ) {
-                            if ( isset( $_POST['smbm_mt_overwrite'] ) && 'overwrite' == $_POST['smbm_mt_overwrite'] ) {
-                                // Remove old tags
-                                $current_tags = array( $new_tag );
-                            } else {
-                                // add to existing tags
-                                $current_tags[] = $new_tag;
-                            }
-                        }
-
-                        $current_tags = array_values( $current_tags );
-                        wp_set_post_tags( $post->ID, $current_tags );
-                    }
-
-                    $this->msg = sprintf( _n( 'Moved %d post from the selected tag', 'Moved %d posts from the selected tag' , count( $posts ), 'bulk-move' ), count( $posts ) );
-                    
-                    break;
-
-                case "bulk-move-category-by-tag":
-
-                    // move by tags
-                    $old_tag = absint( $_POST['smbm_mct_old_tag'] );
-                    $new_cat = ($_POST['smbm_mct_mapped_cat'] == -1) ? -1 : absint($_POST['smbm_mct_mapped_cat']);
-
-                    $posts = $my_query->query( array(
-                        'tag__in'   => $old_tag,
-                        'post_type' => 'post',
-                        'nopaging'  => 'true'
-                    ));
-
-                    foreach ( $posts as $post ) {
-                        $current_cats = wp_get_post_categories($post->ID);
-
-                        if ($new_cat != -1) {
-                            if ( isset( $_POST['smbm_mct_overwrite'] ) && 'overwrite' == $_POST['smbm_mct_overwrite'] ) {
-                                // Remove old categories
-                                $current_cats = array( $new_cat );
-                            } else {
-                                // Add to existing categories
-                                $current_cats[] = $new_cat;
-                            }
-                        }
-
-                        if (count($current_cats) == 0) {
-                            $current_cats = array(get_option('default_category'));
-                        }
-                        $current_cats = array_values($current_cats);
-                        wp_update_post(array('ID'=>$post->ID,'post_category'=>$current_cats));
-                    }
-
-                    $this->msg = sprintf( _n( 'Moved %d post from the selected tag to the new category.', 'Moved %d posts from the selected tag to the new category.' , count( $posts ), 'bulk-move' ), count( $posts ) );
-
-                    break;
-
-                case "bulk-move-save-max-execution-time":
-
-                    $new_max_execution_time = $_POST['smbm_max_execution_time'];
-
-                    if (is_numeric( $new_max_execution_time ) ) {
-                        //Update option.
-                        $option_updated = update_option( self::SCRIPT_TIMEOUT_OPTION, $new_max_execution_time );
-
-                        if ( $option_updated === true ) {
-                            //Success.
-                            $this->msg = sprintf( __( 'Max execution time was successfully saved as %s seconds.', 'bulk-move' ), $new_max_execution_time );
-                        } else {
-                            //Error saving option.
-                            $this->msg = __( 'An unknown error occurred while saving your options.', 'bulk-move' );
-                        }
-                    } else {
-                        //Error, value was not numeric.
-                        $this->msg = sprintf( __( 'Could not update the max execution time to %s, it was not numeric.  Enter the max number of seconds this script should run.', 'bulk-move' ), $new_max_execution_time );
-                    }
-
-                    break;
-            }
-
-            // hook the admin notices action
-            add_action( 'admin_notices', array( &$this, 'moved_notice' ), 9 );
+        // controller
+        if ( isset( $_POST['bm_action'] ) ) {
+            do_action( 'bm_' . $_POST['bm_action'], $_POST );
         }
+
+        // hook the admin notices action
+        add_action( 'admin_notices', array( &$this, 'moved_notice' ), 9 );
     }
 
     /**
@@ -414,6 +387,22 @@ class Bulk_Move {
     }
 }
 
-// Start this plugin once all other plugins are fully loaded
-add_action( 'init', 'Bulk_Move' ); function Bulk_Move() { global $Bulk_Move; $Bulk_Move = new Bulk_Move(); }
+/**
+ * The main function responsible for returning the one true Bulk_Move
+ * Instance to functions everywhere.
+ *
+ * Use this function like you would a global variable, except without needing
+ * to declare the global.
+ *
+ * Example: `$bulk_move = BULK_MOVE();`
+ *
+ * @since  1.2.0
+ * @return object The one true Bulk_Move Instance
+ */
+function BULK_MOVE() {
+	return Bulk_Move::instance();
+}
+
+// Get BULK_MOVE Running
+BULK_MOVE();
 ?>
