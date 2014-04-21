@@ -1,6 +1,6 @@
 ## Changelog ##
 
-### v1.2 (2014-04-21) (Dev time: 6 hours)
+### v1.2 (2014-04-21) (Dev time: 6 hours) ###
 - Add: Add the ability to specify the PHP script timeout. Thanks https://github.com/grantnorwood
 - Add: Add uninstall.php file to remove option when plugin is removed. Thanks https://github.com/grantnorwood
 - Fix: Clean whitespace in HTML attributes. Thanks https://github.com/grantnorwood
@@ -9,19 +9,19 @@
 - Tweak: Make Bulk_Move class as a singleton
 - Add: Add WordPress version to debug information. (issue #6)
 
-### v1.1.1 (2014-02-12) (Dev time: 0.5 hours)
+### v1.1.1 (2014-02-12) (Dev time: 0.5 hours) ###
 - Add: Add German translation
 - Fix: Fix link to Bulk Delete plugin
 
-### v1.1 (2013-12-19) (Dev time: 3 hours)
+### v1.1 (2013-12-19) (Dev time: 3 hours) ###
 - Fix: Change the content displayed in sidebar
 - Tweak: Remove `screen_icon` which is not used in WordPress 3.8
 - New: Add support moving posts by tags
 
-### v1.0 (2013-10-13) (Dev time: 3 hours)
+### v1.0 (2013-10-13) (Dev time: 3 hours) ###
 - Revamped GUI
 
-### v0.9 (2012-07-10) (Dev time: 0.5 hour)
+### v0.9 (2012-07-10) (Dev time: 0.5 hour) ###
 - Added Hindi translations
 - Added Lithuanian translations
 
