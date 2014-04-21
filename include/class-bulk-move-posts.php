@@ -382,6 +382,10 @@ class Bulk_Move_Posts {
                 <td><?php echo phpversion(); ?></td>
             </tr>
             <tr>
+                <th align="right"><?php _e( 'WordPress Version ', 'bulk-move' ); ?></th>
+                <td><?php echo get_bloginfo( 'version' ); ?></td>
+            </tr>
+            <tr>
                 <th align="right"><?php _e( 'Plugin Version ', 'bulk-move' ); ?></th>
                 <td><?php echo Bulk_Move::VERSION; ?></td>
             </tr>
