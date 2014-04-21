@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Bulk Move package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Bulk Move 1.1.1\n"
+"Project-Id-Version: Bulk Move 1.2.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bulk-move\n"
-"POT-Creation-Date: 2014-02-12 09:56:31+00:00\n"
+"POT-Creation-Date: 2014-04-21 12:55:52+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,95 +12,92 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#. #-#-#-#-#  bulk-move.pot (Bulk Move 1.1.1)  #-#-#-#-#
+#: bulk-move.php:124 bulk-move.php:136
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#. #-#-#-#-#  bulk-move.pot (Bulk Move 1.2.0)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
-#: bulk-move.php:79
+#: bulk-move.php:201
 msgid "Bulk Move"
 msgstr ""
 
-#: bulk-move.php:106
+#: bulk-move.php:231
 msgid "About Plugin"
 msgstr ""
 
-#: bulk-move.php:108
+#: bulk-move.php:233
 msgid ""
 "This plugin allows you to move posts in bulk from selected categories to "
 "another category"
 msgstr ""
 
-#: bulk-move.php:115
+#: bulk-move.php:240
 msgid "More information"
 msgstr ""
 
-#: bulk-move.php:116
+#: bulk-move.php:241
 msgid "Plugin Homepage/support"
 msgstr ""
 
-#: bulk-move.php:117
+#: bulk-move.php:242
 msgid "Plugin author's blog"
 msgstr ""
 
-#: bulk-move.php:118
+#: bulk-move.php:243
 msgid "Other Plugin's by Author"
 msgstr ""
 
-#: bulk-move.php:135
+#: bulk-move.php:260
 msgid "Bulk Move By Category"
 msgstr ""
 
-#: bulk-move.php:136
+#: bulk-move.php:261
 msgid "Bulk Move By Tag"
 msgstr ""
 
-#: bulk-move.php:137
+#: bulk-move.php:262
+msgid "Bulk Move Category By Tag"
+msgstr ""
+
+#: bulk-move.php:263
 msgid "Debug Information"
 msgstr ""
 
-#: bulk-move.php:146
+#: bulk-move.php:272
 msgid "Bulk Move Posts"
 msgstr ""
 
-#: bulk-move.php:162
+#: bulk-move.php:288
 msgid "WARNING: Posts moved once cannot be retrieved back. Use with caution."
 msgstr ""
 
-#: bulk-move.php:189
+#: bulk-move.php:315
 msgid "plugin"
 msgstr ""
 
-#: bulk-move.php:189
+#: bulk-move.php:315
 msgid "Version"
 msgstr ""
 
-#: bulk-move.php:189
+#: bulk-move.php:315
 msgid "by"
 msgstr ""
 
-#: bulk-move.php:202
+#: bulk-move.php:326
 msgid "Are you sure you want to move all the selected posts"
 msgstr ""
 
-#: bulk-move.php:206
+#: bulk-move.php:330
 msgid "Please select least one option"
 msgstr ""
 
-#: bulk-move.php:245
-msgid "Moved %d post from the selected category"
-msgid_plural "Moved %d posts from the selected category"
-msgstr[0] ""
-msgstr[1] ""
-
-#: bulk-move.php:272
-msgid "Moved %d post from the selected tag"
-msgid_plural "Moved %d posts from the selected tag"
-msgstr[0] ""
-msgstr[1] ""
-
-#: bulk-move.php:306
+#: bulk-move.php:383
 msgid "Manage"
 msgstr ""
 
-#: include/class-bulk-move-posts.php:19 include/class-bulk-move-posts.php:79
+#: include/class-bulk-move-posts.php:19 include/class-bulk-move-posts.php:137
+#: include/class-bulk-move-posts.php:250
 msgid ""
 "This section just got enabled. Kindly <a href = \"%1$s\">refresh</a> the "
 "page to fully enable it."
@@ -113,7 +110,8 @@ msgid ""
 msgstr ""
 
 #: include/class-bulk-move-posts.php:36 include/class-bulk-move-posts.php:51
-#: include/class-bulk-move-posts.php:96 include/class-bulk-move-posts.php:111
+#: include/class-bulk-move-posts.php:154 include/class-bulk-move-posts.php:169
+#: include/class-bulk-move-posts.php:267 include/class-bulk-move-posts.php:283
 msgid "Posts"
 msgstr ""
 
@@ -121,59 +119,136 @@ msgstr ""
 msgid "Remove Category"
 msgstr ""
 
-#: include/class-bulk-move-posts.php:63 include/class-bulk-move-posts.php:123
+#: include/class-bulk-move-posts.php:62 include/class-bulk-move-posts.php:294
+msgid "If the post contains other categories, then"
+msgstr ""
+
+#: include/class-bulk-move-posts.php:63 include/class-bulk-move-posts.php:181
+#: include/class-bulk-move-posts.php:295
+msgid "Remove them"
+msgstr ""
+
+#: include/class-bulk-move-posts.php:64 include/class-bulk-move-posts.php:182
+#: include/class-bulk-move-posts.php:296
+msgid "Don't remove them"
+msgstr ""
+
+#: include/class-bulk-move-posts.php:69 include/class-bulk-move-posts.php:186
+#: include/class-bulk-move-posts.php:300
 msgid "Bulk Move "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:84
+#: include/class-bulk-move-posts.php:123
+msgid "Moved %d post from the selected category"
+msgid_plural "Moved %d posts from the selected category"
+msgstr[0] ""
+msgstr[1] ""
+
+#: include/class-bulk-move-posts.php:142
 msgid ""
 "On the left side, select the tag whose post you want to move. In the right "
 "side select the tag to which you want the posts to be moved."
 msgstr ""
 
-#: include/class-bulk-move-posts.php:106
+#: include/class-bulk-move-posts.php:164
 msgid "Remove Tag"
 msgstr ""
 
-#: include/class-bulk-move-posts.php:138
+#: include/class-bulk-move-posts.php:180
+msgid "If the post contains other tags, then"
+msgstr ""
+
+#: include/class-bulk-move-posts.php:236
+msgid "Moved %d post from the selected tag"
+msgid_plural "Moved %d posts from the selected tag"
+msgstr[0] ""
+msgstr[1] ""
+
+#: include/class-bulk-move-posts.php:255
+msgid ""
+"On the left side, select the tag whose post you want to move. In the right "
+"side select the category to which you want the posts to be moved."
+msgstr ""
+
+#: include/class-bulk-move-posts.php:277
+msgid "Choose Category"
+msgstr ""
+
+#: include/class-bulk-move-posts.php:355
+msgid "Moved %d post from the selected tag to the new category."
+msgid_plural "Moved %d posts from the selected tag to the new category."
+msgstr[0] ""
+msgstr[1] ""
+
+#: include/class-bulk-move-posts.php:375
 msgid ""
 "If you are seeing a blank page after clicking the Bulk Move button, then "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:139
+#: include/class-bulk-move-posts.php:376
 msgid "check out this FAQ"
 msgstr ""
 
-#: include/class-bulk-move-posts.php:140
+#: include/class-bulk-move-posts.php:377
 msgid "You also need need the following debug information."
 msgstr ""
 
-#: include/class-bulk-move-posts.php:144
+#: include/class-bulk-move-posts.php:381
 msgid "PHP Version "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:148
+#: include/class-bulk-move-posts.php:385
+msgid "WordPress Version "
+msgstr ""
+
+#: include/class-bulk-move-posts.php:389
 msgid "Plugin Version "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:152
+#: include/class-bulk-move-posts.php:393
 msgid "Available memory size "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:156
+#: include/class-bulk-move-posts.php:397
 msgid "Script time out "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:160
+#: include/class-bulk-move-posts.php:398
+msgid "In php.ini"
+msgstr ""
+
+#: include/class-bulk-move-posts.php:398
+msgid "Custom value: "
+msgstr ""
+
+#: include/class-bulk-move-posts.php:398
+msgid "Save"
+msgstr ""
+
+#: include/class-bulk-move-posts.php:401
 msgid "Script input time "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:165
+#: include/class-bulk-move-posts.php:406
 msgid "If you are looking to delete posts in bulk, try out my "
 msgstr ""
 
-#: include/class-bulk-move-posts.php:165
+#: include/class-bulk-move-posts.php:406
 msgid "Bulk Delete Plugin"
+msgstr ""
+
+#: include/class-bulk-move-posts.php:430
+msgid "Max execution time was successfully saved as %s seconds."
+msgstr ""
+
+#: include/class-bulk-move-posts.php:433
+msgid "An unknown error occurred while saving your options."
+msgstr ""
+
+#: include/class-bulk-move-posts.php:437
+msgid ""
+"Could not update the max execution time to %s, it was not numeric.  Enter "
+"the max number of seconds this script should run."
 msgstr ""
 
 #. Plugin URI of the plugin/theme
