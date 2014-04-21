@@ -1,6 +1,6 @@
 ## Changelog ##
 
-### v1.2 (2014-03-11) (Dev time: 5 hours)
+### v1.2 (2014-04-21) (Dev time: 6 hours)
 - Add: Add the ability to specify the PHP script timeout. Thanks https://github.com/grantnorwood
 - Add: Add uninstall.php file to remove option when plugin is removed. Thanks https://github.com/grantnorwood
 - Fix: Clean whitespace in HTML attributes. Thanks https://github.com/grantnorwood
@@ -53,3 +53,7 @@
 
 ### 1.0 ###
 Revamped GUI
+
+### v1.2 ###
+Added the ability to move posts from tags to categories
+
