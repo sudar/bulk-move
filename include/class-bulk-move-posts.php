@@ -2,9 +2,9 @@
 /**
  * Utility class for moving posts
  *
- * @package Bulk Move
- * @since 1.0
- * @author Sudar
+ * @package Bulk_Move
+ * @since   1.0
+ * @author  Sudar
  */
 class Bulk_Move_Posts {
 
@@ -27,33 +27,28 @@ class Bulk_Move_Posts {
 		<table class="optiontable">
             <tr>
                 <td scope="row" >
-                <select name="smbm_mc_selected_cat">
 <?php
-        $categories =  get_categories(array( 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC'));
-        foreach ($categories as $category) {
+                wp_dropdown_categories( array(
+                    'name'         => 'smbm_mc_selected_cat',
+                    'show_count'   => TRUE,
+                    'hierarchical' => TRUE,
+                    'orderby'      => 'NAME',
+                    'hide_empty'   => FALSE
+                ) );
 ?>
-                    <option value="<?php echo $category->cat_ID; ?>">
-                    <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e( "Posts", 'bulk-move' ); ?>)
-                    </option>
-<?php
-        }
-?>
-                </select>
                 ==>
                 </td>
                 <td scope="row" >
-                <select name="smbm_mc_mapped_cat">
-                <option value="-1"><?php _e( "Remove Category", 'bulk-move' ); ?></option>
 <?php
-        foreach ($categories as $category) {
+                wp_dropdown_categories( array(
+                    'name'             => 'smbm_mc_mapped_cat',
+                    'show_count'       => TRUE,
+                    'hierarchical'     => TRUE,
+                    'orderby'          => 'NAME',
+                    'hide_empty'       => FALSE,
+                    'show_option_none' => __( 'Remove Category', 'bulk-move' )
+                ) );
 ?>
-                    <option value="<?php echo $category->cat_ID; ?>">
-                    <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e( "Posts", 'bulk-move' ); ?>)
-                    </option>
-<?php
-        }
-?>
-                </select>
                 </td>
             </tr>
 
@@ -273,19 +268,16 @@ class Bulk_Move_Posts {
                         ==>
                     </td>
                     <td scope="row" >
-                        <select name="smbm_mct_mapped_cat">
-                            <option value="-1"><?php _e( 'Choose Category', 'bulk-move' ); ?></option>
 <?php
-                            $categories =  get_categories(array( 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC'));
-                            foreach ($categories as $category) {
-                                ?>
-                                <option value="<?php echo $category->cat_ID; ?>">
-                                    <?php echo $category->cat_name; ?> (<?php echo $category->count . " "; _e( "Posts", 'bulk-move' ); ?>)
-                                </option>
-<?php
-                            }
+                        wp_dropdown_categories( array(
+                            'name'             => 'smbm_mct_mapped_cat',
+                            'show_count'       => TRUE,
+                            'hierarchical'     => TRUE,
+                            'orderby'          => 'NAME',
+                            'hide_empty'       => FALSE,
+                            'show_option_none' => __( 'Choose Category', 'bulk-move' )
+                        ) );
 ?>
-                        </select>
                     </td>
                 </tr>
 

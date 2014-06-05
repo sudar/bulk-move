@@ -1,5 +1,8 @@
 ## Changelog ##
 
+### v1.2.1 (2014-06-05) (Dev time: 0.5 hours) ###
+- Tweak: Indent sub categories in the category dropdown. (Issue #10)
+
 ### v1.2 (2014-04-21) (Dev time: 6 hours) ###
 - Add: Add the ability to specify the PHP script timeout. Thanks https://github.com/grantnorwood
 - Add: Add uninstall.php file to remove option when plugin is removed. Thanks https://github.com/grantnorwood
