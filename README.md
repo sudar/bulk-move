@@ -3,8 +3,8 @@
 **Tags:** post, bulk, move  
 **Donate Link:** http://sudarmuthu.com/if-you-wanna-thank-me  
 **Requires at least:** 3.8  
-**Tested up to:** 3.9  
-**Stable tag:** 1.2.0  
+**Tested up to:** 3.9.1  
+**Stable tag:** 1.2.1  
 
 Move or remove posts in bulk by category or by tag.
 
