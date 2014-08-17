@@ -1,5 +1,8 @@
 ## Changelog ##
 
+### v1.3 (2014-08-17) (Dev time: 0.5 hours) ###
+- Tweak: Fixed a warning in meta box implementation
+
 ### v1.2.1 (2014-06-05) (Dev time: 0.5 hours) ###
 - Tweak: Indent sub categories in the category dropdown. (Issue #10)
 

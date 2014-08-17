@@ -245,7 +245,6 @@ final class Bulk_Move {
 
         /* Trigger the add_meta_boxes hooks to allow meta boxes to be added */
         do_action( 'add_meta_boxes_' . $this->post_page, null );
-        do_action( 'add_meta_boxes', $this->post_page, null );
 
         /* Enqueue WordPress' script for handling the meta boxes */
         wp_enqueue_script( 'postbox' );
