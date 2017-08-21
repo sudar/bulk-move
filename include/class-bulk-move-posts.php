@@ -58,8 +58,8 @@ class Bulk_Move_Posts {
             <input type="radio" name="smbm_mc_overwrite" value="overwrite" checked><?php _e ( 'Remove them', 'bulk-move' ); ?>
             <input type="radio" name="smbm_mc_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
         </p>
-        <p>Apply to post types:</p>
         <p>
+            Apply to post types:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <?php
             $post_types = get_post_types(array(
                 'public' => true,
@@ -189,8 +189,8 @@ class Bulk_Move_Posts {
             <input type="radio" name="smbm_mt_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
         </p>
 
-        <p>Apply to post types:</p>
         <p>
+            Apply to post types:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <?php
             $post_types = get_post_types(array(
                 'public' => true,
@@ -314,8 +314,8 @@ class Bulk_Move_Posts {
             <input type="radio" name="smbm_mct_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
         </p>
 
-        <p>Apply to post types:</p>
         <p>
+            Apply to post types:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <?php
             $post_types = get_post_types(array(
                 'public' => true,
