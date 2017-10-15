@@ -34,5 +34,6 @@ class Bulk_Move_Util {
         $current_user = wp_get_current_user();
         return get_user_meta( $current_user->ID, self::VISIBLE_POST_BOXES, TRUE );
     }
+
 }
 ?>
