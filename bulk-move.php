@@ -191,7 +191,8 @@ final class Bulk_Move {
         // Register hooks
         add_action( 'admin_menu', array( &$this, 'add_menu' ) );
         add_action( 'admin_init', array( &$this, 'request_handler' ) );
-        add_action( 'wp_ajax_load_custom_terms_by_post_type', 'Bulk_Move_Posts::load_custom_terms_by_post_type' );
+        add_action( 'wp_ajax_load_custom_taxonomy_by_post_type', 'Bulk_Move_Posts::load_custom_taxonomy_by_post_type' );
+        add_action( 'wp_ajax_load_custom_terms_by_taxonomy', 'Bulk_Move_Posts::load_custom_terms_by_taxonomy' );
 
         // Add more links in the plugin listing page
         add_filter( 'plugin_action_links', array( &$this, 'filter_plugin_actions' ), 10, 2 );
@@ -263,7 +264,7 @@ final class Bulk_Move {
         add_meta_box( self::BOX_CATEGORY, __( 'Bulk Move By Category', 'bulk-move' ), 'Bulk_Move_Posts::render_move_category_box', $this->post_page, 'advanced' );
         add_meta_box( self::BOX_TAG, __( 'Bulk Move By Tag', 'bulk-move' ), 'Bulk_Move_Posts::render_move_tag_box', $this->post_page, 'advanced' );
         add_meta_box( self::BOX_CATEGORY_BY_TAG, __( 'Bulk Move Category By Tag', 'bulk-move' ), 'Bulk_Move_Posts::render_move_category_by_tag_box', $this->post_page, 'advanced' );
-        add_meta_box( self::BOX_TERMS, __( 'Bulk Move By Custom Terms', 'bulk-move' ), 'Bulk_Move_Posts::render_move_by_custom_terms_box', $this->post_page, 'advanced' );
+        add_meta_box( self::BOX_TERMS, __( 'Bulk Move By Custom Taxonomy', 'bulk-move' ), 'Bulk_Move_Posts::render_move_by_custom_taxonomy_box', $this->post_page, 'advanced' );
         add_meta_box( self::BOX_DEBUG, __( 'Debug Information', 'bulk-move' ), 'Bulk_Move_Posts::render_debug_box', $this->post_page, 'advanced', 'low' );
     }
 
@@ -335,8 +336,9 @@ final class Bulk_Move {
         );
 
         $bulk_move_posts = array(
-            'action'        => 'load_custom_terms_by_post_type',
-            'security'      => wp_create_nonce( self::BOX_CUSTOM_TERMS_NONCE ),
+            'action_get_taxonomy'  => 'load_custom_taxonomy_by_post_type',
+            'action_get_terms'     => 'load_custom_terms_by_taxonomy',
+            'security'             => wp_create_nonce( self::BOX_CUSTOM_TERMS_NONCE ),
         );
 
         $translation_array = array( 'msg' => $msg, 'error' => $error, 'bulk_move_posts' => $bulk_move_posts );

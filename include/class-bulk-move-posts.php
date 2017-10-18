@@ -448,11 +448,11 @@ class Bulk_Move_Posts {
     }
 
 	/**
-	 * Loads the custom Terms by Post type.
+	 * Loads the custom Taxonomy by Post Type.
 	 *
 	 * @since 1.3.0
 	 */
-	public static function load_custom_terms_by_post_type() {
+	public static function load_custom_taxonomy_by_post_type() {
 		$bulk_move = BULK_MOVE();
 		check_ajax_referer( $bulk_move::BOX_CUSTOM_TERMS_NONCE, 'security' );
 		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : 'post';
@@ -461,6 +461,35 @@ class Bulk_Move_Posts {
 
 		$args = array(
 			'taxonomy'   => $taxonomies,
+			'hide_empty' => false,
+			'orderby'    => 'name',
+		);
+
+		ob_start();
+        ?>
+		<option class="level-0" value="select">Select Taxonomy&nbsp;&nbsp;</option>
+        <?php
+		foreach ( $taxonomies as $taxonomy ) :
+			?>
+			<option class="level-0" value="<?php echo $taxonomy; ?>"><?php echo $taxonomy; ?></option>
+			<?php
+		endforeach;
+		$data = ob_get_clean();
+		wp_send_json_success( $data );
+	}
+
+	/**
+	 * Loads the custom Terms by Taxonomy.
+	 *
+	 * @since 1.3.0
+	 */
+	public static function load_custom_terms_by_taxonomy() {
+		$bulk_move = BULK_MOVE();
+		check_ajax_referer( $bulk_move::BOX_CUSTOM_TERMS_NONCE, 'security' );
+		$taxonomy  = isset( $_POST['taxonomy'] ) ? sanitize_text_field( $_POST['taxonomy'] ) : 'category';
+
+		$args = array(
+			'taxonomy'   => $taxonomy,
 			'hide_empty' => false,
 			'orderby'    => 'name',
 		);
@@ -486,7 +515,7 @@ class Bulk_Move_Posts {
 	 *
 	 * @since 1.3.0
 	 */
-	public static function render_move_by_custom_terms_box() {
+	public static function render_move_by_custom_taxonomy_box() {
 
 		if ( Bulk_Move_Util::is_posts_box_hidden( Bulk_Move::BOX_CATEGORY ) ) {
 			printf( __( 'This section just got enabled. Kindly <a href = "%1$s">refresh</a> the page to fully enable it.', 'bulk-move' ), 'tools.php?page=' . Bulk_Move::POSTS_PAGE_SLUG );
@@ -494,13 +523,13 @@ class Bulk_Move_Posts {
 		}
 		?>
 		<!-- Custom Taxonomy Start-->
-		<h4><?php _e( 'On the left side, select the term whose posts you want to move. On the right side select the term to which you want the posts to be moved.', 'bulk-move' ) ?></h4>
+		<h4><?php _e( 'Select the post type to show its taxonomy. On the left side, select the term whose posts you want to move. On the right side select the term to which you want the posts to be moved.', 'bulk-move' ) ?></h4>
 
 		<fieldset class="options">
 			<table class="optiontable">
 				<tr>
 					<td scope="row" colspan="2">
-						<?php _e( 'Select the post type to show its custom terms.', 'bulk-move' ) ?>
+						<?php _e( 'Select the post type to show its custom taxonomy.', 'bulk-move' ) ?>
 					</td>
 					<td scope="row">
 				</tr>
@@ -512,15 +541,37 @@ class Bulk_Move_Posts {
 					?>
 						<?php // TODO: Hide <select> tags and show messaged when no custom post types are available. ?>
 						<p>
-					<?php foreach ( $custom_post_types as $post_type ) : ?>
-						<input type="radio" id="smbm_mbct_post_type_<?php echo $post_type; ?>" name="smbm_mbct_selected_post_type" value="<?php echo $post_type; ?>" />
-						<label for="smbm_mbct_post_type_post"><?php echo $post_type; ?></label>
-						&nbsp;&nbsp;&nbsp;&nbsp;
-					<?php endforeach; ?>
+							<select name="smbm_mbct_post_type" id="smbm_mbct_post_type">
+								<option value="select">Select Post type</option>
+							<?php foreach ( $custom_post_types as $post_type ) : ?>
+								<option value="<?php echo $post_type; ?>"><?php echo $post_type; ?></option>
+							<?php endforeach; ?>
+							</select>
 						</p>
 					</td>
 				</tr>
-				<tr>
+				<tr class="taxonomy-select-row">
+					<td scope="row" colspan="2">
+						<?php _e( 'Select taxonomy to show its terms.', 'bulk-move' ) ?>
+					</td>
+					<td scope="row">
+				</tr>
+				<tr class="taxonomy-select-row">
+					<td scope="row" colspan="2">
+						<p>
+							<select name="smbm_mbct_taxonomy" id="smbm_mbct_taxonomy">
+								<option value="select">Select Taxonomy</option>
+							</select>
+						</p>
+					</td>
+				</tr>
+				<tr class="term-select-row">
+					<td scope="row" colspan="2">
+						<?php _e( 'Select terms to move its posts.', 'bulk-move' ) ?>
+					</td>
+					<td scope="row">
+				</tr>
+				<tr class="term-select-row">
 					<td scope="row" >
 						<select name="smbm_mbct_selected_term" id="smbm_mbct_selected_term" class="postform">
 							<option class="level-0" value="-1">Select Term&nbsp;&nbsp;</option>
@@ -543,71 +594,60 @@ class Bulk_Move_Posts {
 
 		</fieldset>
 		<p class="submit">
-			<button type="submit" name="bm_action" value="move_custom_terms" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
+			<button type="submit" name="bm_action" value="move_custom_taxonomy" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
 		</p>
 		<!-- Custom Taxonomy end-->
 		<?php
 	}
 
-	public static function move_custom_terms() {
+	public static function move_custom_taxonomy() {
 		if ( check_admin_referer( 'sm-bulk-move-posts', 'sm-bulk-move-posts-nonce' ) ) {
 
 			do_action( 'bm_pre_request_handler' );
 
-			$wp_query = new WP_Query;
-			$bm       = BULK_MOVE();
+			$wp_query    = new WP_Query;
+			$bm          = BULK_MOVE();
 
-			// move by cats
-			$old_cat          = absint( $_POST['smbm_mbct_selected_term'] );
-			$old_cat_taxonomy = get_term( $old_cat );
-			$post_types       = array( 'post' );
+			// Move by terms.
+			$old_cat     = absint( $_POST['smbm_mbct_selected_term'] );
+			$taxonomy    = $_POST['smbm_mbct_taxonomy'];
+			$post_types  = array( $_POST['smbm_mbct_post_type'] );
 
-			if ( ! empty( $old_cat_taxonomy ) ) {
-				$old_cat_taxonomy = $old_cat_taxonomy->taxonomy;
-			}
-
-			$new_cat          = ( $_POST['smbm_mbct_mapped_term'] == -1 ) ? -1 : absint( $_POST['smbm_mbct_mapped_term'] );
-			$new_cat_taxonomy = get_term( $new_cat );
-
-			if ( ! empty( $new_cat_taxonomy ) ) {
-				$new_cat_taxonomy = $new_cat_taxonomy->taxonomy;
-			}
-
-			if ( !empty( $_POST['smbm_mbct_selected_post_type'] ) ) {
-				$post_types = array( $_POST['smbm_mbct_selected_post_type'] );
-			}
+			$new_cat     = ( $_POST['smbm_mbct_mapped_term'] == -1 ) ? -1 : absint( $_POST['smbm_mbct_mapped_term'] );
 
 			$posts_count = 0 ;
 
-			foreach ( $post_types as $post_type ) {
-				$posts_args  = array(
-					'tax_query'    => array(
-						array(
-							'taxonomy' => $old_cat_taxonomy,
-							'field'    => 'term_id',
-							'terms'    => $old_cat,
+			if ( $old_cat !== -1 ) {
+				foreach ( $post_types as $post_type ) {
+					$posts_args  = array(
+						'tax_query'    => array(
+							array(
+								'taxonomy' => $taxonomy,
+								'field'    => 'term_id',
+								'terms'    => $old_cat,
+							),
 						),
-					),
-					'post_type'    => $post_type,
-					'nopaging'     => 'true'
-				);
+						'post_type'    => $post_type,
+						'nopaging'     => 'true'
+					);
 
-				$posts        = $wp_query->query( $posts_args );
-				$posts_count += count ( $posts );
+					$posts        = $wp_query->query( $posts_args );
+					$posts_count += count ( $posts );
 
-				foreach ( $posts as $post ) {
+					foreach ( $posts as $post ) {
 
-					if ( $new_cat != -1 ) {
-						if ( isset( $_POST['smbm_mbct_overwrite'] ) && 'overwrite' == $_POST['smbm_mbct_overwrite'] ) {
-							// Remove old categories
-							$is_append_terms = false;
+						if ( $new_cat != -1 ) {
+							if ( isset( $_POST['smbm_mbct_overwrite'] ) && 'overwrite' == $_POST['smbm_mbct_overwrite'] ) {
+								// Remove old categories
+								$is_append_terms = false;
+							} else {
+								// Add to existing categories
+								$is_append_terms = true;
+							}
+							wp_set_object_terms( $post->ID, $new_cat, $taxonomy, $is_append_terms );
 						} else {
-							// Add to existing categories
-							$is_append_terms = true;
+							wp_remove_object_terms( $post->ID, $old_cat, $taxonomy );
 						}
-						wp_set_object_terms( $post->ID, $new_cat, $new_cat_taxonomy, $is_append_terms );
-					} else {
-						wp_remove_object_terms( $post->ID, $old_cat, $old_cat_taxonomy );
 					}
 				}
 			}
@@ -623,5 +663,5 @@ add_action( 'bm_move_cats'            , array( 'Bulk_Move_Posts', 'move_cats' ) 
 add_action( 'bm_move_tags'            , array( 'Bulk_Move_Posts', 'move_tags' ) );
 add_action( 'bm_move_category_by_tag' , array( 'Bulk_Move_Posts', 'move_category_by_tag' ) );
 add_action( 'bm_save_timeout'         , array( 'Bulk_Move_Posts', 'save_timeout' ) );
-add_action( 'bm_move_custom_terms'    , array( 'Bulk_Move_Posts', 'move_custom_terms' ) );
+add_action( 'bm_move_custom_taxonomy' , array( 'Bulk_Move_Posts', 'move_custom_taxonomy' ) );
 ?>
