@@ -467,7 +467,7 @@ class Bulk_Move_Posts {
 
 		ob_start();
         ?>
-		<option class="level-0" value="select">Select Taxonomy&nbsp;&nbsp;</option>
+		<option class="level-0" value="select"><?php _e( 'Select Taxonomy&nbsp;&nbsp;', 'bulk-move' ); ?></option>
         <?php
 		foreach ( $taxonomies as $taxonomy ) :
 			?>
@@ -495,8 +495,8 @@ class Bulk_Move_Posts {
 		);
 		$terms = get_terms( $args );
 
-		$select_term = '<option class="level-0" value="-1">Select Term&nbsp;&nbsp;</option>';
-		$map_term    = '<option class="level-0" value="-1">Remove Term&nbsp;&nbsp;</option>';
+		$select_term = '<option class="level-0" value="-1">' . __( 'Select Term&nbsp;&nbsp;', '"bulk-move' ) . '</option>';
+		$map_term    = '<option class="level-0" value="-1">' . __( 'Remove Term&nbsp;&nbsp;', 'bullk-move' ) . '</option>';
 		ob_start();
 		foreach ( $terms as $term ) :
 		?>
@@ -542,7 +542,7 @@ class Bulk_Move_Posts {
 						<?php // TODO: Hide <select> tags and show messaged when no custom post types are available. ?>
 						<p>
 							<select name="smbm_mbct_post_type" id="smbm_mbct_post_type">
-								<option value="select">Select Post type</option>
+								<option value="select"><?php _e( 'Select Post type', 'bulk-move' ); ?></option>
 							<?php foreach ( $custom_post_types as $post_type ) : ?>
 								<option value="<?php echo $post_type; ?>"><?php echo $post_type; ?></option>
 							<?php endforeach; ?>
@@ -560,7 +560,7 @@ class Bulk_Move_Posts {
 					<td scope="row" colspan="2">
 						<p>
 							<select name="smbm_mbct_taxonomy" id="smbm_mbct_taxonomy">
-								<option value="select">Select Taxonomy</option>
+								<option value="select"><?php _e( 'Select Taxonomy', 'bulk-move' ); ?></option>
 							</select>
 						</p>
 					</td>
@@ -574,13 +574,13 @@ class Bulk_Move_Posts {
 				<tr class="term-select-row">
 					<td scope="row" >
 						<select name="smbm_mbct_selected_term" id="smbm_mbct_selected_term" class="postform">
-							<option class="level-0" value="-1">Select Term&nbsp;&nbsp;</option>
+							<option class="level-0" value="-1"><?php _e( ' Select Term&nbsp;&nbsp;', 'bulk-move' ); ?></option>
 						</select>
 						==>
 					</td>
 					<td scope="row" >
 						<select name="smbm_mbct_mapped_term" id="smbm_mbct_mapped_term" class="postform">
-							<option class="level-0" value="-1">Remove Term&nbsp;&nbsp;</option>
+							<option class="level-0" value="-1"><?php _e( 'Remove Term&nbsp;&nbsp;', 'bulk-move' ); ?></option>
 						</select>
 					</td>
 				</tr>
