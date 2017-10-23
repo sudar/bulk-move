@@ -7,3 +7,7 @@
 #smbm_max_execution_time {
     width: 40px;
 }
+
+.error-notice {
+    color: red;
+}

@@ -538,8 +538,13 @@ class Bulk_Move_Posts {
 					<?php
 						$custom_post_types_args = array( '_builtin' => false );
 						$custom_post_types      = get_post_types( $custom_post_types_args );
+						$custom_post_types      = array();
 					?>
-						<?php // TODO: Hide <select> tags and show messaged when no custom post types are available. ?>
+					<?php if ( count( $custom_post_types ) === 0 ) : ?>
+						<p>
+							<span class="error-notice"><?php _e( 'You have no custom post type registered.', 'bulk-move' ); ?></span>
+						</p>
+					<?php endif; ?>
 						<p>
 							<select name="smbm_mbct_post_type" id="smbm_mbct_post_type">
 								<option value="select"><?php _e( 'Select Post type', 'bulk-move' ); ?></option>
