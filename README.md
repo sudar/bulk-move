@@ -56,6 +56,36 @@ If you are looking for ideas, then you can start with one of the following TODO 
 
 Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page.
 
+## Screenshots ##
+
+![](assets-wp-repo/screenshot-1.png)
+
+This screenshot shows the Tools menu through which you can access the Bulk Move page.
+
+![](assets-wp-repo/screenshot-2.png)
+
+This screenshot shows the Bulk Move Page. You can access the various Bulk Move modules here.
+
+![](assets-wp-repo/screenshot-3.png)
+
+This screenshot shows the screen options where you can show or hide various Bulk Move Modules.
+
+![](assets-wp-repo/screenshot-4.png)
+
+The 'Bulk Move by Category' module allows you to bulk move posts from one tag to another.
+
+![](assets-wp-repo/screenshot-5.png)
+
+The 'Bulk Move by Tag' module allows you to bulk move posts from one tag to another.
+
+![](assets-wp-repo/screenshot-6.png)
+
+The 'Bulk Move Category by Tag' module allows you to bulk move posts from one tag to another category.
+
+![](assets-wp-repo/screenshot-7.png)
+
+The 'Bulk Move Custom Taxonomy' module allows you to bulk move posts from one custom taxonomy to another custom taxonomy.
+
 ## Readme Generator ##
 
 This Readme file was generated using <a href = 'http://sudarmuthu.com/wordpress/wp-readme'>wp-readme</a>, which generates readme files for WordPress Plugins.
