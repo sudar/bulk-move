@@ -538,7 +538,6 @@ class Bulk_Move_Posts {
 					<?php
 						$custom_post_types_args = array( '_builtin' => false );
 						$custom_post_types      = get_post_types( $custom_post_types_args );
-						$custom_post_types      = array();
 					?>
 					<?php if ( count( $custom_post_types ) === 0 ) : ?>
 						<p>
