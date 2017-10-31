@@ -58,6 +58,18 @@ class Bulk_Move_Posts {
             <input type="radio" name="smbm_mc_overwrite" value="overwrite" checked><?php _e ( 'Remove them', 'bulk-move' ); ?>
             <input type="radio" name="smbm_mc_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
         </p>
+        <p>
+            Apply to post types:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php
+            $post_types = get_post_types(array(
+                'public' => true,
+            ), 'objects');
+
+            foreach($post_types as $type) {
+                echo '<label for="smbm_mc_pt_'.$type->name.'"><input id="smbm_mc_pt_'.$type->name.'" type="checkbox" name="bm_pt[]" value="'.$type->name.'" '.($type->name == 'post' ? 'checked' : '').'><span>'.$type->label.'</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+            }
+?>
+        </p>
 
 		</fieldset>
         <p class="submit">
@@ -88,7 +100,7 @@ class Bulk_Move_Posts {
 
             $posts   = $wp_query->query(array(
                 'category__in' => array( $old_cat ),
-                'post_type'    => 'post',
+                'post_type'    => !empty($_POST['bm_pt']) ? $_POST['bm_pt'] : 'post',
                 'nopaging'     => 'true'
             ) );
 
@@ -176,6 +188,20 @@ class Bulk_Move_Posts {
             <input type="radio" name="smbm_mt_overwrite" value="overwrite" checked><?php _e ( 'Remove them', 'bulk-move' ); ?>
             <input type="radio" name="smbm_mt_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
         </p>
+
+        <p>
+            Apply to post types:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php
+            $post_types = get_post_types(array(
+                'public' => true,
+            ), 'objects');
+
+            foreach($post_types as $type) {
+                echo '<label for="smbm_mt_pt_'.$type->name.'"><input id="smbm_mt_pt_'.$type->name.'" type="checkbox" name="bm_pt[]" value="'.$type->name.'" '.($type->name == 'post' ? 'checked' : '').'><span>'.$type->label.'</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+            }
+?>
+        </p>
+
 		</fieldset>
         <p class="submit">
             <button type="submit" name="bm_action" value="move_tags" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
@@ -206,7 +232,7 @@ class Bulk_Move_Posts {
 
             $posts = $wp_query->query( array(
                 'tag__in'   => $old_tag,
-                'post_type' => 'post',
+                'post_type'    => !empty($_POST['bm_pt']) ? $_POST['bm_pt'] : 'post',
                 'nopaging'  => 'true'
             ));
 
@@ -287,6 +313,20 @@ class Bulk_Move_Posts {
             <input type="radio" name="smbm_mct_overwrite" value="overwrite" checked><?php _e ( 'Remove them', 'bulk-move' ); ?>
             <input type="radio" name="smbm_mct_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
         </p>
+
+        <p>
+            Apply to post types:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php
+            $post_types = get_post_types(array(
+                'public' => true,
+            ), 'objects');
+
+            foreach($post_types as $type) {
+                echo '<label for="smbm_mct_pt_'.$type->name.'"><input id="smbm_mct_pt_'.$type->name.'" type="checkbox" name="bm_pt[]" value="'.$type->name.'" '.($type->name == 'post' ? 'checked' : '').'><span>'.$type->label.'</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+            }
+?>
+        </p>
+
         </fieldset>
         <p class="submit">
             <button type="submit" name="bm_action" value="move_category_by_tag" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
@@ -317,7 +357,7 @@ class Bulk_Move_Posts {
 
             $posts = $wp_query->query( array(
                 'tag__in'   => $old_tag,
-                'post_type' => 'post',
+                'post_type'    => !empty($_POST['bm_pt']) ? $_POST['bm_pt'] : 'post',
                 'nopaging'  => 'true'
             ));
 
