@@ -1,15 +1,15 @@
 <?php
 /**
- * Utility class for moving posts
+ * Utility class for moving posts.
  *
- * @package Bulk_Move
  * @since   1.0
+ *
  * @author  Sudar
  */
 class Bulk_Move_Posts {
 
     /**
-     * Render move categories box
+     * Render move categories box.
      *
      * @since 1.0
      */
@@ -17,6 +17,7 @@ class Bulk_Move_Posts {
 
         if ( Bulk_Move_Util::is_posts_box_hidden( Bulk_Move::BOX_CATEGORY ) ) {
             printf( __( 'This section just got enabled. Kindly <a href = "%1$s">refresh</a> the page to fully enable it.', 'bulk-move' ), 'tools.php?page=' . Bulk_Move::POSTS_PAGE_SLUG );
+
             return;
         }
 ?>
@@ -30,10 +31,10 @@ class Bulk_Move_Posts {
 <?php
                 wp_dropdown_categories( array(
                     'name'         => 'smbm_mc_selected_cat',
-                    'show_count'   => TRUE,
-                    'hierarchical' => TRUE,
+                    'show_count'   => true,
+                    'hierarchical' => true,
                     'orderby'      => 'NAME',
-                    'hide_empty'   => FALSE
+                    'hide_empty'   => false,
                 ) );
 ?>
                 ==>
@@ -42,11 +43,11 @@ class Bulk_Move_Posts {
 <?php
                 wp_dropdown_categories( array(
                     'name'             => 'smbm_mc_mapped_cat',
-                    'show_count'       => TRUE,
-                    'hierarchical'     => TRUE,
+                    'show_count'       => true,
+                    'hierarchical'     => true,
                     'orderby'          => 'NAME',
-                    'hide_empty'       => FALSE,
-                    'show_option_none' => __( 'Remove Category', 'bulk-move' )
+                    'hide_empty'       => false,
+                    'show_option_none' => __( 'Remove Category', 'bulk-move' ),
                 ) );
 ?>
                 </td>
@@ -55,8 +56,8 @@ class Bulk_Move_Posts {
 		</table>
         <p>
             <?php _e( 'If the post contains other categories, then', 'bulk-move' ); ?>
-            <input type="radio" name="smbm_mc_overwrite" value="overwrite" checked><?php _e ( 'Remove them', 'bulk-move' ); ?>
-            <input type="radio" name="smbm_mc_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
+            <input type="radio" name="smbm_mc_overwrite" value="overwrite" checked><?php _e( 'Remove them', 'bulk-move' ); ?>
+            <input type="radio" name="smbm_mc_overwrite" value="no-overwrite"><?php _e( "Don't remove them", 'bulk-move' ); ?>
         </p>
 
 		</fieldset>
@@ -68,10 +69,11 @@ class Bulk_Move_Posts {
     }
 
     /**
-     * Move posts from one category to another
+     * Move posts from one category to another.
      *
      * @static
      * @access public
+     *
      * @since  1.2.0
      */
     public static function move_cats() {
@@ -86,10 +88,10 @@ class Bulk_Move_Posts {
             $old_cat = absint( $_POST['smbm_mc_selected_cat'] );
             $new_cat = ( $_POST['smbm_mc_mapped_cat'] == -1 ) ? -1 : absint( $_POST['smbm_mc_mapped_cat'] );
 
-            $posts   = $wp_query->query(array(
+            $posts = $wp_query->query(array(
                 'category__in' => array( $old_cat ),
                 'post_type'    => 'post',
-                'nopaging'     => 'true'
+                'nopaging'     => 'true',
             ) );
 
             foreach ( $posts as $post ) {
@@ -111,7 +113,7 @@ class Bulk_Move_Posts {
                 $current_cats = array_values( $current_cats );
                 wp_update_post(array(
                     'ID'            => $post->ID,
-                    'post_category' => $current_cats
+                    'post_category' => $current_cats,
                 ) );
             }
 
@@ -120,7 +122,7 @@ class Bulk_Move_Posts {
     }
 
     /**
-     * Render move by tag box
+     * Render move by tag box.
      *
      * @since 1.1
      * @static
@@ -130,6 +132,7 @@ class Bulk_Move_Posts {
 
         if ( Bulk_Move_Util::is_posts_box_hidden( Bulk_Move::BOX_TAG ) ) {
             printf( __( 'This section just got enabled. Kindly <a href = "%1$s">refresh</a> the page to fully enable it.', 'bulk-move' ), 'tools.php?page=' . Bulk_Move::POSTS_PAGE_SLUG );
+
             return;
         }
 ?>
@@ -142,7 +145,7 @@ class Bulk_Move_Posts {
                 <td scope="row" >
                 <select name="smbm_mt_old_tag">
 <?php
-                $tags =  get_tags( array( 'hide_empty' => false ) );
+                $tags = get_tags( array( 'hide_empty' => false ) );
                 foreach ( $tags as $tag ) {
 ?>
                     <option value="<?php echo $tag->term_id; ?>">
@@ -173,8 +176,8 @@ class Bulk_Move_Posts {
 		</table>
         <p>
             <?php _e( 'If the post contains other tags, then', 'bulk-move' ); ?>
-            <input type="radio" name="smbm_mt_overwrite" value="overwrite" checked><?php _e ( 'Remove them', 'bulk-move' ); ?>
-            <input type="radio" name="smbm_mt_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
+            <input type="radio" name="smbm_mt_overwrite" value="overwrite" checked><?php _e( 'Remove them', 'bulk-move' ); ?>
+            <input type="radio" name="smbm_mt_overwrite" value="no-overwrite"><?php _e( "Don't remove them", 'bulk-move' ); ?>
         </p>
 		</fieldset>
         <p class="submit">
@@ -185,10 +188,11 @@ class Bulk_Move_Posts {
     }
 
     /**
-     * Move posts from one tag to another
+     * Move posts from one tag to another.
      *
      * @static
      * @access public
+     *
      * @since  1.2.0
      */
     public static function move_tags() {
@@ -197,17 +201,17 @@ class Bulk_Move_Posts {
 
             do_action( 'bm_pre_request_handler' );
 
-            $wp_query       = new WP_Query;
-            $bm             = BULK_MOVE();
+            $wp_query = new WP_Query;
+            $bm       = BULK_MOVE();
 
             // move by tags
-            $old_tag        = absint( $_POST['smbm_mt_old_tag'] );
-            $new_tag        = ( $_POST['smbm_mt_new_tag'] == -1 ) ? -1 : absint( $_POST['smbm_mt_new_tag'] );
+            $old_tag = absint( $_POST['smbm_mt_old_tag'] );
+            $new_tag = ( $_POST['smbm_mt_new_tag'] == -1 ) ? -1 : absint( $_POST['smbm_mt_new_tag'] );
 
             $posts = $wp_query->query( array(
                 'tag__in'   => $old_tag,
                 'post_type' => 'post',
-                'nopaging'  => 'true'
+                'nopaging'  => 'true',
             ));
 
             foreach ( $posts as $post ) {
@@ -233,7 +237,7 @@ class Bulk_Move_Posts {
     }
 
     /**
-     * Render move category by tag box
+     * Render move category by tag box.
      *
      * @since 1.2
      * @static
@@ -243,6 +247,7 @@ class Bulk_Move_Posts {
 
         if ( Bulk_Move_Util::is_posts_box_hidden( Bulk_Move::BOX_CATEGORY_BY_TAG ) ) {
             printf( __( 'This section just got enabled. Kindly <a href = "%1$s">refresh</a> the page to fully enable it.', 'bulk-move' ), 'tools.php?page=' . Bulk_Move::POSTS_PAGE_SLUG );
+
             return;
         }
         ?>
@@ -255,7 +260,7 @@ class Bulk_Move_Posts {
                     <td scope="row" >
                         <select name="smbm_mct_old_tag">
 <?php
-                            $tags =  get_tags( array( 'hide_empty' => false ) );
+                            $tags = get_tags( array( 'hide_empty' => false ) );
                             foreach ( $tags as $tag ) {
 ?>
                                 <option value="<?php echo $tag->term_id; ?>">
@@ -271,11 +276,11 @@ class Bulk_Move_Posts {
 <?php
                         wp_dropdown_categories( array(
                             'name'             => 'smbm_mct_mapped_cat',
-                            'show_count'       => TRUE,
-                            'hierarchical'     => TRUE,
+                            'show_count'       => true,
+                            'hierarchical'     => true,
                             'orderby'          => 'NAME',
-                            'hide_empty'       => FALSE,
-                            'show_option_none' => __( 'Choose Category', 'bulk-move' )
+                            'hide_empty'       => false,
+                            'show_option_none' => __( 'Choose Category', 'bulk-move' ),
                         ) );
 ?>
                     </td>
@@ -284,8 +289,8 @@ class Bulk_Move_Posts {
             </table>
         <p>
             <?php _e( 'If the post contains other categories, then', 'bulk-move' ); ?>
-            <input type="radio" name="smbm_mct_overwrite" value="overwrite" checked><?php _e ( 'Remove them', 'bulk-move' ); ?>
-            <input type="radio" name="smbm_mct_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
+            <input type="radio" name="smbm_mct_overwrite" value="overwrite" checked><?php _e( 'Remove them', 'bulk-move' ); ?>
+            <input type="radio" name="smbm_mct_overwrite" value="no-overwrite"><?php _e( "Don't remove them", 'bulk-move' ); ?>
         </p>
         </fieldset>
         <p class="submit">
@@ -296,10 +301,11 @@ class Bulk_Move_Posts {
     }
 
     /**
-     * Move posts from a tag to another category
+     * Move posts from a tag to another category.
      *
      * @static
      * @access public
+     *
      * @since  1.2.0
      */
     public static function move_category_by_tag() {
@@ -318,7 +324,7 @@ class Bulk_Move_Posts {
             $posts = $wp_query->query( array(
                 'tag__in'   => $old_tag,
                 'post_type' => 'post',
-                'nopaging'  => 'true'
+                'nopaging'  => 'true',
             ));
 
             foreach ( $posts as $post ) {
@@ -340,7 +346,7 @@ class Bulk_Move_Posts {
                 $current_cats = array_values( $current_cats );
                 wp_update_post( array(
                     'ID'            => $post->ID,
-                    'post_category' => $current_cats
+                    'post_category' => $current_cats,
                 ) );
             }
 
@@ -348,17 +354,18 @@ class Bulk_Move_Posts {
         }
     }
     /**
-     * Render debug box
+     * Render debug box.
      *
      * @static
      * @access public
+     *
      * @since  1.0
      */
     public static function render_debug_box() {
 
         // Get max script execution time from option.
         $max_execution_time = get_option( Bulk_Move::SCRIPT_TIMEOUT_OPTION );
-        if ( !$max_execution_time ) {
+        if ( ! $max_execution_time ) {
             $max_execution_time = '';
         }
 ?>
@@ -401,16 +408,17 @@ class Bulk_Move_Posts {
     }
 
     /**
-     * Save php timeout value
+     * Save php timeout value.
      *
      * @static
      * @access public
+     *
      * @since  1.2.0
      */
     public static function save_timeout() {
 
         if ( check_admin_referer( 'sm-bulk-move-posts', 'sm-bulk-move-posts-nonce' ) ) {
-            $bm = BULK_MOVE();
+            $bm                     = BULK_MOVE();
             $new_max_execution_time = $_POST['smbm_max_execution_time'];
 
             if (is_numeric( $new_max_execution_time ) ) {
@@ -432,16 +440,17 @@ class Bulk_Move_Posts {
     }
 
     /**
-     * Change php `script_timeout`
+     * Change php `script_timeout`.
      *
      * @static
      * @access public
+     *
      * @since  1.2.0
      */
     public static function change_timeout() {
         // get max script execution time from option.
         $max_execution_time = get_option( Bulk_Move::SCRIPT_TIMEOUT_OPTION );
-        if ( !$max_execution_time ) {
+        if ( ! $max_execution_time ) {
             //Increase script timeout in order to handle many posts.
             ini_set( 'max_execution_time', $max_execution_time );
         }
@@ -486,7 +495,7 @@ class Bulk_Move_Posts {
 	public static function load_custom_terms_by_taxonomy() {
 		$bulk_move = BULK_MOVE();
 		check_ajax_referer( $bulk_move::BOX_CUSTOM_TERMS_NONCE, 'security' );
-		$taxonomy  = isset( $_POST['taxonomy'] ) ? sanitize_text_field( $_POST['taxonomy'] ) : 'category';
+		$taxonomy = isset( $_POST['taxonomy'] ) ? sanitize_text_field( $_POST['taxonomy'] ) : 'category';
 
 		$args = array(
 			'taxonomy'   => $taxonomy,
@@ -503,15 +512,15 @@ class Bulk_Move_Posts {
 			<option class="level-0" value="<?php echo $term->term_id; ?>"><?php echo $term->name; ?>&nbsp;&nbsp;(<?php echo $term->count; ?>)</option>
 		<?php
 		endforeach;
-		$ob           = ob_get_clean();
+		$ob = ob_get_clean();
 		$select_term .= $ob;
-		$map_term    .= $ob;
-		$data         = array( 'select_term' => $select_term, 'map_term' => $map_term );
+		$map_term .= $ob;
+		$data = array( 'select_term' => $select_term, 'map_term' => $map_term );
 		wp_send_json_success( $data );
 	}
 
 	/**
-	 * Render move terms box
+	 * Render move terms box.
 	 *
 	 * @since 1.3.0
 	 */
@@ -519,6 +528,7 @@ class Bulk_Move_Posts {
 
 		if ( Bulk_Move_Util::is_posts_box_hidden( Bulk_Move::BOX_CATEGORY ) ) {
 			printf( __( 'This section just got enabled. Kindly <a href = "%1$s">refresh</a> the page to fully enable it.', 'bulk-move' ), 'tools.php?page=' . Bulk_Move::POSTS_PAGE_SLUG );
+
 			return;
 		}
 		?>
@@ -592,8 +602,8 @@ class Bulk_Move_Posts {
 			</table>
 			<p>
 				<?php _e( 'If the post contains other terms, then', 'bulk-move' ); ?>
-				<input type="radio" name="smbm_mbct_overwrite" value="overwrite" checked><?php _e ( 'Remove them', 'bulk-move' ); ?>
-				<input type="radio" name="smbm_mbct_overwrite" value="no-overwrite"><?php _e ( "Don't remove them", 'bulk-move' ); ?>
+				<input type="radio" name="smbm_mbct_overwrite" value="overwrite" checked><?php _e( 'Remove them', 'bulk-move' ); ?>
+				<input type="radio" name="smbm_mbct_overwrite" value="no-overwrite"><?php _e( "Don't remove them", 'bulk-move' ); ?>
 			</p>
 
 		</fieldset>
@@ -609,34 +619,34 @@ class Bulk_Move_Posts {
 
 			do_action( 'bm_pre_request_handler' );
 
-			$wp_query    = new WP_Query;
-			$bm          = BULK_MOVE();
+			$wp_query = new WP_Query;
+			$bm       = BULK_MOVE();
 
 			// Move by terms.
-			$old_cat     = absint( $_POST['smbm_mbct_selected_term'] );
-			$taxonomy    = $_POST['smbm_mbct_taxonomy'];
-			$post_types  = array( $_POST['smbm_mbct_post_type'] );
+			$old_cat    = absint( $_POST['smbm_mbct_selected_term'] );
+			$taxonomy   = $_POST['smbm_mbct_taxonomy'];
+			$post_types = array( $_POST['smbm_mbct_post_type'] );
 
-			$new_cat     = ( $_POST['smbm_mbct_mapped_term'] == -1 ) ? -1 : absint( $_POST['smbm_mbct_mapped_term'] );
+			$new_cat = ( $_POST['smbm_mbct_mapped_term'] == -1 ) ? -1 : absint( $_POST['smbm_mbct_mapped_term'] );
 
 			$posts_count = 0 ;
 
 			if ( $old_cat !== -1 ) {
 				foreach ( $post_types as $post_type ) {
-					$posts_args  = array(
-						'tax_query'    => array(
+					$posts_args = array(
+						'tax_query' => array(
 							array(
 								'taxonomy' => $taxonomy,
 								'field'    => 'term_id',
 								'terms'    => $old_cat,
 							),
 						),
-						'post_type'    => $post_type,
-						'nopaging'     => 'true'
+						'post_type' => $post_type,
+						'nopaging'  => 'true',
 					);
 
-					$posts        = $wp_query->query( $posts_args );
-					$posts_count += count ( $posts );
+					$posts = $wp_query->query( $posts_args );
+					$posts_count += count( $posts );
 
 					foreach ( $posts as $post ) {
 

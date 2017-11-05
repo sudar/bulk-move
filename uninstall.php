@@ -1,19 +1,19 @@
 <?php
 /**
- * Uninstall file for Bulk Move plugin
+ * Uninstall file for Bulk Move plugin.
  *
- * @package Bulk Move
  * @since 1.2
+ *
  * @author Sudar
  */
 
 //if uninstall not called from WordPress exit
-if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) )
     exit();
 
 $option_name = 'bm_max_execution_time';
 
-if ( !is_multisite() ) {
+if ( ! is_multisite() ) {
     // For Single site
     delete_option( $option_name );
 } else {
@@ -21,7 +21,7 @@ if ( !is_multisite() ) {
     global $wpdb;
 
     // For regular options.
-    $blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
+    $blog_ids         = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
     $original_blog_id = get_current_blog_id();
 
     foreach ( $blog_ids as $blog_id ) {
@@ -33,4 +33,3 @@ if ( !is_multisite() ) {
     // For site options.
     delete_site_option( $option_name );
 }
-?>
