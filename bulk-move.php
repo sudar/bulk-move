@@ -193,14 +193,12 @@ final class Bulk_Move {
 	 * @return void
 	 */
 	private function setup_actions() {
-		// Register hooks
-		add_action( 'admin_menu', array( &$this, 'add_menu' ) );
-		add_action( 'admin_init', array( &$this, 'request_handler' ) );
+		add_action( 'admin_menu', array( $this, 'add_menu' ) );
+		add_action( 'admin_init', array( $this, 'request_handler' ) );
 		add_action( 'wp_ajax_load_custom_taxonomy_by_post_type', 'Bulk_Move_Posts::load_custom_taxonomy_by_post_type' );
 		add_action( 'wp_ajax_load_custom_terms_by_taxonomy', 'Bulk_Move_Posts::load_custom_terms_by_taxonomy' );
 
-		// Add more links in the plugin listing page
-		add_filter( 'plugin_action_links', array( &$this, 'filter_plugin_actions' ), 10, 2 );
+		add_filter( 'plugin_action_links', array( $this, 'filter_plugin_actions' ), 10, 2 );
 	}
 
 	/**
@@ -208,17 +206,13 @@ final class Bulk_Move {
 	 */
 	public function add_menu() {
 
-		$this->post_page = add_submenu_page( 'tools.php', __( 'Bulk Move' , 'bulk-move'), __( 'Bulk Move' , 'bulk-move'), 'edit_others_posts', self::POSTS_PAGE_SLUG, array( &$this, 'display_posts_page' ) );
+		$this->post_page = add_submenu_page( 'tools.php', __( 'Bulk Move' , 'bulk-move' ), __( 'Bulk Move' , 'bulk-move' ), 'edit_others_posts', self::POSTS_PAGE_SLUG, array( $this, 'display_posts_page' ) );
 
-		// enqueue JavaScript
-		add_action( 'admin_print_scripts-' . $this->post_page, array( &$this, 'add_script') );
+		add_action( 'admin_print_scripts-' . $this->post_page, array( $this, 'add_script' ) );
+		add_action( 'admin_print_scripts-' . $this->post_page, array( $this, 'add_styles' ) );
 
-		// enqueue CSS
-		add_action( 'admin_print_scripts-' . $this->post_page, array( &$this, 'add_styles') );
-
-		// meta boxes
-		add_action( "load-{$this->post_page}", array( &$this, 'add_move_posts_settings_panel' ) );
-		add_action( "add_meta_boxes_{$this->post_page}", array( &$this, 'add_move_posts_meta_boxes' ) );
+		add_action( "load-{$this->post_page}", array( $this, 'add_move_posts_settings_panel' ) );
+		add_action( "add_meta_boxes_{$this->post_page}", array( $this, 'add_move_posts_meta_boxes' ) );
 	}
 
 	/**
@@ -364,8 +358,7 @@ final class Bulk_Move {
 			do_action( 'bm_' . $_POST['bm_action'], $_POST );
 		}
 
-		// hook the admin notices action
-		add_action( 'admin_notices', array( &$this, 'moved_notice' ), 9 );
+		add_action( 'admin_notices', array( $this, 'moved_notice' ), 9 );
 	}
 
 	/**
@@ -378,7 +371,7 @@ final class Bulk_Move {
 
 		// cleanup
 		$this->msg = '';
-		remove_action( 'admin_notices', array( &$this, 'moved_notice' ) );
+		remove_action( 'admin_notices', array( $this, 'moved_notice' ) );
 	}
 
 	/**
