@@ -99,7 +99,7 @@ final class Bulk_Move {
 	 */
 	public static function instance() {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Bulk_Move ) ) {
-			self::$instance = new Bulk_Move;
+			self::$instance = new Bulk_Move();
 			self::$instance->setup_paths();
 			self::$instance->includes();
 			self::$instance->load_textdomain();
@@ -121,8 +121,8 @@ final class Bulk_Move {
 	 * @return void
 	 */
 	public function __clone() {
-		// Cloning instances of the class is forbidden
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'bulk-move' ), '1.2.0' );
+		// Cloning instances of the class is forbidden.
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'bulk-move' ), self::VERSION );
 	}
 
 	/**
@@ -134,8 +134,8 @@ final class Bulk_Move {
 	 * @return void
 	 */
 	public function __wakeup() {
-		// Unserializing instances of the class is forbidden
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'bulk-move' ), '1.2.0' );
+		// Unserializing instances of the class is forbidden.
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'bulk-move' ), self::VERSION );
 	}
 
 	/**
@@ -178,7 +178,6 @@ final class Bulk_Move {
 	 * @since  1.2.0
 	 */
 	public function load_textdomain() {
-		// Load localization domain
 		$this->translations = dirname( plugin_basename( self::$PLUGIN_FILE ) ) . '/languages/';
 		load_plugin_textdomain( 'bulk-move', false, $this->translations );
 	}
@@ -239,7 +238,6 @@ final class Bulk_Move {
 			)
 		);
 
-		// Add help sidebar
 		$this->move_posts_screen->set_help_sidebar(
 			'<p><strong>' . __( 'More information', 'bulk-move' ) . '</strong></p>' .
 			'<p><a href = "http://sudarmuthu.com/wordpress/bulk-move">' . __( 'Plugin Homepage/support', 'bulk-move' ) . '</a></p>' .
@@ -273,11 +271,10 @@ final class Bulk_Move {
 	public function display_posts_page() {
 		?>
 		<div class="wrap">
-			<h2><?php _e( 'Bulk Move Posts', 'bulk-move' );?></h2>
+			<h2><?php _e( 'Bulk Move Posts', 'bulk-move' ); ?></h2>
 
 			<form method = "post">
 				<?php
-				// nonce for bulk move
 				wp_nonce_field( 'sm-bulk-move-posts', 'sm-bulk-move-posts-nonce' );
 
 				/* Used to save closed meta boxes and their order */
@@ -302,15 +299,17 @@ final class Bulk_Move {
 
 			</form>
 		</div><!-- .wrap -->
+
 		<?php
-		// Display credits in Footer
-		add_action( 'in_admin_footer', array( &$this, 'admin_footer' ) );
+		add_action( 'in_admin_footer', array( $this, 'display_credits_in_footer' ) );
 	}
 
 	/**
-	 * Adds Footer links. Based on http://striderweb.com/nerdaphernalia/2008/06/give-your-wordpress-plugin-credit/.
+	 * Adds Footer links.
+	 *
+	 * Based on http://striderweb.com/nerdaphernalia/2008/06/give-your-wordpress-plugin-credit/.
 	 */
-	public function admin_footer() {
+	public function display_credits_in_footer() {
 		$plugin_data = get_plugin_data( __FILE__ );
 		printf( '%1$s ' . __( 'plugin', 'bulk-move' ) . ' | ' . __( 'Version', 'bulk-move' ) . ' %2$s | ' . __( 'by', 'bulk-move' ) . ' %3$s<br />', $plugin_data['Title'], $plugin_data['Version'], $plugin_data['Author'] );
 	}
@@ -321,7 +320,6 @@ final class Bulk_Move {
 	public function add_script() {
 		wp_enqueue_script( self::JS_HANDLE, plugins_url( '/js/bulk-move.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 
-		// JavaScript messages
 		$msg = array(
 			'move_warning' => __( 'Are you sure you want to move all the selected posts', 'bulk-move' ),
 		);
@@ -336,7 +334,11 @@ final class Bulk_Move {
 			'security'            => wp_create_nonce( self::BOX_CUSTOM_TERMS_NONCE ),
 		);
 
-		$translation_array = array( 'msg' => $msg, 'error' => $error, 'bulk_move_posts' => $bulk_move_posts );
+		$translation_array = array(
+			'msg' => $msg,
+			'error' => $error,
+			'bulk_move_posts' => $bulk_move_posts,
+		);
 		wp_localize_script( self::JS_HANDLE, self::JS_VARIABLE, $translation_array );
 	}
 
@@ -353,7 +355,6 @@ final class Bulk_Move {
 	 * Request Handler.
 	 */
 	public function request_handler() {
-		// controller
 		if ( isset( $_POST['bm_action'] ) ) {
 			do_action( 'bm_' . $_POST['bm_action'], $_POST );
 		}
@@ -369,7 +370,7 @@ final class Bulk_Move {
 			echo "<div class = 'updated'><p>" . $this->msg . '</p></div>';
 		}
 
-		// cleanup
+		// cleanup.
 		$this->msg = '';
 		remove_action( 'admin_notices', array( $this, 'moved_notice' ) );
 	}
@@ -379,18 +380,23 @@ final class Bulk_Move {
 	 *
 	 * Based on http://striderweb.com/nerdaphernalia/2008/06/wp-use-action-links/.
 	 *
-	 * @staticvar <type> $this_plugin
+	 * @staticvar string $this_plugin
 	 *
-	 * @param array $links
-	 * @param string $file
+	 * @param array  $links Links.
+	 * @param string $file   Plugin file name.
+	 *
+	 * @return array Modified links.
 	 */
 	public function filter_plugin_actions( $links, $file ) {
 		static $this_plugin;
-		if( ! $this_plugin ) $this_plugin = plugin_basename( __FILE__ );
 
-		if( $file == $this_plugin ) {
+		if ( ! $this_plugin ) {
+			$this_plugin = plugin_basename( __FILE__ );
+		}
+
+		if ( $file == $this_plugin ) {
 			$settings_link = '<a href="tools.php?page=' . self::POSTS_PAGE_SLUG . '">' . __( 'Manage', 'bulk-move' ) . '</a>';
-			array_unshift( $links, $settings_link ); // before other links
+			array_unshift( $links, $settings_link ); // before other links.
 		}
 
 		return $links;
@@ -414,5 +420,5 @@ function BULK_MOVE() {
 	return Bulk_Move::instance();
 }
 
-// Get BULK_MOVE Running
+// Get BULK_MOVE Running.
 BULK_MOVE();

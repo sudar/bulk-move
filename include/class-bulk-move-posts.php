@@ -22,7 +22,7 @@ class Bulk_Move_Posts {
 		}
 		?>
 		<!-- Category Start-->
-		<h4><?php _e( 'On the left side, select the category whose post you want to move. In the right side select the category to which you want the posts to be moved.', 'bulk-move' ) ?></h4>
+		<h4><?php _e( 'On the left side, select the category whose post you want to move. In the right side select the category to which you want the posts to be moved.', 'bulk-move' ); ?></h4>
 
 		<fieldset class="options">
 			<table class="optiontable">
@@ -62,7 +62,7 @@ class Bulk_Move_Posts {
 
 		</fieldset>
 		<p class="submit">
-			<button type="submit" name="bm_action" value="move_cats" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
+			<button type="submit" name="bm_action" value="move_cats" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ); ?>&raquo;</button>
 		</p>
 		<!-- Category end-->
 		<?php
@@ -81,12 +81,12 @@ class Bulk_Move_Posts {
 
 			do_action( 'bm_pre_request_handler' );
 
-			$wp_query = new WP_Query;
+			$wp_query = new WP_Query();
 			$bm       = BULK_MOVE();
 
-			// move by cats
+			// move by cats.
 			$old_cat = absint( $_POST['smbm_mc_selected_cat'] );
-			$new_cat = ( $_POST['smbm_mc_mapped_cat'] == -1 ) ? -1 : absint( $_POST['smbm_mc_mapped_cat'] );
+			$new_cat = ( -1 === $_POST['smbm_mc_mapped_cat'] ) ? -1 : absint( $_POST['smbm_mc_mapped_cat'] );
 
 			$posts = $wp_query->query(array(
 				'category__in' => array( $old_cat ),
@@ -97,12 +97,12 @@ class Bulk_Move_Posts {
 			foreach ( $posts as $post ) {
 				$current_cats = array_diff( wp_get_post_categories( $post->ID ), array( $old_cat ) );
 
-				if ( $new_cat != -1 ) {
+				if ( -1 !== $new_cat ) {
 					if ( isset( $_POST['smbm_mc_overwrite'] ) && 'overwrite' == $_POST['smbm_mc_overwrite'] ) {
-						// Remove old categories
+						// Remove old categories.
 						$current_cats = array( $new_cat );
 					} else {
-						// Add to existing categories
+						// Add to existing categories.
 						$current_cats[] = $new_cat;
 					}
 				}
@@ -137,7 +137,7 @@ class Bulk_Move_Posts {
 		}
 		?>
 		<!-- Tag Start-->
-		<h4><?php _e( 'On the left side, select the tag whose post you want to move. In the right side select the tag to which you want the posts to be moved.', 'bulk-move' ) ?></h4>
+		<h4><?php _e( 'On the left side, select the tag whose post you want to move. In the right side select the tag to which you want the posts to be moved.', 'bulk-move' ); ?></h4>
 
 		<fieldset class="options">
 			<table class="optiontable">
@@ -146,10 +146,11 @@ class Bulk_Move_Posts {
 						<select name="smbm_mt_old_tag">
 							<?php
 							$tags = get_tags( array( 'hide_empty' => false ) );
+
 							foreach ( $tags as $tag ) {
 								?>
 								<option value="<?php echo $tag->term_id; ?>">
-									<?php echo $tag->name; ?> (<?php echo $tag->count . ' '; _e( 'Posts', 'bulk-move' ); ?>)
+									<?php echo $tag->name; ?> (<?php echo $tag->count . ' ', __( 'Posts', 'bulk-move' ); ?>)
 								</option>
 								<?php
 							}
@@ -161,10 +162,10 @@ class Bulk_Move_Posts {
 						<select name="smbm_mt_new_tag">
 							<option value="-1"><?php _e( 'Remove Tag', 'bulk-move' ); ?></option>
 							<?php
-							foreach ($tags as $tag) {
+							foreach ( $tags as $tag ) {
 								?>
 								<option value="<?php echo $tag->term_id; ?>">
-									<?php echo $tag->name; ?> (<?php echo $tag->count . ' '; _e( 'Posts', 'bulk-move' ); ?>)
+									<?php echo $tag->name; ?> (<?php echo $tag->count . ' ', __( 'Posts', 'bulk-move' ); ?>)
 								</option>
 								<?php
 							}
@@ -181,7 +182,7 @@ class Bulk_Move_Posts {
 			</p>
 		</fieldset>
 		<p class="submit">
-			<button type="submit" name="bm_action" value="move_tags" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
+			<button type="submit" name="bm_action" value="move_tags" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ); ?>&raquo;</button>
 		</p>
 		<!-- Tag end-->
 		<?php
@@ -201,12 +202,11 @@ class Bulk_Move_Posts {
 
 			do_action( 'bm_pre_request_handler' );
 
-			$wp_query = new WP_Query;
+			$wp_query = new WP_Query();
 			$bm       = BULK_MOVE();
 
-			// move by tags
 			$old_tag = absint( $_POST['smbm_mt_old_tag'] );
-			$new_tag = ( $_POST['smbm_mt_new_tag'] == -1 ) ? -1 : absint( $_POST['smbm_mt_new_tag'] );
+			$new_tag = ( -1 === $_POST['smbm_mt_new_tag'] ) ? -1 : absint( $_POST['smbm_mt_new_tag'] );
 
 			$posts = $wp_query->query( array(
 				'tag__in'   => $old_tag,
@@ -218,12 +218,12 @@ class Bulk_Move_Posts {
 				$current_tags = wp_get_post_tags( $post->ID, array( 'fields' => 'ids' ) );
 				$current_tags = array_diff( $current_tags, array( $old_tag ) );
 
-				if ( $new_tag != -1 ) {
+				if ( -1 !== $new_tag ) {
 					if ( isset( $_POST['smbm_mt_overwrite'] ) && 'overwrite' == $_POST['smbm_mt_overwrite'] ) {
-						// Remove old tags
+						// Remove old tags.
 						$current_tags = array( $new_tag );
 					} else {
-						// add to existing tags
+						// add to existing tags.
 						$current_tags[] = $new_tag;
 					}
 				}
@@ -232,7 +232,7 @@ class Bulk_Move_Posts {
 				wp_set_post_tags( $post->ID, $current_tags );
 			}
 
-			$bm->msg = sprintf( _n( 'Moved %d post from the selected tag', 'Moved %d posts from the selected tag' , count( $posts ), 'bulk-move' ), count( $posts ) );
+			$bm->msg = sprintf( _n( 'Moved %d post from the selected tag', 'Moved %d posts from the selected tag', count( $posts ), 'bulk-move' ), count( $posts ) );
 		}
 	}
 
@@ -252,7 +252,7 @@ class Bulk_Move_Posts {
 		}
 		?>
 		<!-- Tag Start-->
-		<h4><?php _e( 'On the left side, select the tag whose post you want to move. In the right side select the category to which you want the posts to be moved.', 'bulk-move' ) ?></h4>
+		<h4><?php _e( 'On the left side, select the tag whose post you want to move. In the right side select the category to which you want the posts to be moved.', 'bulk-move' ); ?></h4>
 
 		<fieldset class="options">
 			<table class="optiontable">
@@ -264,7 +264,7 @@ class Bulk_Move_Posts {
 							foreach ( $tags as $tag ) {
 								?>
 								<option value="<?php echo $tag->term_id; ?>">
-									<?php echo $tag->name; ?> (<?php echo $tag->count . ' '; _e( 'Posts', 'bulk-move' ); ?>)
+									<?php echo $tag->name; ?> (<?php echo $tag->count . ' ', __( 'Posts', 'bulk-move' ); ?>)
 								</option>
 								<?php
 							}
@@ -294,7 +294,7 @@ class Bulk_Move_Posts {
 			</p>
 		</fieldset>
 		<p class="submit">
-			<button type="submit" name="bm_action" value="move_category_by_tag" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
+			<button type="submit" name="bm_action" value="move_category_by_tag" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ); ?>&raquo;</button>
 		</p>
 		<!-- Tag end-->
 		<?php
@@ -314,12 +314,11 @@ class Bulk_Move_Posts {
 
 			do_action( 'bm_pre_request_handler' );
 
-			$wp_query = new WP_Query;
+			$wp_query = new WP_Query();
 			$bm       = BULK_MOVE();
 
-			// move by tags
 			$old_tag = absint( $_POST['smbm_mct_old_tag'] );
-			$new_cat = ( $_POST['smbm_mct_mapped_cat'] == -1 ) ? -1 : absint( $_POST['smbm_mct_mapped_cat'] );
+			$new_cat = ( -1 === $_POST['smbm_mct_mapped_cat'] ) ? -1 : absint( $_POST['smbm_mct_mapped_cat'] );
 
 			$posts = $wp_query->query( array(
 				'tag__in'   => $old_tag,
@@ -330,17 +329,17 @@ class Bulk_Move_Posts {
 			foreach ( $posts as $post ) {
 				$current_cats = wp_get_post_categories( $post->ID );
 
-				if ( $new_cat != -1 ) {
+				if ( -1 !== $new_cat ) {
 					if ( isset( $_POST['smbm_mct_overwrite'] ) && 'overwrite' == $_POST['smbm_mct_overwrite'] ) {
-						// Remove old categories
+						// Remove old categories.
 						$current_cats = array( $new_cat );
 					} else {
-						// Add to existing categories
+						// Add to existing categories.
 						$current_cats[] = $new_cat;
 					}
 				}
 
-				if ( count( $current_cats ) == 0) {
+				if ( count( $current_cats ) == 0 ) {
 					$current_cats = array( get_option( 'default_category' ) );
 				}
 				$current_cats = array_values( $current_cats );
@@ -353,6 +352,7 @@ class Bulk_Move_Posts {
 			$bm->msg = sprintf( _n( 'Moved %d post from the selected tag to the new category.', 'Moved %d posts from the selected tag to the new category.' , count( $posts ), 'bulk-move' ), count( $posts ) );
 		}
 	}
+
 	/**
 	 * Render debug box.
 	 *
@@ -372,7 +372,7 @@ class Bulk_Move_Posts {
 		<!-- Debug box start-->
 		<p>
 			<?php _e( 'If you are seeing a blank page after clicking the Bulk Move button, then ', 'bulk-move' ); ?>
-			<a href = "http://sudarmuthu.com/wordpress/bulk-move#faq"><?php _e( 'check out this FAQ', 'bulk-move' );?></a>.
+			<a href = "http://sudarmuthu.com/wordpress/bulk-move#faq"><?php _e( 'check out this FAQ', 'bulk-move' ); ?></a>.
 			<?php _e( 'You also need need the following debug information.', 'bulk-move' ); ?>
 		</p>
 		<table cellspacing="10">
@@ -389,12 +389,12 @@ class Bulk_Move_Posts {
 				<td><?php echo Bulk_Move::VERSION; ?></td>
 			</tr>
 			<tr>
-				<th align="right"><?php _e( 'Available memory size ', 'bulk-move' );?></th>
+				<th align="right"><?php _e( 'Available memory size ', 'bulk-move' ); ?></th>
 				<td><?php echo ini_get( 'memory_limit' ); ?></td>
 			</tr>
 			<tr>
-				<th align="right"><?php _e( 'Script time out ', 'bulk-move' );?></th>
-				<td><strong><?php echo ini_get( 'max_execution_time' );?></strong> (<?php _e( 'In php.ini', 'bulk-move' );?>). <?php _e( 'Custom value: ', 'bulk-move' );?><input type="text" id="smbm_max_execution_time" name="smbm_max_execution_time" value="<?php echo $max_execution_time; ?>" > <button type="submit" name="bm_action" value="save_timeout" class="button-primary"><?php _e( 'Save', 'bulk-move' ) ?> &raquo;</button></td>
+				<th align="right"><?php _e( 'Script time out ', 'bulk-move' ); ?></th>
+				<td><strong><?php echo ini_get( 'max_execution_time' ); ?></strong> (<?php _e( 'In php.ini', 'bulk-move' ); ?>). <?php _e( 'Custom value: ', 'bulk-move' ); ?><input type="text" id="smbm_max_execution_time" name="smbm_max_execution_time" value="<?php echo $max_execution_time; ?>" > <button type="submit" name="bm_action" value="save_timeout" class="button-primary"><?php _e( 'Save', 'bulk-move' ) ?> &raquo;</button></td>
 			</tr>
 			<tr>
 				<th align="right"><?php _e( 'Script input time ', 'bulk-move' ); ?></th>
@@ -402,7 +402,7 @@ class Bulk_Move_Posts {
 			</tr>
 		</table>
 
-		<p><em><?php _e( 'If you are looking to delete posts in bulk, try out my ', 'bulk-move' ); ?> <a href = "http://sudarmuthu.com/wordpress/bulk-delete"><?php _e( 'Bulk Delete Plugin', 'bulk-move' );?></a>.</em></p>
+		<p><em><?php _e( 'If you are looking to delete posts in bulk, try out my ', 'bulk-move' ); ?> <a href = "http://sudarmuthu.com/wordpress/bulk-delete"><?php _e( 'Bulk Delete Plugin', 'bulk-move' ); ?></a>.</em></p>
 		<!-- Debug box end-->
 		<?php
 	}
@@ -421,19 +421,17 @@ class Bulk_Move_Posts {
 			$bm                     = BULK_MOVE();
 			$new_max_execution_time = $_POST['smbm_max_execution_time'];
 
-			if (is_numeric( $new_max_execution_time ) ) {
-				//Update option.
+			if ( is_numeric( $new_max_execution_time ) ) {
 				$option_updated = update_option( Bulk_Move::SCRIPT_TIMEOUT_OPTION, $new_max_execution_time );
 
-				if ( $option_updated === true ) {
-					//Success.
+				if ( $option_updated ) {
 					$bm->msg = sprintf( __( 'Max execution time was successfully saved as %s seconds.', 'bulk-move' ), $new_max_execution_time );
 				} else {
-					//Error saving option.
+					// Error saving option.
 					$bm->msg = __( 'An unknown error occurred while saving your options.', 'bulk-move' );
 				}
 			} else {
-				//Error, value was not numeric.
+				// Error, value was not numeric.
 				$bm->msg = sprintf( __( 'Could not update the max execution time to %s, it was not numeric.  Enter the max number of seconds this script should run.', 'bulk-move' ), $new_max_execution_time );
 			}
 		}
@@ -451,7 +449,7 @@ class Bulk_Move_Posts {
 		// get max script execution time from option.
 		$max_execution_time = get_option( Bulk_Move::SCRIPT_TIMEOUT_OPTION );
 		if ( ! $max_execution_time ) {
-			//Increase script timeout in order to handle many posts.
+			// Increase script timeout in order to handle many posts.
 			ini_set( 'max_execution_time', $max_execution_time );
 		}
 	}
@@ -533,13 +531,13 @@ class Bulk_Move_Posts {
 		}
 		?>
 		<!-- Custom Taxonomy Start-->
-		<h4><?php _e( 'Select the post type to show its taxonomy. On the left side, select the term whose posts you want to move. On the right side select the term to which you want the posts to be moved.', 'bulk-move' ) ?></h4>
+		<h4><?php _e( 'Select the post type to show its taxonomy. On the left side, select the term whose posts you want to move. On the right side select the term to which you want the posts to be moved.', 'bulk-move' ); ?></h4>
 
 		<fieldset class="options">
 			<table class="optiontable">
 				<tr>
 					<td scope="row" colspan="2">
-						<?php _e( 'Select the post type to show its custom taxonomy.', 'bulk-move' ) ?>
+						<?php _e( 'Select the post type to show its custom taxonomy.', 'bulk-move' ); ?>
 					</td>
 					<td scope="row">
 				</tr>
@@ -566,7 +564,7 @@ class Bulk_Move_Posts {
 				</tr>
 				<tr class="taxonomy-select-row">
 					<td scope="row" colspan="2">
-						<?php _e( 'Select taxonomy to show its terms.', 'bulk-move' ) ?>
+						<?php _e( 'Select taxonomy to show its terms.', 'bulk-move' ); ?>
 					</td>
 					<td scope="row">
 				</tr>
@@ -581,7 +579,7 @@ class Bulk_Move_Posts {
 				</tr>
 				<tr class="term-select-row">
 					<td scope="row" colspan="2">
-						<?php _e( 'Select terms to move its posts.', 'bulk-move' ) ?>
+						<?php _e( 'Select terms to move its posts.', 'bulk-move' ); ?>
 					</td>
 					<td scope="row">
 				</tr>
@@ -608,18 +606,23 @@ class Bulk_Move_Posts {
 
 		</fieldset>
 		<p class="submit">
-			<button type="submit" name="bm_action" value="move_custom_taxonomy" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ) ?>&raquo;</button>
+			<button type="submit" name="bm_action" value="move_custom_taxonomy" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ); ?>&raquo;</button>
 		</p>
 		<!-- Custom Taxonomy end-->
 		<?php
 	}
 
+	/**
+	 * Move posts from one custom taxonomy to another.
+	 *
+	 * @since 1.3.0
+	 */
 	public static function move_custom_taxonomy() {
 		if ( check_admin_referer( 'sm-bulk-move-posts', 'sm-bulk-move-posts-nonce' ) ) {
 
 			do_action( 'bm_pre_request_handler' );
 
-			$wp_query = new WP_Query;
+			$wp_query = new WP_Query();
 			$bm       = BULK_MOVE();
 
 			// Move by terms.
@@ -627,11 +630,11 @@ class Bulk_Move_Posts {
 			$taxonomy   = $_POST['smbm_mbct_taxonomy'];
 			$post_types = array( $_POST['smbm_mbct_post_type'] );
 
-			$new_cat = ( $_POST['smbm_mbct_mapped_term'] == -1 ) ? -1 : absint( $_POST['smbm_mbct_mapped_term'] );
+			$new_cat = ( -1 === $_POST['smbm_mbct_mapped_term'] ) ? -1 : absint( $_POST['smbm_mbct_mapped_term'] );
 
 			$posts_count = 0 ;
 
-			if ( $old_cat !== -1 ) {
+			if ( -1 !== $old_cat ) {
 				foreach ( $post_types as $post_type ) {
 					$posts_args = array(
 						'tax_query' => array(
@@ -650,12 +653,10 @@ class Bulk_Move_Posts {
 
 					foreach ( $posts as $post ) {
 
-						if ( $new_cat != -1 ) {
+						if ( -1 !== $new_cat ) {
 							if ( isset( $_POST['smbm_mbct_overwrite'] ) && 'overwrite' == $_POST['smbm_mbct_overwrite'] ) {
-								// Remove old categories
 								$is_append_terms = false;
 							} else {
-								// Add to existing categories
 								$is_append_terms = true;
 							}
 							wp_set_object_terms( $post->ID, $new_cat, $taxonomy, $is_append_terms );
@@ -678,4 +679,3 @@ add_action( 'bm_move_tags'            , array( 'Bulk_Move_Posts', 'move_tags' ) 
 add_action( 'bm_move_category_by_tag' , array( 'Bulk_Move_Posts', 'move_category_by_tag' ) );
 add_action( 'bm_save_timeout'         , array( 'Bulk_Move_Posts', 'save_timeout' ) );
 add_action( 'bm_move_custom_taxonomy' , array( 'Bulk_Move_Posts', 'move_custom_taxonomy' ) );
-?>
