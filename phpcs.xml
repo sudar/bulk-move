@@ -33,6 +33,9 @@
 		<exclude name="Generic.Files.LowercasedFilename.NotFound"/>
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+
+        <!-- Even arrays that have one item are getting flagged -->
+		<exclude name="WordPress.Arrays.ArrayDeclarationSpacing.AssociativeKeyFound"/>
 	</rule>
 
 	<!-- PHP Compatibility -->
