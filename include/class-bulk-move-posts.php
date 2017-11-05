@@ -135,7 +135,14 @@ class Bulk_Move_Posts {
 
 			return;
 		}
+
+		$tags = bm_get_tags_or_fail();
+
+		if ( empty( $tags ) ) {
+			return;
+		}
 		?>
+
 		<!-- Tag Start-->
 		<h4><?php _e( 'On the left side, select the tag whose post you want to move. In the right side select the tag to which you want the posts to be moved.', 'bulk-move' ); ?></h4>
 
@@ -143,34 +150,11 @@ class Bulk_Move_Posts {
 			<table class="optiontable">
 				<tr>
 					<td scope="row" >
-						<select name="smbm_mt_old_tag">
-							<?php
-							$tags = get_tags( array( 'hide_empty' => false ) );
-
-							foreach ( $tags as $tag ) {
-								?>
-								<option value="<?php echo $tag->term_id; ?>">
-									<?php echo $tag->name; ?> (<?php echo $tag->count . ' ', __( 'Posts', 'bulk-move' ); ?>)
-								</option>
-								<?php
-							}
-							?>
-						</select>
+						<?php bm_render_tags_dropdown( 'smbm_mt_old_tag', $tags ); ?>
 						==>
 					</td>
 					<td scope="row" >
-						<select name="smbm_mt_new_tag">
-							<option value="-1"><?php _e( 'Remove Tag', 'bulk-move' ); ?></option>
-							<?php
-							foreach ( $tags as $tag ) {
-								?>
-								<option value="<?php echo $tag->term_id; ?>">
-									<?php echo $tag->name; ?> (<?php echo $tag->count . ' ', __( 'Posts', 'bulk-move' ); ?>)
-								</option>
-								<?php
-							}
-							?>
-						</select>
+						<?php bm_render_tags_dropdown( 'smbm_mt_new_tag', $tags, true ); ?>
 					</td>
 				</tr>
 
@@ -250,26 +234,24 @@ class Bulk_Move_Posts {
 
 			return;
 		}
+
+		$tags = bm_get_tags_or_fail();
+
+		if ( empty( $tags ) ) {
+			return;
+		}
 		?>
-		<!-- Tag Start-->
-		<h4><?php _e( 'On the left side, select the tag whose post you want to move. In the right side select the category to which you want the posts to be moved.', 'bulk-move' ); ?></h4>
+
+		<!-- Category by Tag Start-->
+		<h4>
+			<?php _e( 'On the left side, select the tag whose post you want to move. In the right side select the category to which you want the posts to be moved.', 'bulk-move' ); ?>
+		</h4>
 
 		<fieldset class="options">
 			<table class="optiontable">
 				<tr>
-					<td scope="row" >
-						<select name="smbm_mct_old_tag">
-							<?php
-							$tags = get_tags( array( 'hide_empty' => false ) );
-							foreach ( $tags as $tag ) {
-								?>
-								<option value="<?php echo $tag->term_id; ?>">
-									<?php echo $tag->name; ?> (<?php echo $tag->count . ' ', __( 'Posts', 'bulk-move' ); ?>)
-								</option>
-								<?php
-							}
-							?>
-						</select>
+					<td scope="row">
+						<?php bm_render_tags_dropdown( 'smbm_mct_old_tag', $tags ); ?>
 						==>
 					</td>
 					<td scope="row" >
