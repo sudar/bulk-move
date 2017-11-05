@@ -5,6 +5,7 @@
 **Requires at least:** 3.8  
 **Tested up to:** 4.9  
 **Stable tag:** 1.2.1  
+[![Build Status](https://scrutinizer-ci.com/g/sudar/bulk-move/badges/build.png?b=master)](https://scrutinizer-ci.com/g/sudar/bulk-move/build-status/master) [![Code Coverage](https://scrutinizer-ci.com/g/sudar/bulk-move/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/sudar/bulk-move/?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sudar/bulk-move/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sudar/bulk-move/?branch=master) [![StyleCI](https://styleci.io/repos/7822849/shield?branch=master)](https://styleci.io/repos/7822849) [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://wordpress.org/about/license/)
 
 Move or remove posts in bulk from one category, tag or custom taxonomy to another.
 
