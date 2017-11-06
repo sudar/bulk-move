@@ -30,9 +30,7 @@ jQuery(document).ready(function () {
 	 * Load Taxonomy on Post Type change.
 	 */
 	jQuery( '#smbm_mbct_post_type' ).change( function () {
-		//  Selected option.
 		var selectedOption = jQuery( this ).find( 'option:selected' ).attr( 'value' ),
-			// Data to send via AJAX.
 			data = {
 				'action'   : BULK_MOVE.bulk_move_posts.action_get_taxonomy,
 				'security' : BULK_MOVE.bulk_move_posts.security,

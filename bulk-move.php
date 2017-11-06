@@ -320,7 +320,7 @@ final class Bulk_Move {
 	 * Enqueue JavaScript.
 	 */
 	public function add_script() {
-		wp_enqueue_script( self::JS_HANDLE, plugins_url( '/js/bulk-move.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
+		wp_enqueue_script( self::JS_HANDLE, plugins_url( '/assets/js/bulk-move.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 
 		$msg = array(
 			'move_warning' => __( 'Are you sure you want to move all the selected posts', 'bulk-move' ),
@@ -350,7 +350,7 @@ final class Bulk_Move {
 	 * @since 1.2.0
 	 */
 	public function add_styles() {
-		wp_enqueue_style( self::CSS_HANDLE, plugins_url( '/css/bulk-move.css', __FILE__ ), false, self::VERSION );
+		wp_enqueue_style( self::CSS_HANDLE, plugins_url( '/assets/css/bulk-move.css', __FILE__ ), false, self::VERSION );
 	}
 
 	/**
