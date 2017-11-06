@@ -448,21 +448,17 @@ class Bulk_Move_Posts {
 
 		$taxonomies = get_object_taxonomies( $post_type );
 
-		$args = array(
-			'taxonomy'   => $taxonomies,
-			'hide_empty' => false,
-			'orderby'    => 'name',
-		);
-
 		ob_start();
 		?>
 		<option class="level-0" value="select"><?php _e( 'Select Taxonomy&nbsp;&nbsp;', 'bulk-move' ); ?></option>
+
+		<?php foreach ( $taxonomies as $taxonomy ) : ?>
+			<option class="level-0" value="<?php echo esc_attr( $taxonomy ); ?>">
+				<?php echo esc_html( $taxonomy ); ?>
+			</option>
+		<?php endforeach; ?>
+
 		<?php
-		foreach ( $taxonomies as $taxonomy ) :
-			?>
-			<option class="level-0" value="<?php echo $taxonomy; ?>"><?php echo $taxonomy; ?></option>
-			<?php
-		endforeach;
 		$data = ob_get_clean();
 		wp_send_json_success( $data );
 	}
@@ -486,15 +482,21 @@ class Bulk_Move_Posts {
 
 		$select_term = '<option class="level-0" value="-1">' . __( 'Select Term&nbsp;&nbsp;', '"bulk-move' ) . '</option>';
 		$map_term    = '<option class="level-0" value="-1">' . __( 'Remove Term&nbsp;&nbsp;', 'bullk-move' ) . '</option>';
+
 		ob_start();
-		foreach ( $terms as $term ) :
-			?>
-			<option class="level-0" value="<?php echo $term->term_id; ?>"><?php echo $term->name; ?>&nbsp;&nbsp;(<?php echo $term->count; ?>)</option>
-			<?php
-		endforeach;
-		$ob = ob_get_clean();
-		$select_term .= $ob;
-		$map_term .= $ob;
+		?>
+
+		<?php foreach ( $terms as $term ) : ?>
+			<option class="level-0" value="<?php echo absint( $term->term_id ); ?>">
+				<?php echo esc_html( $term->name ); ?>&nbsp;&nbsp;(<?php echo absint( $term->count ); ?>)
+			</option>
+		<?php endforeach; ?>
+
+		<?php
+		$content = ob_get_clean();
+		$select_term .= $content;
+		$map_term .= $content;
+
 		$data = array( 'select_term' => $select_term, 'map_term' => $map_term );
 		wp_send_json_success( $data );
 	}
