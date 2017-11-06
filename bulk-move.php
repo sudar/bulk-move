@@ -330,10 +330,11 @@ final class Bulk_Move {
 			'select_one' => __( 'Please select least one option', 'bulk-move' ),
 		);
 
+		// TODO: Add this from Bulk_Move_Posts class using a filter.
 		$bulk_move_posts = array(
 			'action_get_taxonomy' => 'load_custom_taxonomy_by_post_type',
 			'action_get_terms'    => 'load_custom_terms_by_taxonomy',
-			'security'            => wp_create_nonce( self::BOX_CUSTOM_TERMS_NONCE ),
+			'nonce'               => wp_create_nonce( self::BOX_CUSTOM_TERMS_NONCE ),
 		);
 
 		$translation_array = array(

@@ -442,8 +442,8 @@ class Bulk_Move_Posts {
 	 * @since 1.3.0
 	 */
 	public static function load_custom_taxonomy_by_post_type() {
-		$bulk_move = BULK_MOVE();
-		check_ajax_referer( $bulk_move::BOX_CUSTOM_TERMS_NONCE, 'security' );
+		check_ajax_referer( Bulk_Move::BOX_CUSTOM_TERMS_NONCE, 'nonce' );
+
 		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : 'post';
 
 		$taxonomies = get_object_taxonomies( $post_type );
@@ -459,8 +459,7 @@ class Bulk_Move_Posts {
 		<?php endforeach; ?>
 
 		<?php
-		$data = ob_get_clean();
-		wp_send_json_success( $data );
+		wp_send_json_success( ob_get_clean() );
 	}
 
 	/**
@@ -469,8 +468,8 @@ class Bulk_Move_Posts {
 	 * @since 1.3.0
 	 */
 	public static function load_custom_terms_by_taxonomy() {
-		$bulk_move = BULK_MOVE();
-		check_ajax_referer( $bulk_move::BOX_CUSTOM_TERMS_NONCE, 'security' );
+		check_ajax_referer( Bulk_Move::BOX_CUSTOM_TERMS_NONCE, 'nonce' );
+
 		$taxonomy = isset( $_POST['taxonomy'] ) ? sanitize_text_field( $_POST['taxonomy'] ) : 'category';
 
 		$args = array(
@@ -480,7 +479,7 @@ class Bulk_Move_Posts {
 		);
 		$terms = get_terms( $args );
 
-		$select_term = '<option class="level-0" value="-1">' . __( 'Select Term&nbsp;&nbsp;', '"bulk-move' ) . '</option>';
+		$select_term = '<option class="level-0" value="-1">' . __( 'Select Term&nbsp;&nbsp;', 'bulk-move' ) . '</option>';
 		$map_term    = '<option class="level-0" value="-1">' . __( 'Remove Term&nbsp;&nbsp;', 'bullk-move' ) . '</option>';
 
 		ob_start();
@@ -514,8 +513,12 @@ class Bulk_Move_Posts {
 			return;
 		}
 		?>
+
 		<!-- Custom Taxonomy Start-->
-		<h4><?php _e( 'Select the post type to show its taxonomy. On the left side, select the term whose posts you want to move. On the right side select the term to which you want the posts to be moved.', 'bulk-move' ); ?></h4>
+
+		<h4>
+			<?php _e( 'Select the post type to show its taxonomy. On the left side, select the term whose posts you want to move. On the right side select the term to which you want the posts to be moved.', 'bulk-move' ); ?>
+		</h4>
 
 		<fieldset class="options">
 			<table class="optiontable">
@@ -525,33 +528,32 @@ class Bulk_Move_Posts {
 					</td>
 					<td scope="row">
 				</tr>
+
 				<tr>
 					<td scope="row" colspan="2">
-						<?php
-						$custom_post_types_args = array( '_builtin' => false );
-						$custom_post_types      = get_post_types( $custom_post_types_args );
-						?>
-						<?php if ( count( $custom_post_types ) === 0 ) : ?>
-							<p>
-								<span class="error-notice"><?php _e( 'You have no custom post type registered.', 'bulk-move' ); ?></span>
-							</p>
-						<?php endif; ?>
 						<p>
 							<select name="smbm_mbct_post_type" id="smbm_mbct_post_type">
 								<option value="select"><?php _e( 'Select Post type', 'bulk-move' ); ?></option>
+
+								<?php
+								$custom_post_types = get_post_types( array( 'public' => true ) );
+								?>
+
 								<?php foreach ( $custom_post_types as $post_type ) : ?>
-									<option value="<?php echo $post_type; ?>"><?php echo $post_type; ?></option>
+									<option value="<?php echo esc_attr( $post_type ); ?>"><?php echo esc_html( $post_type ); ?></option>
 								<?php endforeach; ?>
 							</select>
 						</p>
 					</td>
 				</tr>
+
 				<tr class="taxonomy-select-row">
 					<td scope="row" colspan="2">
 						<?php _e( 'Select taxonomy to show its terms.', 'bulk-move' ); ?>
 					</td>
 					<td scope="row">
 				</tr>
+
 				<tr class="taxonomy-select-row">
 					<td scope="row" colspan="2">
 						<p>
@@ -561,12 +563,14 @@ class Bulk_Move_Posts {
 						</p>
 					</td>
 				</tr>
+
 				<tr class="term-select-row">
 					<td scope="row" colspan="2">
 						<?php _e( 'Select terms to move its posts.', 'bulk-move' ); ?>
 					</td>
 					<td scope="row">
 				</tr>
+
 				<tr class="term-select-row">
 					<td scope="row" >
 						<select name="smbm_mbct_selected_term" id="smbm_mbct_selected_term" class="postform">
@@ -580,18 +584,20 @@ class Bulk_Move_Posts {
 						</select>
 					</td>
 				</tr>
-
 			</table>
-			<p>
+
+			<p class="bm_ct_filters">
 				<?php _e( 'If the post contains other terms, then', 'bulk-move' ); ?>
 				<input type="radio" name="smbm_mbct_overwrite" value="overwrite" checked><?php _e( 'Remove them', 'bulk-move' ); ?>
 				<input type="radio" name="smbm_mbct_overwrite" value="no-overwrite"><?php _e( "Don't remove them", 'bulk-move' ); ?>
 			</p>
 
 		</fieldset>
-		<p class="submit">
+
+		<p class="submit bm_ct_submit">
 			<button type="submit" name="bm_action" value="move_custom_taxonomy" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ); ?>&raquo;</button>
 		</p>
+
 		<!-- Custom Taxonomy end-->
 		<?php
 	}

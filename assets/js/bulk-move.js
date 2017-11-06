@@ -13,27 +13,19 @@ jQuery(document).ready(function () {
         return confirm( BULK_MOVE.msg.move_warning );
     });
 
-    // for post boxes
-    postboxes.add_postbox_toggles(pagenow);
+    // Enable toggles for all modules.
+    postboxes.add_postbox_toggles( pagenow );
 
-	/**
-	 * Hide Taxonomy dropdown on page load.
-	 */
-	jQuery( 'tr.taxonomy-select-row' ).hide();
-
-	/**
-	 * Hide Term dropdown on page load.
-	 */
-	jQuery( 'tr.term-select-row' ).hide();
+	jQuery( 'tr.taxonomy-select-row, tr.term-select-row, .bm_ct_filters, .bm_ct_submit' ).hide();
 
 	/**
 	 * Load Taxonomy on Post Type change.
 	 */
 	jQuery( '#smbm_mbct_post_type' ).change( function () {
-		var selectedOption = jQuery( this ).find( 'option:selected' ).attr( 'value' ),
+		var selectedOption = jQuery( this ).val(),
 			data = {
 				'action'   : BULK_MOVE.bulk_move_posts.action_get_taxonomy,
-				'security' : BULK_MOVE.bulk_move_posts.security,
+				'nonce'    : BULK_MOVE.bulk_move_posts.nonce,
 				'post_type': selectedOption
 			};
 
@@ -58,7 +50,7 @@ jQuery(document).ready(function () {
 	jQuery( '#smbm_mbct_taxonomy' ).change( function () {
 
 		//  Selected option.
-		var selectedOption = jQuery( this ).find( 'option:selected' ).attr( 'value' ),
+		var selectedOption = jQuery( this ).val(),
 			// Data to send via AJAX.
 			data = {
 				'action'   : BULK_MOVE.bulk_move_posts.action_get_terms,
