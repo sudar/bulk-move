@@ -661,3 +661,5 @@ add_action( 'bm_move_tags'            , array( 'Bulk_Move_Posts', 'move_tags' ) 
 add_action( 'bm_move_category_by_tag' , array( 'Bulk_Move_Posts', 'move_category_by_tag' ) );
 add_action( 'bm_save_timeout'         , array( 'Bulk_Move_Posts', 'save_timeout' ) );
 add_action( 'bm_move_custom_taxonomy' , array( 'Bulk_Move_Posts', 'move_custom_taxonomy' ) );
+add_action( 'wp_ajax_load_custom_taxonomy_by_post_type', array( 'Bulk_Move_Posts', 'load_custom_taxonomy_by_post_type' ) );
+add_action( 'wp_ajax_load_custom_terms_by_taxonomy', array( 'Bulk_Move_Posts', 'load_custom_terms_by_taxonomy' ) );

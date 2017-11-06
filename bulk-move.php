@@ -193,8 +193,6 @@ final class Bulk_Move {
 	private function setup_actions() {
 		add_action( 'admin_menu', array( $this, 'add_menu' ) );
 		add_action( 'admin_init', array( $this, 'request_handler' ) );
-		add_action( 'wp_ajax_load_custom_taxonomy_by_post_type', 'Bulk_Move_Posts::load_custom_taxonomy_by_post_type' );
-		add_action( 'wp_ajax_load_custom_terms_by_taxonomy', 'Bulk_Move_Posts::load_custom_terms_by_taxonomy' );
 
 		add_filter( 'plugin_action_links', array( $this, 'filter_plugin_actions' ), 10, 2 );
 	}
