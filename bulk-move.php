@@ -16,7 +16,7 @@
  */
 
 /**
- * Copyright 2009  Sudar Muthu  (email : sudar@sudarmuthu.com)
+ * Copyright 2009  Sudar Muthu  (email : sudar@sudarmuthu.com).
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2, as
@@ -31,7 +31,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
-
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
@@ -335,8 +334,8 @@ final class Bulk_Move {
 		);
 
 		$translation_array = array(
-			'msg' => $msg,
-			'error' => $error,
+			'msg'             => $msg,
+			'error'           => $error,
 			'bulk_move_posts' => $bulk_move_posts,
 		);
 		wp_localize_script( self::JS_HANDLE, self::JS_VARIABLE, $translation_array );
@@ -383,7 +382,7 @@ final class Bulk_Move {
 	 * @staticvar string $this_plugin
 	 *
 	 * @param array  $links Links.
-	 * @param string $file   Plugin file name.
+	 * @param string $file  Plugin file name.
 	 *
 	 * @return array Modified links.
 	 */
