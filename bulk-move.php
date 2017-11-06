@@ -71,6 +71,11 @@ final class Bulk_Move {
 	// options
 	const SCRIPT_TIMEOUT_OPTION = 'bm_max_execution_time';
 
+	public $translations;
+	public $post_page;
+	public $move_posts_screen;
+	public $msg;
+
 	// path variables
 	// Ideally these should be constants, but because of PHP's limitations, these are static varaibles
 	public static $PLUGIN_DIR;
