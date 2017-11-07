@@ -511,10 +511,6 @@ class Bulk_Move_Posts {
 
 		<!-- Custom Taxonomy Start-->
 
-		<h4>
-			<?php _e( 'Select the post type to show its taxonomy. On the left side, select the term whose posts you want to move. On the right side select the term to which you want the posts to be moved.', 'bulk-move' ); ?>
-		</h4>
-
 		<fieldset class="options">
 			<table class="optiontable">
 				<tr>
