@@ -31,17 +31,36 @@ jQuery(document).ready(function () {
 
 		jQuery( 'tr.term-select-row' ).hide();
 
-		if ( 'select' === selectedOption.toLowerCase() ) {
+		jQuery.ajaxSetup( { async: false } );
+		jQuery.post( ajaxurl, data, function( response ) {
 			jQuery( 'tr.taxonomy-select-row' ).hide();
-		} else {
-			jQuery.ajaxSetup( { async: false } );
-			jQuery.post( ajaxurl, data, function( response ) {
-				if ( response.success ) {
-					jQuery( '#smbm_mbct_taxonomy' ).html( response.data );
+			if ( response.success ) {
+
+				var taxonomy = response.data.taxonomy || {},
+					message  = response.data.no_taxonomy_alert_msg;
+
+				if ( jQuery.isEmptyObject( taxonomy ) ) {
+					alert( message );
+				} else {
 					jQuery( 'tr.taxonomy-select-row' ).show();
+
+					// Reset options on each AJAX request.
+					jQuery( '#smbm_mbct_taxonomy' ).children( 'option' ).remove();
+
+					jQuery( '<option/>', {
+						'value': '-1',
+						'text': 'Select Taxonomy'
+					}).appendTo( '#smbm_mbct_taxonomy' );
+
+					jQuery.each( taxonomy, function( index, val ) {
+						jQuery( '<option/>', {
+							'value': val,
+							'text': val
+						}).appendTo( '#smbm_mbct_taxonomy' );
+					});
 				}
-			});
-		}
+			}
+		});
 	});
 
 	/**

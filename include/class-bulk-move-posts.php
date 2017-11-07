@@ -444,22 +444,17 @@ class Bulk_Move_Posts {
 	public static function load_custom_taxonomy_by_post_type() {
 		check_ajax_referer( Bulk_Move::BOX_CUSTOM_TERMS_NONCE, 'nonce' );
 
-		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : 'post';
-
+		$result     = array();
+		$post_type  = isset( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : 'post';
 		$taxonomies = get_object_taxonomies( $post_type );
 
-		ob_start();
-		?>
-		<option class="level-0" value="select"><?php _e( 'Select Taxonomy&nbsp;&nbsp;', 'bulk-move' ); ?></option>
+		foreach ( $taxonomies as $taxonomy ) {
+			$result[ $taxonomy ] = $taxonomy;
+		}
 
-		<?php foreach ( $taxonomies as $taxonomy ) : ?>
-			<option class="level-0" value="<?php echo esc_attr( $taxonomy ); ?>">
-				<?php echo esc_html( $taxonomy ); ?>
-			</option>
-		<?php endforeach; ?>
-
-		<?php
-		wp_send_json_success( ob_get_clean() );
+		$alert_message = sprintf( __( 'There is no taxonomy associated with "%s" post type.', 'bulk-move' ), $post_type );
+		// Makeover done for more appealing result.
+		wp_send_json_success( array( 'taxonomy' => $result, 'no_taxonomy_alert_msg' => $alert_message ) );
 	}
 
 	/**
