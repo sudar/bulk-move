@@ -470,7 +470,8 @@ class Bulk_Move_Posts {
 	public static function load_custom_terms_by_taxonomy() {
 		check_ajax_referer( Bulk_Move::BOX_CUSTOM_TERMS_NONCE, 'nonce' );
 
-		$taxonomy = isset( $_POST['taxonomy'] ) ? sanitize_text_field( $_POST['taxonomy'] ) : 'category';
+		$result   = array();
+		$taxonomy = isset( $_POST['taxonomy'] ) ? sanitize_text_field( $_POST['taxonomy'] ) : '';
 
 		$args = array(
 			'taxonomy'   => $taxonomy,
@@ -479,25 +480,20 @@ class Bulk_Move_Posts {
 		);
 		$terms = get_terms( $args );
 
-		$select_term = '<option class="level-0" value="-1">' . __( 'Select Term&nbsp;&nbsp;', 'bulk-move' ) . '</option>';
-		$map_term    = '<option class="level-0" value="-1">' . __( 'Remove Term&nbsp;&nbsp;', 'bullk-move' ) . '</option>';
+		if ( ! is_wp_error( $terms ) ) {
+			foreach ( $terms as $term ) {
+				$result[ $term->term_id ] = array( 'term_name' => esc_html( $term->name ), 'term_count' => absint( $term->count ) );
+			}
+        }
 
-		ob_start();
-		?>
-
-		<?php foreach ( $terms as $term ) : ?>
-			<option class="level-0" value="<?php echo absint( $term->term_id ); ?>">
-				<?php echo esc_html( $term->name ); ?>&nbsp;&nbsp;(<?php echo absint( $term->count ); ?>)
-			</option>
-		<?php endforeach; ?>
-
-		<?php
-		$content = ob_get_clean();
-		$select_term .= $content;
-		$map_term .= $content;
-
-		$data = array( 'select_term' => $select_term, 'map_term' => $map_term );
-		wp_send_json_success( $data );
+		$alert_message = sprintf( __( 'There is no term associated with "%s" taxonomy.', 'bulk-move' ), $taxonomy );
+		wp_send_json_success( array(
+				'term'                      => $result,
+				'no_term_alert_msg'         => $alert_message,
+				'default_select_term_label' => __( 'Select Term', 'bulk-move' ),
+				'default_remove_term_label' => __( 'Remove Term', 'bulk-move' ),
+			)
+		);
 	}
 
 	/**
@@ -527,19 +523,17 @@ class Bulk_Move_Posts {
 
 				<tr>
 					<td scope="row" colspan="2">
-						<p>
-							<select name="smbm_mbct_post_type" id="smbm_mbct_post_type">
-								<option value="select"><?php _e( 'Select Post type', 'bulk-move' ); ?></option>
+						<select name="smbm_mbct_post_type" id="smbm_mbct_post_type">
+							<option value="-1"><?php _e( 'Select Post type', 'bulk-move' ); ?></option>
 
-								<?php
-								$custom_post_types = get_post_types( array( 'public' => true ) );
-								?>
+							<?php
+							$custom_post_types = get_post_types( array( 'public' => true ) );
+							?>
 
-								<?php foreach ( $custom_post_types as $post_type ) : ?>
-									<option value="<?php echo esc_attr( $post_type ); ?>"><?php echo esc_html( $post_type ); ?></option>
-								<?php endforeach; ?>
-							</select>
-						</p>
+							<?php foreach ( $custom_post_types as $post_type ) : ?>
+								<option value="<?php echo esc_attr( $post_type ); ?>"><?php echo esc_html( $post_type ); ?></option>
+							<?php endforeach; ?>
+						</select>
 					</td>
 				</tr>
 
@@ -552,11 +546,9 @@ class Bulk_Move_Posts {
 
 				<tr class="taxonomy-select-row">
 					<td scope="row" colspan="2">
-						<p>
-							<select name="smbm_mbct_taxonomy" id="smbm_mbct_taxonomy">
-								<option value="select"><?php _e( 'Select Taxonomy', 'bulk-move' ); ?></option>
-							</select>
-						</p>
+						<select name="smbm_mbct_taxonomy" id="smbm_mbct_taxonomy">
+							<option value="select"><?php _e( 'Select Taxonomy', 'bulk-move' ); ?></option>
+						</select>
 					</td>
 				</tr>
 
