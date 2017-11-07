@@ -49,7 +49,7 @@ jQuery(document).ready(function () {
 
 					jQuery( '<option/>', {
 						'value': '-1',
-						'text': 'Select Taxonomy'
+						'text': response.data.default_select_taxonomy_label
 					}).appendTo( '#smbm_mbct_taxonomy' );
 
 					jQuery.each( taxonomy, function( index, val ) {
