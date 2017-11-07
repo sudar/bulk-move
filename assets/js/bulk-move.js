@@ -54,7 +54,7 @@ jQuery(document).ready(function () {
 			// Data to send via AJAX.
 			data = {
 				'action'   : BULK_MOVE.bulk_move_posts.action_get_terms,
-				'security' : BULK_MOVE.bulk_move_posts.security,
+				'nonce'    : BULK_MOVE.bulk_move_posts.nonce,
 				'taxonomy' : selectedOption
 			};
 
