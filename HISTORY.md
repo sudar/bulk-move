@@ -1,6 +1,7 @@
 ## Changelog ##
 
-### v1.3 (2014-08-17) (Dev time: 0.5 hours) ###
+### v1.3.0 (2017-11-08) ###
+- New: Added the ability to move posts based on custom taxonomies.
 - Tweak: Fixed a warning in meta box implementation
 
 ### v1.2.1 (2014-06-05) (Dev time: 0.5 hours) ###

@@ -10,9 +10,8 @@
  * Author URI: http://sudarmuthu.com/
  * Text Domain: bulk-move
  * Domain Path: languages/
- *
  * === RELEASE NOTES ===
- * Checkout readme file for release notes
+ * Checkout readme file for release notes.
  */
 
 /**
