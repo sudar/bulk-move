@@ -122,12 +122,12 @@ jQuery(document).ready(function () {
 			jQuery.each( terms, function( termId, term ) {
 				jQuery( '<option/>', {
 					'value': termId,
-					'text': term['term_name'] + '(' + term['term_count'] + ')'
+					'text': term['term_name']
 				}).appendTo( '#smbm_mbct_selected_term' );
 
 				jQuery( '<option/>', {
 					'value': termId,
-					'text': term['term_name'] + '(' + term['term_count'] + ')'
+					'text': term['term_name']
 				}).appendTo( '#smbm_mbct_mapped_term' );
 			});
 		});
