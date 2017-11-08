@@ -22,50 +22,52 @@ jQuery(document).ready(function () {
 	 * Load Taxonomy on Post Type change.
 	 */
 	jQuery( '#smbm_mbct_post_type' ).change( function () {
-		var selectedOption = jQuery( this ).val(),
-			data = {
+		var selectedPostType = jQuery( this ).val(),
+			payload = {
 				'action'   : BULK_MOVE.bulk_move_posts.action_get_taxonomy,
 				'nonce'    : BULK_MOVE.bulk_move_posts.nonce,
-				'post_type': selectedOption
+				'post_type': selectedPostType
 			};
 
-		if ( selectedOption !== '-1' ) {
-			jQuery.ajaxSetup( { async: false } );
-			jQuery.post( ajaxurl, data, function( response ) {
-				jQuery( 'tr.taxonomy-select-row' ).hide();
-				if ( response.success ) {
+		if ( '-1' === selectedPostType ) {
+			jQuery( 'tr.taxonomy-select-row, tr.term-select-row, .bm_ct_filters, .bm_ct_submit' ).hide();
 
-					var taxonomy = response.data.taxonomy || {},
-						message  = response.data.no_taxonomy_alert_msg;
-
-					if ( jQuery.isEmptyObject( taxonomy ) ) {
-						alert( message );
-					} else {
-						jQuery( 'tr.taxonomy-select-row' ).show();
-
-						// Reset options on each AJAX request.
-						jQuery( '#smbm_mbct_taxonomy' ).children( 'option' ).remove();
-
-						jQuery( '<option/>', {
-							'value': '-1',
-							'text': response.data.default_select_taxonomy_label
-						}).appendTo( '#smbm_mbct_taxonomy' );
-
-						jQuery.each( taxonomy, function( index, val ) {
-							jQuery( '<option/>', {
-								'value': val,
-								'text': val
-							}).appendTo( '#smbm_mbct_taxonomy' );
-						});
-					}
-				}
-			});
-		} else {
-			jQuery( 'tr.taxonomy-select-row' ).hide();
-			jQuery( 'tr.term-select-row' ).hide();
-			jQuery( '.bm_ct_filters' ).hide();
-			jQuery( '.bm_ct_submit' ).hide();
+			return;
 		}
+
+		jQuery.ajaxSetup( { async: false } );
+
+		jQuery.post( ajaxurl, payload, function( response ) {
+			jQuery( 'tr.taxonomy-select-row' ).hide();
+
+			if ( ! response.success ) {
+				return;
+			}
+
+			var taxonomies = response.data.taxonomies || {};
+
+			if ( jQuery.isEmptyObject( taxonomies ) ) {
+				alert( response.data.no_taxonomy_msg );
+				return;
+			}
+
+			jQuery( 'tr.taxonomy-select-row' ).show();
+
+			// Reset options on each AJAX request.
+			jQuery( '#smbm_mbct_taxonomy' ).children( 'option' ).remove();
+
+			jQuery( '<option/>', {
+				'value': '-1',
+				'text': response.data.select_taxonomy_label
+			}).appendTo( '#smbm_mbct_taxonomy' );
+
+			jQuery.each( taxonomies, function( index, taxonomy ) {
+				jQuery( '<option/>', {
+					'value': taxonomy,
+					'text': taxonomy
+				}).appendTo( '#smbm_mbct_taxonomy' );
+			});
+		});
 	});
 
 	/**
@@ -73,68 +75,65 @@ jQuery(document).ready(function () {
 	 */
 	jQuery( '#smbm_mbct_taxonomy' ).change( function () {
 
-		//  Selected option.
-		var selectedOption = jQuery( this ).val(),
-			// Data to send via AJAX.
-			data = {
+		var selectedTaxonomy = jQuery( this ).val(),
+			payload = {
 				'action'   : BULK_MOVE.bulk_move_posts.action_get_terms,
 				'nonce'    : BULK_MOVE.bulk_move_posts.nonce,
-				'taxonomy' : selectedOption
+				'taxonomy' : selectedTaxonomy
 			};
 
-		if ( selectedOption !== '-1' ) {
-			jQuery.ajaxSetup( { async: false } );
-			jQuery.post( ajaxurl, data, function( response ) {
+		if ( '-1' === selectedTaxonomy ) {
+			jQuery( 'tr.term-select-row, .bm_ct_filters, .bm_ct_submit' ).hide();
 
-				if ( response.success ) {
-
-					var term     = response.data.term || {},
-						message  = response.data.no_term_alert_msg,
-						termIds  = Object.keys( term )
-
-					if ( jQuery.isEmptyObject( term ) ) {
-						alert( message );
-					} else {
-						jQuery( 'tr.term-select-row' ).show();
-						// Reset options on each AJAX request.
-						jQuery( '#smbm_mbct_selected_term, #smbm_mbct_mapped_term' ).children( 'option' ).remove();
-
-						jQuery( '<option/>', {
-							'value': '-1',
-							'text': response.data.default_select_term_label
-						}).appendTo( '#smbm_mbct_selected_term' );
-
-						jQuery( '<option/>', {
-							'value': '-1',
-							'text': response.data.default_remove_term_label
-						}).appendTo( '#smbm_mbct_mapped_term' );
-
-						jQuery.each( termIds, function( index, val ) {
-							console.log(  term[ val ]['term_name'] + ':' + term[ val ]['term_count'] );
-
-							jQuery( '<option/>', {
-								'value': val,
-								'text': term[ val ]['term_name'] + '(' + term[ val ]['term_count'] + ')'
-							}).appendTo( '#smbm_mbct_selected_term' );
-
-							jQuery( '<option/>', {
-								'value': val,
-								'text': term[ val ]['term_name'] + '(' + term[ val ]['term_count'] + ')'
-							}).appendTo( '#smbm_mbct_mapped_term' );
-						});
-					}
-				}
-			});
-		} else {
-			jQuery( 'tr.term-select-row' ).hide();
-			jQuery( '.bm_ct_filters' ).hide();
-			jQuery( '.bm_ct_submit' ).hide();
+			return;
 		}
+
+		jQuery.ajaxSetup( { async: false } );
+
+		jQuery.post( ajaxurl, payload, function( response ) {
+
+			if ( ! response.success ) {
+				return;
+			}
+
+			var terms = response.data.terms || {};
+
+			if ( jQuery.isEmptyObject( terms ) ) {
+				alert( response.data.no_term_msg );
+
+				return;
+			}
+
+			jQuery( 'tr.term-select-row' ).show();
+
+			// Reset options on each AJAX request.
+			jQuery( '#smbm_mbct_selected_term, #smbm_mbct_mapped_term' ).children( 'option' ).remove();
+
+			jQuery( '<option/>', {
+				'value': '-1',
+				'text': response.data.select_term_label
+			}).appendTo( '#smbm_mbct_selected_term' );
+
+			jQuery( '<option/>', {
+				'value': '-1',
+				'text': response.data.remove_term_label
+			}).appendTo( '#smbm_mbct_mapped_term' );
+
+			jQuery.each( terms, function( termId, term ) {
+				jQuery( '<option/>', {
+					'value': termId,
+					'text': term['term_name'] + '(' + term['term_count'] + ')'
+				}).appendTo( '#smbm_mbct_selected_term' );
+
+				jQuery( '<option/>', {
+					'value': termId,
+					'text': term['term_name'] + '(' + term['term_count'] + ')'
+				}).appendTo( '#smbm_mbct_mapped_term' );
+			});
+		});
 	});
 
 	jQuery( '#smbm_mbct_selected_term, #smbm_mbct_mapped_term' ).change( function() {
-		jQuery( '.bm_ct_filters' ).show();
-		jQuery( '.bm_ct_submit' ).show();
+		jQuery( '.bm_ct_filters, .bm_ct_submit' ).show();
 	});
-
 });
