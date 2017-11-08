@@ -455,9 +455,9 @@ class Bulk_Move_Posts {
 		$alert_message = sprintf( __( 'There is no taxonomy associated with "%s" post type.', 'bulk-move' ), $post_type );
 		// Makeover done for more appealing result.
 		wp_send_json_success( array(
-				'taxonomy'                       => $result,
-				'no_taxonomy_alert_msg'          => $alert_message,
-				'default_select_taxonomy_label'  => __( 'Select Taxonomy', 'bulk-move' ),
+				'taxonomy'                      => $result,
+				'no_taxonomy_alert_msg'         => $alert_message,
+				'default_select_taxonomy_label' => __( 'Select Taxonomy', 'bulk-move' ),
 			)
 		);
 	}
