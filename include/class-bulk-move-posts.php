@@ -81,43 +81,16 @@ class Bulk_Move_Posts {
 
 			do_action( 'bm_pre_request_handler' );
 
-			$wp_query = new WP_Query();
 			$bm       = BULK_MOVE();
 
 			// move by cats.
 			$old_cat = absint( $_POST['smbm_mc_selected_cat'] );
 			$new_cat = ( -1 === $_POST['smbm_mc_mapped_cat'] ) ? -1 : absint( $_POST['smbm_mc_mapped_cat'] );
+			$overwrite = isset( $_POST['smbm_mc_overwrite'] ) && 'overwrite' == $_POST['smbm_mc_overwrite'];
 
-			$posts = $wp_query->query(array(
-				'category__in' => array( $old_cat ),
-				'post_type'    => 'post',
-				'nopaging'     => 'true',
-			) );
+			$posts_moved = self::do_move_cats( $old_cat, $new_cat, $overwrite );
 
-			foreach ( $posts as $post ) {
-				$current_cats = array_diff( wp_get_post_categories( $post->ID ), array( $old_cat ) );
-
-				if ( -1 !== $new_cat ) {
-					if ( isset( $_POST['smbm_mc_overwrite'] ) && 'overwrite' == $_POST['smbm_mc_overwrite'] ) {
-						// Remove old categories.
-						$current_cats = array( $new_cat );
-					} else {
-						// Add to existing categories.
-						$current_cats[] = $new_cat;
-					}
-				}
-
-				if ( count( $current_cats ) == 0 ) {
-					$current_cats = array( get_option( 'default_category' ) );
-				}
-				$current_cats = array_values( $current_cats );
-				wp_update_post(array(
-					'ID'            => $post->ID,
-					'post_category' => $current_cats,
-				) );
-			}
-
-			$bm->msg = sprintf( _n( 'Moved %d post from the selected category', 'Moved %d posts from the selected category' , count( $posts ), 'bulk-move' ), count( $posts ) );
+			$bm->msg = sprintf( _n( 'Moved %d post from the selected category', 'Moved %d posts from the selected category' , $posts_moved, 'bulk-move' ), $posts_moved );
 		}
 	}
 
@@ -647,6 +620,51 @@ class Bulk_Move_Posts {
 
 		/* translators: 1 number of posts deleted, 2 the taxonomy from which the posts were deleted */
 		$bm->msg = sprintf( _n( 'Moved %1$d post from the selected %2$s taxonomy', 'Moved %1$d posts from the selected %2$s taxonomy', $posts_count, 'bulk-move' ), $posts_count, $taxonomy );
+	}
+
+	/**
+	 * Move posts from one category to another.
+	 *
+	 * @since 2.0
+	 *
+	 * @param int  $old_cat   Old Category id.
+	 * @param int  $new_cat   New Category id.
+	 * @param bool $overwrite Should other categories be removed if the post has more than one.
+	 *
+	 * @return array List of posts that got Changed..
+	 */
+	public static function do_move_cats( $old_cat, $new_cat, $overwrite ) {
+		$wp_query = new WP_Query();
+		$posts    = $wp_query->query( array(
+			'category__in' => array( $old_cat ),
+			'post_type'    => 'post',
+			'nopaging'     => 'true',
+		) );
+
+		foreach ( $posts as $post ) {
+			$current_cats = array_diff( wp_get_post_categories( $post->ID ), array( $old_cat ) );
+
+			if ( - 1 !== $new_cat ) {
+				if ( $overwrite ) {
+					// Remove old categories.
+					$current_cats = array( $new_cat );
+				} else {
+					// Add to existing categories.
+					$current_cats[] = $new_cat;
+				}
+			}
+
+			if ( count( $current_cats ) == 0 ) {
+				$current_cats = array( get_option( 'default_category' ) );
+			}
+			$current_cats = array_values( $current_cats );
+			wp_update_post( array(
+				'ID'            => $post->ID,
+				'post_category' => $current_cats,
+			) );
+		}
+
+		return count( $posts );
 	}
 }
 
