@@ -2,6 +2,7 @@
 ######################
 /dist/
 /docs/
+/code-coverage/
 /.sass-cache/
 /node_modules/
 /vendor/

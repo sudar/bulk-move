@@ -4,6 +4,9 @@
 
 	<file>./</file>
 
+    <!-- Show sniff codes in all reports -->
+    <arg value="s"/>
+
  	<!-- Non code directories -->
 	<exclude-pattern>docs/*</exclude-pattern>
 	<exclude-pattern>dist/*</exclude-pattern>
