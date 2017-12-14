@@ -140,12 +140,7 @@ class BM_Metabox_Posts_Category extends BM_Metabox_Base {
 		}
 
 		return count( $posts );
-}
-
-	/**
-	 * @param $request
-	 */
-	protected function process_overwrite_filter( $request ) {
-		return isset( $request[ $this->action . '_overwrite' ] ) && 'overwrite' === $request[ $this->action . '_overwrite' ];
 	}
+
+
 }

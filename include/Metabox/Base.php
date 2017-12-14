@@ -195,4 +195,15 @@ abstract class BM_Metabox_Base {
 	public function filter_js_array( $js_array ) {
 		return $js_array;
 	}
+
+	/**
+	 * Process overwrite filter.
+	 *
+	 * @param array $request Request array.
+	 *
+	 * @return bool True if overwrite is enabled, false otherwise.
+	 */
+	protected function process_overwrite_filter( $request ) {
+		return isset( $request[ $this->action . '_overwrite' ] ) && 'overwrite' === $request[ $this->action . '_overwrite' ];
+	}
 }
