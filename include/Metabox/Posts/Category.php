@@ -3,6 +3,7 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
+ * Metabox to move posts based on category.
  *
  * @since 2.0.0
  */
@@ -69,23 +70,14 @@ class BM_Metabox_Posts_Category extends BM_Metabox_Base {
 		<?php
 	}
 
-	public function process( $request ) {
+	protected function convert_user_input_to_options( $request ) {
 		$options = array();
 
-		$options['old_cat'] = absint( $request['smbm_mc_selected_cat'] );
-		$options['new_cat'] = ( -1 === $request['smbm_mc_mapped_cat'] ) ? -1 : absint( $request['smbm_mc_mapped_cat'] );
+		$options['old_cat']   = absint( $request['smbm_mc_selected_cat'] );
+		$options['new_cat']   = ( - 1 === $request['smbm_mc_mapped_cat'] ) ? - 1 : absint( $request['smbm_mc_mapped_cat'] );
 		$options['overwrite'] = $this->process_overwrite_filter( $request );
 
-		$posts_moved = $this->move( $options );
-
-		$msg = sprintf( _n( 'Moved %d post from the selected category', 'Moved %d posts from the selected category', $posts_moved, 'bulk-move' ), $posts_moved );
-
-		add_settings_error(
-			$this->page_slug,
-			$this->action,
-			$msg,
-			'updated'
-		);
+		return $options;
 	}
 
 	public function move( $options ) {
@@ -123,5 +115,8 @@ class BM_Metabox_Posts_Category extends BM_Metabox_Base {
 		return count( $posts );
 	}
 
-
+	protected function get_success_message( $posts_moved ) {
+		/* translators: 1 Number of posts moved */
+		return _n( 'Moved %d post from the selected category', 'Moved %d posts from the selected category', $posts_moved, 'bulk-move' );
+	}
 }

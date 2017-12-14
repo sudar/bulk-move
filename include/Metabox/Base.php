@@ -78,18 +78,18 @@ abstract class BM_Metabox_Base {
 	 *
 	 * @return void
 	 */
-	abstract public function render();
+	abstract protected function render();
 
 	/**
-	 * Process the deletion.
+	 * Process user input and create metabox options.
 	 *
 	 * @abstract
 	 *
 	 * @param array $request Request array.
 	 *
-	 * @return void
+	 * @return array User options.
 	 */
-	abstract public function process( $request );
+	abstract protected function convert_user_input_to_options( $request );
 
 	/**
 	 * Move items.
@@ -100,6 +100,15 @@ abstract class BM_Metabox_Base {
 	 * @return int Number of items deleted
 	 */
 	abstract public function move( $options );
+
+	/**
+	 * Get Success Message.
+	 *
+	 * @param int $posts_moved Number of posts that were moved.
+	 *
+	 * @return string Success message.
+	 */
+	abstract protected function get_success_message( $posts_moved );
 
 	/**
 	 * Base constructor.
@@ -152,6 +161,17 @@ abstract class BM_Metabox_Base {
 		}
 
 		$this->render();
+	}
+
+	/**
+	 * Process the metabox.
+	 *
+	 * @param array $request Request array.
+	 */
+	public function process( $request ) {
+		$options     = $this->convert_user_input_to_options( $request );
+		$posts_moved = $this->move( $options );
+		$this->render_result( $posts_moved );
 	}
 
 	/**
@@ -281,5 +301,21 @@ abstract class BM_Metabox_Base {
 		</p>
 
 		<?php
+	}
+
+	/**
+	 * Render results.
+	 *
+	 * @param int $posts_moved Number of posts that were moved.
+	 */
+	protected function render_result( $posts_moved ) {
+		$msg = sprintf( $this->get_success_message( $posts_moved ), $posts_moved );
+
+		add_settings_error(
+			$this->page_slug,
+			$this->action,
+			$msg,
+			'updated'
+		);
 	}
 }
