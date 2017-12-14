@@ -171,11 +171,17 @@ abstract class BM_Metabox_Base {
 	 * @return string Name of the User Meta field.
 	 */
 	protected function get_hidden_box_user_meta_field() {
-		if ( 'posts' == $this->item_type ) {
-			return 'metaboxhidden_toplevel_page_bulk-delete-posts';
-		} else {
-			return 'metaboxhidden_bulk-wp_page_' . $this->page_slug;
-		}
+		$meta_field = 'metaboxhidden_bulk-wp_page_' . $this->page_slug;
+
+		/**
+		 * Filter the user meta field that determines whether a metabox is hidden or not.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param string User Meta Field name.
+		 * @param string Page Slug.
+		 */
+		return apply_filters( 'bm_metabox_user_meta_field', $meta_field, $this->page_slug );
 	}
 
 	/**

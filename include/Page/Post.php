@@ -25,6 +25,7 @@ class BM_Page_Post extends BM_Page_Base {
 		parent::register();
 
 		add_filter( 'bm_plugin_action_links', array( $this, 'append_to_plugin_action_links' ) );
+		add_filter( 'bm_metabox_user_meta_field', array( $this, 'modify_metabox_user_meta_field_if_bulk_delete_is_installed' ), 10, 2 );
 	}
 
 	/**
@@ -38,6 +39,28 @@ class BM_Page_Post extends BM_Page_Base {
 		$links[ $this->get_slug() ] = '<a href="admin.php?page=' . $this->get_slug() . '">' . $this->page_title . '</a>';
 
 		return $links;
+	}
+
+	/**
+	 * Modify the user meta field that determines if a metabox is hidden by user or not.
+	 *
+	 * This can change based on whether Bulk Delete plugin is installed or not.
+	 *
+	 * @param string $meta_field User Meta field.
+	 * @param string $page_slug Page Slug.
+	 *
+	 * @return string Modified user meta field.
+	 */
+	public function modify_metabox_user_meta_field_if_bulk_delete_is_installed( $meta_field, $page_slug ) {
+		if ( $page_slug !== $this->slug ) {
+			return $meta_field;
+		}
+
+		if ( $this->is_bulkwp_menu_registered() ) {
+			return $meta_field;
+		}
+
+		return 'metaboxhidden_toplevel_page_bulk-move-posts';
 	}
 
 	/**
