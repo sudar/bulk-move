@@ -62,28 +62,9 @@ class BM_Metabox_Posts_Category extends BM_Metabox_Base {
 
 		</fieldset>
 
-		<?php $this->render_submit( $this->action ); ?>
+		<?php $this->render_submit(); ?>
 
 		<!-- Category end-->
-
-		<?php
-	}
-
-	protected function render_overwrite_filters() {
-		?>
-			<input type="radio" name="<?php echo esc_attr( $this->action ); ?>_overwrite" value="overwrite" checked><?php _e( 'Remove them', 'bulk-move' ); ?>
-			<input type="radio" name="<?php echo esc_attr( $this->action ); ?>_overwrite" value="no-overwrite"><?php _e( "Don't remove them", 'bulk-move' ); ?>
-		<?php
-	}
-
-	protected function render_submit( $action ) {
-		?>
-
-		<p class="submit">
-			<button type="submit" name="bm_action" value="<?php echo esc_attr( $action ); ?>" class="button-primary">
-				<?php _e( 'Bulk Move ', 'bulk-move' ); ?>&raquo;
-			</button>
-		</p>
 
 		<?php
 	}
