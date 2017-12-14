@@ -4,22 +4,22 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a19d0e7fe1c71bde613e27630b02600e",
-    "content-hash": "a5abd00821f4b3054cef883d32a39d86",
+    "hash": "54ac8fdff4252320d981b3a2cedc14b2",
+    "content-hash": "d8da07f8e2ab9d9b7ddf5d5db84d1ae9",
     "packages": [],
     "packages-dev": [
         {
             "name": "10up/wp_mock",
-            "version": "dev-phpunit-6",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sudar/wp_mock.git",
-                "reference": "c6260c14873bd7238c9718021bc02dcd036ef786"
+                "url": "https://github.com/10up/wp_mock.git",
+                "reference": "64956557e98ee4c8c56cd1e396e822adb4673714"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sudar/wp_mock/zipball/c6260c14873bd7238c9718021bc02dcd036ef786",
-                "reference": "c6260c14873bd7238c9718021bc02dcd036ef786",
+                "url": "https://api.github.com/repos/10up/wp_mock/zipball/64956557e98ee4c8c56cd1e396e822adb4673714",
+                "reference": "64956557e98ee4c8c56cd1e396e822adb4673714",
                 "shasum": ""
             },
             "require": {
@@ -30,6 +30,7 @@
             },
             "require-dev": {
                 "behat/behat": "^3.0",
+                "satooshi/php-coveralls": "^1.0",
                 "sebastian/comparator": ">=1.2.3"
             },
             "type": "library",
@@ -41,26 +42,12 @@
                     "php/WP_Mock.php"
                 ]
             },
-            "scripts": {
-                "test:behat": [
-                    "behat"
-                ],
-                "test:phpunit": [
-                    "phpunit"
-                ],
-                "test": [
-                    "@test:behat",
-                    "@test:phpunit"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-2.0+"
             ],
             "description": "A mocking library to take the pain out of unit testing for WordPress",
-            "support": {
-                "source": "https://github.com/sudar/wp_mock/tree/phpunit-6"
-            },
-            "time": "2017-12-03 07:15:23"
+            "time": "2017-12-03 19:28:28"
         },
         {
             "name": "antecedent/patchwork",
@@ -2195,9 +2182,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "10up/wp_mock": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
