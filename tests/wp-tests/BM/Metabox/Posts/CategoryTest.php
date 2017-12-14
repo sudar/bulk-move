@@ -1,9 +1,24 @@
 <?php
 
+namespace BM\Metabox\Posts;
+
 /**
- * Test Move Cats functionality.
+ * Test BM_Metabox_Posts_Category class.
+ *
+ * TODO: Add tests for default category.
  */
-class MoveCatsTest extends WP_UnitTestCase {
+class CategoryTest extends \WP_UnitTestCase {
+
+	/**
+	 * @var \BM_Metabox_Posts_Category
+	 */
+	protected $category_metabox;
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->category_metabox = new \BM_Metabox_Posts_Category();
+	}
 
 	/**
 	 * Test basic case of moving categories.
@@ -25,7 +40,12 @@ class MoveCatsTest extends WP_UnitTestCase {
 		$this->assertEquals( count( $posts_in_cat2 ), 1 );
 
 		// call our method.
-		Bulk_Move_Posts::do_move_cats( $cat1, $cat2, true );
+		$options = array(
+			'old_cat'   => $cat1,
+			'new_cat'   => $cat2,
+			'overwrite' => true,
+		);
+		$this->category_metabox->move( $options );
 
 		// Assert that category 1 has no posts.
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
@@ -60,7 +80,12 @@ class MoveCatsTest extends WP_UnitTestCase {
 		$this->assertEquals( count( $posts_in_common_cat ), 1 );
 
 		// Invoke our method.
-		Bulk_Move_Posts::do_move_cats( $cat1, $cat2, true );
+		$options = array(
+			'old_cat'   => $cat1,
+			'new_cat'   => $cat2,
+			'overwrite' => true,
+		);
+		$this->category_metabox->move( $options );
 
 		// Assert that category 1 has no posts.
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
@@ -99,7 +124,12 @@ class MoveCatsTest extends WP_UnitTestCase {
 		$this->assertEquals( count( $posts_in_common_cat ), 1 );
 
 		// Invoke our method.
-		Bulk_Move_Posts::do_move_cats( $cat1, $cat2, false );
+		$options = array(
+			'old_cat'   => $cat1,
+			'new_cat'   => $cat2,
+			'overwrite' => false,
+		);
+		$this->category_metabox->move( $options );
 
 		// Assert that category 1 has no posts.
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
@@ -126,9 +156,10 @@ class MoveCatsTest extends WP_UnitTestCase {
 			'category__in' => array( $cat ),
 			'post_type'    => 'post',
 			'nopaging'     => 'true',
+			'post_status'  => 'publish',
 		);
 
-		$wp_query = new WP_Query();
+		$wp_query = new \WP_Query();
 		return $wp_query->query( $args );
 	}
 }
