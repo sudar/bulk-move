@@ -10,10 +10,6 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  * @since 2.0.0
  */
 abstract class BM_Metabox_Base {
-	/**
-	 * @var string Item Type. Possible values 'posts', 'pages', 'users' etc.
-	 */
-	protected $item_type = 'posts';
 
 	/**
 	 * The hook_suffix of the admin page in which this module is embedded.
@@ -28,34 +24,14 @@ abstract class BM_Metabox_Base {
 	protected $page_slug;
 
 	/**
-	 * @var string Slug for the form fields.
-	 */
-	protected $field_slug;
-
-	/**
 	 * @var string Slug of the meta box.
 	 */
 	protected $meta_box_slug;
 
 	/**
-	 * @var string Hook in which this meta box should be shown.
-	 */
-	protected $meta_box_hook;
-
-	/**
 	 * @var string Action in which the move operation should be performed.
 	 */
 	protected $action;
-
-	/**
-	 * @var string Hook for scheduler.
-	 */
-	protected $cron_hook;
-
-	/**
-	 * @var string Url of the scheduler addon.
-	 */
-	protected $scheduler_url;
 
 	/**
 	 * @var array Messages shown to the user.
