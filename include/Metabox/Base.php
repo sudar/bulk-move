@@ -85,7 +85,7 @@ abstract class BM_Metabox_Base {
 	 *
 	 * @abstract
 	 *
-	 * @param $request
+	 * @param array $request Request array.
 	 *
 	 * @return void
 	 */
@@ -188,11 +188,11 @@ abstract class BM_Metabox_Base {
 	 *
 	 * @since 5.5
 	 *
-	 * @param array $js_array JavaScript Array
+	 * @param array $js_array JavaScript Array.
 	 *
 	 * @return array Modified JavaScript Array
 	 */
-	public function filter_js_array( $js_array) {
+	public function filter_js_array( $js_array ) {
 		return $js_array;
 	}
 }
