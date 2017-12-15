@@ -1,13 +1,11 @@
 <?php
 
-namespace BM\Metabox\Posts;
-
 /**
  * Test BM_Metabox_Posts_Category class.
  *
  * TODO: Add tests for default category.
  */
-class CategoryTest extends \WP_UnitTestCase {
+class CategoryTest extends \BM_TestCase {
 
 	/**
 	 * @var \BM_Metabox_Posts_Category
@@ -142,24 +140,5 @@ class CategoryTest extends \WP_UnitTestCase {
 		// Assert that category 2 has two posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( count( $posts_in_cat2 ), 2 );
-	}
-
-	/**
-	 * Helper method to get posts by category.
-	 *
-	 * @param string $cat Category name.
-	 *
-	 * @return array Posts that belong to that category.
-	 */
-	protected function get_posts_by_category( $cat ) {
-		$args = array(
-			'category__in' => array( $cat ),
-			'post_type'    => 'post',
-			'nopaging'     => 'true',
-			'post_status'  => 'publish',
-		);
-
-		$wp_query = new \WP_Query();
-		return $wp_query->query( $args );
 	}
 }

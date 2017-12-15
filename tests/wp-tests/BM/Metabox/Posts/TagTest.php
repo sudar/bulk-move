@@ -3,7 +3,7 @@
 /**
  * Test BM_Metabox_Posts_Tag class.
  */
-class TagTest extends \WP_UnitTestCase {
+class TagTest extends BM_TestCase {
 
 	/**
 	 * @var \BM_Metabox_Posts_Tag
@@ -67,25 +67,5 @@ class TagTest extends \WP_UnitTestCase {
 	 */
 	public function test_move_posts_from_one_tag_to_another_without_overwrite() {
 
-	}
-
-	/**
-	 * Helper method to get posts by tag.
-	 *
-	 * @param string $tag Tag name.
-	 *
-	 * @return array Posts that belong to that tag.
-	 */
-	protected function get_posts_by_tag( $tag ) {
-		$args = array(
-			'tag__in' => array( $tag ),
-			'post_type'    => 'post',
-			'nopaging'     => 'true',
-			'post_status'  => 'publish',
-		);
-
-		$wp_query = new \WP_Query();
-
-		return $wp_query->query( $args );
 	}
 }
