@@ -18,13 +18,18 @@
     "type": "git",
     "url": "https://github.com/sudar/bulk-move.git"
   },
-  "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-contrib-clean": "^1.1.0",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "matchdep": "^2.0.0",
-    "time-grunt": "^1.4.0"
+  "devDependencies": {},
+  "scripts": {
+    "test:wp-test": "vendor/bin/phpunit",
+    "test:wp-test-c": "npm run test:wp-test -- --coverage-php code-coverage/wp-test.cov",
+    "test:wp-mock": "npm run test:wp-test -- --configuration phpunit-wp-mock.xml",
+    "test:wp-mock-c": "npm run test:wp-mock -- --coverage-php code-coverage/wp-mock.cov",
+    "test": "npm run test:wp-mock && npm run test:wp-test",
+    "test:coverage": "mkdir code-coverage && npm run test:wp-mock-c && npm run test:wp-test-c",
+    "test:merge-coverage": "vendor/bin/phpcov merge code-coverage/",
+    "test:html-coverage": "npm run test:coverage && npm run test:merge-coverage -- --html code-coverage/html/",
+    "test:cover-coverage": "npm run test:coverage && npm run test:merge-coverage -- --clover=code-coverage/bulk-move.clover",
+    "phpcs": "vendor/bin/phpcs -p *.php include/ --standard=PHPCompatibility --runtime-set testVersion 5.2-7.2"
   },
   "private": true
 }
