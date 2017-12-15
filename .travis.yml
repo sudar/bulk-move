@@ -53,10 +53,13 @@ install:
 before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - |
-    if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
-      phpenv config-rm xdebug.ini
-    else
-      echo "xdebug.ini does not exist"
+    if [[ $TRAVIS_PHP_VERSION != 7.1 ]]; then
+      # Disable x-debug to increase performance. x-debug is enabled only for PHP 7.1 to run code-coverage reports.
+      if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+        phpenv config-rm xdebug.ini
+      else
+        echo "xdebug.ini does not exist"
+      fi
     fi
   - |
     if [[ ! -z "$WP_VERSION" ]] ; then
