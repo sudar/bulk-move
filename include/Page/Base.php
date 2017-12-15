@@ -36,6 +36,13 @@ abstract class BM_Page_Base {
 	protected $menu_title;
 
 	/**
+	 * Warning message shown at the top of the page.
+	 *
+	 * @var string
+	 */
+	protected $warning_message;
+
+	/**
 	 * Capability needed to render the page.
 	 *
 	 * @var string
@@ -62,7 +69,6 @@ abstract class BM_Page_Base {
 	 * @var \WP_Screen
 	 */
 	protected $screen;
-	protected $warning_message;
 
 	/**
 	 * Initialize values when an object is created.
