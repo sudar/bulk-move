@@ -35,6 +35,17 @@ class BulkMoveTest extends BaseTestCase {
 		$this->assertConditionsMet();
 	}
 
+	function test_if_wakeup_is_not_supported() {
+		\WP_Mock::userFunction( '_doing_it_wrong', array(
+			'times' => 1,
+		) );
+
+		$bulk_move = \BM_BulkMove::get_instance();
+		unserialize( serialize( $bulk_move ) );
+
+		$this->assertConditionsMet();
+	}
+
 	function test_load_action() {
 		\WP_Mock::expectAction( 'bm_loaded' );
 
