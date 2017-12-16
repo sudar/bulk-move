@@ -51,6 +51,11 @@ install:
 before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - |
+    if [[ $TRAVIS_PHP_VERSION == 7.1 ]]; then
+      # Install latest version of npm. This is needed for running our npm script setup
+      npm i -g npm
+    fi
+
     if [[ $TRAVIS_PHP_VERSION != 7.1 ]]; then
       # Disable x-debug to increase performance. x-debug is enabled only for PHP 7.1 to run code-coverage reports.
       if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
