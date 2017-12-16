@@ -273,9 +273,9 @@ abstract class BM_Page_Base {
 	protected function render_help_tab() {
 		$this->get_screen()->add_help_tab(
 			array(
-				'title'    => __( 'About Plugin', 'bulk-move' ),
+				'title'    => __( 'Bulk Move Posts', 'bulk-move' ),
 				'id'       => 'about_tab',
-				'content'  => '<p>' . __( 'This plugin allows you to move posts in bulk from selected categories to another category', 'bulk-move' ) . '</p>',
+				'content'  => '<p>' . __( 'This plugin allows you to move posts in bulk from selected categories, tags or custom taxonomies.', 'bulk-move' ) . '</p>',
 				'callback' => false,
 			)
 		);
