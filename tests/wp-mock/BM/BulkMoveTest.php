@@ -2,7 +2,7 @@
 
 namespace BM;
 
-use WP_Mock\Tools\TestCase;
+use BulkWP\Tests\WPMock\BaseTestCase;
 
 /**
  * Test BM_BulkMove.
@@ -11,15 +11,11 @@ use WP_Mock\Tools\TestCase;
  * TODO: Add tests for plugin_file
  * TODO: Add tests for setting translations path
  */
-class BulkMoveTest extends TestCase {
+class BulkMoveTest extends BaseTestCase {
 
-	public function setUp() {
-		\WP_Mock::setUp();
-	}
-
-	public function tearDown() {
-		\WP_Mock::tearDown();
-	}
+	protected $test_files = [
+		'/include/BulkMove.php',
+	];
 
 	function test_it_is_singleton() {
 		$a = \BM_BulkMove::get_instance();
@@ -31,7 +27,7 @@ class BulkMoveTest extends TestCase {
 	function test_load_action() {
 		\WP_Mock::expectAction( 'bm_loaded' );
 
-		$bulk_move = bulk_move();
+		$bulk_move = \BM_BulkMove::get_instance();
 		$bulk_move->load();
 
 		$this->assertConditionsMet();
@@ -43,7 +39,7 @@ class BulkMoveTest extends TestCase {
 			'args' => array( 'bulk-move', false, \WP_Mock\Functions::type( 'string' ) )
 		) );
 
-		$bulk_move = bulk_move();
+		$bulk_move = \BM_BulkMove::get_instance();
 		$bulk_move->on_init();
 
 		$this->assertConditionsMet();
