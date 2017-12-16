@@ -24,6 +24,17 @@ class BulkMoveTest extends BaseTestCase {
 		$this->assertSame( $a, $b );
 	}
 
+	function test_if_cone_is_not_supported() {
+		\WP_Mock::userFunction( '_doing_it_wrong', array(
+			'times' => 1,
+		) );
+
+		$bulk_move = \BM_BulkMove::get_instance();
+		clone $bulk_move;
+
+		$this->assertConditionsMet();
+	}
+
 	function test_load_action() {
 		\WP_Mock::expectAction( 'bm_loaded' );
 
