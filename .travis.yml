@@ -53,7 +53,7 @@ before_script:
   - |
     if [[ $TRAVIS_PHP_VERSION == 7.1 ]]; then
       # Install latest version of npm. This is needed for running our npm script setup
-      npm i -g npm
+      npm i -g npm@2.0.0
     fi
 
     if [[ $TRAVIS_PHP_VERSION != 7.1 ]]; then
