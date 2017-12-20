@@ -275,7 +275,7 @@ abstract class BM_Page_Base {
 			array(
 				'title'    => __( 'Bulk Move Posts', 'bulk-move' ),
 				'id'       => 'about_tab',
-				'content'  => '<p>' . __( 'This plugin allows you to move posts in bulk from selected categories, tags or custom taxonomies.', 'bulk-move' ) . '</p>',
+				'content'  => '<p>' . __( 'This Plugin allows you to move posts from one category to another, from one tag to another and even from one custom taxonomy to another in bulk. This Plugin can also be used to remove assigned categories, tags and custom taxonomies from posts (includes custom post types).', 'bulk-move' ) . '</p>',
 				'callback' => false,
 			)
 		);
