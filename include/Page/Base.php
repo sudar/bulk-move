@@ -282,7 +282,7 @@ abstract class BM_Page_Base {
 
 		$this->get_screen()->set_help_sidebar(
 			'<p><strong>' . __( 'More information', 'bulk-move' ) . '</strong></p>' .
-			'<p><a href = "http://sudarmuthu.com/wordpress/bulk-move">' . __( 'Plugin Homepage/support', 'bulk-move' ) . '</a></p>' .
+			'<p><a href = "https://bulkwp.com/">' . __( 'Plugin Homepage/support', 'bulk-move' ) . '</a></p>' .
 			'<p><a href = "http://sudarmuthu.com/blog">' . __( "Plugin author's blog", 'bulk-move' ) . '</a></p>' .
 			'<p><a href = "http://sudarmuthu.com/wordpress/">' . __( "Other Plugin's by Author", 'bulk-move' ) . '</a></p>'
 		);
