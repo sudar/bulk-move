@@ -141,4 +141,40 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( count( $posts_in_cat2 ), 2 );
 	}
+	
+	/**
+	 * Test remove category from post
+	 */
+	public function test_remove_category_from_posts(){
+		// Create two categories.
+		$cat1 = $this->factory->category->create( array( 'name' => 'cat1' ) );
+		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
+
+		// Create one post in each category.
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $cat1 ) ) );
+		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat2 ) ) );
+
+		// Assert that each category has one post.
+		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+
+		$this->assertEquals( count( $posts_in_cat1 ), 1 );
+		$this->assertEquals( count( $posts_in_cat2 ), 1 );
+
+		// call our method.
+		$options = array(
+			'old_cat'   => $cat1,
+			'new_cat'   => -1,
+			'overwrite' => true,
+		);
+		$this->category_metabox->move( $options );
+
+		// Assert that category 1 has no posts.
+		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+		$this->assertEquals( count( $posts_in_cat1 ), 0 );
+
+		// Assert that category 2 has two posts.
+		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+		$this->assertEquals( count( $posts_in_cat2 ), 1 );
+	}
 }
