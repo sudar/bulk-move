@@ -84,8 +84,8 @@ class Bulk_Move_Posts {
 			$bm       = BULK_MOVE();
 
 			// move by cats.
-			$old_cat = absint( $_POST['smbm_mc_selected_cat'] );
-			$new_cat = ( -1 === $_POST['smbm_mc_mapped_cat'] ) ? -1 : absint( $_POST['smbm_mc_mapped_cat'] );
+			$old_cat   = absint( $_POST['smbm_mc_selected_cat'] );
+			$new_cat   = ( -1 === $_POST['smbm_mc_mapped_cat'] ) ? -1 : absint( $_POST['smbm_mc_mapped_cat'] );
 			$overwrite = isset( $_POST['smbm_mc_overwrite'] ) && 'overwrite' == $_POST['smbm_mc_overwrite'];
 
 			$posts_moved = self::do_move_cats( $old_cat, $new_cat, $overwrite );

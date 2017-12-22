@@ -10,9 +10,9 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 class BM_Metabox_Posts_Category extends BM_Metabox_Base {
 
 	protected function initialize() {
-		$this->meta_box_slug = 'bm-posts-by-category';
+		$this->meta_box_slug         = 'bm-posts-by-category';
 		$this->messages['box_label'] = __( 'Move Posts By Category', 'bulk-move' );
-		$this->action = 'move_category';
+		$this->action                = 'move_category';
 	}
 
 	public function render() {
