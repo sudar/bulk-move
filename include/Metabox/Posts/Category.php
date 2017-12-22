@@ -100,6 +100,15 @@ class BM_Metabox_Posts_Category extends BM_Metabox_Base {
 					// Add to existing categories.
 					$current_cats[] = $options['new_cat'];
 				}
+			}else if( -1 == $options['new_cat'] ){
+				$options['new_cat'] = absint( $options['new_cat'] );
+				if ( $options['overwrite'] ) {
+					// Remove old categories.
+					$current_cats = array( $options['new_cat'] );
+				} else {
+					// Add to existing categories.
+					$current_cats[] = $options['new_cat'];
+				}
 			}
 
 			if ( count( $current_cats ) == 0 ) {
