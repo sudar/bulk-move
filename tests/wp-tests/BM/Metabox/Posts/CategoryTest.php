@@ -173,7 +173,7 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
 		$this->assertEquals( count( $posts_in_cat1 ), 0 );
 
-		// Assert that category 2 has two posts.
+		// Assert that category 2 has one posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( count( $posts_in_cat2 ), 1 );
 	}
@@ -213,11 +213,11 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
 		$this->assertEquals( count( $posts_in_cat1 ), 0 );
 
-		// Assert that common category has no posts.
+		// Assert that common category has one posts.
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 		$this->assertEquals( count( $posts_in_common_cat ), 1 );
 
-		// Assert that category 2 has two posts.
+		// Assert that category 2 has one posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( count( $posts_in_cat2 ), 1 );
 	}	
