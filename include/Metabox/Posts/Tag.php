@@ -10,9 +10,9 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 class BM_Metabox_Posts_Tag extends BM_Metabox_Base {
 
 	protected function initialize() {
-		$this->meta_box_slug = 'bm-posts-by-tag';
+		$this->meta_box_slug         = 'bm-posts-by-tag';
 		$this->messages['box_label'] = __( 'Move Posts By Tag', 'bulk-move' );
-		$this->action = 'move_tag';
+		$this->action                = 'move_tag';
 	}
 
 	public function render() {

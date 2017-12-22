@@ -73,6 +73,7 @@ abstract class BM_Metabox_Base {
 	 * @abstract
 	 *
 	 * @param array $options User selected options.
+	 *
 	 * @return int Number of items deleted
 	 */
 	abstract public function move( $options );
@@ -97,7 +98,7 @@ abstract class BM_Metabox_Base {
 	 * Register.
 	 *
 	 * @param string $hook_suffix Page Hook Suffix.
-	 * @param string $page_slug Page slug.
+	 * @param string $page_slug   Page slug.
 	 */
 	public function register( $hook_suffix, $page_slug ) {
 		$this->page_hook_suffix = $hook_suffix;
