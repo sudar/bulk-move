@@ -15,7 +15,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
-
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
@@ -70,7 +69,7 @@ final class BM_BulkMove {
 	 *
 	 * @var \BM_BulkMove
 	 */
-	static private $instance = null;
+	private static $instance = null;
 
 	/**
 	 * Conditionally creates the singleton instance if absent, else
@@ -80,6 +79,7 @@ final class BM_BulkMove {
 	 * time. Also prevents needing to define globals all over the place.
 	 *
 	 * @static
+	 *
 	 * @see \bulk_move()
 	 *
 	 * @return \BM_BulkMove The singleton instance
@@ -175,7 +175,7 @@ final class BM_BulkMove {
 	 */
 	private function get_admin_pages() {
 		if ( empty( $this->admin_pages ) ) {
-			$posts_page = $this->get_post_admin_page();
+			$posts_page                                   = $this->get_post_admin_page();
 			$this->admin_pages[ $posts_page->get_slug() ] = $posts_page;
 		}
 
@@ -250,7 +250,7 @@ final class BM_BulkMove {
 	 * @param string $plugin_file Path to main plugin file.
 	 */
 	public function set_plugin_file( $plugin_file ) {
-		$this->plugin_file = $plugin_file;
+		$this->plugin_file       = $plugin_file;
 		$this->translations_path = dirname( plugin_basename( $this->get_plugin_file() ) ) . '/languages/';
 	}
 
