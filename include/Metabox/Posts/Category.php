@@ -91,24 +91,14 @@ class BM_Metabox_Posts_Category extends BM_Metabox_Base {
 
 		foreach ( $posts as $post ) {
 			$current_cats = array_diff( wp_get_post_categories( $post->ID ), array( $options['old_cat'] ) );
+			
+			if ( $options['overwrite'] ) {
+				// Override is set, so remove all common categories.
+				$current_cats = array();
+			}
 
 			if ( -1 !== $options['new_cat'] ) {
-				if ( $options['overwrite'] ) {
-					// Remove old categories.
-					$current_cats = array( $options['new_cat'] );
-				} else {
-					// Add to existing categories.
-					$current_cats[] = $options['new_cat'];
-				}
-			}else if( -1 == $options['new_cat'] ){
-				$options['new_cat'] = absint( $options['new_cat'] );
-				if ( $options['overwrite'] ) {
-					// Remove old categories.
-					$current_cats = array( $options['new_cat'] );
-				} else {
-					// Add to existing categories.
-					$current_cats[] = $options['new_cat'];
-				}
+				$current_cats[] = $options['new_cat'];
 			}
 
 			if ( count( $current_cats ) == 0 ) {
