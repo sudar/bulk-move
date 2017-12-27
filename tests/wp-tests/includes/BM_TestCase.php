@@ -45,4 +45,29 @@ class BM_TestCase extends WP_UnitTestCase {
 
 		return $wp_query->query( $args );
 	}
+
+	/**
+	 * Helper method to get posts by category.
+	 *
+	 * @param string $cat Category name.
+	 *
+	 * @return array Posts that belong to that category.
+	 */
+	protected function get_posts_by_custom_term( $term_id, $taxonomy, $post_type = 'post' ) {
+		$args = array(
+			'tax_query' => array(
+				array(
+					'taxonomy' => $taxonomy,
+					'field'    => 'term_id',
+					'terms'    => $term_id,
+				),
+			),
+			'post_type' => $post_type,
+			'nopaging'  => 'true',
+		);
+
+		$wp_query = new \WP_Query();
+
+		return $wp_query->query( $args );
+	}
 }
