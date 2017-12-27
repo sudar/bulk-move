@@ -66,6 +66,7 @@ spl_autoload_register( 'bm_autoloader' );
 function load_bulk_move() {
 	$bulk_move = bulk_move();
 	$bulk_move->set_plugin_file( __FILE__ );
+	$bulk_move->add_loadie( new BM_Request_CustomTaxonomyAction() );
 
 	add_action( 'plugins_loaded', array( $bulk_move, 'load' ), 101 );
 }

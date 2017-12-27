@@ -108,6 +108,7 @@ abstract class BM_Metabox_Base {
 
 		add_action( 'bm_' . $this->action, array( $this, 'process' ) );
 		add_filter( 'bd_javascript_array', array( $this, 'filter_js_array' ) );
+
 	}
 
 	/**
@@ -301,4 +302,8 @@ abstract class BM_Metabox_Base {
 			'updated'
 		);
 	}
+
+	public function get_metabox_slug() {
+	    return $this->meta_box_slug;
+    }
 }

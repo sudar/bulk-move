@@ -121,6 +121,7 @@ abstract class BM_Page_Base {
 		add_action( "load-{$this->hook_suffix}", array( $this, 'on_load_page' ) );
 
 		add_action( 'admin_init', array( $this, 'verify_nonce' ) );
+
 	}
 
 	/**
@@ -236,7 +237,7 @@ abstract class BM_Page_Base {
 		$bulk_move_posts = array(
 			'action_get_taxonomy' => 'load_custom_taxonomy_by_post_type',
 			'action_get_terms'    => 'load_custom_terms_by_taxonomy',
-//			'nonce'               => wp_create_nonce( self::BOX_CUSTOM_TERMS_NONCE ),
+			'nonce'               => wp_create_nonce( $this->slug . '-nonce' ),
 		);
 
 		$translation_array = array(
@@ -298,7 +299,7 @@ abstract class BM_Page_Base {
 			return;
 		}
 
-		$this->metaboxes[] = $metabox;
+		$this->metaboxes[ $metabox->get_metabox_slug() ] = $metabox;
 	}
 
 	/**

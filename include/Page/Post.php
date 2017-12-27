@@ -14,6 +14,7 @@ class BM_Page_Post extends BM_Page_Base {
 		$this->page_title      = __( 'Bulk Move Posts', 'bulk-move' );
 		$this->menu_title      = __( 'Bulk Move Posts', 'bulk-move' );
 		$this->warning_message = __( 'WARNING: Posts moved once cannot be reverted. Use with caution.', 'bulk-move' );
+
 		$this->capability      = 'edit_others_posts';
 	}
 
@@ -26,6 +27,7 @@ class BM_Page_Post extends BM_Page_Base {
 
 		add_filter( 'bm_plugin_action_links', array( $this, 'append_to_plugin_action_links' ) );
 		add_filter( 'bm_metabox_user_meta_field', array( $this, 'modify_metabox_user_meta_field_if_bulk_delete_is_installed' ), 10, 2 );
+
 	}
 
 	/**
