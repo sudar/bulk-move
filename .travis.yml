@@ -72,6 +72,7 @@ before_script:
       else
         composer global require "phpunit/phpunit=5.7.*"
       fi
+      composer global require codedungeon/phpunit-result-printer
     fi
 
 script:
