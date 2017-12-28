@@ -271,31 +271,31 @@ class CategoryTest extends \BM_TestCase {
 	 */
 	public function test_move_posts_from_default_cat_to_another() {
 		// Create one categories and get default category.
-		$cat1 = get_option( 'default_category' );
+		$default_cat = get_option( 'default_category' );
 		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
 
 		// Create one post in each category.
-		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $cat1 ) ) );
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $default_cat ) ) );
 		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat2 ) ) );
 
 		// Assert that each category has one post.
-		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 
-		$this->assertEquals( count( $posts_in_cat1 ), 1 );
+		$this->assertEquals( count( $posts_in_default_cat ), 1 );
 		$this->assertEquals( count( $posts_in_cat2 ), 1 );
 
 		// call our method.
 		$options = array(
-			'old_cat'   => $cat1,
+			'old_cat'   => $default_cat,
 			'new_cat'   => $cat2,
 			'overwrite' => true,
 		);
 		$this->category_metabox->move( $options );
 
-		// Assert that category 1 (or) default category has no posts.
-		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( count( $posts_in_cat1 ), 0 );
+		// Assert that default category has no posts.
+		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
+		$this->assertEquals( count( $posts_in_default_cat ), 0 );
 
 		// Assert that category 2 has two posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
