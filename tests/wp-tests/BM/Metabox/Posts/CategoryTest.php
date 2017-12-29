@@ -34,8 +34,8 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 
-		$this->assertEquals( count( $posts_in_cat1 ), 1 );
-		$this->assertEquals( count( $posts_in_cat2 ), 1 );
+		$this->assertEquals( 1, count( $posts_in_cat1 ) );
+		$this->assertEquals( 1, count( $posts_in_cat2 ) );
 
 		// call our method.
 		$options = array(
@@ -47,11 +47,11 @@ class CategoryTest extends \BM_TestCase {
 
 		// Assert that category 1 has no posts.
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( count( $posts_in_cat1 ), 0 );
+		$this->assertEquals( 0, count( $posts_in_cat1 ) );
 
 		// Assert that category 2 has two posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( count( $posts_in_cat2 ), 2 );
+		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
 
 	/**
@@ -73,9 +73,9 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
-		$this->assertEquals( count( $posts_in_cat1 ), 1 );
-		$this->assertEquals( count( $posts_in_cat2 ), 1 );
-		$this->assertEquals( count( $posts_in_common_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_cat1 ) );
+		$this->assertEquals( 1, count( $posts_in_cat2 ) );
+		$this->assertEquals( 1, count( $posts_in_common_cat ) );
 
 		// Invoke our method.
 		$options = array(
@@ -87,15 +87,15 @@ class CategoryTest extends \BM_TestCase {
 
 		// Assert that category 1 has no posts.
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( count( $posts_in_cat1 ), 0 );
+		$this->assertEquals( 0, count( $posts_in_cat1 ) );
 
 		// Assert that common category has no posts.
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( count( $posts_in_common_cat ), 0 );
+		$this->assertEquals( 0, count( $posts_in_common_cat ) );
 
 		// Assert that category 2 has two posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( count( $posts_in_cat2 ), 2 );
+		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
 
 	/**
@@ -117,9 +117,9 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
-		$this->assertEquals( count( $posts_in_cat1 ), 1 );
-		$this->assertEquals( count( $posts_in_cat2 ), 1 );
-		$this->assertEquals( count( $posts_in_common_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_cat1 ) );
+		$this->assertEquals( 1, count( $posts_in_cat2 ) );
+		$this->assertEquals( 1, count( $posts_in_common_cat ) );
 
 		// Invoke our method.
 		$options = array(
@@ -131,15 +131,15 @@ class CategoryTest extends \BM_TestCase {
 
 		// Assert that category 1 has no posts.
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( count( $posts_in_cat1 ), 0 );
+		$this->assertEquals( 0, count( $posts_in_cat1 ) );
 
 		// Assert that common category has one posts.
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( count( $posts_in_common_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_common_cat ) );
 
 		// Assert that category 2 has two posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( count( $posts_in_cat2 ), 2 );
+		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
 	
 	/**
@@ -158,8 +158,8 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 
-		$this->assertEquals( count( $posts_in_cat1 ), 1 );
-		$this->assertEquals( count( $posts_in_cat2 ), 1 );
+		$this->assertEquals( 1, count( $posts_in_cat1 ) );
+		$this->assertEquals( 1, count( $posts_in_cat2 ) );
 
 		// call our method.
 		$options = array(
@@ -171,11 +171,11 @@ class CategoryTest extends \BM_TestCase {
 
 		// Assert that category 1 has no posts.
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( count( $posts_in_cat1 ), 0 );
+		$this->assertEquals( 0, count( $posts_in_cat1 ) );
 
 		// Assert that category 2 has one posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( count( $posts_in_cat2 ), 1 );
+		$this->assertEquals( 1, count( $posts_in_cat2 ) );
 	}
 	
 	/**
@@ -197,9 +197,9 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
-		$this->assertEquals( count( $posts_in_cat1 ), 1 );
-		$this->assertEquals( count( $posts_in_cat2 ), 1 );
-		$this->assertEquals( count( $posts_in_common_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_cat1 ) );
+		$this->assertEquals( 1, count( $posts_in_cat2 ) );
+		$this->assertEquals( 1, count( $posts_in_common_cat ) );
 
 		// Invoke our method.
 		$options = array(
@@ -211,15 +211,15 @@ class CategoryTest extends \BM_TestCase {
 
 		// Assert that category 1 has no posts.
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( count( $posts_in_cat1 ), 0 );
+		$this->assertEquals( 0, count( $posts_in_cat1 ) );
 
 		// Assert that common category has one posts.
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( count( $posts_in_common_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_common_cat ) );
 
 		// Assert that category 2 has one posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( count( $posts_in_cat2 ), 1 );
+		$this->assertEquals( 1, count( $posts_in_cat2 ) );
 	}
 	
 	/**
@@ -241,9 +241,9 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
-		$this->assertEquals( count( $posts_in_cat1 ), 1 );
-		$this->assertEquals( count( $posts_in_cat2 ), 1 );
-		$this->assertEquals( count( $posts_in_common_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_cat1 ) );
+		$this->assertEquals( 1, count( $posts_in_cat2 ) );
+		$this->assertEquals( 1, count( $posts_in_common_cat ) );
 
 		// Invoke our method.
 		$options = array(
@@ -255,15 +255,15 @@ class CategoryTest extends \BM_TestCase {
 
 		// Assert that category 1 has no posts.
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( count( $posts_in_cat1 ), 0 );
+		$this->assertEquals( 0, count( $posts_in_cat1 ) );
 
 		// Assert that common category has no posts.
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( count( $posts_in_common_cat ), 0 );
+		$this->assertEquals( 0, count( $posts_in_common_cat ) );
 
 		// Assert that category 2 has one posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( count( $posts_in_cat2 ), 1 );
+		$this->assertEquals( 1, count( $posts_in_cat2 ) );
 	}
 	
 	/**
@@ -282,8 +282,8 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 
-		$this->assertEquals( count( $posts_in_default_cat ), 1 );
-		$this->assertEquals( count( $posts_in_cat2 ), 1 );
+		$this->assertEquals( 1, count( $posts_in_default_cat ) );
+		$this->assertEquals( 1, count( $posts_in_cat2 ) );
 
 		// call our method.
 		$options = array(
@@ -295,11 +295,11 @@ class CategoryTest extends \BM_TestCase {
 
 		// Assert that default category has no posts.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( count( $posts_in_default_cat ), 0 );
+		$this->assertEquals( 0, count( $posts_in_default_cat ) );
 
 		// Assert that category 2 has two posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( count( $posts_in_cat2 ), 2 );
+		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
 	
 	/**
@@ -321,9 +321,9 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
-		$this->assertEquals( count( $posts_in_default_cat ), 1 );
-		$this->assertEquals( count( $posts_in_cat2 ), 1 );
-		$this->assertEquals( count( $posts_in_common_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_default_cat ) );
+		$this->assertEquals( 1, count( $posts_in_cat2 ) );
+		$this->assertEquals( 1, count( $posts_in_common_cat ) );
 
 		// call our method.
 		$options = array(
@@ -335,15 +335,15 @@ class CategoryTest extends \BM_TestCase {
 
 		// Assert that default category has no posts.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( count( $posts_in_default_cat ), 0 );
+		$this->assertEquals( 0, count( $posts_in_default_cat ) );
 
 		// Assert that common category has no posts.
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( count( $posts_in_common_cat ), 0 );
+		$this->assertEquals( 0, count( $posts_in_common_cat ) );
 
 		// Assert that category 2 has two posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( count( $posts_in_cat2 ), 2 );
+		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
 	
 	/**
@@ -365,9 +365,9 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
-		$this->assertEquals( count( $posts_in_default_cat ), 1 );
-		$this->assertEquals( count( $posts_in_cat2 ), 1 );
-		$this->assertEquals( count( $posts_in_common_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_default_cat ) );
+		$this->assertEquals( 1, count( $posts_in_cat2 ) );
+		$this->assertEquals( 1, count( $posts_in_common_cat ) );
 
 		// call our method.
 		$options = array(
@@ -379,15 +379,15 @@ class CategoryTest extends \BM_TestCase {
 
 		// Assert that default category has no posts.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( count( $posts_in_default_cat ), 0 );
+		$this->assertEquals( 0, count( $posts_in_default_cat ) );
 
 		// Assert that common category has one posts.
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( count( $posts_in_common_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_common_cat ) );
 
 		// Assert that category 2 has two posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( count( $posts_in_cat2 ), 2 );
+		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
 	
 	/**
@@ -403,7 +403,7 @@ class CategoryTest extends \BM_TestCase {
 		// Assert that default category has one post.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
 
-		$this->assertEquals( count( $posts_in_default_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_default_cat ) );
 
 		// call our method.
 		$options = array(
@@ -415,7 +415,7 @@ class CategoryTest extends \BM_TestCase {
 
 		// Assert that default category has one post.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( count( $posts_in_default_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_default_cat ) );
 	}
 	
 	/**
@@ -434,8 +434,8 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
-		$this->assertEquals( count( $posts_in_default_cat ), 1 );
-		$this->assertEquals( count( $posts_in_common_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_default_cat ) );
+		$this->assertEquals( 1, count( $posts_in_common_cat ) );
 
 		// call our method.
 		$options = array(
@@ -447,11 +447,11 @@ class CategoryTest extends \BM_TestCase {
 
 		// Assert that default category has one post.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( count( $posts_in_default_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_default_cat ) );
 		
 		// Assert that common category has 0 posts.
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( count( $posts_in_common_cat ), 0 );
+		$this->assertEquals( 0, count( $posts_in_common_cat ) );
 	}
 	
 	/**
@@ -470,8 +470,8 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
-		$this->assertEquals( count( $posts_in_default_cat ), 1 );
-		$this->assertEquals( count( $posts_in_common_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_default_cat ) );
+		$this->assertEquals( 1, count( $posts_in_common_cat ) );
 
 		// call our method.
 		$options = array(
@@ -483,10 +483,10 @@ class CategoryTest extends \BM_TestCase {
 
 		// Assert that default category has 0 post.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( count( $posts_in_default_cat ), 0 );
+		$this->assertEquals( 0, count( $posts_in_default_cat ) );
 		
 		// Assert that common category has one posts.
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( count( $posts_in_common_cat ), 1 );
+		$this->assertEquals( 1, count( $posts_in_common_cat ) );
 	}
 }
