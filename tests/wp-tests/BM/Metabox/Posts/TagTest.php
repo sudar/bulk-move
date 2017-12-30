@@ -77,9 +77,9 @@ class TagTest extends BM_TestCase {
         $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
         $posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
 
-        $this->assertEquals( count( $posts_in_tag1 ), 1 );
-        $this->assertEquals( count( $posts_in_tag2 ), 1 );
-        $this->assertEquals( count( $posts_in_common_tag ), 1 );
+        $this->assertEquals( 1, count( $posts_in_tag1 ) );
+        $this->assertEquals( 1, count( $posts_in_tag2 ) );
+        $this->assertEquals( 1, count( $posts_in_common_tag ) );
 
         // call our method.
         $options = array(
@@ -91,15 +91,15 @@ class TagTest extends BM_TestCase {
 
         // Assert that tag 1 has no posts.
         $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
-        $this->assertEquals( count( $posts_in_tag1 ), 0 );
+        $this->assertEquals( 0, count( $posts_in_tag1 ) );
 
         // Assert that common tag has 0 posts.
         $posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
-        $this->assertEquals( count( $posts_in_common_tag ), 0 );
+        $this->assertEquals( 0, count( $posts_in_common_tag ) );
 
         // Assert that tag 2 has two posts.
         $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
-        $this->assertEquals( count( $posts_in_tag2 ), 2 );
+        $this->assertEquals( 2, count( $posts_in_tag2 ) );
 	}
 
 	/**
@@ -124,9 +124,9 @@ class TagTest extends BM_TestCase {
         $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
         $posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
 
-        $this->assertEquals( count( $posts_in_tag1 ), 1 );
-        $this->assertEquals( count( $posts_in_tag2 ), 1 );
-        $this->assertEquals( count( $posts_in_common_tag ), 1 );
+        $this->assertEquals( 1, count( $posts_in_tag1 ) );
+        $this->assertEquals( 1, count( $posts_in_tag2 ) );
+        $this->assertEquals( 1, count( $posts_in_common_tag ) );
 
         // call our method.
         $options = array(
@@ -138,14 +138,14 @@ class TagTest extends BM_TestCase {
 
         // Assert that tag 1 has no posts.
         $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
-        $this->assertEquals( count( $posts_in_tag1 ), 0 );
+        $this->assertEquals( 0, count( $posts_in_tag1 ) );
 
         // Assert that common tag has one posts.
         $posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
-        $this->assertEquals( count( $posts_in_common_tag ), 1 );
+        $this->assertEquals( 1, count( $posts_in_common_tag ) );
 
         // Assert that tag 2 has two posts.
         $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
-        $this->assertEquals( count( $posts_in_tag2 ), 2 );
+        $this->assertEquals( 2, count( $posts_in_tag2 ) );
 	}
 }
