@@ -17,7 +17,7 @@ class TagTest extends BM_TestCase {
 	}
 
 	/**
-	 * Test basic case of moving categories.
+	 * Test basic case of moving tags.
 	 */
 	public function test_move_posts_from_one_tag_to_another() {
 		// Create two tags.
@@ -148,4 +148,43 @@ class TagTest extends BM_TestCase {
         $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
         $this->assertEquals( 2, count( $posts_in_tag2 ) );
 	}
+
+    /**
+     * Test basic case of removing tags.
+     */
+    public function test_remove_posts_from_tag() {
+        // Create two tags.
+        $tag1 = $this->factory->tag->create( array( 'name' => 'tag1' ) );
+        $tag2 = $this->factory->tag->create( array( 'name' => 'tag2' ) );
+
+        // Create one post in each tag.
+        $post1 = $this->factory->post->create( array( 'post_title' => 'post1' ) );
+        wp_set_post_tags( $post1, 'tag1' );
+
+        $post2 = $this->factory->post->create( array( 'post_title' => 'post2' ) );
+        wp_set_post_tags( $post2, 'tag2' );
+
+        // Assert that each tag has one post.
+        $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
+        $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
+
+        $this->assertEquals( 1, count( $posts_in_tag1 ) );
+        $this->assertEquals( 1, count( $posts_in_tag2 ) );
+
+        // call our method.
+        $options = array(
+            'old_tag'   => $tag1,
+            'new_tag'   => -1,
+            'overwrite' => true,
+        );
+        $this->tag_metabox->move( $options );
+
+        // Assert that tag 1 has no posts.
+        $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
+        $this->assertEquals( 0, count( $posts_in_tag1 ) );
+
+        // Assert that tag 2 has one posts.
+        $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
+        $this->assertEquals( 1, count( $posts_in_tag2 ) );
+    }
 }
