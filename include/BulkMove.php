@@ -263,6 +263,7 @@ final class BM_BulkMove {
 		// TODO: Add other metaboxes.
 		$posts_page->add_metabox( new BM_Metabox_Posts_Category() );
 		$posts_page->add_metabox( new BM_Metabox_Posts_Tag() );
+        $posts_page->add_metabox( new BM_Metabox_Posts_Tagtocategory() );
 
 		return $posts_page;
 	}
