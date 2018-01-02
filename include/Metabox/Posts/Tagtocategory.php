@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  *
  * @since 2.0.0
  */
-class BM_Metabox_Posts_Tagtocategory extends BM_Metabox_Base {
+class BM_Metabox_Posts_TagToCategory extends BM_Metabox_Base {
 
     protected function initialize() {
         $this->meta_box_slug         = 'bm-posts-tag-to-category';
