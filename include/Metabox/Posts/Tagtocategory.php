@@ -48,7 +48,7 @@ class BM_Metabox_Posts_TagToCategory extends BM_Metabox_Base {
 
             </table>
             <p>
-                <?php _e( 'If the post contains other tags, then', 'bulk-move' ); ?>
+                <?php _e( 'If the post contains other categories', 'bulk-move' ); ?>
                 <?php $this->render_overwrite_filters(); ?>
             </p>
         </fieldset>
