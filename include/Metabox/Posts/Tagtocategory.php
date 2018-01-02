@@ -12,7 +12,7 @@ class BM_Metabox_Posts_TagToCategory extends BM_Metabox_Base {
     protected function initialize() {
         $this->meta_box_slug         = 'bm-posts-tag-to-category';
         $this->messages['box_label'] = __( 'Move Posts from Tag to Category', 'bulk-move' );
-        $this->action                = 'move_tagtocategory';
+        $this->action                = 'move_tag_to_category';
     }
 
     public function render() {
