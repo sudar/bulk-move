@@ -73,16 +73,16 @@ class BM_Metabox_Posts_Tag extends BM_Metabox_Base {
 		foreach ( $posts as $post ) {
             $current_tags = wp_get_post_tags( $post->ID, array( 'fields' => 'ids' ) );
             $current_tags = array_diff( $current_tags, array( $options['old_tag'] ) );
-            
+
             if ( $options['overwrite'] ) {
                 // Override is set, so remove all common tags.
                 $current_tags = array();
             }
-            
+
             if ( -1 !== $options['new_tag'] ) {
                 $current_tags[] = $options['new_tag'];
             }
-            
+
             $current_tags = array_values( $current_tags );
             wp_set_post_tags( $post->ID, $current_tags );
 		}

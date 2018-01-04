@@ -83,7 +83,7 @@ class BM_Metabox_Posts_TagToCategory extends BM_Metabox_Base {
             $current_tags = array_diff( $current_tags, array( $options['tag'] ) );
 
             $current_cats = wp_get_post_categories( $post->ID );
-	        $current_cats[] = $options['cat'];
+	        $current_cats[]  = $options['cat'];
             if ( $options['overwrite'] ) {
                 // Override is set, so remove all common tags.
 	            $current_cats = array();
@@ -91,11 +91,11 @@ class BM_Metabox_Posts_TagToCategory extends BM_Metabox_Base {
 
             $current_tags = array_values( $current_tags );
             wp_set_post_tags( $post->ID, $current_tags );
-	
+
 	        if ( count( $current_cats ) == 0 ) {
 		        $current_cats = array( $options['cat'] );
 	        }
-	        
+
             $current_cats = array_values( $current_cats );
             wp_update_post( array(
                 'ID'            => $post->ID,
