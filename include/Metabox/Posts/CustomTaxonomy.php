@@ -104,7 +104,7 @@ class BM_Metabox_Posts_CustomTaxonomy extends BM_Metabox_Base {
 		$wp_query    = new WP_Query();
 		$posts_count = 0;
 
-		if ( - 1 === $options['old_term'] ) {
+		if ( -1 === $options['old_term'] ) {
 			return $posts_count;
 		}
 
