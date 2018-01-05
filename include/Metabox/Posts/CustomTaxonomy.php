@@ -79,9 +79,7 @@ class BM_Metabox_Posts_CustomTaxonomy extends BM_Metabox_Base {
 
 		</fieldset>
 
-		<p class="submit bm_ct_submit">
-			<button type="submit" name="bm_action" value="move_custom_taxonomy" class="button-primary"><?php _e( 'Bulk Move ', 'bulk-move' ); ?>&raquo;</button>
-		</p>
+		<?php $this->render_submit(); ?>
 
 		<!-- Custom Taxonomy end-->
 
