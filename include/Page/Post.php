@@ -14,7 +14,6 @@ class BM_Page_Post extends BM_Page_Base {
 		$this->page_title      = __( 'Bulk Move Posts', 'bulk-move' );
 		$this->menu_title      = __( 'Bulk Move Posts', 'bulk-move' );
 		$this->warning_message = __( 'WARNING: Posts moved once cannot be reverted. Use with caution.', 'bulk-move' );
-
 		$this->capability      = 'edit_others_posts';
 	}
 
