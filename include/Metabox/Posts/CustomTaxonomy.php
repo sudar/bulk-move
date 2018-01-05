@@ -31,17 +31,7 @@ class BM_Metabox_Posts_CustomTaxonomy extends BM_Metabox_Base {
 
 				<tr>
 					<td scope="row" colspan="2">
-						<select name="smbm_mbct_post_type" id="smbm_mbct_post_type">
-							<option value="-1"><?php _e( 'Select Post type', 'bulk-move' ); ?></option>
-
-							<?php
-							$custom_post_types = get_post_types( array( 'public' => true ) );
-							?>
-
-							<?php foreach ( $custom_post_types as $post_type ) : ?>
-								<option value="<?php echo esc_attr( $post_type ); ?>"><?php echo esc_html( $post_type ); ?></option>
-							<?php endforeach; ?>
-						</select>
+						<?php $this->render_post_type_dropdown(); ?>
 					</td>
 				</tr>
 
@@ -103,7 +93,7 @@ class BM_Metabox_Posts_CustomTaxonomy extends BM_Metabox_Base {
 
 		$options['old_term']   = absint( $request['smbm_mbct_selected_term'] );
 		$options['taxonomy']   = $request['smbm_mbct_taxonomy'];
-		$options['post_types'] = array( $request['smbm_mbct_post_type'] );
+		$options['post_types'] = array( $request['smbm_move_custom_taxonomy_post_type'] );
 
 		$options['new_term'] = ( -1 === $request['smbm_mbct_mapped_term'] ) ? -1 : absint( $_POST['smbm_mbct_mapped_term'] );
 		$options['overwrite'] = $this->process_overwrite_filter( $request );
