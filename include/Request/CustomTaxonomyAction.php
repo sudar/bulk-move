@@ -15,6 +15,8 @@ class BM_Request_CustomTaxonomyAction implements BM_Loadie {
 	public function load() {
 		add_action( 'wp_ajax_load_custom_taxonomy_by_post_type', array( $this, 'load_custom_taxonomy_by_post_type' ) );
 		add_action( 'wp_ajax_load_custom_terms_by_taxonomy', array( $this, 'load_custom_terms_by_taxonomy' ) );
+
+		add_filter( 'bm_bulk-move_js_i18n', array( $this, 'include_ajax_params_in_localization' ) );
 	}
 
 	/**
@@ -80,5 +82,27 @@ class BM_Request_CustomTaxonomyAction implements BM_Loadie {
 				'remove_term_label' => __( 'Remove Term', 'bulk-move' ),
 			)
 		);
+	}
+
+	/**
+	 * Includes the additional JS variables using the
+	 * Bulk Move JS translation array.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param $translation_array
+	 *
+	 * @return array $translation_array
+	 */
+	public function include_ajax_params_in_localization( $translation_array ) {
+		$bulk_move_posts = array(
+			'action_get_taxonomy' => 'load_custom_taxonomy_by_post_type',
+			'action_get_terms'    => 'load_custom_terms_by_taxonomy',
+			'nonce'               => wp_create_nonce( 'bulk-move-posts-nonce' ),
+		);
+
+		$translation_array['bulk_move_posts'] = $bulk_move_posts;
+
+		return $translation_array;
 	}
 }
