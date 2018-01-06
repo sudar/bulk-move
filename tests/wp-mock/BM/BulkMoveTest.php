@@ -2,7 +2,7 @@
 
 namespace BM;
 
-use BulkWP\Tests\WPMock\BaseTestCase;
+use BulkWP\Tests\WPMock\WPMockTestCase;
 
 /**
  * Test BM_BulkMove.
@@ -11,7 +11,7 @@ use BulkWP\Tests\WPMock\BaseTestCase;
  * TODO: Add tests for plugin_file
  * TODO: Add tests for setting translations path
  */
-class BulkMoveTest extends BaseTestCase {
+class BulkMoveTest extends WPMockTestCase {
 
 	protected $test_files = [
 		'/include/BulkMove.php',
