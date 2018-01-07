@@ -1,8 +1,8 @@
 <?php
-
+	
 use BulkWP\Tests\WPCore\WPCoreUnitTestCase;
-
-/**
+	
+ /**
  * Test BM_Metabox_Posts_TagToCategory class.
  */
 class TagtocategoryTest extends WPCoreUnitTestCase {
@@ -10,12 +10,12 @@ class TagtocategoryTest extends WPCoreUnitTestCase {
 	/**
 	 * @var \BM_Metabox_Posts_TagToCategory
 	 */
-	protected $tagtocategory_metabox;
+	protected $tag_to_category_metabox;
 	
 	public function setUp() {
 		parent::setUp();
 		
-		$this->tagtocategory_metabox = new \BM_Metabox_Posts_TagToCategory();
+		$this->tag_to_category_metabox = new \BM_Metabox_Posts_TagToCategory();
 	}
 	
 	/**
@@ -45,7 +45,7 @@ class TagtocategoryTest extends WPCoreUnitTestCase {
 			'cat'   => $cat,
 			'overwrite' => true,
 		);
-		$this->tagtocategory_metabox->move( $options );
+		$this->tag_to_category_metabox->move( $options );
 		
 		// Assert that tag 1 has no posts.
 		$posts_in_tag = $this->get_posts_by_tag( $tag );
@@ -87,7 +87,7 @@ class TagtocategoryTest extends WPCoreUnitTestCase {
 			'cat'   => $cat,
 			'overwrite' => true,
 		);
-		$this->tagtocategory_metabox->move( $options );
+		$this->tag_to_category_metabox->move( $options );
 		
 		// Assert that tag has no posts.
 		$posts_in_tag = $this->get_posts_by_tag( $tag );
@@ -133,7 +133,7 @@ class TagtocategoryTest extends WPCoreUnitTestCase {
 			'cat'   => $cat,
 			'overwrite' => false,
 		);
-		$this->tagtocategory_metabox->move( $options );
+		$this->tag_to_category_metabox->move( $options );
 		
 		// Assert that tag has no posts.
 		$posts_in_tag = $this->get_posts_by_tag( $tag );
