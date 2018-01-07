@@ -1,11 +1,13 @@
 <?php
 
+use BulkWP\Tests\WPCore\WPCoreUnitTestCase;
+
 /**
  * Test BM_Metabox_Posts_Category class.
  *
  * TODO: Add tests for default category.
  */
-class CategoryTest extends \BM_TestCase {
+class CategoryTest extends WPCoreUnitTestCase {
 
 	/**
 	 * @var \BM_Metabox_Posts_Category
@@ -141,7 +143,7 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
-	
+
 	/**
 	 * Test remove category from post
 	 */
@@ -177,7 +179,7 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 1, count( $posts_in_cat2 ) );
 	}
-	
+
 	/**
 	 * Test remove category from post without overwrite.
 	 */
@@ -221,7 +223,7 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 1, count( $posts_in_cat2 ) );
 	}
-	
+
 	/**
 	 * Test remove category from post with overwrite.
 	 */
@@ -265,7 +267,7 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 1, count( $posts_in_cat2 ) );
 	}
-	
+
 	/**
 	 * Test basic case of moving default category.
 	 */
@@ -301,7 +303,7 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
-	
+
 	/**
 	 * Test basic case of moving default category with overwrite.
 	 */
@@ -345,7 +347,7 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
-	
+
 	/**
 	 * Test basic case of moving default category without overwrite.
 	 */
@@ -389,7 +391,7 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
-	
+
 	/**
 	 * Test remove default category from post
 	 */
@@ -417,7 +419,7 @@ class CategoryTest extends \BM_TestCase {
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
 		$this->assertEquals( 1, count( $posts_in_default_cat ) );
 	}
-	
+
 	/**
 	 * Test remove default category from post with overwrite.
 	 */
@@ -448,12 +450,12 @@ class CategoryTest extends \BM_TestCase {
 		// Assert that default category has one post.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
 		$this->assertEquals( 1, count( $posts_in_default_cat ) );
-		
+
 		// Assert that common category has 0 posts.
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 		$this->assertEquals( 0, count( $posts_in_common_cat ) );
 	}
-	
+
 	/**
 	 * Test remove default category from post without overwrite.
 	 */
@@ -484,7 +486,7 @@ class CategoryTest extends \BM_TestCase {
 		// Assert that default category has 0 post.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
 		$this->assertEquals( 0, count( $posts_in_default_cat ) );
-		
+
 		// Assert that common category has one posts.
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 		$this->assertEquals( 1, count( $posts_in_common_cat ) );
