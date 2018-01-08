@@ -7,16 +7,10 @@ class CustomTaxonomyTest extends \BM_TestCase {
 	 */
 	protected $custom_taxonomy_metabox;
 
-	/**
-	 * @var array
-	 */
-	protected $loadies;
-
 	public function setUp() {
 		parent::setUp();
 
 		$this->custom_taxonomy_metabox = new \BM_Metabox_Posts_CustomTaxonomy();
-		//$this->loadies[] = new \BM_Request_CustomTaxonomyAction();
 	}
 
 	public function test_move_posts_from_one_tax_term_to_another_without_overwrite() {
