@@ -239,7 +239,7 @@ abstract class BM_Page_Base {
 		);
 
 		/**
-		 * Filters the localized translations for bulk-move.js
+		 * Filters the localized translations for bulk-move.js.
 		 *
 		 * @since 2.0.0
 		 *

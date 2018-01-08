@@ -10,9 +10,9 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 class BM_Metabox_Posts_CustomTaxonomy extends BM_Metabox_Base {
 
 	protected function initialize() {
-		$this->meta_box_slug = 'bm-posts-by-custom-taxonomy';
+		$this->meta_box_slug         = 'bm-posts-by-custom-taxonomy';
 		$this->messages['box_label'] = __( 'Move Posts By Custom Taxonomy', 'bulk-move' );
-		$this->action = 'move_custom_taxonomy';
+		$this->action                = 'move_custom_taxonomy';
 	}
 
 	public function render() {
@@ -93,7 +93,7 @@ class BM_Metabox_Posts_CustomTaxonomy extends BM_Metabox_Base {
 		$options['taxonomy']   = $request['smbm_mbct_taxonomy'];
 		$options['post_types'] = array( $request['smbm_move_custom_taxonomy_post_type'] );
 
-		$options['new_term'] = ( -1 === $request['smbm_mbct_mapped_term'] ) ? -1 : absint( $_POST['smbm_mbct_mapped_term'] );
+		$options['new_term']  = ( - 1 === $request['smbm_mbct_mapped_term'] ) ? - 1 : absint( $_POST['smbm_mbct_mapped_term'] );
 		$options['overwrite'] = $this->process_overwrite_filter( $request );
 
 		return $options;
