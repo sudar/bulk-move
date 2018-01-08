@@ -300,7 +300,7 @@ abstract class BM_Page_Base {
 			return;
 		}
 
-		$this->metaboxes[ $metabox->get_metabox_slug() ] = $metabox;
+		$this->metaboxes[] = $metabox;
 	}
 
 	/**

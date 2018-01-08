@@ -303,10 +303,6 @@ abstract class BM_Metabox_Base {
 		);
 	}
 
-	public function get_metabox_slug() {
-	    return $this->meta_box_slug;
-    }
-
 	/**
 	 * Render the post type dropdown.
 	 *
