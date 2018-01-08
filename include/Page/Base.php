@@ -128,7 +128,7 @@ abstract class BM_Page_Base {
 	 * Verify nonce.
 	 */
 	public function verify_nonce() {
-		if ( ! isset( $_POST['bm_action'] ) ) {
+		if ( ! isset( $_POST['bm_action'] ) || ! isset( $_POST['action'] ) ) {
 			return;
 		}
 
@@ -233,18 +233,19 @@ abstract class BM_Page_Base {
 			'select_one' => __( 'Please select least one option', 'bulk-move' ),
 		);
 
-		// TODO: Add this from Bulk_Move_Posts class using a filter.
-		$bulk_move_posts = array(
-			'action_get_taxonomy' => 'load_custom_taxonomy_by_post_type',
-			'action_get_terms'    => 'load_custom_terms_by_taxonomy',
-			'nonce'               => wp_create_nonce( $this->slug . '-nonce' ),
+		$translation_array = array(
+			'msg'   => $msg,
+			'error' => $error,
 		);
 
-		$translation_array = array(
-			'msg'             => $msg,
-			'error'           => $error,
-			'bulk_move_posts' => $bulk_move_posts,
-		);
+		/**
+		 * Filters the localized translations for bulk-move.js.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param array $translation_array A single dimensional translation array.
+		 */
+		$translation_array = apply_filters( 'bm_bulk-move_js_i18n', $translation_array );
 
 		wp_localize_script( 'bulk-move', 'BULK_MOVE', $translation_array );
 	}
@@ -299,7 +300,7 @@ abstract class BM_Page_Base {
 			return;
 		}
 
-		$this->metaboxes[ $metabox->get_metabox_slug() ] = $metabox;
+		$this->metaboxes[] = $metabox;
 	}
 
 	/**
