@@ -128,7 +128,7 @@ abstract class BM_Page_Base {
 	 * Verify nonce.
 	 */
 	public function verify_nonce() {
-		if ( ! isset( $_POST['bm_action'] ) ) {
+		if ( ! isset( $_POST['bm_action'] ) || ! isset( $_POST['action'] ) ) {
 			return;
 		}
 

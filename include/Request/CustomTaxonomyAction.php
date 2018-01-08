@@ -25,10 +25,7 @@ class BM_Request_CustomTaxonomyAction implements BM_Loadie {
 	 * @since 2.0.0
 	 */
 	public static function load_custom_taxonomy_by_post_type() {
-		/* The action should be in the {page_slug}-nonce format.
-		 * {page_slug} is the slug of the page on which the AJAX is requested.
-		 */
-		check_ajax_referer( 'bulk-move-posts-nonce', 'nonce' );
+		/* Nonce verification is done in BasePage class. */
 
 		$post_type  = isset( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : 'post';
 		$taxonomies = get_object_taxonomies( $post_type );
@@ -50,10 +47,7 @@ class BM_Request_CustomTaxonomyAction implements BM_Loadie {
 	 * @since 2.0.0
 	 */
 	public static function load_custom_terms_by_taxonomy() {
-		/* The action should be in the {page_slug}-nonce format.
-		 * {page_slug} is the slug of the page on which the AJAX is requested.
-		 */
-		check_ajax_referer( 'bulk-move-posts-nonce', 'nonce' );
+		/* Nonce verification is done in BasePage class. */
 
 		$terms    = array();
 		$taxonomy = isset( $_POST['taxonomy'] ) ? sanitize_text_field( $_POST['taxonomy'] ) : '';
@@ -98,7 +92,7 @@ class BM_Request_CustomTaxonomyAction implements BM_Loadie {
 		$bulk_move_posts = array(
 			'action_get_taxonomy' => 'load_custom_taxonomy_by_post_type',
 			'action_get_terms'    => 'load_custom_terms_by_taxonomy',
-			'nonce'               => wp_create_nonce( 'bulk-move-posts-nonce' ),
+			'nonce'               => wp_create_nonce( 'bulk-move-posts' ),
 		);
 
 		$translation_array['bulk_move_posts'] = $bulk_move_posts;
