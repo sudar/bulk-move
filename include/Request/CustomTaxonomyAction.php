@@ -99,4 +99,5 @@ class BM_Request_CustomTaxonomyAction implements BM_Loadie {
 
 		return $translation_array;
 	}
+
 }
