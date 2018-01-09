@@ -74,7 +74,7 @@ class BM_Metabox_Posts_Category extends BM_Metabox_Base {
 		$options = array();
 
 		$options['old_cat']   = absint( $request['smbm_mc_selected_cat'] );
-		$options['new_cat']   = ( - 1 === $request['smbm_mc_mapped_cat'] ) ? - 1 : absint( $request['smbm_mc_mapped_cat'] );
+		$options['new_cat']   = ( '-1' === $request['smbm_mc_mapped_cat'] ) ? -1 : absint( $request['smbm_mc_mapped_cat'] );
 		$options['overwrite'] = $this->process_overwrite_filter( $request );
 
 		return $options;
@@ -92,14 +92,13 @@ class BM_Metabox_Posts_Category extends BM_Metabox_Base {
 		foreach ( $posts as $post ) {
 			$current_cats = array_diff( wp_get_post_categories( $post->ID ), array( $options['old_cat'] ) );
 
-			if ( - 1 !== $options['new_cat'] ) {
-				if ( $options['overwrite'] ) {
-					// Remove old categories.
-					$current_cats = array( $options['new_cat'] );
-				} else {
-					// Add to existing categories.
-					$current_cats[] = $options['new_cat'];
-				}
+			if ( $options['overwrite'] ) {
+				// Override is set, so remove all common categories.
+				$current_cats = array();
+			}
+
+			if ( -1 !== $options['new_cat'] ) {
+				$current_cats[] = $options['new_cat'];
 			}
 
 			if ( count( $current_cats ) == 0 ) {

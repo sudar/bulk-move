@@ -20,16 +20,18 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test:wp-test": "vendor/bin/phpunit",
-    "test:wp-test-c": "npm run test:wp-test -- --coverage-php code-coverage/wp-test.cov",
-    "test:wp-mock": "npm run test:wp-test -- --configuration phpunit-wp-mock.xml",
-    "test:wp-mock-c": "npm run test:wp-mock -- --coverage-php code-coverage/wp-mock.cov",
-    "test": "npm run test:wp-mock && npm run test:wp-test",
-    "test:coverage": "mkdir code-coverage && npm run test:wp-mock-c && npm run test:wp-test-c",
+    "test:unit": "vendor/bin/phpunit",
+    "unit": "npm run test:unit -- --printer=Codedungeon\\\\PHPUnitPrettyResultPrinter\\\\Printer",
+    "test:unit-c": "npm run test:unit -- --coverage-php code-coverage/unit.cov",
+    "test:mock": "npm run test:unit -- --configuration phpunit-wp-mock.xml.dist",
+    "mock": "npm run test:mock -- --printer=Codedungeon\\\\PHPUnitPrettyResultPrinter\\\\Printer",
+    "test:mock-c": "npm run test:mock -- --coverage-php code-coverage/mock.cov",
+    "test": "npm run mock && npm run unit",
+    "test:coverage": "mkdir code-coverage && npm run test:mock-c && npm run test:unit-c",
     "test:merge-coverage": "vendor/bin/phpcov merge code-coverage/",
     "test:html-coverage": "npm run test:coverage && npm run test:merge-coverage -- --html code-coverage/html/",
     "test:cover-coverage": "npm run test:coverage && npm run test:merge-coverage -- --clover=code-coverage/bulk-move.clover",
-    "phpcs": "vendor/bin/phpcs -p *.php include/ --standard=PHPCompatibility --runtime-set testVersion 5.2-7.2"
+    "phpcs": "vendor/bin/phpcs -p *.php include/ --standard=PHPCompatibility --runtime-set testVersion 5.2-"
   },
   "private": true
 }

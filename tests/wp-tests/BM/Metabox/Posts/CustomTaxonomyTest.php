@@ -1,6 +1,11 @@
 <?php
 
-class CustomTaxonomyTest extends \BM_TestCase {
+use BulkWP\Tests\WPCore\WPCoreUnitTestCase;
+
+/**
+ * Test BM_Metabox_Posts_CustomTaxonomy class.
+ */
+class CustomTaxonomyTest extends WPCoreUnitTestCase {
 
 	/**
 	 * @var \BM_Metabox_Posts_CustomTaxonomy
@@ -8,6 +13,8 @@ class CustomTaxonomyTest extends \BM_TestCase {
 	protected $custom_taxonomy_metabox;
 
 	public function setUp() {
+		parent::setUp();
+
 		$this->custom_taxonomy_metabox = new \BM_Metabox_Posts_CustomTaxonomy();
 
 		/* Register custom post type and taxonomy */
