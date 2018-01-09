@@ -28,5 +28,9 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 // Start up the WP testing environment.
 require $_tests_dir . '/includes/bootstrap.php';
 
-// Include Bulk WP Test libs.
-require_once dirname( dirname( __FILE__ ) ) . '/wp-tests/includes/BM_TestCase.php';
+// Load BulkWP test tools.
+if ( ! file_exists( dirname( dirname( __FILE__ ) ) . '/../vendor/sudar/wp-plugin-test-tools/src/Tests/WPCore/WPCoreUnitTestCase.php' ) ) {
+	echo 'Could not find BulkWP Test tools. Have you run composer install?' . PHP_EOL;
+	exit( 1 );
+}
+require_once dirname( dirname( __FILE__ ) ) . '/../vendor/sudar/wp-plugin-test-tools/src/Tests/WPCore/WPCoreUnitTestCase.php';

@@ -2,7 +2,6 @@
 # @link http://docs.travis-ci.com/user/migrating-from-legacy/#Why-migrate-to-container-based-infrastructure%3F
 # @link http://docs.travis-ci.com/user/workers/container-based-infrastructure/#Routing-your-build-to-container-based-infrastructure
 sudo: false
-dist: precise
 language: php
 
 notifications:
@@ -14,12 +13,12 @@ notifications:
 
 cache:
   directories:
-    - vendor
-    - $HOME/.composer/cache
+  - vendor
+  - "$HOME/.composer/cache"
 
 matrix:
   include:
-    # Run truck in nightly and PHP 7.2
+    # Run trunk in nightly and PHP 7.2
     - php: nightly
       env: WP_VERSION=trunk
     - php: 7.2
@@ -36,26 +35,23 @@ matrix:
       env: WP_VERSION=latest
     - php: 5.3
       env: WP_VERSION=latest WP_MULTISITE=1 # For PHP 5.3 also run Multisite
+      dist: precise
   allow_failures:
     - php: nightly
   fast_finish: true
 
 install:
   - |
-    if [[ $TRAVIS_PHP_VERSION == 7.1 ]]; then
-      # Run composer install only for PHP 7.1
-      # composer is used for running phpcs and testing wp_mocks.
+    if [[ ${TRAVIS_PHP_VERSION:0:2} == "5." ]] || [[ $TRAVIS_PHP_VERSION == 7.0 ]]; then
+      bash bin/install-wp-test-tools.sh
+    else
+      # Run composer install only for PHP 7.1 or above. The dependencies are not compatible with PHP 5.x
       composer install
     fi
 
 before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - |
-    if [[ $TRAVIS_PHP_VERSION == 7.1 ]]; then
-      # Install latest version of npm. This is needed for running our npm script setup
-      npm i -g npm@2.0.0
-    fi
-
     if [[ $TRAVIS_PHP_VERSION != 7.1 ]]; then
       # Disable x-debug to increase performance. x-debug is enabled only for PHP 7.1 to run code-coverage reports.
       if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
@@ -67,11 +63,7 @@ before_script:
   - |
     if [[ ! -z "$WP_VERSION" ]] ; then
       bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-      if [[ ${TRAVIS_PHP_VERSION:0:2} == "5." ]]; then
-        composer global require "phpunit/phpunit=4.8.*"
-      else
-        composer global require "phpunit/phpunit=5.7.*"
-      fi
+      composer global require "phpunit/phpunit=4.8.*|5.7.*"
     fi
 
 script:

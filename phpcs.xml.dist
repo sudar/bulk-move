@@ -12,8 +12,6 @@
 	<exclude-pattern>dist/*</exclude-pattern>
 	<exclude-pattern>code-coverage/*</exclude-pattern>
  	<exclude-pattern>node_modules/*</exclude-pattern>
- 	<exclude-pattern>test/*</exclude-pattern>
- 	<exclude-pattern>tests/*</exclude-pattern>
  	<exclude-pattern>vendor/*</exclude-pattern>
  	<exclude-pattern>Gruntfile.js</exclude-pattern>
 
@@ -27,6 +25,12 @@
  	<exclude-pattern>assets/js/vendor/*</exclude-pattern>
  	<exclude-pattern>assets/js/*.min.js</exclude-pattern>
 
+	<!-- PHP Compatibility -->
+	<config name="testVersion" value="5.2-"/>
+	<rule ref="PHPCompatibility">
+		<exclude-pattern>*/tests/*</exclude-pattern>
+	</rule>
+
 	<!--Code-->
 	<rule ref="WordPress-Extra">
 		<!-- Exclude suggestion to use esc_html__() instead of _e() -->
@@ -39,11 +43,6 @@
 
         <!-- Even arrays that have one item are getting flagged -->
 		<exclude name="WordPress.Arrays.ArrayDeclarationSpacing.AssociativeKeyFound"/>
-	</rule>
-
-	<!-- PHP Compatibility -->
-	<config name="testVersion" value="5.2-"/>
-	<rule ref="PHPCompatibility">
 	</rule>
 
 	<!--Docs-->
