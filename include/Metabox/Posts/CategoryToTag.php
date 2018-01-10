@@ -70,8 +70,7 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_Base {
     }
 
     public function move( $options ) {
-        $wp_query = new WP_Query();
-        
+        $wp_query = new WP_Query();        
         $posts = $wp_query->query( array(
             'category__in' => array( $options['cat'] ),
             'post_type'    => 'post',
