@@ -32,7 +32,7 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_Base {
                     <td scope="row" >
 	                    <?php
 		                    wp_dropdown_categories( array(
-			                    'name'             => 'smbm_mc_mapped_cat',
+			                    'name'             => 'smbm_mct_cat',
 			                    'show_count'       => true,
 			                    'hierarchical'     => true,
 			                    'orderby'          => 'NAME',
@@ -42,13 +42,13 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_Base {
                         ==>
                     </td>
                     <td scope="row" >
-	                    <?php $this->render_tags_dropdown( 'smbm_mt_tag', $tags ); ?>
+	                    <?php $this->render_tags_dropdown( 'smbm_mct_tag', $tags ); ?>
                     </td>
                 </tr>
 
             </table>
             <p>
-                <?php _e( 'If the post contains other tags', 'bulk-move' ); ?>
+                <?php _e( 'If the post contains other tags, then', 'bulk-move' ); ?>
                 <?php $this->render_overwrite_filters(); ?>
             </p>
         </fieldset>
@@ -62,8 +62,8 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_Base {
     protected function convert_user_input_to_options( $request ) {
         $options = array();
 
-        $options['cat']       = absint( $request['smbm_mc_mapped_cat'] );
-        $options['tag']       =  absint( $request['smbm_mt_tag'] );
+        $options['cat']       = absint( $request['smbm_mct_cat'] );
+        $options['tag']       =  absint( $request['smbm_mct_tag'] );
         $options['overwrite'] = $this->process_overwrite_filter( $request );
 
         return $options;
@@ -81,8 +81,8 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_Base {
         foreach ( $posts as $post ) {
             $current_cats = array_diff( wp_get_post_categories( $post->ID ), array( $options['cat'] ) );	
             $current_tags = wp_get_post_tags( $post->ID, array( 'fields' => 'ids' ) );
+
             $current_tags[]  = $options['tag'];
-                                                
             if ( $options['overwrite'] ) {
                 // Override is set, so remove all common tags.
                 $current_tags = array();
