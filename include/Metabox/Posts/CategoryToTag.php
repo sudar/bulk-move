@@ -71,13 +71,12 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_Base {
 
     public function move( $options ) {
 	    $wp_query = new WP_Query();
-	    
-	    $posts    = $wp_query->query( array(
+	
+	    $posts = $wp_query->query( array(
 		    'category__in' => array( $options['cat'] ),
 		    'post_type'    => 'post',
 		    'nopaging'     => 'true',
-		    'post_status'  => 'publish',
-	    ) );
+	    ));
 
 	    foreach( $posts as $post ) {
 		    $current_cats = array_diff( wp_get_post_categories( $post->ID ), array( $options['cat'] ) );
