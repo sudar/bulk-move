@@ -194,8 +194,8 @@ final class BM_BulkMove {
 	 *
 	 * @staticvar string $this_plugin
 	 *
-	 * @param array  $action_links Action Links.
-	 * @param string $file         Plugin file name.
+	 * @param array $action_links Action Links.
+	 * @param string $file Plugin file name.
 	 *
 	 * @return array Modified links.
 	 */
