@@ -33,10 +33,10 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_Base {
 						<?php
 						wp_dropdown_categories( array(
 							'name'         => 'smbm_mct_cat',
-							'show_count'   => TRUE,
-							'hierarchical' => TRUE,
+							'show_count'   => true,
+							'hierarchical' => true,
 							'orderby'      => 'NAME',
-							'hide_empty'   => FALSE,
+							'hide_empty'   => false,
 						) );
 						?>
                         ==>
