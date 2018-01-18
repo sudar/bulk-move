@@ -166,6 +166,9 @@ final class BM_BulkMove {
 		if ( empty( $this->admin_pages ) ) {
 			$posts_page                                   = $this->get_post_admin_page();
 			$this->admin_pages[ $posts_page->get_slug() ] = $posts_page;
+
+			$users_page                                   = $this->get_user_admin_page();
+			$this->admin_pages[ $users_page->get_slug() ] = $users_page;
 		}
 
 		/**
@@ -266,5 +269,11 @@ final class BM_BulkMove {
 		$posts_page->add_metabox( new BM_Metabox_Posts_TagToCategory() );
 
 		return $posts_page;
+	}
+
+	private function get_user_admin_page() {
+		$users_page = new BM_Page_User();
+
+		return $users_page;
 	}
 }
