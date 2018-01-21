@@ -5,7 +5,7 @@
  *
  * @since 2.0.0
  */
-class BM_Request_CustomTaxonomyAction implements BM_Loadie {
+class BM_Request_CustomTaxonomyAction {
 
 	/**
 	 * The BM_Loadie() calls this method.
@@ -99,5 +99,4 @@ class BM_Request_CustomTaxonomyAction implements BM_Loadie {
 
 		return $translation_array;
 	}
-
 }

@@ -58,6 +58,13 @@ final class BM_BulkMove {
 	private $admin_pages = array();
 
 	/**
+	 * AJAX Handlers.
+	 *
+	 * @var array
+	 */
+	private $ajax_handlers = array();
+
+	/**
 	 * List of loadies.
 	 *
 	 * @var BM_Loadie[]
@@ -155,6 +162,36 @@ final class BM_BulkMove {
 	 */
 	public function on_init() {
 		$this->load_textdomain();
+		$this->load_ajax_handlers();
+	}
+
+	/**
+	 * Load AJAX Handlers.
+	 */
+	private function load_ajax_handlers() {
+		foreach ( $this->get_ajax_handlers() as $handler ) {
+			$handler->load();
+		}
+	}
+
+	/**
+	 * Get the list of AJAX Handlers;
+	 *
+	 * @return array List of AJAX Handlers.
+	 */
+	private function get_ajax_handlers() {
+		if ( empty( $this->ajax_handlers ) ) {
+			$this->ajax_handlers[] = new BM_Request_CustomTaxonomyAction();
+		}
+
+		/**
+		 * List of ajax handlers.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param array List of AJAX Handlers.
+		 */
+		return apply_filters( 'bm_ajax_handlers', $this->ajax_handlers );
 	}
 
 	/**
