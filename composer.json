@@ -9,6 +9,9 @@
             "url" : "https://github.com/sudar/wp-plugin-test-tools"
         }
     ],
+    "config": {
+        "sort-packages": true
+    },
     "require-dev": {
         "squizlabs/php_codesniffer": "<4.0",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.4",
