@@ -298,6 +298,7 @@ final class BM_BulkMove {
 		$posts_page->add_metabox( new BM_Metabox_Posts_Tag() );
 		$posts_page->add_metabox( new BM_Metabox_Posts_CustomTaxonomy() );
 		$posts_page->add_metabox( new BM_Metabox_Posts_TagToCategory() );
+		$posts_page->add_metabox( new BM_Metabox_Posts_CategoryToTag() );
 
 		return $posts_page;
 	}
