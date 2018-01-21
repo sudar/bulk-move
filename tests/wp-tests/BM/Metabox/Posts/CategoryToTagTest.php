@@ -69,11 +69,12 @@ class CategoryToTagTest extends WPCoreUnitTestCase {
 		$common_tag = $this->factory->tag->create( array( 'name' => 'common_tag' ) );
 
 		// Create one post in tag and category.
-		// The post_tag will also have the common tag.
-		$post_tag = $this->factory->post->create( array( 'post_title' => 'post_tag' ) );
-		wp_set_post_tags( $post_tag, array( 'tag', 'common_tag' ) );
+		// The post that contains tag will also have the common tag.
+		$post1 = $this->factory->post->create( array( 'post_title' => 'tag_post' ) );
+		wp_set_post_tags( $post1, array( 'tag', 'common_tag' ) );
 
-		$post_cat = $this->factory->post->create( array( 'post_title' => 'post_cat', 'post_category' => array( $cat ) ) );
+		$post2 = $this->factory->post->create( array( 'post_title' => 'post_cat', 'post_category' => array( $cat ) ) );
+		wp_set_post_tags( $post2, array( 'common_tag' ) );
 
 		// Assert that each tag and categories has one post.
 		$posts_in_tag        = $this->get_posts_by_tag( $tag );
@@ -82,7 +83,7 @@ class CategoryToTagTest extends WPCoreUnitTestCase {
 
 		$this->assertEquals( 1, count( $posts_in_tag ) );
 		$this->assertEquals( 1, count( $posts_in_cat ) );
-		$this->assertEquals( 1, count( $posts_in_common_tag ) );
+		$this->assertEquals( 2, count( $posts_in_common_tag ) );
 
 		// call our method.
 		$options = array(
@@ -100,9 +101,9 @@ class CategoryToTagTest extends WPCoreUnitTestCase {
 		$posts_in_cat = $this->get_posts_by_category( $cat );
 		$this->assertEquals( 0, count( $posts_in_cat ) );
 
-		// Assert that common tag has one posts.
+		// Assert that common tag has tow posts.
 		$posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
-		$this->assertEquals( 1, count( $posts_in_common_tag ) );
+		$this->assertEquals( 2, count( $posts_in_common_tag ) );
 	}
 
 	/**
@@ -147,7 +148,7 @@ class CategoryToTagTest extends WPCoreUnitTestCase {
 		$posts_in_cat = $this->get_posts_by_category( $cat );
 		$this->assertEquals( 0, count( $posts_in_cat ) );
 
-		// Assert that common tag has no posts.
+		// Assert that common tag has one posts.
 		$posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
 		$this->assertEquals( 1, count( $posts_in_common_tag ) );
 	}
