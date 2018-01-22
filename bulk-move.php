@@ -5,7 +5,8 @@
  * Plugin URI: http://sudarmuthu.com/wordpress/bulk-move
  * Description: Move or remove posts in bulk from one category, tag or custom taxonomy to another
  * Version: 1.3.0
- * License: GPL
+ * License: GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Author: Sudar
  * Author URI: http://sudarmuthu.com/
  * Text Domain: bulk-move
