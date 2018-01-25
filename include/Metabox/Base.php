@@ -172,7 +172,7 @@ abstract class BM_Metabox_Base {
 	 * @return string Name of the User Meta field.
 	 */
 	protected function get_hidden_box_user_meta_field() {
-		$meta_field = 'metaboxhidden_toplevel_page_' . $this->page_slug;
+		$meta_field = 'metaboxhidden_bulk-wp_page_' . $this->page_slug;
 
 		/**
 		 * Filter the user meta field that determines whether a metabox is hidden or not.
