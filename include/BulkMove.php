@@ -65,6 +65,15 @@ final class BM_BulkMove {
 	private static $instance = null;
 
 	/**
+	 * Bulk Move Helper class.
+	 *
+	 * @var BM_Util_Helper $helper
+	 *
+	 * @since 2.0.0
+	 */
+	public $helper;
+
+	/**
 	 * Conditionally creates the singleton instance if absent, else
 	 * returns the previously saved instance.
 	 *
@@ -274,6 +283,7 @@ final class BM_BulkMove {
 	private function get_user_admin_page() {
 		$users_page = new BM_Page_User();
 
+		$users_page->add_metabox( new BM_Metabox_Users_Role() );
 		return $users_page;
 	}
 }

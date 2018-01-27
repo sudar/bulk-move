@@ -67,6 +67,8 @@ function load_bulk_move() {
 	$bulk_move = bulk_move();
 	$bulk_move->set_plugin_file( __FILE__ );
 
+	$bulk_move->helper = new BM_Util_helper();
+
 	add_action( 'plugins_loaded', array( $bulk_move, 'load' ), 101 );
 }
 

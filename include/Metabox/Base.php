@@ -107,7 +107,7 @@ abstract class BM_Metabox_Base {
 		add_action( "add_meta_boxes_{$this->page_hook_suffix}", array( $this, 'setup_metabox' ) );
 
 		add_action( 'bm_' . $this->action, array( $this, 'process' ) );
-		add_filter( 'bd_javascript_array', array( $this, 'filter_js_array' ) );
+		add_filter( 'bm_javascript_array', array( $this, 'filter_js_array' ) );
 	}
 
 	/**
@@ -300,5 +300,42 @@ abstract class BM_Metabox_Base {
 			$msg,
 			'updated'
 		);
+	}
+
+	protected function render_roles_dropdown( $name = '', $hide_no_role_option = false ) {
+		global $wp_roles;
+		$roles = $wp_roles->roles;
+
+		if ( ! ( $users = wp_cache_get( 'bm_users', 'bulk-wp' ) ) ) {
+			$users = get_users();
+			wp_cache_add( 'bm_users', 'bulk-wp' );
+		}
+
+		$bulk_move = bulk_move();
+
+		$users_by_roles = $bulk_move->helper->get_users_count_by_roles( $users, $roles );
+
+		$field_name  = $this->meta_box_slug;
+		$field_name .= ! empty( $name ) ? '-' . $name : $name;
+		$field_name .= '-roles-list';
+
+		?>
+		<select id="<?php echo $field_name; ?>"
+				name="<?php echo $field_name; ?>">
+			<?php if ( ! $hide_no_role_option ) : ?>
+				<option value="norole">No role <?php echo '(' . $users_by_roles['norole'] . ')' ?></option>
+			<?php endif; ?>
+			<?php
+			foreach ( $roles as $role_slug => $role ) :
+				?>
+				<option value="<?php echo esc_attr( $role_slug ); ?>">
+					<?php echo esc_html( $role['name'] ); ?>
+					&nbsp;<?php echo '(' . $users_by_roles[ $role_slug ] . ')' ?>
+				</option>
+			<?php
+			endforeach;
+			?>
+		</select>
+		<?php
 	}
 }
