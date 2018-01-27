@@ -284,6 +284,7 @@ final class BM_BulkMove {
 		$users_page = new BM_Page_User();
 
 		$users_page->add_metabox( new BM_Metabox_Users_Role() );
+
 		return $users_page;
 	}
 }
