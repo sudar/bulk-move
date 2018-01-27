@@ -17,6 +17,7 @@ class BM_Util_helper {
 
 				if ( empty( $user->roles ) ) {
 					$users_by_roles['norole'] ++;
+
 					continue;
 				}
 
