@@ -67,7 +67,7 @@ final class BM_BulkMove {
 	/**
 	 * Bulk Move Helper class.
 	 *
-	 * @var BM_Util_Helper $helper
+	 * @var BM_Util_Helper
 	 *
 	 * @since 2.0.0
 	 */
