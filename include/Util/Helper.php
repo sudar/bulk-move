@@ -28,4 +28,3 @@ class BM_Util_helper {
 		return $users_by_roles;
 	}
 }
-
