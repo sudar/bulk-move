@@ -75,10 +75,10 @@ class BM_Metabox_Users_Role extends BM_Metabox_Base {
 	}
 
 	public function filter_js_array( $js_array ) {
-	    $js_array['msg']['move_administrators_warning'] = __( 'Are you sure you want to move all Administrators?', 'bulk-move' );
-		$js_array['msg']['move_warning'] = __( 'Are you sure you want to move all the users in the selected role?', 'bulk-move' );
-		$js_array['error']['same_user_roles'] = __( 'You cannot move users to the same role.', 'bulk-move' );
-		$js_array['validators'][$this->action] = array( 'validate_same_user_roles' );
+		$js_array['msg']['move_administrators_warning'] = __( 'Are you sure you want to move all Administrators?', 'bulk-move' );
+		$js_array['msg']['move_warning']                = __( 'Are you sure you want to move all the users in the selected role?', 'bulk-move' );
+		$js_array['error']['same_user_roles']           = __( 'You cannot move users to the same role.', 'bulk-move' );
+		$js_array['validators'][ $this->action ]        = array( 'validate_same_user_roles' );
 
 		return $js_array;
 	}
