@@ -58,6 +58,13 @@ final class BM_BulkMove {
 	private $admin_pages = array();
 
 	/**
+	 * List of loadies.
+	 *
+	 * @var BM_Loadie[]
+	 */
+	private $loadies = array();
+
+	/**
 	 * Singleton instance of the Plugin.
 	 *
 	 * @var \BM_BulkMove
@@ -128,6 +135,10 @@ final class BM_BulkMove {
 		add_action( 'admin_menu', array( $this, 'on_admin_menu' ) );
 
 		add_filter( 'plugin_action_links', array( $this, 'filter_plugin_action_links' ), 10, 2 );
+
+		foreach ( $this->loadies as $loadie ) {
+			$loadie->load();
+		}
 
 		$this->loaded = true;
 
@@ -253,6 +264,28 @@ final class BM_BulkMove {
 	}
 
 	/**
+	 * Add a Bulk Move Loadie.
+	 * The `load()` method of the Loadies will be called when Bulk Move is loaded.
+	 *
+	 * @param BM_Loadie $loadie Loadie to be loaded.
+	 *
+	 * @return bool False if Bulk Move is already loaded or if $loadie is not of `Loadie` type. True otherwise.
+	 */
+	public function add_loadie( $loadie ) {
+		if ( $this->loaded ) {
+			return false;
+		}
+
+		if ( ! $loadie instanceof BM_Loadie ) {
+			return false;
+		}
+
+		$this->loadies[] = $loadie;
+
+		return true;
+	}
+
+	/**
 	 * Get Bulk Move Post admin page.
 	 *
 	 * @return \BM_Page_Post Bulk Move Post admin page.
@@ -263,6 +296,7 @@ final class BM_BulkMove {
 		// TODO: Add other metaboxes.
 		$posts_page->add_metabox( new BM_Metabox_Posts_Category() );
 		$posts_page->add_metabox( new BM_Metabox_Posts_Tag() );
+		$posts_page->add_metabox( new BM_Metabox_Posts_CustomTaxonomy() );
 		$posts_page->add_metabox( new BM_Metabox_Posts_TagToCategory() );
 		$posts_page->add_metabox( new BM_Metabox_Posts_CategoryToTag() );
 

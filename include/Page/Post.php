@@ -26,6 +26,7 @@ class BM_Page_Post extends BM_Page_Base {
 
 		add_filter( 'bm_plugin_action_links', array( $this, 'append_to_plugin_action_links' ) );
 		add_filter( 'bm_metabox_user_meta_field', array( $this, 'modify_metabox_user_meta_field_if_bulk_delete_is_installed' ), 10, 2 );
+
 	}
 
 	/**
