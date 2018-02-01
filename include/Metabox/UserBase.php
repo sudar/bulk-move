@@ -15,9 +15,9 @@ abstract class BM_Metabox_UserBase extends BM_Metabox_Base {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param string $name              Select tag's name & ID attribute.
-	 * @param bool $hide_no_role_option Default FALSE.
-	 *                                  Flag to hide the no role option.
+	 * @param string $name                Select tag's name & ID attribute.
+	 * @param bool   $hide_no_role_option Default FALSE.
+	 *                                    Flag to hide the no role option.
 	 */
 	protected function render_roles_dropdown( $name = '', $hide_no_role_option = false ) {
 		global $wp_roles;
@@ -30,27 +30,30 @@ abstract class BM_Metabox_UserBase extends BM_Metabox_Base {
 
 		$users_by_roles = $this->get_users_count_by_roles( $users, $roles );
 
-		$field_name  = $this->meta_box_slug;
+		$field_name = $this->meta_box_slug;
 		$field_name .= ! empty( $name ) ? '-' . $name : $name;
 		$field_name .= '-roles-list';
 
 		?>
-		<select id="<?php echo sanitize_html_class( $field_name ); ?>"
-		        name="<?php echo sanitize_html_class( $field_name ); ?>">
+        <select id="<?php echo sanitize_html_class( $field_name ); ?>"
+                name="<?php echo sanitize_html_class( $field_name ); ?>">
 			<?php if ( ! $hide_no_role_option ) : ?>
-				<option value="norole">No role <?php echo '(' . $users_by_roles['norole'] . ')' ?></option>
+                <option value="norole">
+					<?php echo __( 'No role', 'bulk-move' ); ?>
+					<?php echo '(' . $users_by_roles['norole'] . ')' ?>
+                </option>
 			<?php endif; ?>
 			<?php
 			foreach ( $roles as $role_slug => $role ) :
 				?>
-				<option value="<?php echo esc_attr( $role_slug ); ?>">
+                <option value="<?php echo esc_attr( $role_slug ); ?>">
 					<?php echo esc_html( $role['name'] ); ?>
-					&nbsp;<?php echo '(' . $users_by_roles[ $role_slug ] . ')' ?>
-				</option>
+                    &nbsp;<?php echo '(' . $users_by_roles[ $role_slug ] . ')' ?>
+                </option>
 			<?php
 			endforeach;
 			?>
-		</select>
+        </select>
 		<?php
 	}
 
