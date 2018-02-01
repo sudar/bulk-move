@@ -25,14 +25,13 @@ jQuery(document).ready(function () {
 
         var currentButton = jQuery(this).val(),
             valid = true,
-            that,
+            that = this,
             errorKey;
 
         if (!currentButton in BULK_MOVE.validators) {
             return confirm(BULK_MOVE.msg.move_warning);
         }
 
-        that = this;
         jQuery.each(BULK_MOVE.validators[currentButton], function (index, validator) {
             valid &= ! BULK_MOVE[validator](that);
 
