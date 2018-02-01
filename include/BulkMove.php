@@ -280,6 +280,11 @@ final class BM_BulkMove {
 		return $posts_page;
 	}
 
+	/**
+	 * Gets the Bulk Move User admin page.
+	 *
+	 * @return \BM_Page_User Bulk Move User admin page.
+	 */
 	private function get_user_admin_page() {
 		$users_page = new BM_Page_User();
 
