@@ -35,8 +35,8 @@ abstract class BM_Metabox_UserBase extends BM_Metabox_Base {
 		$field_name .= '-roles-list';
 
 		?>
-		<select id="<?php echo $field_name; ?>"
-		        name="<?php echo $field_name; ?>">
+		<select id="<?php echo sanitize_html_class( $field_name ); ?>"
+		        name="<?php echo sanitize_html_class( $field_name ); ?>">
 			<?php if ( ! $hide_no_role_option ) : ?>
 				<option value="norole">No role <?php echo '(' . $users_by_roles['norole'] . ')' ?></option>
 			<?php endif; ?>
