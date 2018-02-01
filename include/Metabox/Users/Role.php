@@ -74,6 +74,15 @@ class BM_Metabox_Users_Role extends BM_Metabox_UserBase {
 		return _n( 'Moved %d user between the selected roles', 'Moved %d users between the selected roles.', $posts_moved, 'bulk-move' );
 	}
 
+	/**
+	 * Filter the js array.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array $js_array JavaScript Array.
+	 *
+	 * @return array Modified JavaScript Array
+	 */
 	public function filter_js_array( $js_array ) {
 		$js_array['msg']['move_administrators_warning'] = __( 'Are you sure you want to move all Administrators?', 'bulk-move' );
 		$js_array['msg']['move_warning']                = __( 'Are you sure you want to move all the users in the selected role?', 'bulk-move' );
