@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  *
  * @since 2.0.0
  */
-class BM_Metabox_Users_Role extends BM_Metabox_Base {
+class BM_Metabox_Users_Role extends BM_Metabox_UserBase {
 
 	public function render() {
 		?>

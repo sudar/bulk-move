@@ -65,15 +65,6 @@ final class BM_BulkMove {
 	private static $instance = null;
 
 	/**
-	 * Bulk Move Helper class.
-	 *
-	 * @var BM_Util_Helper
-	 *
-	 * @since 2.0.0
-	 */
-	public $helper;
-
-	/**
 	 * Conditionally creates the singleton instance if absent, else
 	 * returns the previously saved instance.
 	 *
