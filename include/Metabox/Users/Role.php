@@ -11,7 +11,7 @@ class BM_Metabox_Users_Role extends BM_Metabox_UserBase {
 
 	public function render() {
 		?>
-		<!-- Category Start-->
+		<!-- Role Start-->
 		<h4>
 			<?php
 			_e( 'On the left side, select the role from which you want to move users.', 'bulk-move' );
@@ -35,7 +35,7 @@ class BM_Metabox_Users_Role extends BM_Metabox_UserBase {
 		</fieldset>
 
 		<?php $this->render_submit(); ?>
-		<!-- Category end-->
+		<!-- Role end-->
 		<?php
 	}
 
