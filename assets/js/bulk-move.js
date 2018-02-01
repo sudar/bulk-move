@@ -33,7 +33,7 @@ jQuery(document).ready(function () {
         }
 
         jQuery.each(BULK_MOVE.validators[currentButton], function (index, validator) {
-            valid &= ! BULK_MOVE[validator](that);
+            valid = valid && (!BULK_MOVE[validator](that));
 
             if (!valid) {
                 errorKey = validator.replace('validate_', '');
