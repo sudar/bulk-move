@@ -173,5 +173,4 @@ jQuery(document).ready(function () {
 		jQuery( '.bm_ct_filters, .bm_ct_submit' ).show();
 	});
 
-
 });
