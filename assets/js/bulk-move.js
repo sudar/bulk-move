@@ -8,10 +8,45 @@
 
 /*jslint browser: true, devel: true*/
 /*global BULK_MOVE, jQuery, document, postboxes, pagenow, ajaxurl*/
+BULK_MOVE.validate_same_user_roles = function() {
+
+    var fromUserRole = jQuery( '#bm-users-by-role-from-roles-list' ).val().toLowerCase(),
+        ToUserRole = jQuery( '#bm-users-by-role-to-roles-list' ).val().toLowerCase();
+
+    fromUserRole = jQuery.trim( fromUserRole );
+    ToUserRole = jQuery.trim( ToUserRole );
+
+    return fromUserRole === ToUserRole;
+};
+
 jQuery(document).ready(function () {
-	jQuery( 'button[value="move_tags"], button[value="move_cats"], button[value="move_category_by_tag"], button[value="move_custom_taxonomy"]' ).click( function () {
-		return confirm( BULK_MOVE.msg.move_warning );
-	});
+
+    jQuery('button[value="move_tags"], button[value="move_cats"], button[value="move_category_by_tag"], button[value="move_custom_taxonomy"], button[value="move_users_by_role"]').click(function (e) {
+
+        e.preventDefault();
+
+        var currentButton = jQuery(this).val(),
+            valid = true,
+            errorKey;
+
+        if (!(currentButton in BULK_MOVE.validators)) {
+            return confirm(BULK_MOVE.msg.move_warning);
+        }
+
+        jQuery.each(BULK_MOVE.validators[currentButton], function (index, validator) {
+            valid = valid && (!BULK_MOVE[validator]());
+
+            if (!valid) {
+                errorKey = validator.replace('validate_', '');
+                alert(BULK_MOVE['error'][errorKey]);
+                return false;
+            }
+        });
+
+        if ( valid ) {
+            return confirm(BULK_MOVE.msg.move_warning);
+        }
+    });
 
 	// Enable toggles for all modules.
 	postboxes.add_postbox_toggles( pagenow );
@@ -136,4 +171,5 @@ jQuery(document).ready(function () {
 	jQuery( '#smbm_mbct_selected_term, #smbm_mbct_mapped_term' ).change( function() {
 		jQuery( '.bm_ct_filters, .bm_ct_submit' ).show();
 	});
+
 });
