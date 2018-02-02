@@ -8,7 +8,7 @@
 
 /*jslint browser: true, devel: true*/
 /*global BULK_MOVE, jQuery, document, postboxes, pagenow, ajaxurl*/
-BULK_MOVE.validate_same_user_roles = function(that) {
+BULK_MOVE.validate_same_user_roles = function() {
 
     var fromUserRole = jQuery( '#bm-users-by-role-from-roles-list' ).val().toLowerCase(),
         ToUserRole = jQuery( '#bm-users-by-role-to-roles-list' ).val().toLowerCase();
@@ -25,7 +25,6 @@ jQuery(document).ready(function () {
 
         var currentButton = jQuery(this).val(),
             valid = true,
-            that = this,
             errorKey;
 
         if (!currentButton in BULK_MOVE.validators) {
@@ -33,7 +32,7 @@ jQuery(document).ready(function () {
         }
 
         jQuery.each(BULK_MOVE.validators[currentButton], function (index, validator) {
-            valid = valid && (!BULK_MOVE[validator](that));
+            valid = valid && (!BULK_MOVE[validator]());
 
             if (!valid) {
                 errorKey = validator.replace('validate_', '');
