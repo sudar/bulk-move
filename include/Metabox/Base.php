@@ -107,7 +107,7 @@ abstract class BM_Metabox_Base {
 		add_action( "add_meta_boxes_{$this->page_hook_suffix}", array( $this, 'setup_metabox' ) );
 
 		add_action( 'bm_' . $this->action, array( $this, 'process' ) );
-		add_filter( 'bd_javascript_array', array( $this, 'filter_js_array' ) );
+		add_filter( 'bm_javascript_array', array( $this, 'filter_js_array' ) );
 	}
 
 	/**

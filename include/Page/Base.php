@@ -245,6 +245,13 @@ abstract class BM_Page_Base {
 			'bulk_move_posts' => $bulk_move_posts,
 		);
 
+		/**
+		 * Filters the localized JS translations.
+		 *
+		 * @param array $translation_array A key value pair.
+		 */
+		$translation_array = apply_filters( 'bm_javascript_array', $translation_array );
+
 		wp_localize_script( 'bulk-move', 'BULK_MOVE', $translation_array );
 	}
 
