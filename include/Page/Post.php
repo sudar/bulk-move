@@ -24,21 +24,7 @@ class BM_Page_Post extends BM_Page_Base {
 
 		parent::register();
 
-		add_filter( 'bm_plugin_action_links', array( $this, 'append_to_plugin_action_links' ) );
 		add_filter( 'bm_metabox_user_meta_field', array( $this, 'modify_metabox_user_meta_field_if_bulk_delete_is_installed' ), 10, 2 );
-	}
-
-	/**
-	 * Append link to the current page in plugin list.
-	 *
-	 * @param array $links Array of links.
-	 *
-	 * @return array Modified list of links.
-	 */
-	public function append_to_plugin_action_links( $links ) {
-		$links[ $this->get_slug() ] = '<a href="admin.php?page=' . $this->get_slug() . '">' . $this->page_title . '</a>';
-
-		return $links;
 	}
 
 	/**

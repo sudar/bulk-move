@@ -121,6 +121,8 @@ abstract class BM_Page_Base {
 		add_action( "load-{$this->hook_suffix}", array( $this, 'on_load_page' ) );
 
 		add_action( 'admin_init', array( $this, 'verify_nonce' ) );
+
+		add_filter( 'bm_plugin_action_links', array( $this, 'append_to_plugin_action_links' ) );
 	}
 
 	/**
@@ -390,5 +392,18 @@ abstract class BM_Page_Base {
 		$bulk_move = bulk_move();
 
 		return $bulk_move->get_plugin_file();
+	}
+
+	/**
+	 * Append link to the current page in plugin list.
+	 *
+	 * @param array $links Array of links.
+	 *
+	 * @return array Modified list of links.
+	 */
+	public function append_to_plugin_action_links( $links ) {
+		$links[ $this->get_slug() ] = '<a href="admin.php?page=' . $this->get_slug() . '">' . $this->page_title . '</a>';
+
+		return $links;
 	}
 }
