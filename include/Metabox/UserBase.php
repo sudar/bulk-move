@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  */
 abstract class BM_Metabox_UserBase extends BM_Metabox_Base {
 	/**
-	 * Renders the User roles dropdown
+	 * Renders the User roles dropdown.
 	 *
 	 * @since 2.0.0
 	 *
