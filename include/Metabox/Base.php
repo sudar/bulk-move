@@ -107,8 +107,7 @@ abstract class BM_Metabox_Base {
 		add_action( "add_meta_boxes_{$this->page_hook_suffix}", array( $this, 'setup_metabox' ) );
 
 		add_action( 'bm_' . $this->action, array( $this, 'process' ) );
-		add_filter( 'bd_javascript_array', array( $this, 'filter_js_array' ) );
-
+		add_filter( 'bm_javascript_array', array( $this, 'filter_js_array' ) );
 	}
 
 	/**
@@ -173,7 +172,7 @@ abstract class BM_Metabox_Base {
 	 * @return string Name of the User Meta field.
 	 */
 	protected function get_hidden_box_user_meta_field() {
-		$meta_field = 'metaboxhidden_bulk-wp_page_' . $this->page_slug;
+		$meta_field = 'metaboxhidden_toplevel_page_' . $this->page_slug;
 
 		/**
 		 * Filter the user meta field that determines whether a metabox is hidden or not.

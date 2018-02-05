@@ -122,6 +122,8 @@ abstract class BM_Page_Base {
 
 		add_action( 'admin_init', array( $this, 'verify_nonce' ) );
 
+		add_filter( 'bm_plugin_action_links', array( $this, 'append_to_plugin_action_links' ) );
+		add_filter( 'bm_metabox_user_meta_field', array( $this, 'modify_metabox_user_meta_field_if_bulk_delete_is_installed' ), 10, 2 );
 	}
 
 	/**
@@ -239,13 +241,11 @@ abstract class BM_Page_Base {
 		);
 
 		/**
-		 * Filters the localized translations for bulk-move.js.
+		 * Filters the localized JS translations.
 		 *
-		 * @since 2.0.0
-		 *
-		 * @param array $translation_array A single dimensional translation array.
+		 * @param array $translation_array A key value pair.
 		 */
-		$translation_array = apply_filters( 'bm_bulk-move_js_i18n', $translation_array );
+		$translation_array = apply_filters( 'bm_javascript_array', $translation_array );
 
 		wp_localize_script( 'bulk-move', 'BULK_MOVE', $translation_array );
 	}
@@ -385,5 +385,41 @@ abstract class BM_Page_Base {
 		$bulk_move = bulk_move();
 
 		return $bulk_move->get_plugin_file();
+	}
+
+	/**
+	 * Append link to the current page in plugin list.
+	 *
+	 * @param array $links Array of links.
+	 *
+	 * @return array Modified list of links.
+	 */
+	public function append_to_plugin_action_links( $links ) {
+		$links[ $this->get_slug() ] = '<a href="admin.php?page=' . $this->get_slug() . '">' . $this->page_title . '</a>';
+
+		return $links;
+	}
+	/**
+	 * Modify the user meta field that determines if a metabox is hidden by user or not.
+	 *
+	 * This can change based on whether Bulk Delete plugin is installed or not.
+	 *
+	 * @param string $meta_field User Meta field.
+	 * @param string $page_slug  Page Slug.
+	 *
+	 * @return string Modified user meta field.
+	 */
+	public function modify_metabox_user_meta_field_if_bulk_delete_is_installed( $meta_field, $page_slug ) {
+		if ( $page_slug !== $this->slug ) {
+			return $meta_field;
+		}
+
+		if ( $this->is_bulkwp_menu_registered() ) {
+			return $meta_field;
+		}
+
+		// The meta field should be in the following form.
+		// $meta_field = 'metaboxhidden_bulk-wp_page_' . $this->page_slug;
+		return "metaboxhidden_bulk-wp_page_{$this->slug}";
 	}
 }

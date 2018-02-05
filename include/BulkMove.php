@@ -214,6 +214,9 @@ final class BM_BulkMove {
 		if ( empty( $this->admin_pages ) ) {
 			$posts_page                                   = $this->get_post_admin_page();
 			$this->admin_pages[ $posts_page->get_slug() ] = $posts_page;
+
+			$users_page                                   = $this->get_user_admin_page();
+			$this->admin_pages[ $users_page->get_slug() ] = $users_page;
 		}
 
 		/**
@@ -338,5 +341,18 @@ final class BM_BulkMove {
 		$posts_page->add_metabox( new BM_Metabox_Posts_CategoryToTag() );
 
 		return $posts_page;
+	}
+
+	/**
+	 * Gets the Bulk Move User admin page.
+	 *
+	 * @return \BM_Page_User Bulk Move User admin page.
+	 */
+	private function get_user_admin_page() {
+		$users_page = new BM_Page_User();
+
+		$users_page->add_metabox( new BM_Metabox_Users_Role() );
+
+		return $users_page;
 	}
 }

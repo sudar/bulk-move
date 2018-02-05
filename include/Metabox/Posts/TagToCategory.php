@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  *
  * @since 2.0.0
  */
-class BM_Metabox_Posts_TagToCategory extends BM_Metabox_Base {
+class BM_Metabox_Posts_TagToCategory extends BM_Metabox_PostBase {
 
     protected function initialize() {
         $this->meta_box_slug         = 'bm-posts-tag-to-category';
@@ -83,12 +83,13 @@ class BM_Metabox_Posts_TagToCategory extends BM_Metabox_Base {
             $current_tags = array_diff( $current_tags, array( $options['tag'] ) );
 
             $current_cats = wp_get_post_categories( $post->ID );
-	        $current_cats[]  = $options['cat'];
+
             if ( $options['overwrite'] ) {
                 // Override is set, so remove all common tags.
 	            $current_cats = array();
             }
 
+	        $current_cats[]  = $options['cat'];
             $current_tags = array_values( $current_tags );
             wp_set_post_tags( $post->ID, $current_tags );
 
