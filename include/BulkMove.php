@@ -65,13 +65,6 @@ final class BM_BulkMove {
 	private $ajax_handlers = array();
 
 	/**
-	 * List of loadies.
-	 *
-	 * @var BM_Loadie[]
-	 */
-	private $loadies = array();
-
-	/**
 	 * Singleton instance of the Plugin.
 	 *
 	 * @var \BM_BulkMove
@@ -142,10 +135,6 @@ final class BM_BulkMove {
 		add_action( 'admin_menu', array( $this, 'on_admin_menu' ) );
 
 		add_filter( 'plugin_action_links', array( $this, 'filter_plugin_action_links' ), 10, 2 );
-
-		foreach ( $this->loadies as $loadie ) {
-			$loadie->load();
-		}
 
 		$this->loaded = true;
 
