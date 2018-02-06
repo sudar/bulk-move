@@ -16,7 +16,7 @@ class BM_Request_CustomTaxonomyAction {
 		add_action( 'wp_ajax_load_custom_taxonomy_by_post_type', array( $this, 'load_custom_taxonomy_by_post_type' ) );
 		add_action( 'wp_ajax_load_custom_terms_by_taxonomy', array( $this, 'load_custom_terms_by_taxonomy' ) );
 
-		add_filter( 'bm_bulk-move_js_i18n', array( $this, 'include_ajax_params_in_localization' ) );
+		add_filter( 'bm_javascript_array', array( $this, 'include_ajax_params_in_localization' ) );
 	}
 
 	/**
@@ -25,7 +25,7 @@ class BM_Request_CustomTaxonomyAction {
 	 * @since 2.0.0
 	 */
 	public static function load_custom_taxonomy_by_post_type() {
-		/* Nonce verification is done in BasePage class. */
+		check_ajax_referer( 'bulk-move-posts', 'nonce' );
 
 		$post_type  = isset( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : 'post';
 		$taxonomies = get_object_taxonomies( $post_type );
@@ -47,7 +47,7 @@ class BM_Request_CustomTaxonomyAction {
 	 * @since 2.0.0
 	 */
 	public static function load_custom_terms_by_taxonomy() {
-		/* Nonce verification is done in BasePage class. */
+		check_ajax_referer( 'bulk-move-posts', 'nonce' );
 
 		$terms    = array();
 		$taxonomy = isset( $_POST['taxonomy'] ) ? sanitize_text_field( $_POST['taxonomy'] ) : '';
@@ -90,8 +90,8 @@ class BM_Request_CustomTaxonomyAction {
 	 */
 	public function include_ajax_params_in_localization( $translation_array ) {
 		$bulk_move_posts = array(
-			'action_get_taxonomy' => 'load_custom_taxonomy_by_post_type',
-			'action_get_terms'    => 'load_custom_terms_by_taxonomy',
+			'get_taxonomy_action' => 'load_custom_taxonomy_by_post_type',
+			'get_terms_action'    => 'load_custom_terms_by_taxonomy',
 			'nonce'               => wp_create_nonce( 'bulk-move-posts' ),
 		);
 

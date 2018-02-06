@@ -59,9 +59,9 @@ jQuery(document).ready(function () {
 	jQuery( '#smbm_move_custom_taxonomy_post_type' ).change( function () {
 		var selectedPostType = jQuery( this ).val(),
 			payload = {
-				'action'                : BULK_MOVE.bulk_move_posts.action_get_taxonomy,
-				'bulk-move-posts-nonce' : BULK_MOVE.bulk_move_posts.nonce,
-				'post_type'             : selectedPostType
+				'action'    : BULK_MOVE.bulk_move_posts.get_taxonomy_action,
+				'nonce'     : BULK_MOVE.bulk_move_posts.nonce,
+				'post_type' : selectedPostType
 			};
 
 		if ( '-1' === selectedPostType ) {
@@ -112,7 +112,7 @@ jQuery(document).ready(function () {
 
 		var selectedTaxonomy = jQuery( this ).val(),
 			payload = {
-				'action'   : BULK_MOVE.bulk_move_posts.action_get_terms,
+				'action'   : BULK_MOVE.bulk_move_posts.get_terms_action,
 				'nonce'    : BULK_MOVE.bulk_move_posts.nonce,
 				'taxonomy' : selectedTaxonomy
 			};
