@@ -164,7 +164,7 @@ final class BM_BulkMove {
 	}
 
 	/**
-	 * Get the list of AJAX Handlers;
+	 * Get the list of AJAX Handlers.
 	 *
 	 * @return array List of AJAX Handlers.
 	 */
