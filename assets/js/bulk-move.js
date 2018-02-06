@@ -21,7 +21,7 @@ BULK_MOVE.validate_same_user_roles = function() {
 
 jQuery(document).ready(function () {
 
-    jQuery('button[value="move_tags"], button[value="move_cats"], button[value="move_category_by_tag"], button[value="move_custom_taxonomy"], button[value="move_users_by_role"]').click(function (e) {
+    jQuery('button[value="move_tags"], button[value="move_cats"], button[value="move_category_by_tag"], button[value="move_users_by_role"]').click(function (e) {
 
         e.preventDefault();
 
