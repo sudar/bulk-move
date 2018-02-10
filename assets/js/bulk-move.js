@@ -8,28 +8,44 @@
 
 /*jslint browser: true, devel: true*/
 /*global BULK_MOVE, jQuery, document, postboxes, pagenow, ajaxurl*/
-BULK_MOVE.validate_same_user_roles = function() {
-
-    var fromUserRole = jQuery( '#bm-users-by-role-from-roles-list' ).val().toLowerCase(),
-        ToUserRole = jQuery( '#bm-users-by-role-to-roles-list' ).val().toLowerCase();
-
-    fromUserRole = jQuery.trim( fromUserRole );
-    ToUserRole = jQuery.trim( ToUserRole );
-
-    return fromUserRole === ToUserRole;
-};
-
 jQuery(document).ready(function () {
+    /**
+     * Gets the value of the selected element & trims the value.
+     *
+     * @param   selectedElem
+     * @returns {String} Returns empty string when element doesn't exist.
+     *          Otherwise returns the element's value.
+     */
+    var getValAndTrim = function (selectedElem) {
+
+        if (selectedElem.length === 0) {
+            return '';
+        }
+
+        return selectedElem.val();
+    };
+
+    /**
+     * Validates to TRUE when the same User role is selected on
+     * both sides during Bulk Move Users.
+     *
+     * @returns {boolean}
+     */
+    BULK_MOVE.validate_same_user_roles = function () {
+
+        var fromUserRole = getValAndTrim(jQuery('#bm-users-by-role-from-roles-list')),
+            toUserRole = getValAndTrim(jQuery('#bm-users-by-role-to-roles-list'));
+
+        return fromUserRole.toLowerCase() === toUserRole.toLowerCase();
+    };
 
     jQuery('button[value="move_tags"], button[value="move_cats"], button[value="move_category_by_tag"], button[value="move_users_by_role"]').click(function (e) {
-
-        e.preventDefault();
 
         var currentButton = jQuery(this).val(),
             valid = true,
             errorKey;
 
-        if (!(currentButton in BULK_MOVE.validators)) {
+        if (!BULK_MOVE.validators.hasOwnProperty(currentButton)) {
             return confirm(BULK_MOVE.msg.move_warning);
         }
 
@@ -37,13 +53,14 @@ jQuery(document).ready(function () {
             valid = valid && (!BULK_MOVE[validator]());
 
             if (!valid) {
+                e.preventDefault();
                 errorKey = validator.replace('validate_', '');
                 alert(BULK_MOVE['error'][errorKey]);
                 return false;
             }
         });
 
-        if ( valid ) {
+        if (valid) {
             return confirm(BULK_MOVE.msg.move_warning);
         }
     });
