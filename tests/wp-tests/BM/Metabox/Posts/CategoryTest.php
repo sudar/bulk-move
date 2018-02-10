@@ -133,7 +133,7 @@ class CategoryTest extends WPCoreUnitTestCase {
 
 		// Assert that category 1 has no posts.
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( 0, count( $posts_in_cat1 ) );
+		$this->assertEquals( 1, count( $posts_in_cat1 ) );
 
 		// Assert that common category has one posts.
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
