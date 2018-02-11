@@ -73,6 +73,10 @@ class BM_Metabox_Posts_Tag extends BM_Metabox_PostBase {
 		foreach ( $posts as $post ) {
 			$current_tags = wp_get_post_tags( $post->ID, array( 'fields' => 'ids' ) );
 
+			if ( $current_tags instanceof WP_Error || ( ! is_array( $current_tags ) ) ) {
+				continue;
+			}
+
 			if ( $options['overwrite'] ) {
 				// Override is set, so remove all common tags.
 				$current_tags = array();
