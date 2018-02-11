@@ -140,7 +140,7 @@ class TagTest extends WPCoreUnitTestCase {
 
         // Assert that tag 1 has no posts.
         $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
-        $this->assertEquals( 0, count( $posts_in_tag1 ) );
+        $this->assertEquals( 1, count( $posts_in_tag1 ) );
 
         // Assert that common tag has one posts.
         $posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
