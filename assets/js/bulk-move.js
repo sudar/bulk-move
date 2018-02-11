@@ -39,7 +39,7 @@ jQuery(document).ready(function () {
         return fromUserRole.toLowerCase() === toUserRole.toLowerCase();
     };
 
-    jQuery('button[value="move_tags"], button[value="move_cats"], button[value="move_category_by_tag"], button[value="move_users_by_role"]').click(function (e) {
+    jQuery('button[value="move_tags"], button[value="move_cats"], button[value="move_category_by_tag"], button[value="move_users_by_role"], button[value="move_custom_taxonomy"]').click(function (e) {
 
         var currentButton = jQuery(this).val(),
             valid = true,
