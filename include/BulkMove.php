@@ -293,28 +293,6 @@ final class BM_BulkMove {
 	}
 
 	/**
-	 * Add a Bulk Move Loadie.
-	 * The `load()` method of the Loadies will be called when Bulk Move is loaded.
-	 *
-	 * @param BM_Loadie $loadie Loadie to be loaded.
-	 *
-	 * @return bool False if Bulk Move is already loaded or if $loadie is not of `Loadie` type. True otherwise.
-	 */
-	public function add_loadie( $loadie ) {
-		if ( $this->loaded ) {
-			return false;
-		}
-
-		if ( ! $loadie instanceof BM_Loadie ) {
-			return false;
-		}
-
-		$this->loadies[] = $loadie;
-
-		return true;
-	}
-
-	/**
 	 * Get Bulk Move Post admin page.
 	 *
 	 * @return \BM_Page_Post Bulk Move Post admin page.
