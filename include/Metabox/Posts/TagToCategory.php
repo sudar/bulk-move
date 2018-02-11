@@ -36,7 +36,7 @@ class BM_Metabox_Posts_TagToCategory extends BM_Metabox_PostBase {
                     <td scope="row" >
                         <?php
                         wp_dropdown_categories( array(
-                            'name'             => 'smbm_mc_mapped_cat',
+                            'name'             => 'smbm_mt_mapped_cat',
                             'show_count'       => true,
                             'hierarchical'     => true,
                             'orderby'          => 'NAME',
@@ -63,7 +63,7 @@ class BM_Metabox_Posts_TagToCategory extends BM_Metabox_PostBase {
         $options = array();
 
         $options['tag']       = absint( $request['smbm_mt_tag'] );
-        $options['cat']       =  absint( $request['smbm_mc_mapped_cat'] );
+        $options['cat']       =  absint( $request['smbm_mt_mapped_cat'] );
         $options['overwrite'] = $this->process_overwrite_filter( $request );
 
         return $options;
