@@ -8,7 +8,7 @@
 class BM_Request_CustomTaxonomyAction {
 
 	/**
-	 * The BM_Loadie() calls this method.
+	 * Entry point for the BM_Request_CustomTaxonomyAction class.
 	 *
 	 * @since 2.0.0
 	 */
