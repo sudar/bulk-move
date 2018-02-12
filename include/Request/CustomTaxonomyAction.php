@@ -24,7 +24,7 @@ class BM_Request_CustomTaxonomyAction {
 	 *
 	 * @since 2.0.0
 	 */
-	public static function load_custom_taxonomy_by_post_type() {
+	public function load_custom_taxonomy_by_post_type() {
 		check_ajax_referer( 'bulk-move-posts', 'nonce' );
 
 		$post_type  = isset( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : 'post';
@@ -46,7 +46,7 @@ class BM_Request_CustomTaxonomyAction {
 	 *
 	 * @since 2.0.0
 	 */
-	public static function load_custom_terms_by_taxonomy() {
+	public function load_custom_terms_by_taxonomy() {
 		check_ajax_referer( 'bulk-move-posts', 'nonce' );
 
 		$terms    = array();
