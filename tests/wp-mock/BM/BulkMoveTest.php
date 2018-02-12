@@ -55,14 +55,7 @@ class BulkMoveTest extends WPMockTestCase {
 		$this->assertConditionsMet();
 	}
 
-	/**
-	 * Test if translations are loaded.
-	 *
-	 * Skipped for now till the dependencies are resolved.
-	 */
-	public function test_translation_is_loaded() {
-		self::markTestSkipped( 'Skipping this for now.' );
-
+	function test_translation_is_loaded() {
 		\WP_Mock::userFunction( 'load_plugin_textdomain', array(
 			'times' => 1,
 			'args' => array( 'bulk-move', false, \WP_Mock\Functions::type( 'string' ) )
