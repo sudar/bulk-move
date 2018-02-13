@@ -32,8 +32,8 @@
     "test:html-coverage": "npm run test:coverage && npm run test:merge-coverage -- --html code-coverage/html/",
     "test:cover-coverage": "npm run test:coverage && npm run test:merge-coverage -- --clover=code-coverage/bulk-move.clover",
     "phpcs": "vendor/bin/phpcs -p *.php include/ --standard=PHPCompatibility --runtime-set testVersion 5.2-",
-    "check-composer": "composer validate --no-check-all --strict",
-    "travis": "npm run check-composer && npm run phpcs && npm run test:cover-coverage"
+    "composer:validate": "composer validate",
+    "travis": "npm run composer:validate && npm run phpcs && npm run test:cover-coverage"
   },
   "private": true
 }
