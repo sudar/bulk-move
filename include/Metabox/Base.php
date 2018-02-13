@@ -301,4 +301,27 @@ abstract class BM_Metabox_Base {
 			'updated'
 		);
 	}
+
+	/**
+	 * Render the post type dropdown.
+	 *
+	 * All the public post types are listed in the dropdown.
+	 *
+	 * @since 2.0.0
+	 */
+	protected function render_post_type_dropdown() {
+	?>
+		<select name="smbm_<?php echo esc_attr( $this->action ); ?>_post_type" id="smbm_<?php echo esc_attr( $this->action ); ?>_post_type">
+			<option value="-1"><?php _e( 'Select Post type', 'bulk-move' ); ?></option>
+
+			<?php
+			$custom_post_types = get_post_types( array( 'public' => true ) );
+			?>
+
+			<?php foreach ( $custom_post_types as $post_type ) : ?>
+				<option value="<?php echo esc_attr( $post_type ); ?>"><?php echo esc_html( $post_type ); ?></option>
+			<?php endforeach; ?>
+		</select>
+	<?php
+	}
 }

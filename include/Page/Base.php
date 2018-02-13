@@ -235,17 +235,9 @@ abstract class BM_Page_Base {
 			'select_one' => __( 'Please select least one option', 'bulk-move' ),
 		);
 
-		// TODO: Add this from Bulk_Move_Posts class using a filter.
-		$bulk_move_posts = array(
-			'action_get_taxonomy' => 'load_custom_taxonomy_by_post_type',
-			'action_get_terms'    => 'load_custom_terms_by_taxonomy',
-//			'nonce'               => wp_create_nonce( self::BOX_CUSTOM_TERMS_NONCE ),
-		);
-
 		$translation_array = array(
-			'msg'             => $msg,
-			'error'           => $error,
-			'bulk_move_posts' => $bulk_move_posts,
+			'msg'   => $msg,
+			'error' => $error,
 		);
 
 		/**

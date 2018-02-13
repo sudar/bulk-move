@@ -55,7 +55,7 @@ class BM_Metabox_Posts_Tag extends BM_Metabox_PostBase {
 		$options = array();
 
 		$options['old_tag']   = absint( $request['smbm_mt_old_tag'] );
-		$options['new_tag']   = ( - 1 === $request['smbm_mt_new_tag'] ) ? - 1 : absint( $request['smbm_mt_new_tag'] );
+		$options['new_tag']   = ( '-1' === $request['smbm_mt_new_tag'] ) ? -1 : absint( $request['smbm_mt_new_tag'] );
 		$options['overwrite'] = $this->process_overwrite_filter( $request );
 
 		return $options;
@@ -68,23 +68,28 @@ class BM_Metabox_Posts_Tag extends BM_Metabox_PostBase {
 			'tag__in'   => $options['old_tag'],
 			'post_type' => 'post',
 			'nopaging'  => 'true',
-		));
+		) );
 
 		foreach ( $posts as $post ) {
-            $current_tags = wp_get_post_tags( $post->ID, array( 'fields' => 'ids' ) );
-            $current_tags = array_diff( $current_tags, array( $options['old_tag'] ) );
+			$current_tags = wp_get_post_tags( $post->ID, array( 'fields' => 'ids' ) );
 
-            if ( $options['overwrite'] ) {
-                // Override is set, so remove all common tags.
-                $current_tags = array();
-            }
+			if ( $current_tags instanceof WP_Error || ( ! is_array( $current_tags ) ) ) {
+				continue;
+			}
 
-            if ( -1 !== $options['new_tag'] ) {
-                $current_tags[] = $options['new_tag'];
-            }
+			if ( $options['overwrite'] ) {
+				// Override is set, so remove all common tags.
+				$current_tags = array();
+			}
 
-            $current_tags = array_values( $current_tags );
-            wp_set_post_tags( $post->ID, $current_tags );
+			if ( -1 === $options['new_tag'] ) {
+				$current_tags = array_diff( $current_tags, array( $options['old_tag'] ) );
+
+			} else {
+				$current_tags[] = $options['new_tag'];
+			}
+
+			wp_set_post_tags( $post->ID, $current_tags );
 		}
 
 		return count( $posts );

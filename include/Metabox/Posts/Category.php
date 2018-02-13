@@ -90,14 +90,20 @@ class BM_Metabox_Posts_Category extends BM_Metabox_PostBase {
 		) );
 
 		foreach ( $posts as $post ) {
-			$current_cats = array_diff( wp_get_post_categories( $post->ID ), array( $options['old_cat'] ) );
+			$current_cats = wp_get_post_categories( $post->ID );
+
+			if ( $current_cats instanceof WP_Error || ( ! is_array( $current_cats ) ) ) {
+				continue;
+			}
 
 			if ( $options['overwrite'] ) {
 				// Override is set, so remove all common categories.
 				$current_cats = array();
 			}
 
-			if ( -1 !== $options['new_cat'] ) {
+			if ( -1 === $options['new_cat'] ) {
+				$current_cats = array_diff( $current_cats, array( $options['old_cat'] ) );
+			} else {
 				$current_cats[] = $options['new_cat'];
 			}
 
