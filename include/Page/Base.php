@@ -258,7 +258,7 @@ abstract class BM_Page_Base {
 	 * Enqueue styles.
 	 */
 	public function enqueue_styles() {
-		wp_enqueue_style( 'bulk-move', $this->get_plugin_dir_url() . 'assets/css/bulk-move.css', false, BM_BulkMove::VERSION );
+		wp_enqueue_style( 'bulk-move', $this->get_plugin_dir_url() . 'assets/css/bulk-move.css', array(), BM_BulkMove::VERSION );
 	}
 
 	/**
