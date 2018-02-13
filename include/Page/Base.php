@@ -101,7 +101,7 @@ abstract class BM_Page_Base {
 	 * Register page.
 	 */
 	protected function register_page() {
-		$this->hook_suffix = add_submenu_page(
+		$hook_suffiix = add_submenu_page(
 			$this->get_base_page_slug(),
 			$this->page_title,
 			$this->menu_title,
@@ -109,6 +109,10 @@ abstract class BM_Page_Base {
 			$this->slug,
 			array( $this, 'render_page' )
 		);
+
+		if ( $hook_suffiix ) {
+			$this->hook_suffix = $hook_suffiix;
+		}
 	}
 
 	/**
