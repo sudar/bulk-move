@@ -18,7 +18,9 @@
     "type": "git",
     "url": "https://github.com/sudar/bulk-move.git"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt": "^1.0.2"
+  },
   "scripts": {
     "test:unit": "vendor/bin/phpunit",
     "unit": "npm run test:unit -- --printer=Codedungeon\\\\PHPUnitPrettyResultPrinter\\\\Printer",

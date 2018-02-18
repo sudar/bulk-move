@@ -9,6 +9,42 @@
 /*jslint browser: true, devel: true*/
 /*global BULK_MOVE, jQuery, document, postboxes, pagenow, ajaxurl*/
 jQuery(document).ready(function () {
+	/**
+	 * Enable select2
+	 */
+	jQuery( '.select2' ).select2();
+
+	jQuery( '.select2Ajax' ).select2({
+		ajax: {
+    			url: ajaxurl, 
+    			dataType: 'json',
+    			delay: 250, 
+    			data: function (params) {
+    				var term = jQuery(this).attr('data-term');
+      				return {
+        				q: params.term, 
+        				term: term,
+        				action: 'load_taxonomy_term' 
+      				};
+    			},
+    			processResults: function( data ) {
+				var options = [];
+				if ( data ) {
+ 
+					jQuery.each( data, function( index, text ) { 
+						options.push( { id: text[0], text: text[1] } );
+					});
+ 
+				}
+				return {
+					results: options
+				};
+			},
+			cache: true
+		},
+		minimumInputLength: 3 // the minimum of symbols to input before perform a search
+	});
+	
     /**
      * Gets the value of the selected element & trims the value.
      *

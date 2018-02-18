@@ -69,9 +69,38 @@ function load_bulk_move() {
 	$bulk_move->set_plugin_file( __FILE__ );
 
 	add_action( 'plugins_loaded', array( $bulk_move, 'load' ), 101 );
+
+	/**
+	 * This is Ajax hook, It's runs when user search categories or tags on bulk-delete-posts page
+	 *
+	 * @since 5.7.0
+	 */
+	add_action( 'wp_ajax_load_taxonomy_term', 'load_taxonomy_term' );
 }
 
 load_bulk_move();
+
+/**
+ * Ajax call back function for getting taxonomies to load select2 options.
+ *
+ * @since 5.7.0
+ */
+function load_taxonomy_term(){
+	$return = array();
+
+	$terms = get_terms( array(
+		'taxonomy' => $_GET['term'],
+		'hide_empty' => false,
+		'search' => $_GET['q']
+	) );
+
+	foreach ( $terms as $term ) {
+		$return[] = array( absint($term->term_id), $term->name.' ('. $term->count.  __( ' Posts', 'bulk-delete' ) . ')' ); 
+	}
+
+	echo json_encode( $return );
+	die;
+}
 
 /**
  * The main function responsible for returning the one true BM_BulkMove

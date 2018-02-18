@@ -31,26 +31,38 @@ class BM_Metabox_Posts_Category extends BM_Metabox_PostBase {
 				<tr>
 					<td scope="row" >
 						<?php
-						wp_dropdown_categories( array(
-							'name'         => 'smbm_mc_selected_cat',
-							'show_count'   => true,
-							'hierarchical' => true,
-							'orderby'      => 'NAME',
-							'hide_empty'   => false,
-						) );
+						$categories = get_categories( array(
+								'hide_empty' => false,
+							)
+						);
+
+						if( count($categories) > 50 ){?>
+							<select class="select2Ajax" name="smbm_mc_selected_cat" data-term="category" data-placeholder="<?php _e( 'Select Categories', 'bulk-delete' ); ?>" style="width:300px">
+							</select>
+						<?php }else{?>
+							<select class="select2" name="smbm_mc_selected_cat" data-placeholder="<?php _e( 'Select Categories', 'bulk-delete' ); ?>">
+							<?php foreach ( $categories as $category ) { ?>
+								<option value="<?php echo $category->cat_ID; ?>"><?php echo $category->cat_name, ' (', $category->count, ' ', __( 'Posts', 'bulk-delete' ), ')'; ?></option>
+							<?php } ?>
+							</select>
+						<?php }
 						?>
 						==>
 					</td>
 					<td scope="row" >
 						<?php
-						wp_dropdown_categories( array(
-							'name'             => 'smbm_mc_mapped_cat',
-							'show_count'       => true,
-							'hierarchical'     => true,
-							'orderby'          => 'NAME',
-							'hide_empty'       => false,
-							'show_option_none' => __( 'Remove Category', 'bulk-move' ),
-						) );
+						if( count($categories) > 50 ){?>
+							<select class="select2Ajax" name="smbm_mc_mapped_cat" data-term="category" data-placeholder="<?php _e( 'Remove Category', 'bulk-delete' ); ?>" style="width:300px">
+								<option value="-1" selected="selected"><?php _e( 'Remove Category', 'bulk-delete' ); ?></option>
+							</select>
+						<?php }else{?>
+							<select class="select2" name="smbm_mc_mapped_cat" data-placeholder="<?php _e( 'Select Categories', 'bulk-delete' ); ?>">
+								<option value="-1" selected="selected"><?php _e( 'Remove Category', 'bulk-delete' ); ?></option>
+							<?php foreach ( $categories as $category ) { ?>
+								<option value="<?php echo $category->cat_ID; ?>"><?php echo $category->cat_name, ' (', $category->count, ' ', __( 'Posts', 'bulk-delete' ), ')'; ?></option>
+							<?php } ?>
+							</select>
+						<?php }
 						?>
 					</td>
 				</tr>

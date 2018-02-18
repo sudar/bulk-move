@@ -230,6 +230,7 @@ abstract class BM_Page_Base {
 	 */
 	public function enqueue_script() {
 		wp_enqueue_script( 'bulk-move', $this->get_plugin_dir_url() . 'assets/js/bulk-move.js', array( 'jquery', 'postbox' ), BM_BulkMove::VERSION, true );
+		wp_enqueue_script( 'select2', $this->get_plugin_dir_url() . 'assets/js/select2.min.js', array( 'jquery' ), '4.0.0', true );
 
 		$msg = array(
 			'move_warning' => __( 'Are you sure you want to move all the selected posts', 'bulk-move' ),
@@ -259,6 +260,7 @@ abstract class BM_Page_Base {
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( 'bulk-move', $this->get_plugin_dir_url() . 'assets/css/bulk-move.css', array(), BM_BulkMove::VERSION );
+		wp_enqueue_style( 'select2', $this->get_plugin_dir_url() . 'assets/css/select2.min.css', array(), '4.0.0' );
 	}
 
 	/**
