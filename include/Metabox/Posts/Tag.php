@@ -30,11 +30,37 @@ class BM_Metabox_Posts_Tag extends BM_Metabox_PostBase {
 			<table class="optiontable">
 				<tr>
 					<td scope="row" >
-						<?php $this->render_tags_dropdown( 'smbm_mt_old_tag', $tags ); ?>
+						<?php
+						$tags = get_tags();
+
+						if( count($tags) > 50 ){?>
+							<select class="select2Ajax" name="smbm_mt_old_tag" data-term="post_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
+							</select>
+						<?php }else{?>
+							<select class="select2" name="smbm_mt_old_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
+							<?php foreach ( $tags as $tag ) { ?>
+								<option value="<?php echo absint( $tag->term_id ); ?>"><?php echo $tag->name, ' (', $tag->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
+							<?php } ?>
+							</select>
+						<?php }
+						?>
 						==>
 					</td>
 					<td scope="row" >
-						<?php $this->render_tags_dropdown( 'smbm_mt_new_tag', $tags, true ); ?>
+						<?php 
+						if( count($tags) > 50 ){?>
+							<select class="select2Ajax" name="smbm_mt_new_tag" data-term="post_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
+								<option value="-1" selected="selected"><?php _e( 'Remove Tag', 'bulk-move' ); ?></option>
+							</select>
+						<?php }else{?>
+							<select class="select2" name="smbm_mt_new_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
+								<option value="-1" selected="selected"><?php _e( 'Remove Tag', 'bulk-move' ); ?></option>
+							<?php foreach ( $tags as $tag ) { ?>
+								<option value="<?php echo absint( $tag->term_id ); ?>"><?php echo $tag->name, ' (', $tag->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
+							<?php } ?>
+							</select>
+						<?php }
+						// $this->render_tags_dropdown( 'smbm_mt_new_tag', $tags, true ); ?>
 					</td>
 				</tr>
 
