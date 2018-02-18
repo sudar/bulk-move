@@ -7,8 +7,6 @@
 /node_modules/
 /vendor/
 /assets/vendor/
-/assets/js/*.js
-/assets/css/*.css
 /assets/**/*.map
 
 # IDE #
