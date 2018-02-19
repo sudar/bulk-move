@@ -176,49 +176,40 @@ jQuery(document).ready(function () {
 			return;
 		}
 
-		jQuery.ajaxSetup( { async: false } );
+		jQuery( 'tr.term-select-row' ).show();
 
-		jQuery.post( ajaxurl, payload, function( response ) {
-
-			if ( ! response.success ) {
-				return;
-			}
-
-			var terms = response.data.terms || {};
-
-			if ( jQuery.isEmptyObject( terms ) ) {
-				alert( response.data.no_term_msg );
-
-				return;
-			}
-
-			jQuery( 'tr.term-select-row' ).show();
-
-			// Reset options on each AJAX request.
-			jQuery( '#smbm_mbct_selected_term, #smbm_mbct_mapped_term' ).children( 'option' ).remove();
-
-			jQuery( '<option/>', {
-				'value': '-1',
-				'text': response.data.select_term_label
-			}).appendTo( '#smbm_mbct_selected_term' );
-
-			jQuery( '<option/>', {
-				'value': '-1',
-				'text': response.data.remove_term_label
-			}).appendTo( '#smbm_mbct_mapped_term' );
-
-			jQuery.each( terms, function( termId, term ) {
-				jQuery( '<option/>', {
-					'value': termId,
-					'text': term['term_name']
-				}).appendTo( '#smbm_mbct_selected_term' );
-
-				jQuery( '<option/>', {
-					'value': termId,
-					'text': term['term_name']
-				}).appendTo( '#smbm_mbct_mapped_term' );
-			});
+		jQuery( '#smbm_mbct_selected_term, #smbm_mbct_mapped_term' ).select2({
+			ajax: {
+    			url: ajaxurl, 
+    			dataType: 'json',
+    			delay: 250, 
+    			data: function (params) {
+    				var term = selectedTaxonomy;
+      				return {
+        				q: params.term, 
+        				term: term,
+        				action: 'load_taxonomy_term' 
+      				};
+    			},
+    			processResults: function( data ) {
+					var options = [];
+					if ( data ) {
+	 
+						jQuery.each( data, function( index, text ) { 
+							options.push( { id: text[0], text: text[1] } );
+						});
+	 
+					}
+					return {
+						results: options
+					};
+				},
+				cache: true
+			},
+			width: '300px',
+			minimumInputLength: 3 // the minimum of symbols to input before perform a search
 		});
+
 	});
 
 	jQuery( '#smbm_mbct_selected_term, #smbm_mbct_mapped_term' ).change( function() {
