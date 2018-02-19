@@ -37,10 +37,10 @@ class BM_Metabox_Posts_Category extends BM_Metabox_PostBase {
 						);
 
 						if( count($categories) > 50 ){?>
-							<select class="select2Ajax" name="smbm_mc_selected_cat" data-term="category" data-placeholder="<?php _e( 'Select Categories', 'bulk-move' ); ?>" style="width:300px">
+							<select class="select2Ajax" name="smbm_mc_selected_cat" data-term="category" data-placeholder="<?php _e( 'Select Category', 'bulk-move' ); ?>" style="width:300px">
 							</select>
 						<?php }else{?>
-							<select class="select2" name="smbm_mc_selected_cat" data-placeholder="<?php _e( 'Select Categories', 'bulk-move' ); ?>">
+							<select class="select2" name="smbm_mc_selected_cat" data-placeholder="<?php _e( 'Select Category', 'bulk-move' ); ?>">
 							<?php foreach ( $categories as $category ) { ?>
 								<option value="<?php echo $category->cat_ID; ?>"><?php echo $category->cat_name, ' (', $category->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
 							<?php } ?>
@@ -56,7 +56,7 @@ class BM_Metabox_Posts_Category extends BM_Metabox_PostBase {
 								<option value="-1" selected="selected"><?php _e( 'Remove Category', 'bulk-move' ); ?></option>
 							</select>
 						<?php }else{?>
-							<select class="select2" name="smbm_mc_mapped_cat" data-placeholder="<?php _e( 'Select Categories', 'bulk-move' ); ?>">
+							<select class="select2" name="smbm_mc_mapped_cat" data-placeholder="<?php _e( 'Select Category', 'bulk-move' ); ?>">
 								<option value="-1" selected="selected"><?php _e( 'Remove Category', 'bulk-move' ); ?></option>
 							<?php foreach ( $categories as $category ) { ?>
 								<option value="<?php echo $category->cat_ID; ?>"><?php echo $category->cat_name, ' (', $category->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
