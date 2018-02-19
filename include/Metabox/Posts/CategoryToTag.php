@@ -30,19 +30,40 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_PostBase {
             <table class="optiontable">
                 <tr>
                     <td scope="row">
-						<?php
-						wp_dropdown_categories( array(
-							'name'         => 'smbm_mct_cat',
-							'show_count'   => true,
-							'hierarchical' => true,
-							'orderby'      => 'NAME',
-							'hide_empty'   => false,
-						) );
-						?>
+                    	<?php
+                        $categories = get_categories( array(
+                                'hide_empty' => false,
+                            )
+                        );
+
+                        if( count($categories) > 50 ){?>
+                            <select class="select2Ajax" name="smbm_mct_cat" data-term="category" data-placeholder="<?php _e( 'Select Categories', 'bulk-delete' ); ?>" style="width:300px">
+                            </select>
+                        <?php }else{?>
+                            <select class="select2" name="smbm_mct_cat" data-placeholder="<?php _e( 'Select Categories', 'bulk-delete' ); ?>">
+                            <?php foreach ( $categories as $category ) { ?>
+                                <option value="<?php echo $category->cat_ID; ?>"><?php echo $category->cat_name, ' (', $category->count, ' ', __( 'Posts', 'bulk-delete' ), ')'; ?></option>
+                            <?php } ?>
+                            </select>
+                        <?php }
+                        ?>
                         ==>
                     </td>
                     <td scope="row">
-						<?php $this->render_tags_dropdown( 'smbm_mct_tag', $tags ); ?>
+                    	<?php
+                        $tags = get_tags();
+
+                        if( count($tags) > 50 ){?>
+                            <select class="select2Ajax" name="smbm_mct_tag" data-term="post_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
+                            </select>
+                        <?php }else{?>
+                            <select class="select2" name="smbm_mct_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
+                            <?php foreach ( $tags as $tag ) { ?>
+                                <option value="<?php echo absint( $tag->term_id ); ?>"><?php echo $tag->name, ' (', $tag->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
+                            <?php } ?>
+                            </select>
+                        <?php }
+                        ?>
                     </td>
                 </tr>
 
