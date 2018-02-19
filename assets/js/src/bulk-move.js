@@ -55,7 +55,7 @@ jQuery(document).ready(function () {
             if (!valid) {
                 e.preventDefault();
                 errorKey = validator.replace('validate_', '');
-                alert(BULK_MOVE['error'][errorKey]);
+                alert(BULK_MOVE.error.errorKey);
                 return false;
             }
         });
@@ -174,12 +174,12 @@ jQuery(document).ready(function () {
 			jQuery.each( terms, function( termId, term ) {
 				jQuery( '<option/>', {
 					'value': termId,
-					'text': term['term_name']
+					'text': term.term_name
 				}).appendTo( '#smbm_mbct_selected_term' );
 
 				jQuery( '<option/>', {
 					'value': termId,
-					'text': term['term_name']
+					'text': term.term_name
 				}).appendTo( '#smbm_mbct_mapped_term' );
 			});
 		});
