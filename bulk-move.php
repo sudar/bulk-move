@@ -95,7 +95,7 @@ function load_taxonomy_term(){
 	) );
 
 	foreach ( $terms as $term ) {
-		$return[] = array( absint($term->term_id), $term->name.' ('. $term->count.  __( ' Posts', 'bulk-delete' ) . ')' ); 
+		$return[] = array( absint($term->term_id), $term->name.' ('. $term->count.  __( ' Posts', 'bulk-move' ) . ')' ); 
 	}
 
 	echo json_encode( $return );
