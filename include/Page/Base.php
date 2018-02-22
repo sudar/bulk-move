@@ -422,8 +422,6 @@ abstract class BM_Page_Base {
 			return $meta_field;
 		}
 
-		// The meta field should be in the following form.
-		// $meta_field = 'metaboxhidden_bulk-wp_page_' . $this->page_slug;
 		return "metaboxhidden_bulk-wp_page_{$this->slug}";
 	}
 }
