@@ -229,7 +229,7 @@ abstract class BM_Page_Base {
 	 * Enqueue JavaScript.
 	 */
 	public function enqueue_script() {
-		wp_enqueue_script( 'bulk-move', $this->get_plugin_dir_url() . 'assets/js/bulk-move.js', array( 'jquery', 'postbox' ), BM_BulkMove::VERSION, true );
+		wp_enqueue_script( 'bulk-move', $this->get_plugin_dir_url() . 'assets/js/src/bulk-move.js', array( 'jquery', 'postbox' ), BM_BulkMove::VERSION, true );
 
 		$msg = array(
 			'move_warning' => __( 'Are you sure you want to move all the selected posts', 'bulk-move' ),

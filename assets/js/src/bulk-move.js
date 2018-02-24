@@ -55,14 +55,16 @@ jQuery(document).ready(function () {
             if (!valid) {
                 e.preventDefault();
                 errorKey = validator.replace('validate_', '');
-                alert(BULK_MOVE.error.errorKey);
+                alert(BULK_MOVE.error[ errorKey ]);
                 return false;
             }
+            return;
         });
 
         if (valid) {
             return confirm(BULK_MOVE.msg.move_warning);
         }
+        return;
     });
 
 	// Enable toggles for all modules.
