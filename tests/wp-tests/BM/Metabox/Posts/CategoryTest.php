@@ -45,15 +45,20 @@ class CategoryTest extends WPCoreUnitTestCase {
 			'new_cat'   => $cat2,
 			'overwrite' => true,
 		);
-		$this->category_metabox->move( $options );
 
-		// Assert that category 1 has no posts.
-		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( 0, count( $posts_in_cat1 ) );
+		$move_result = $this->category_metabox->move( $options );
+		
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that category 1 has no posts.
+			$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+			$this->assertEquals( 0, count( $posts_in_cat1 ) );
 
-		// Assert that category 2 has two posts.
-		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( 2, count( $posts_in_cat2 ) );
+			// Assert that category 2 has two posts.
+			$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+			$this->assertEquals( 2, count( $posts_in_cat2 ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -85,19 +90,24 @@ class CategoryTest extends WPCoreUnitTestCase {
 			'new_cat'   => $cat2,
 			'overwrite' => true,
 		);
-		$this->category_metabox->move( $options );
 
-		// Assert that category 1 has no posts.
-		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( 0, count( $posts_in_cat1 ) );
+		$move_result = $this->category_metabox->move( $options );
 
-		// Assert that common category has no posts.
-		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( 0, count( $posts_in_common_cat ) );
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that category 1 has no posts.
+			$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+			$this->assertEquals( 0, count( $posts_in_cat1 ) );
 
-		// Assert that category 2 has two posts.
-		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( 2, count( $posts_in_cat2 ) );
+			// Assert that common category has no posts.
+			$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
+			$this->assertEquals( 0, count( $posts_in_common_cat ) );
+
+			// Assert that category 2 has two posts.
+			$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+			$this->assertEquals( 2, count( $posts_in_cat2 ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -129,19 +139,24 @@ class CategoryTest extends WPCoreUnitTestCase {
 			'new_cat'   => $cat2,
 			'overwrite' => false,
 		);
-		$this->category_metabox->move( $options );
 
-		// Assert that category 1 has no posts.
-		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( 0, count( $posts_in_cat1 ) );
+		$move_result = $this->category_metabox->move( $options );
 
-		// Assert that common category has one posts.
-		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( 1, count( $posts_in_common_cat ) );
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that category 1 has no posts.
+			$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+			$this->assertEquals( 0, count( $posts_in_cat1 ) );
 
-		// Assert that category 2 has two posts.
-		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( 2, count( $posts_in_cat2 ) );
+			// Assert that common category has one posts.
+			$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
+			$this->assertEquals( 1, count( $posts_in_common_cat ) );
+
+			// Assert that category 2 has two posts.
+			$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+			$this->assertEquals( 2, count( $posts_in_cat2 ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -169,15 +184,20 @@ class CategoryTest extends WPCoreUnitTestCase {
 			'new_cat'   => -1,
 			'overwrite' => true,
 		);
-		$this->category_metabox->move( $options );
 
-		// Assert that category 1 has no posts.
-		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( 0, count( $posts_in_cat1 ) );
+		$move_result = $this->category_metabox->move( $options );
 
-		// Assert that category 2 has one posts.
-		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( 1, count( $posts_in_cat2 ) );
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that category 1 has no posts.
+			$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+			$this->assertEquals( 0, count( $posts_in_cat1 ) );
+
+			// Assert that category 2 has one posts.
+			$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+			$this->assertEquals( 1, count( $posts_in_cat2 ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -209,19 +229,24 @@ class CategoryTest extends WPCoreUnitTestCase {
 			'new_cat'   => -1,
 			'overwrite' => false,
 		);
-		$this->category_metabox->move( $options );
 
-		// Assert that category 1 has no posts.
-		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( 0, count( $posts_in_cat1 ) );
+		$move_result = $this->category_metabox->move( $options );
 
-		// Assert that common category has one posts.
-		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( 1, count( $posts_in_common_cat ) );
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that category 1 has no posts.
+			$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+			$this->assertEquals( 0, count( $posts_in_cat1 ) );
 
-		// Assert that category 2 has one posts.
-		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( 1, count( $posts_in_cat2 ) );
+			// Assert that common category has one posts.
+			$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
+			$this->assertEquals( 1, count( $posts_in_common_cat ) );
+
+			// Assert that category 2 has one posts.
+			$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+			$this->assertEquals( 1, count( $posts_in_cat2 ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -253,19 +278,24 @@ class CategoryTest extends WPCoreUnitTestCase {
 			'new_cat'   => -1,
 			'overwrite' => true,
 		);
-		$this->category_metabox->move( $options );
 
-		// Assert that category 1 has no posts.
-		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( 0, count( $posts_in_cat1 ) );
+		$move_result = $this->category_metabox->move( $options );
 
-		// Assert that common category has no posts.
-		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( 0, count( $posts_in_common_cat ) );
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that category 1 has no posts.
+			$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+			$this->assertEquals( 0, count( $posts_in_cat1 ) );
 
-		// Assert that category 2 has one posts.
-		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( 1, count( $posts_in_cat2 ) );
+			// Assert that common category has no posts.
+			$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
+			$this->assertEquals( 0, count( $posts_in_common_cat ) );
+
+			// Assert that category 2 has one posts.
+			$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+			$this->assertEquals( 1, count( $posts_in_cat2 ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -293,15 +323,20 @@ class CategoryTest extends WPCoreUnitTestCase {
 			'new_cat'   => $cat2,
 			'overwrite' => true,
 		);
-		$this->category_metabox->move( $options );
 
-		// Assert that default category has no posts.
-		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( 0, count( $posts_in_default_cat ) );
+		$move_result = $this->category_metabox->move( $options );
 
-		// Assert that category 2 has two posts.
-		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( 2, count( $posts_in_cat2 ) );
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that default category has no posts.
+			$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
+			$this->assertEquals( 0, count( $posts_in_default_cat ) );
+
+			// Assert that category 2 has two posts.
+			$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+			$this->assertEquals( 2, count( $posts_in_cat2 ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -333,8 +368,10 @@ class CategoryTest extends WPCoreUnitTestCase {
 			'new_cat'   => $cat2,
 			'overwrite' => true,
 		);
-		$this->category_metabox->move( $options );
 
+		$move_result = $this->category_metabox->move( $options );
+
+		if ( ! is_wp_error( $move_result ) ) {
 		// Assert that default category has no posts.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
 		$this->assertEquals( 0, count( $posts_in_default_cat ) );
@@ -346,6 +383,9 @@ class CategoryTest extends WPCoreUnitTestCase {
 		// Assert that category 2 has two posts.
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 2, count( $posts_in_cat2 ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -377,19 +417,24 @@ class CategoryTest extends WPCoreUnitTestCase {
 			'new_cat'   => $cat2,
 			'overwrite' => false,
 		);
-		$this->category_metabox->move( $options );
 
-		// Assert that default category has no posts.
-		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( 0, count( $posts_in_default_cat ) );
+		$move_result = $this->category_metabox->move( $options );
 
-		// Assert that common category has one posts.
-		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( 1, count( $posts_in_common_cat ) );
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that default category has no posts.
+			$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
+			$this->assertEquals( 0, count( $posts_in_default_cat ) );
 
-		// Assert that category 2 has two posts.
-		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( 2, count( $posts_in_cat2 ) );
+			// Assert that common category has one posts.
+			$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
+			$this->assertEquals( 1, count( $posts_in_common_cat ) );
+
+			// Assert that category 2 has two posts.
+			$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+			$this->assertEquals( 2, count( $posts_in_cat2 ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -413,11 +458,16 @@ class CategoryTest extends WPCoreUnitTestCase {
 			'new_cat'   => -1,
 			'overwrite' => true,
 		);
-		$this->category_metabox->move( $options );
 
-		// Assert that default category has one post.
-		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( 1, count( $posts_in_default_cat ) );
+		$move_result = $this->category_metabox->move( $options );
+
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that default category has one post.
+			$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
+			$this->assertEquals( 1, count( $posts_in_default_cat ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -445,15 +495,20 @@ class CategoryTest extends WPCoreUnitTestCase {
 			'new_cat'   => -1,
 			'overwrite' => true,
 		);
-		$this->category_metabox->move( $options );
 
-		// Assert that default category has one post.
-		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( 1, count( $posts_in_default_cat ) );
+		$move_result = $this->category_metabox->move( $options );
 
-		// Assert that common category has 0 posts.
-		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( 0, count( $posts_in_common_cat ) );
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that default category has one post.
+			$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
+			$this->assertEquals( 1, count( $posts_in_default_cat ) );
+
+			// Assert that common category has 0 posts.
+			$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
+			$this->assertEquals( 0, count( $posts_in_common_cat ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -481,14 +536,19 @@ class CategoryTest extends WPCoreUnitTestCase {
 			'new_cat'   => -1,
 			'overwrite' => false,
 		);
-		$this->category_metabox->move( $options );
 
-		// Assert that default category has 0 post.
-		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( 0, count( $posts_in_default_cat ) );
+		$move_result = $this->category_metabox->move( $options );
 
-		// Assert that common category has one posts.
-		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
-		$this->assertEquals( 1, count( $posts_in_common_cat ) );
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that default category has 0 post.
+			$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
+			$this->assertEquals( 0, count( $posts_in_default_cat ) );
+
+			// Assert that common category has one posts.
+			$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
+			$this->assertEquals( 1, count( $posts_in_common_cat ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 }
