@@ -45,16 +45,21 @@ class TagTest extends WPCoreUnitTestCase {
 			'old_tag'   => $tag1,
 			'new_tag'   => $tag2,
 			'overwrite' => true,
-		);
-		$this->tag_metabox->move( $options );
+        );
+        
+        $move_result = $this->tag_metabox->move( $options );
+        
+        if ( ! is_wp_error( $move_result ) ) {
+            // Assert that tag 1 has no posts.
+            $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
+            $this->assertEquals( 0, count( $posts_in_tag1 ) );
 
-		// Assert that tag 1 has no posts.
-		$posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
-		$this->assertEquals( 0, count( $posts_in_tag1 ) );
-
-		// Assert that tag 2 has two posts.
-		$posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
-		$this->assertEquals( 2, count( $posts_in_tag2 ) );
+            // Assert that tag 2 has two posts.
+            $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
+            $this->assertEquals( 2, count( $posts_in_tag2 ) );
+        } else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -88,20 +93,25 @@ class TagTest extends WPCoreUnitTestCase {
 		    'old_tag'   => $tag1,
 		    'new_tag'   => $tag2,
 		    'overwrite' => true,
-		);
-		$this->tag_metabox->move( $options );
+        );
+        
+		$move_result = $this->tag_metabox->move( $options );
 
-		// Assert that tag 1 has no posts.
-		$posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
-		$this->assertEquals( 0, count( $posts_in_tag1 ) );
+        if ( ! is_wp_error( $move_result ) ) {
+            // Assert that tag 1 has no posts.
+            $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
+            $this->assertEquals( 0, count( $posts_in_tag1 ) );
 
-		// Assert that common tag has 0 posts.
-		$posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
-		$this->assertEquals( 0, count( $posts_in_common_tag ) );
+            // Assert that common tag has 0 posts.
+            $posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
+            $this->assertEquals( 0, count( $posts_in_common_tag ) );
 
-		// Assert that tag 2 has two posts.
-		$posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
-		$this->assertEquals( 2, count( $posts_in_tag2 ) );
+            // Assert that tag 2 has two posts.
+            $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
+            $this->assertEquals( 2, count( $posts_in_tag2 ) );
+        } else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -136,19 +146,24 @@ class TagTest extends WPCoreUnitTestCase {
             'new_tag'   => $tag2,
             'overwrite' => false,
         );
-        $this->tag_metabox->move( $options );
+        
+        $move_result = $this->tag_metabox->move( $options );
 
-        // Assert that tag 1 has no posts.
-        $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
-        $this->assertEquals( 0, count( $posts_in_tag1 ) );
+        if ( ! is_wp_error( $move_result ) ) {
+            // Assert that tag 1 has no posts.
+            $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
+            $this->assertEquals( 0, count( $posts_in_tag1 ) );
 
-        // Assert that common tag has one posts.
-        $posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
-        $this->assertEquals( 1, count( $posts_in_common_tag ) );
+            // Assert that common tag has one posts.
+            $posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
+            $this->assertEquals( 1, count( $posts_in_common_tag ) );
 
-        // Assert that tag 2 has two posts.
-        $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
-        $this->assertEquals( 2, count( $posts_in_tag2 ) );
+            // Assert that tag 2 has two posts.
+            $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
+            $this->assertEquals( 2, count( $posts_in_tag2 ) );
+        } else {
+			echo $move_result->get_error_message();
+		}
 	}
 
     /**
@@ -179,15 +194,20 @@ class TagTest extends WPCoreUnitTestCase {
             'new_tag'   => -1,
             'overwrite' => true,
         );
-        $this->tag_metabox->move( $options );
 
-        // Assert that tag 1 has no posts.
-        $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
-        $this->assertEquals( 0, count( $posts_in_tag1 ) );
+        $move_result = $this->tag_metabox->move( $options );
 
-        // Assert that tag 2 has one posts.
-        $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
-        $this->assertEquals( 1, count( $posts_in_tag2 ) );
+        if ( ! is_wp_error( $move_result ) ) {
+            // Assert that tag 1 has no posts.
+            $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
+            $this->assertEquals( 0, count( $posts_in_tag1 ) );
+
+            // Assert that tag 2 has one posts.
+            $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
+            $this->assertEquals( 1, count( $posts_in_tag2 ) );
+        } else {
+			echo $move_result->get_error_message();
+		}
     }
 
     /**
@@ -222,19 +242,24 @@ class TagTest extends WPCoreUnitTestCase {
             'new_tag'   => -1,
             'overwrite' => true,
         );
-        $this->tag_metabox->move( $options );
 
-        // Assert that tag 1 has no posts.
-        $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
-        $this->assertEquals( 0, count( $posts_in_tag1 ) );
+        $move_result = $this->tag_metabox->move( $options );
 
-        // Assert that common tag has 0 posts.
-        $posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
-        $this->assertEquals( 0, count( $posts_in_common_tag ) );
+        if ( ! is_wp_error( $move_result ) ) {
+            // Assert that tag 1 has no posts.
+            $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
+            $this->assertEquals( 0, count( $posts_in_tag1 ) );
 
-        // Assert that tag 2 has one posts.
-        $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
-        $this->assertEquals( 1, count( $posts_in_tag2 ) );
+            // Assert that common tag has 0 posts.
+            $posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
+            $this->assertEquals( 0, count( $posts_in_common_tag ) );
+
+            // Assert that tag 2 has one posts.
+            $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
+            $this->assertEquals( 1, count( $posts_in_tag2 ) );
+        } else {
+			echo $move_result->get_error_message();
+		}
     }
 
     /**
@@ -269,18 +294,23 @@ class TagTest extends WPCoreUnitTestCase {
             'new_tag'   => -1,
             'overwrite' => false,
         );
-        $this->tag_metabox->move( $options );
 
-        // Assert that tag 1 has no posts.
-        $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
-        $this->assertEquals( 0, count( $posts_in_tag1 ) );
+        $move_result = $this->tag_metabox->move( $options );
+        
+        if ( ! is_wp_error( $move_result ) ) {
+            // Assert that tag 1 has no posts.
+            $posts_in_tag1 = $this->get_posts_by_tag( $tag1 );
+            $this->assertEquals( 0, count( $posts_in_tag1 ) );
 
-        // Assert that common tag has one posts.
-        $posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
-        $this->assertEquals( 1, count( $posts_in_common_tag ) );
+            // Assert that common tag has one posts.
+            $posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
+            $this->assertEquals( 1, count( $posts_in_common_tag ) );
 
-        // Assert that tag 2 has one posts.
-        $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
-        $this->assertEquals( 1, count( $posts_in_tag2 ) );
+            // Assert that tag 2 has one posts.
+            $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
+            $this->assertEquals( 1, count( $posts_in_tag2 ) );
+        } else {
+			echo $move_result->get_error_message();
+		}
     }
 }
