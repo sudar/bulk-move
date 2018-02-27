@@ -175,9 +175,7 @@ jQuery(document).ready(function () {
 
 			return;
 		}
-
 		jQuery( 'tr.term-select-row' ).show();
-
 		jQuery( '#smbm_mbct_selected_term, #smbm_mbct_mapped_term' ).select2({
 			ajax: {
     			url: ajaxurl, 
