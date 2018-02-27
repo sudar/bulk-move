@@ -171,8 +171,8 @@ final class BM_BulkMove {
 	private function get_ajax_handlers() {
 		if ( empty( $this->ajax_handlers ) ) {
 			$this->ajax_handlers[] = new BM_Request_CustomTaxonomyAction();
+			$this->ajax_handlers[] = new BM_Request_LoadTaxonomyTerm();
 		}
-
 		/**
 		 * List of ajax handlers.
 		 *

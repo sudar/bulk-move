@@ -22,9 +22,10 @@ jQuery(document).ready(function () {
     			data: function (params) {
     				var term = jQuery(this).attr('data-term');
       				return {
-        				q: params.term, 
-        				term: term,
-        				action: 'load_taxonomy_term' 
+        				'q': params.term, 
+        				'term': term,
+        				'action': BULK_MOVE.bulk_move_posts_taxonomy.load_taxonomy_action,
+        				'nonce': BULK_MOVE.bulk_move_posts_taxonomy.nonce,
       				};
     			},
     			processResults: function( data ) {
@@ -184,9 +185,10 @@ jQuery(document).ready(function () {
     			data: function (params) {
     				var term = selectedTaxonomy;
       				return {
-        				q: params.term, 
-        				term: term,
-        				action: 'load_taxonomy_term' 
+        				'q': params.term, 
+        				'term': term,
+        				'action': BULK_MOVE.bulk_move_posts_taxonomy.load_taxonomy_action,
+        				'nonce': BULK_MOVE.bulk_move_posts_taxonomy.nonce,
       				};
     			},
     			processResults: function( data ) {
