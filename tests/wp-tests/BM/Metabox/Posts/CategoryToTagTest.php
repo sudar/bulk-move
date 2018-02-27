@@ -48,15 +48,20 @@ class CategoryToTagTest extends WPCoreUnitTestCase {
 			'tag'       => $tag,
 			'overwrite' => true,
 		);
-		$this->category_to_tag_metabox->move( $options );
 
-		// Assert that tag 1 has two posts.
-		$posts_in_tag = $this->get_posts_by_tag( $tag );
-		$this->assertEquals( 2, count( $posts_in_tag ) );
+		$move_result = $this->category_to_tag_metabox->move( $options );
 
-		// Assert that category has no posts.
-		$posts_in_cat = $this->get_posts_by_category( $cat );
-		$this->assertEquals( 0, count( $posts_in_cat ) );
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that tag 1 has two posts.
+			$posts_in_tag = $this->get_posts_by_tag( $tag );
+			$this->assertEquals( 2, count( $posts_in_tag ) );
+
+			// Assert that category has no posts.
+			$posts_in_cat = $this->get_posts_by_category( $cat );
+			$this->assertEquals( 0, count( $posts_in_cat ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -91,19 +96,24 @@ class CategoryToTagTest extends WPCoreUnitTestCase {
 			'tag'       => $tag,
 			'overwrite' => false,
 		);
-		$this->category_to_tag_metabox->move( $options );
 
-		// Assert that tag has two posts.
-		$posts_in_tag = $this->get_posts_by_tag( $tag );
-		$this->assertEquals( 2, count( $posts_in_tag ) );
+		$move_result = $this->category_to_tag_metabox->move( $options );
 
-		// Assert that category has no posts.
-		$posts_in_cat = $this->get_posts_by_category( $cat );
-		$this->assertEquals( 0, count( $posts_in_cat ) );
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that tag has two posts.
+			$posts_in_tag = $this->get_posts_by_tag( $tag );
+			$this->assertEquals( 2, count( $posts_in_tag ) );
 
-		// Assert that common tag has tow posts.
-		$posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
-		$this->assertEquals( 2, count( $posts_in_common_tag ) );
+			// Assert that category has no posts.
+			$posts_in_cat = $this->get_posts_by_category( $cat );
+			$this->assertEquals( 0, count( $posts_in_cat ) );
+
+			// Assert that common tag has tow posts.
+			$posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
+			$this->assertEquals( 2, count( $posts_in_common_tag ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 
 	/**
@@ -138,18 +148,23 @@ class CategoryToTagTest extends WPCoreUnitTestCase {
 			'tag'       => $tag,
 			'overwrite' => true,
 		);
-		$this->category_to_tag_metabox->move( $options );
 
-		// Assert that tag has two posts.
-		$posts_in_tag = $this->get_posts_by_tag( $tag );
-		$this->assertEquals( 2, count( $posts_in_tag ) );
+		$move_result = $this->category_to_tag_metabox->move( $options );
 
-		// Assert that category has no posts.
-		$posts_in_cat = $this->get_posts_by_category( $cat );
-		$this->assertEquals( 0, count( $posts_in_cat ) );
+		if ( ! is_wp_error( $move_result ) ) {
+			// Assert that tag has two posts.
+			$posts_in_tag = $this->get_posts_by_tag( $tag );
+			$this->assertEquals( 2, count( $posts_in_tag ) );
 
-		// Assert that common tag has one posts.
-		$posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
-		$this->assertEquals( 1, count( $posts_in_common_tag ) );
+			// Assert that category has no posts.
+			$posts_in_cat = $this->get_posts_by_category( $cat );
+			$this->assertEquals( 0, count( $posts_in_cat ) );
+
+			// Assert that common tag has one posts.
+			$posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
+			$this->assertEquals( 1, count( $posts_in_common_tag ) );
+		} else {
+			echo $move_result->get_error_message();
+		}
 	}
 }
