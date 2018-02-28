@@ -40,7 +40,6 @@ class BM_Request_LoadTaxonomyTerm {
 		die;
 	}
 
-
 	/**
 	 * Includes the additional JS variables using the
 	 * Bulk Move JS translation array.
