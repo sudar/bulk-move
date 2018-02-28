@@ -33,7 +33,7 @@ class BM_Request_LoadTaxonomyTerm {
 		) );
 
 		foreach ( $terms as $term ) {
-			$return[] = array( absint($term->term_id), $term->name . ' (' . $term->count . __( ' Posts', 'bulk-move' ) . ')' ); 
+			$return[] = array( absint($term->term_id), $term->name . ' (' . $term->count . __( ' Posts', 'bulk-move' ) . ')' );
 		}
 
 		echo json_encode( $return );
