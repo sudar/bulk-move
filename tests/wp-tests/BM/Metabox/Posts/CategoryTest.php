@@ -283,35 +283,7 @@ class CategoryTest extends WPCoreUnitTestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
-
-	/**
-	 * Test remove default category from post
-	 */
-	public function test_remove_default_category_from_posts(){
-		// Get default category.
-		$default_cat = get_option( 'default_category' );
-
-		// Create one post.
-		$post1 = $this->factory->post->create( array( 'post_title' => 'post1' ) );
-
-		// Assert that default category has one post.
-		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-
-		$this->assertEquals( 1, count( $posts_in_default_cat ) );
-
-		// call our method.
-		$options = array(
-			'old_cat'   => $default_cat,
-			'new_cat'   => -1,
-			'overwrite' => true,
-		);
-		$this->category_metabox->move( $options );
-
-		// Assert that default category has one post.
-		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( 1, count( $posts_in_default_cat ) );
-	}
-
+	
 	/**
 	 * Test remove default category from post with overwrite.
 	 */
