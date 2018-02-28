@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Custom Taxonomy metabox's Ajax Action Class.
+ * Custom Taxonomy select2 Ajax Action Class.
  *
  * @since 2.0.0
  */
@@ -13,8 +13,7 @@ class BM_Request_LoadTaxonomyTerm {
 	 * @since 2.0.0
 	 */
 	public function load() {
-		add_action( 'wp_ajax_load_taxonomy_term', array( $this, 'load_taxonomy_term' ) );
-
+		add_action( 'wp_ajax_bm_load_taxonomy_term', array( $this, 'bm_load_taxonomy_term' ) );
 		add_filter( 'bm_javascript_array', array( $this, 'include_ajax_params_in_localization' ) );
 	}
 
@@ -23,8 +22,7 @@ class BM_Request_LoadTaxonomyTerm {
 	 *
 	 * @since 2.0.0
 	 */
-	public function load_taxonomy_term(){
-		//file_put_contents( dirname(__FILE__) . '/_debugger.php', 'ok', FILE_APPEND );
+	public function bm_load_taxonomy_term(){
 		check_ajax_referer( 'bulk-move-posts', 'nonce' );
 		$return = array();
 
@@ -55,7 +53,7 @@ class BM_Request_LoadTaxonomyTerm {
 	 */
 	public function include_ajax_params_in_localization( $translation_array ) {
 		$bulk_move_posts = array(
-			'load_taxonomy_action' => 'load_taxonomy_term',
+			'load_taxonomy_action' => 'bm_load_taxonomy_term',
 			'nonce'               => wp_create_nonce( 'bulk-move-posts' ),
 		);
 
