@@ -19,43 +19,7 @@ class CategoryTest extends WPCoreUnitTestCase {
 
 		$this->category_metabox = new \BM_Metabox_Posts_Category();
 	}
-
-	/**
-	 * Test basic case of moving categories.
-	 */
-	public function test_move_posts_from_one_cat_to_another() {
-		// Create two categories.
-		$cat1 = $this->factory->category->create( array( 'name' => 'cat1' ) );
-		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
-
-		// Create one post in each category.
-		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $cat1 ) ) );
-		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat2 ) ) );
-
-		// Assert that each category has one post.
-		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-
-		$this->assertEquals( 1, count( $posts_in_cat1 ) );
-		$this->assertEquals( 1, count( $posts_in_cat2 ) );
-
-		// call our method.
-		$options = array(
-			'old_cat'   => $cat1,
-			'new_cat'   => $cat2,
-			'overwrite' => true,
-		);
-		$this->category_metabox->move( $options );
-
-		// Assert that category 1 has no posts.
-		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
-		$this->assertEquals( 0, count( $posts_in_cat1 ) );
-
-		// Assert that category 2 has two posts.
-		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( 2, count( $posts_in_cat2 ) );
-	}
-
+	
 	/**
 	 * Test moving posts from one category to another with overwrite.
 	 */
