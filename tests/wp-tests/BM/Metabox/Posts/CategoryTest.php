@@ -195,43 +195,7 @@ class CategoryTest extends WPCoreUnitTestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 1, count( $posts_in_cat2 ) );
 	}
-
-	/**
-	 * Test basic case of moving default category.
-	 */
-	public function test_move_posts_from_default_cat_to_another() {
-		// Create one categories and get default category.
-		$default_cat = get_option( 'default_category' );
-		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
-
-		// Create one post in each category.
-		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $default_cat ) ) );
-		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat2 ) ) );
-
-		// Assert that each category has one post.
-		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-
-		$this->assertEquals( 1, count( $posts_in_default_cat ) );
-		$this->assertEquals( 1, count( $posts_in_cat2 ) );
-
-		// call our method.
-		$options = array(
-			'old_cat'   => $default_cat,
-			'new_cat'   => $cat2,
-			'overwrite' => true,
-		);
-		$this->category_metabox->move( $options );
-
-		// Assert that default category has no posts.
-		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$this->assertEquals( 0, count( $posts_in_default_cat ) );
-
-		// Assert that category 2 has two posts.
-		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
-		$this->assertEquals( 2, count( $posts_in_cat2 ) );
-	}
-
+	
 	/**
 	 * Test basic case of moving default category with overwrite.
 	 */
