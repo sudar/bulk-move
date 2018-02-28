@@ -27,13 +27,13 @@ class BM_Request_LoadTaxonomyTerm {
 		$return = array();
 
 		$terms = get_terms( array(
-			'taxonomy' => sanitize_text_field($_GET['term']),
+			'taxonomy'   => sanitize_text_field($_GET['term']),
 			'hide_empty' => false,
-			'search' => sanitize_text_field($_GET['q'])
+			'search'     => sanitize_text_field($_GET['q']),
 		) );
 
 		foreach ( $terms as $term ) {
-			$return[] = array( absint($term->term_id), $term->name.' ('. $term->count.  __( ' Posts', 'bulk-move' ) . ')' ); 
+			$return[] = array( absint($term->term_id), $term->name . ' (' . $term->count . __( ' Posts', 'bulk-move' ) . ')' ); 
 		}
 
 		echo json_encode( $return );
@@ -54,7 +54,7 @@ class BM_Request_LoadTaxonomyTerm {
 	public function include_ajax_params_in_localization( $translation_array ) {
 		$bulk_move_posts = array(
 			'load_taxonomy_action' => 'bm_load_taxonomy_term',
-			'nonce'               => wp_create_nonce( 'bulk-move-posts' ),
+			'nonce'                => wp_create_nonce( 'bulk-move-posts' ),
 		);
 
 		$translation_array['bulk_move_posts_taxonomy'] = $bulk_move_posts;

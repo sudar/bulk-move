@@ -60,7 +60,6 @@ class BM_Metabox_Posts_Tag extends BM_Metabox_PostBase {
 							<?php } ?>
 							</select>
 						<?php }
-						// $this->render_tags_dropdown( 'smbm_mt_new_tag', $tags, true ); ?>
 					</td>
 				</tr>
 
