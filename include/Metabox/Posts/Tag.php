@@ -59,7 +59,7 @@ class BM_Metabox_Posts_Tag extends BM_Metabox_PostBase {
 								<option value="<?php echo absint( $tag->term_id ); ?>"><?php echo $tag->name, ' (', $tag->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
 							<?php } ?>
 							</select>
-						<?php }
+						<?php }?>
 					</td>
 				</tr>
 
