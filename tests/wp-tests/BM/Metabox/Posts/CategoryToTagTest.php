@@ -32,7 +32,10 @@ class CategoryToTagTest extends WPCoreUnitTestCase {
 		$post1 = $this->factory->post->create( array( 'post_title' => 'tag_post' ) );
 		wp_set_post_tags( $post1, array( 'tag', 'common_tag' ) );
 
-		$post2 = $this->factory->post->create( array( 'post_title' => 'post_cat', 'post_category' => array( $cat ) ) );
+		$post2 = $this->factory->post->create( array(
+			'post_title'    => 'post_cat',
+			'post_category' => array( $cat ),
+		) );
 		wp_set_post_tags( $post2, array( 'common_tag' ) );
 
 		// Assert that each tag and categories has one post.
@@ -79,7 +82,10 @@ class CategoryToTagTest extends WPCoreUnitTestCase {
 		$post1 = $this->factory->post->create( array( 'post_title' => 'tag_post' ) );
 		wp_set_post_tags( $post1, array( 'tag', 'common_tag' ) );
 
-		$post2 = $this->factory->post->create( array( 'post_title' => 'post_cat', 'post_category' => array( $cat ) ) );
+		$post2 = $this->factory->post->create( array(
+			'post_title'    => 'post_cat',
+			'post_category' => array( $cat ),
+		) );
 		wp_set_post_tags( $post2, array( 'common_tag' ) );
 
 		// Assert that each tag and categories has one post.
