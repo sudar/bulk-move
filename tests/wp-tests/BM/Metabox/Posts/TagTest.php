@@ -103,7 +103,7 @@ class TagTest extends WPCoreUnitTestCase {
         $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
         $this->assertEquals( 2, count( $posts_in_tag2 ) );
     }
-    
+
     /**
 	 * Test Moving tag without overwrite.
 	 */
@@ -150,7 +150,7 @@ class TagTest extends WPCoreUnitTestCase {
         $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
         $this->assertEquals( 2, count( $posts_in_tag2 ) );
     }
-    
+
     /**
      * Test basic case of removing tags.
      */
@@ -189,7 +189,7 @@ class TagTest extends WPCoreUnitTestCase {
         $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
         $this->assertEquals( 1, count( $posts_in_tag2 ) );
     }
-    
+
     /**
      * Test removing posts from tag with overwrite.
      */
@@ -236,7 +236,7 @@ class TagTest extends WPCoreUnitTestCase {
         $posts_in_tag2 = $this->get_posts_by_tag( $tag2 );
         $this->assertEquals( 1, count( $posts_in_tag2 ) );
     }
-    
+
     /**
      * Test removing posts from tag without overwrite.
      */
