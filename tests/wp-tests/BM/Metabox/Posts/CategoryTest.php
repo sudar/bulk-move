@@ -78,7 +78,7 @@ class CategoryTest extends WPCoreUnitTestCase {
 		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $cat1, $common_cat ) ) );
 		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat2 ) ) );
 
-		// Assert that each cateogry has one post.
+		// Assert that each category has one post.
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
