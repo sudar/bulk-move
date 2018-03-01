@@ -19,7 +19,7 @@ class CategoryTest extends WPCoreUnitTestCase {
 
 		$this->category_metabox = new \BM_Metabox_Posts_Category();
 	}
-	
+
 	/**
 	 * Test moving posts from one category to another with overwrite.
 	 */
