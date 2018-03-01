@@ -31,12 +31,14 @@ class BM_Metabox_Posts_Category extends BM_Metabox_PostBase {
 				<tr>
 					<td scope="row" >
 						<?php
+						echo $bm_select2_ajax_limit_categories = BM_BulkMove::get_select2_ajax_limit();
 						$categories = get_categories( array(
 								'hide_empty' => false,
+								'number'        => $bm_select2_ajax_limit_categories,
 							)
 						);
 
-						if( count($categories) > 50 ){?>
+						if( count($categories) >= $bm_select2_ajax_limit_categories){?>
 							<select class="select2Ajax" name="smbm_mc_selected_cat" data-term="category" data-placeholder="<?php _e( 'Select Category', 'bulk-move' ); ?>" style="width:300px">
 							</select>
 						<?php }else{?>

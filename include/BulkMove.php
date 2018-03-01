@@ -72,6 +72,13 @@ final class BM_BulkMove {
 	private static $instance = null;
 
 	/**
+	 * Max select2 limit.
+	 *
+	 * @var \BM_BulkMove
+	 */
+	private static $bm_select2_ajax_limit = 50;
+
+	/**
 	 * Conditionally creates the singleton instance if absent, else
 	 * returns the previously saved instance.
 	 *
@@ -321,5 +328,16 @@ final class BM_BulkMove {
 		$users_page->add_metabox( new BM_Metabox_Users_Role() );
 
 		return $users_page;
+	}
+
+	/**
+	 * Gets Select2 Max limit.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return \BM_BulkMove.
+	 */
+	public function get_select2_ajax_limit() {
+		return apply_filters( 'bm_select2_ajax_limit_categories', self::$bm_select2_ajax_limit );
 	}
 }
