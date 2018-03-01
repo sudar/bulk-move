@@ -17,7 +17,7 @@ class CategoryToTagTest extends WPCoreUnitTestCase {
 
 		$this->category_to_tag_metabox = new \BM_Metabox_Posts_CategoryToTag();
 	}
-	
+
 	/**
 	 * Test case of moving category to tag without overwrite.
 	 */
