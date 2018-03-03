@@ -18,6 +18,17 @@ class BM_Page_Post extends BM_Page_Base {
 	}
 
 	/**
+	 * Register Bulk WP Menu if Bulk Delete is not installed.
+	 */
+	public function register() {
+		if ( ! $this->is_bulkwp_menu_registered() ) {
+			$this->register_bulkwp_menu();
+		}
+
+		parent::register();
+	}
+
+	/**
 	 * Register Bulk WP Menu.
 	 */
 	protected function register_bulkwp_menu() {

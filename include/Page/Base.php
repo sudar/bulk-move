@@ -229,7 +229,7 @@ abstract class BM_Page_Base {
 	 * Enqueue JavaScript.
 	 */
 	public function enqueue_script() {
-		wp_enqueue_script( 'bulk-move', $this->get_plugin_dir_url() . 'assets/js/bulk-move.js', array( 'jquery', 'postbox' ), BM_BulkMove::VERSION, true );
+		wp_enqueue_script( 'bulk-move', $this->get_plugin_dir_url() . 'assets/js/src/bulk-move.js', array( 'jquery', 'postbox' ), BM_BulkMove::VERSION, true );
 		wp_enqueue_script( 'select2', $this->get_plugin_dir_url() . 'assets/js/select2.min.js', array( 'jquery' ), '4.0.0', true );
 
 		$msg = array(
@@ -424,8 +424,6 @@ abstract class BM_Page_Base {
 			return $meta_field;
 		}
 
-		// The meta field should be in the following form.
-		// $meta_field = 'metaboxhidden_bulk-wp_page_' . $this->page_slug;
 		return "metaboxhidden_bulk-wp_page_{$this->slug}";
 	}
 }
