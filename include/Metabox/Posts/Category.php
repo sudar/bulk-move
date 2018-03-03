@@ -31,7 +31,7 @@ class BM_Metabox_Posts_Category extends BM_Metabox_PostBase {
 				<tr>
 					<td scope="row" >
 						<?php
-						echo $bm_select2_ajax_limit_categories = BM_BulkMove::get_select2_ajax_limit();
+						$bm_select2_ajax_limit_categories = BM_BulkMove::get_select2_ajax_limit();
 						$categories = get_categories( array(
 								'hide_empty' => false,
 								'number'        => $bm_select2_ajax_limit_categories,
