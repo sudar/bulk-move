@@ -58,13 +58,11 @@ jQuery(document).ready(function () {
                 alert(BULK_MOVE.error[ errorKey ]);
                 return false;
             }
-            return;
         });
 
         if (valid) {
             return confirm(BULK_MOVE.msg.move_warning);
         }
-        return;
     });
 
 	// Enable toggles for all modules.
