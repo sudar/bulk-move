@@ -27,7 +27,7 @@ final class BM_BulkMove {
 	/**
 	 * Plugin version.
 	 */
-	const VERSION = '1.3.0';
+	const VERSION = '2.0.0';
 
 	/**
 	 * Flag to track if the plugin is loaded.
