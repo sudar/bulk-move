@@ -8,6 +8,14 @@
 class BM_Request_LoadTaxonomyTerm {
 
 	/**
+	 * Max select2 limit.
+	 *
+	 * @var \BM_BulkMove
+	 */
+
+	const BM_MAX_SELECT2_LIMIT  = 50;
+
+	/**
 	 * Entry point for the BM_Request_LoadTaxonomyTerm class.
 	 *
 	 * @since 2.0.0
@@ -60,4 +68,5 @@ class BM_Request_LoadTaxonomyTerm {
 
 		return $translation_array;
 	}
+
 }
