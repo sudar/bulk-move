@@ -12,7 +12,6 @@ class BM_Request_LoadTaxonomyTerm {
 	 *
 	 * @var \BM_BulkMove
 	 */
-
 	const BM_MAX_SELECT2_LIMIT  = 50;
 
 	/**

@@ -34,7 +34,7 @@ class BM_Metabox_Posts_Category extends BM_Metabox_PostBase {
 						$bm_select2_ajax_limit_categories = apply_filters( 'bm_select2_ajax_limit_categories', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
 
 						$categories = get_categories( array(
-								'hide_empty' => false,
+								'hide_empty'    => false,
 								'number'        => $bm_select2_ajax_limit_categories,
 							)
 						);
