@@ -55,7 +55,7 @@ jQuery(document).ready(function () {
             if (!valid) {
                 e.preventDefault();
                 errorKey = validator.replace('validate_', '');
-                alert(BULK_MOVE.error.errorKey);
+                alert(BULK_MOVE.error[ errorKey ]);
                 return false;
             }
         });
