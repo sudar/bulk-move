@@ -30,7 +30,7 @@ require $_tests_dir . '/includes/bootstrap.php';
 
 // Load BulkWP test tools.
 if ( ! file_exists( dirname( dirname( __FILE__ ) ) . '/../vendor/sudar/wp-plugin-test-tools/src/Tests/WPCore/WPCoreUnitTestCase.php' ) ) {
-	echo 'Could not find BulkWP Test tools. Have you run composer install?' . PHP_EOL;
+	echo esc_html( 'Could not find BulkWP Test tools. Have you run composer install?' );
 	exit( 1 );
 }
 require_once dirname( dirname( __FILE__ ) ) . '/../vendor/sudar/wp-plugin-test-tools/src/Tests/WPCore/WPCoreUnitTestCase.php';
