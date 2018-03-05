@@ -2,16 +2,21 @@
 
 use BulkWP\Tests\WPCore\WPCoreUnitTestCase;
 
- /**
+/**
  * Test BM_Metabox_Posts_TagToCategory class.
  */
 class TagtocategoryTest extends WPCoreUnitTestCase {
 
 	/**
+	 * Variable for base move class
+	 *
 	 * @var \BM_Metabox_Posts_TagToCategory
 	 */
 	protected $tag_to_category_metabox;
 
+	/**
+	 * Base move class setup
+	 */
 	public function setUp() {
 		parent::setUp();
 
@@ -29,10 +34,16 @@ class TagtocategoryTest extends WPCoreUnitTestCase {
 
 		// Create one post in tag and category.
 		// The post1 will also have the common category.
-		$post1 = $this->factory->post->create( array( 'post_title' => 'post_tag', 'post_category' => array( $common_cat ) ) );
+		$post1 = $this->factory->post->create( array(
+			'post_title' => 'post_tag',
+			'post_category' => array( $common_cat ),
+		) );
 		wp_set_post_tags( $post1, 'tag' );
 
-		$post2 = $this->factory->post->create( array( 'post_title' => 'post_cat', 'post_category' => array( $cat, $common_cat ) ) );
+		$post2 = $this->factory->post->create( array(
+			'post_title' => 'post_cat',
+			'post_category' => array( $cat, $common_cat ),
+		) );
 
 		// Assert that each tag and categories has one post.
 		$posts_in_tag = $this->get_posts_by_tag( $tag );
@@ -45,9 +56,9 @@ class TagtocategoryTest extends WPCoreUnitTestCase {
 
 		// call our method.
 		$options = array(
-		'tag' => $tag,
-		'cat' => $cat,
-		'overwrite' => true,
+			'tag' => $tag,
+			'cat' => $cat,
+			'overwrite' => true,
 		);
 		$this->tag_to_category_metabox->move( $options );
 
@@ -75,10 +86,16 @@ class TagtocategoryTest extends WPCoreUnitTestCase {
 
 		// Create one post in tag and category.
 		// The post1 will also have the common category.
-		$post1 = $this->factory->post->create( array( 'post_title' => 'post_tag', 'post_category' => array( $common_cat ) ) );
+		$post1 = $this->factory->post->create( array(
+			'post_title' => 'post_tag',
+			'post_category' => array( $common_cat ),
+		) );
 		wp_set_post_tags( $post1, 'tag' );
 
-		$post2 = $this->factory->post->create( array( 'post_title' => 'post_cat', 'post_category' => array( $cat, $common_cat ) ) );
+		$post2 = $this->factory->post->create( array(
+			'post_title' => 'post_cat',
+			'post_category' => array( $cat, $common_cat ),
+		) );
 
 		// Assert that each tag and categories has one post.
 		$posts_in_tag = $this->get_posts_by_tag( $tag );
@@ -91,9 +108,9 @@ class TagtocategoryTest extends WPCoreUnitTestCase {
 
 		// call our method.
 		$options = array(
-		'tag' => $tag,
-		'cat' => $cat,
-		'overwrite' => false,
+			'tag' => $tag,
+			'cat' => $cat,
+			'overwrite' => false,
 		);
 		$this->tag_to_category_metabox->move( $options );
 
