@@ -45,8 +45,8 @@ class TagtocategoryTest extends WPCoreUnitTestCase {
 
 		// call our method.
 		$options = array(
-		'tag'   => $tag,
-		'cat'   => $cat,
+		'tag' => $tag,
+		'cat' => $cat,
 		'overwrite' => true,
 		);
 		$this->tag_to_category_metabox->move( $options );
@@ -91,8 +91,8 @@ class TagtocategoryTest extends WPCoreUnitTestCase {
 
 		// call our method.
 		$options = array(
-		'tag'   => $tag,
-		'cat'   => $cat,
+		'tag' => $tag,
+		'cat' => $cat,
 		'overwrite' => false,
 		);
 		$this->tag_to_category_metabox->move( $options );
