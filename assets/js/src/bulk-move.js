@@ -1,11 +1,6 @@
-/**
- * JavaScript for Bulk move Plugin
- *
- * http://sudarmuthu.com/wordpress/bulk-move
- *
- * @author: Sudar <http://sudarmuthu.com>
- */
-
+/*! Bulk Move - v1.3.0 %>
+ * https://bulkwp.com
+ * Copyright (c) 2018; * Licensed GPLv2+ */
 /*jslint browser: true, devel: true*/
 /*global BULK_MOVE, jQuery, document, postboxes, pagenow, ajaxurl*/
 jQuery(document).ready(function () {
@@ -207,7 +202,7 @@ jQuery(document).ready(function () {
 				cache: true
 			},
 			width: '300px',
-			minimumInputLength: 3 // the minimum of symbols to input before perform a search
+			minimumInputLength: 2 // the minimum of symbols to input before perform a search
 		});
 
 		jQuery.ajaxSetup( { async: false } );
@@ -260,3 +255,5 @@ jQuery(document).ready(function () {
 	});
 
 });
+
+//# sourceMappingURL=bulk-move.js.map

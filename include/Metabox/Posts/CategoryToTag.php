@@ -31,12 +31,15 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_PostBase {
                 <tr>
                     <td scope="row">
                     	<?php
-                        $categories = get_categories( array(
-                                'hide_empty' => false,
-                            )
-                        );
+                        $bm_select2_ajax_limit_categories = apply_filters( 'bm_select2_ajax_limit_categories', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
 
-                        if( count($categories) > 50 ){?>
+						$categories = get_categories( array(
+								'hide_empty'    => false,
+								'number'        => $bm_select2_ajax_limit_categories,
+							)
+						);
+
+                        if( count($categories) >= $bm_select2_ajax_limit_categories){?>
                             <select class="select2Ajax" name="smbm_mct_cat" data-term="category" data-placeholder="<?php _e( 'Select Category', 'bulk-move' ); ?>" style="width:300px">
                             </select>
                         <?php }else{?>
@@ -51,9 +54,16 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_PostBase {
                     </td>
                     <td scope="row">
                     	<?php
-                        $tags = get_tags();
+						$bm_select2_ajax_limit_tags = apply_filters( 'bm_select2_ajax_limit_tags', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
 
-                        if( count($tags) > 50 ){?>
+						$tags = get_tags(
+							array(
+								'hide_empty'    => false,
+								'number'        => $bm_select2_ajax_limit_tags,
+							)
+						);
+
+						if( count($tags) >= $bm_select2_ajax_limit_tags){?>
                             <select class="select2Ajax" name="smbm_mct_tag" data-term="post_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
                             </select>
                         <?php }else{?>
