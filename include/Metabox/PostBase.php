@@ -15,7 +15,7 @@ abstract class BM_Metabox_PostBase extends BM_Metabox_Base {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param string $name                Select tag's name.
+	 * @param string $name Select tag's name.
 	 */
 	protected function render_categories_select( $name = '' ) {
 
@@ -43,7 +43,7 @@ abstract class BM_Metabox_PostBase extends BM_Metabox_Base {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param string $name                Select tag's name.
+	 * @param string $name Select tag's name.
 	 */
 	protected function render_tags_select( $name = '' ) {
 
