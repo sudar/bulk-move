@@ -255,5 +255,3 @@ jQuery(document).ready(function () {
 	});
 
 });
-
-//# sourceMappingURL=bulk-move.js.map
