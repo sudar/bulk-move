@@ -30,43 +30,11 @@ class BM_Metabox_Posts_Tag extends BM_Metabox_PostBase {
 			<table class="optiontable">
 				<tr>
 					<td scope="row" >
-						<?php
-						$bm_select2_ajax_limit_tags = apply_filters( 'bm_select2_ajax_limit_tags', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
-
-						$tags = get_tags(
-							array(
-								'hide_empty'    => false,
-								'number'        => $bm_select2_ajax_limit_tags,
-							)
-						);
-
-						if( count($tags) >= $bm_select2_ajax_limit_tags){?>
-							<select class="select2Ajax" name="smbm_mt_old_tag" data-term="post_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
-							</select>
-						<?php }else{?>
-							<select class="select2" name="smbm_mt_old_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
-							<?php foreach ( $tags as $tag ) { ?>
-								<option value="<?php echo absint( $tag->term_id ); ?>"><?php echo $tag->name, ' (', $tag->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
-							<?php } ?>
-							</select>
-						<?php }
-						?>
+						<?php $this->render_tags_select( 'smbm_mt_old_tag' );?>
 						==>
 					</td>
 					<td scope="row" >
-						<?php 
-						if( count($tags) >= $bm_select2_ajax_limit_tags){?>
-							<select class="select2Ajax" name="smbm_mt_new_tag" data-term="post_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
-								<option value="-1" selected="selected"><?php _e( 'Remove Tag', 'bulk-move' ); ?></option>
-							</select>
-						<?php }else{?>
-							<select class="select2" name="smbm_mt_new_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
-								<option value="-1" selected="selected"><?php _e( 'Remove Tag', 'bulk-move' ); ?></option>
-							<?php foreach ( $tags as $tag ) { ?>
-								<option value="<?php echo absint( $tag->term_id ); ?>"><?php echo $tag->name, ' (', $tag->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
-							<?php } ?>
-							</select>
-						<?php }?>
+						<?php $this->render_tags_select( 'smbm_mt_new_tag' );?>
 					</td>
 				</tr>
 

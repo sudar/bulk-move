@@ -30,42 +30,11 @@ class BM_Metabox_Posts_Category extends BM_Metabox_PostBase {
 			<table class="optiontable">
 				<tr>
 					<td scope="row" >
-						<?php
-						$bm_select2_ajax_limit_categories = apply_filters( 'bm_select2_ajax_limit_categories', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
-
-						$categories = get_categories( array(
-								'hide_empty'    => false,
-								'number'        => $bm_select2_ajax_limit_categories,
-							)
-						);
-						if( count($categories) >= $bm_select2_ajax_limit_categories){?>
-							<select class="select2Ajax" name="smbm_mc_selected_cat" data-term="category" data-placeholder="<?php _e( 'Select Category', 'bulk-move' ); ?>" style="width:300px">
-							</select>
-						<?php }else{?>
-							<select class="select2" name="smbm_mc_selected_cat" data-placeholder="<?php _e( 'Select Category', 'bulk-move' ); ?>">
-							<?php foreach ( $categories as $category ) { ?>
-								<option value="<?php echo $category->cat_ID; ?>"><?php echo $category->cat_name, ' (', $category->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
-							<?php } ?>
-							</select>
-						<?php }
-						?>
+						<?php $this->render_categories_select( 'smbm_mc_selected_cat' ); ?>
 						==>
 					</td>
 					<td scope="row" >
-						<?php 
-						if( count($categories) >= $bm_select2_ajax_limit_categories ){?>
-							<select class="select2Ajax" name="smbm_mc_mapped_cat" data-term="category" data-placeholder="<?php _e( 'Remove Category', 'bulk-move' ); ?>" style="width:300px">
-								<option value="-1" selected="selected"><?php _e( 'Remove Category', 'bulk-move' ); ?></option>
-							</select>
-						<?php }else{?>
-							<select class="select2" name="smbm_mc_mapped_cat" data-placeholder="<?php _e( 'Select Category', 'bulk-move' ); ?>">
-								<option value="-1" selected="selected"><?php _e( 'Remove Category', 'bulk-move' ); ?></option>
-							<?php foreach ( $categories as $category ) { ?>
-								<option value="<?php echo $category->cat_ID; ?>"><?php echo $category->cat_name, ' (', $category->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
-							<?php } ?>
-							</select>
-						<?php }
-						?>
+						<?php $this->render_categories_select( 'smbm_mc_mapped_cat' ); ?>
 					</td>
 				</tr>
 			</table>
