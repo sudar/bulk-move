@@ -65,12 +65,14 @@ class BM_Metabox_Posts_Category extends BM_Metabox_PostBase {
 
 	public function move( $options ) {
 		$wp_query = new WP_Query();
-		$posts    = $wp_query->query( array(
-			'category__in' => array( $options['old_cat'] ),
-			'post_type'    => 'post',
-			'nopaging'     => 'true',
-			'post_status'  => 'publish',
-		) );
+		$posts    = $wp_query->query(
+			array(
+				'category__in' => array( $options['old_cat'] ),
+				'post_type'    => 'post',
+				'nopaging'     => 'true',
+				'post_status'  => 'publish',
+			)
+		);
 
 		foreach ( $posts as $post ) {
 			$current_cats = wp_get_post_categories( $post->ID );
@@ -94,10 +96,12 @@ class BM_Metabox_Posts_Category extends BM_Metabox_PostBase {
 				$current_cats = array( get_option( 'default_category' ) );
 			}
 			$current_cats = array_values( $current_cats );
-			wp_update_post( array(
-				'ID'            => $post->ID,
-				'post_category' => $current_cats,
-			) );
+			wp_update_post(
+				array(
+					'ID'            => $post->ID,
+					'post_category' => $current_cats,
+				)
+			);
 		}
 
 		return count( $posts );

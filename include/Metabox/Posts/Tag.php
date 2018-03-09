@@ -30,11 +30,11 @@ class BM_Metabox_Posts_Tag extends BM_Metabox_PostBase {
 			<table class="optiontable">
 				<tr>
 					<td scope="row" >
-						<?php $this->render_tags_select( 'smbm_mt_old_tag' );?>
+						<?php $this->render_tags_select( 'smbm_mt_old_tag' ); ?>
 						==>
 					</td>
 					<td scope="row" >
-						<?php $this->render_tags_select( 'smbm_mt_new_tag' );?>
+						<?php $this->render_tags_select( 'smbm_mt_new_tag' ); ?>
 					</td>
 				</tr>
 
@@ -64,11 +64,13 @@ class BM_Metabox_Posts_Tag extends BM_Metabox_PostBase {
 	public function move( $options ) {
 		$wp_query = new WP_Query();
 
-		$posts = $wp_query->query( array(
-			'tag__in'   => $options['old_tag'],
-			'post_type' => 'post',
-			'nopaging'  => 'true',
-		) );
+		$posts = $wp_query->query(
+			array(
+				'tag__in'   => $options['old_tag'],
+				'post_type' => 'post',
+				'nopaging'  => 'true',
+			)
+		);
 
 		foreach ( $posts as $post ) {
 			$current_tags = wp_get_post_tags( $post->ID, array( 'fields' => 'ids' ) );

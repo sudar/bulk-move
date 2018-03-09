@@ -12,7 +12,7 @@ class BM_Request_LoadTaxonomyTerm {
 	 *
 	 * @var \BM_BulkMove
 	 */
-	const BM_MAX_SELECT2_LIMIT  = 50;
+	const BM_MAX_SELECT2_LIMIT = 50;
 
 	/**
 	 * Entry point for the BM_Request_LoadTaxonomyTerm class.
@@ -29,18 +29,20 @@ class BM_Request_LoadTaxonomyTerm {
 	 *
 	 * @since 2.0.0
 	 */
-	public function bm_load_taxonomy_term(){
+	public function bm_load_taxonomy_term() {
 		check_ajax_referer( 'bulk-move-posts', 'nonce' );
 		$return = array();
 
-		$terms = get_terms( array(
-			'taxonomy'   => sanitize_text_field($_GET['term']),
-			'hide_empty' => false,
-			'search'     => sanitize_text_field($_GET['q']),
-		) );
+		$terms = get_terms(
+			array(
+				'taxonomy'   => sanitize_text_field( $_GET['term'] ),
+				'hide_empty' => false,
+				'search'     => sanitize_text_field( $_GET['q'] ),
+			)
+		);
 
 		foreach ( $terms as $term ) {
-			$return[] = array( absint($term->term_id), $term->name . ' (' . $term->count . __( ' Posts', 'bulk-move' ) . ')' );
+			$return[] = array( absint( $term->term_id ), $term->name . ' (' . $term->count . __( ' Posts', 'bulk-move' ) . ')' );
 		}
 
 		echo json_encode( $return );

@@ -215,7 +215,8 @@ abstract class BM_Page_Base {
 	 */
 	public function modify_admin_footer_text( $footer_text ) {
 		/* translators: 1 Bulk WP Site Link, Bulk Move Review Link */
-		$footer_link = sprintf( __( 'Thank you for using <a href = "%1$s">Bulk Move</a> plugin! Kindly <a href = "%2$s">rate us</a> at <a href = "%2$s">WordPress.org</a>', 'bulk-delete' ),
+		$footer_link = sprintf(
+			__( 'Thank you for using <a href = "%1$s">Bulk Move</a> plugin! Kindly <a href = "%2$s">rate us</a> at <a href = "%2$s">WordPress.org</a>', 'bulk-delete' ),
 			'http://bulkwp.com?utm_source=wpadmin&utm_campaign=BulkMove&utm_medium=footer',
 			'http://wordpress.org/support/view/plugin-reviews/bulk-move?filter=5#postform'
 		);

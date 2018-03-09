@@ -106,7 +106,7 @@ class BM_Metabox_Posts_CustomTaxonomy extends BM_Metabox_PostBase {
 		}
 
 		if ( ! is_array( $options['post_types'] ) ) {
-		    return $posts_count;
+			return $posts_count;
 		}
 
 		foreach ( $options['post_types'] as $post_type ) {

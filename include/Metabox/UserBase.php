@@ -30,30 +30,30 @@ abstract class BM_Metabox_UserBase extends BM_Metabox_Base {
 
 		$users_by_roles = $this->get_users_count_by_roles( $users, $roles );
 
-		$field_name = $this->meta_box_slug;
+		$field_name  = $this->meta_box_slug;
 		$field_name .= ! empty( $name ) ? '-' . $name : $name;
 		$field_name .= '-roles-list';
 
 		?>
-        <select id="<?php echo sanitize_html_class( $field_name ); ?>"
-                name="<?php echo sanitize_html_class( $field_name ); ?>">
+		<select id="<?php echo sanitize_html_class( $field_name ); ?>"
+				name="<?php echo sanitize_html_class( $field_name ); ?>">
 			<?php if ( ! $hide_no_role_option ) : ?>
-                <option value="norole">
+				<option value="norole">
 					<?php echo __( 'No role', 'bulk-move' ); ?>
-					<?php echo '(' . $users_by_roles['norole'] . ')' ?>
-                </option>
+					<?php echo '(' . $users_by_roles['norole'] . ')'; ?>
+				</option>
 			<?php endif; ?>
 			<?php
 			foreach ( $roles as $role_slug => $role ) :
 				?>
-                <option value="<?php echo esc_attr( $role_slug ); ?>">
+				<option value="<?php echo esc_attr( $role_slug ); ?>">
 					<?php echo esc_html( $role['name'] ); ?>
-                    &nbsp;<?php echo '(' . $users_by_roles[ $role_slug ] . ')' ?>
-                </option>
+					&nbsp;<?php echo '(' . $users_by_roles[ $role_slug ] . ')'; ?>
+				</option>
 			<?php
 			endforeach;
 			?>
-        </select>
+		</select>
 		<?php
 	}
 
@@ -85,7 +85,6 @@ abstract class BM_Metabox_UserBase extends BM_Metabox_Base {
 
 				$users_by_roles[ $role ] = in_array( $role, $user->roles ) ? ++ $role_count : $role_count;
 			}
-
 		}
 
 		return $users_by_roles;
