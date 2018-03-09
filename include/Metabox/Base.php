@@ -234,6 +234,31 @@ abstract class BM_Metabox_Base {
 	}
 
 	/**
+	 * Render Tags Dropdown.
+	 *
+	 * Ideally this method should be included in a trait. This is added here since PHP 5.2 needs to be supported.
+	 *
+	 * @param string $name             Name for the dropdown.
+	 * @param array  $tags             Array of 'post_tag' term objects.
+	 * @param bool   $show_option_none Optional. Should the none option be added? Default false.
+	 */
+	protected function render_tags_dropdown( $name, $tags, $show_option_none = false ) {
+		?>
+		<select name="<?php echo esc_attr( $name ); ?>">
+			<?php if ( $show_option_none ) : ?>
+				<option value="-1"><?php _e( 'Remove Tag', 'bulk-move' ); ?></option>
+			<?php endif; ?>
+
+			<?php foreach ( $tags as $tag ) : ?>
+				<option value="<?php echo esc_attr( $tag->term_id ); ?>">
+					<?php echo esc_html( $tag->name ); ?> (<?php echo absint( $tag->count ), ' ', esc_html__( 'Posts', 'bulk-move' ); ?>)
+				</option>
+			<?php endforeach; ?>
+		</select>
+		<?php
+	}
+
+	/**
 	 * Render Overwrite Filter options.
 	 */
 	protected function render_overwrite_filters() {
