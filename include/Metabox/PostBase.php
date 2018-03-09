@@ -17,7 +17,7 @@ abstract class BM_Metabox_PostBase extends BM_Metabox_Base {
 	 *
 	 * @param string $name Select tag's name.
 	 */
-	protected function render_categories_select( $name = '' ) {
+	protected function render_categories_dropdown( $name ) {
 
 		$bm_select2_ajax_limit_categories = apply_filters( 'bm_select2_ajax_limit_categories', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
 
@@ -47,7 +47,7 @@ abstract class BM_Metabox_PostBase extends BM_Metabox_Base {
 	 *
 	 * @param string $name Select tag's name.
 	 */
-	protected function render_tags_select( $name = '' ) {
+	protected function render_tags_dropdown( $name ) {
 
 		$bm_select2_ajax_limit_tags = apply_filters( 'bm_select2_ajax_limit_tags', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
 

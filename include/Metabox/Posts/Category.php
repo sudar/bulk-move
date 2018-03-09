@@ -30,11 +30,11 @@ class BM_Metabox_Posts_Category extends BM_Metabox_PostBase {
 			<table class="optiontable">
 				<tr>
 					<td scope="row" >
-						<?php $this->render_categories_select( 'smbm_mc_selected_cat' ); ?>
+						<?php $this->render_categories_dropdown( 'smbm_mc_selected_cat' ); ?>
 						==>
 					</td>
 					<td scope="row" >
-						<?php $this->render_categories_select( 'smbm_mc_mapped_cat' ); ?>
+						<?php $this->render_categories_dropdown( 'smbm_mc_mapped_cat' ); ?>
 					</td>
 				</tr>
 			</table>
