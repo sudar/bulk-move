@@ -30,7 +30,7 @@ class BM_Metabox_Posts_TagToCategory extends BM_Metabox_PostBase {
 			<table class="optiontable">
 				<tr>
 					<td scope="row" >
-						<?php $this->render_tags_dropdown( 'smbm_mt_tag' ); ?>
+						<?php $this->render_tags_dropdown( 'smbm_mt_tag', $tags ); ?>
 						==>
 					</td>
 					<td scope="row" >

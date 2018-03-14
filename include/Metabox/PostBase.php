@@ -37,35 +37,4 @@ abstract class BM_Metabox_PostBase extends BM_Metabox_Base {
 			</select>
 		<?php }
 	}
-
-	/**
-	 * Renders the tags select.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @param string $name Select tag's name.
-	 */
-	protected function render_tags_dropdown( $name ) {
-
-		$bm_select2_ajax_limit_tags = apply_filters( 'bm_select2_ajax_limit_tags', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
-
-		$tags = get_tags(
-			array(
-				'hide_empty'    => false,
-				'number'        => $bm_select2_ajax_limit_tags,
-			)
-		);
-
-		if( count($tags) >= $bm_select2_ajax_limit_tags){?>
-			<select class="select2Ajax" name="<?php echo sanitize_html_class( $name ); ?>" data-term="post_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
-			</select>
-		<?php }else{?>
-			<select class="select2" name="<?php echo sanitize_html_class( $name ); ?>" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
-			<?php foreach ( $tags as $tag ) { ?>
-				<option value="<?php echo absint( $tag->term_id ); ?>"><?php echo $tag->name, ' (', $tag->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
-			<?php } ?>
-			</select>
-		<?php }
-	}
-
 }

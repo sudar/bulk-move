@@ -30,11 +30,11 @@ class BM_Metabox_Posts_Tag extends BM_Metabox_PostBase {
 			<table class="optiontable">
 				<tr>
 					<td scope="row" >
-						<?php $this->render_tags_dropdown( 'smbm_mt_old_tag' ); ?>
+						<?php $this->render_tags_dropdown( 'smbm_mt_old_tag', $tags ); ?>
 						==>
 					</td>
 					<td scope="row" >
-						<?php $this->render_tags_dropdown( 'smbm_mt_new_tag' ); ?>
+						<?php $this->render_tags_dropdown( 'smbm_mt_new_tag', $tags ); ?>
 					</td>
 				</tr>
 

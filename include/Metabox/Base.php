@@ -242,20 +242,27 @@ abstract class BM_Metabox_Base {
 	 * @param array  $tags             Array of 'post_tag' term objects.
 	 * @param bool   $show_option_none Optional. Should the none option be added? Default false.
 	 */
-	protected function render_tags_dropdown( $name, $tags, $show_option_none = false ) {
-		?>
-		<select name="<?php echo esc_attr( $name ); ?>">
-			<?php if ( $show_option_none ) : ?>
-				<option value="-1"><?php _e( 'Remove Tag', 'bulk-move' ); ?></option>
-			<?php endif; ?>
+	protected function render_tags_dropdown( $name, $tags = array(), $show_option_none = false ) {
+		$bm_select2_ajax_limit_tags = apply_filters( 'bm_select2_ajax_limit_tags', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
+		if ( empty( $tags ) ){
+			$tags = get_tags(
+				array(
+					'hide_empty'    => false,
+					'number'        => $bm_select2_ajax_limit_tags,
+				)
+			);
+		}
 
-			<?php foreach ( $tags as $tag ) : ?>
-				<option value="<?php echo esc_attr( $tag->term_id ); ?>">
-					<?php echo esc_html( $tag->name ); ?> (<?php echo absint( $tag->count ), ' ', esc_html__( 'Posts', 'bulk-move' ); ?>)
-				</option>
-			<?php endforeach; ?>
-		</select>
-		<?php
+		if( count($tags) >= $bm_select2_ajax_limit_tags){?>
+			<select class="select2Ajax" name="<?php echo sanitize_html_class( $name ); ?>" data-term="post_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
+			</select>
+		<?php }else{?>
+			<select class="select2" name="<?php echo sanitize_html_class( $name ); ?>" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
+			<?php foreach ( $tags as $tag ) { ?>
+				<option value="<?php echo absint( $tag->term_id ); ?>"><?php echo $tag->name, ' (', $tag->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
+			<?php } ?>
+			</select>
+		<?php }
 	}
 
 	/**
