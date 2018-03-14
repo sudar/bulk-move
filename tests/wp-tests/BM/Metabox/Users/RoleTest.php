@@ -12,7 +12,7 @@ class RoleTest extends WPCoreUnitTestCase {
 	 */
 	protected $user_metabox;
 
-	protected $role_key         = 'role';
+	protected $role_key = 'role';
 	protected $display_name_key = 'display_name';
 
 	protected $role1;
@@ -71,9 +71,9 @@ class RoleTest extends WPCoreUnitTestCase {
 		$this->assertEquals( count( $users_in_role1 ), 2 );
 		$this->assertEquals( count( $users_in_role2 ), 0 );
 
-		$options             = array();
-		$options['old_role'] = $this->role1[ $this->role_key ];
-		$options['new_role'] = $this->role2[ $this->role_key ];
+		$options              = array();
+		$options['old_role']  = $this->role1[ $this->role_key ];
+		$options['new_role']  = $this->role2[ $this->role_key ];
 
 		$this->user_metabox->move( $options );
 

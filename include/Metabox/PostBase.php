@@ -21,23 +21,21 @@ abstract class BM_Metabox_PostBase extends BM_Metabox_Base {
 
 		$bm_select2_ajax_limit_categories = apply_filters( 'bm_select2_ajax_limit_categories', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
 
-		$categories = get_categories(
-			array(
-				'hide_empty' => false,
-				'number'     => $bm_select2_ajax_limit_categories,
+		$categories = get_categories( array(
+				'hide_empty'    => false,
+				'number'        => $bm_select2_ajax_limit_categories,
 			)
 		);
-		if ( count( $categories ) >= $bm_select2_ajax_limit_categories ) { ?>
+		if( count($categories) >= $bm_select2_ajax_limit_categories){ ?>
 			<select class="select2Ajax" name="<?php echo sanitize_html_class( $name ); ?>" data-term="category" data-placeholder="<?php _e( 'Select Category', 'bulk-move' ); ?>" style="width:300px">
 			</select>
-		<?php } else { ?>
+		<?php }else{?>
 			<select class="select2" name="<?php echo sanitize_html_class( $name ); ?>" data-placeholder="<?php _e( 'Select Category', 'bulk-move' ); ?>">
 			<?php foreach ( $categories as $category ) { ?>
 				<option value="<?php echo $category->cat_ID; ?>"><?php echo $category->cat_name, ' (', $category->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
 			<?php } ?>
 			</select>
-		<?php
-}
+		<?php }
 	}
 
 	/**
@@ -53,23 +51,21 @@ abstract class BM_Metabox_PostBase extends BM_Metabox_Base {
 
 		$tags = get_tags(
 			array(
-				'hide_empty' => false,
-				'number'     => $bm_select2_ajax_limit_tags,
+				'hide_empty'    => false,
+				'number'        => $bm_select2_ajax_limit_tags,
 			)
 		);
 
-		if ( count( $tags ) >= $bm_select2_ajax_limit_tags ) {
-		?>
+		if( count($tags) >= $bm_select2_ajax_limit_tags){?>
 			<select class="select2Ajax" name="<?php echo sanitize_html_class( $name ); ?>" data-term="post_tag" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
 			</select>
-		<?php } else { ?>
+		<?php }else{?>
 			<select class="select2" name="<?php echo sanitize_html_class( $name ); ?>" data-placeholder="<?php _e( 'Select Tag', 'bulk-move' ); ?>" style="width:300px">
 			<?php foreach ( $tags as $tag ) { ?>
 				<option value="<?php echo absint( $tag->term_id ); ?>"><?php echo $tag->name, ' (', $tag->count, ' ', __( 'Posts', 'bulk-move' ), ')'; ?></option>
 			<?php } ?>
 			</select>
-		<?php
-}
+		<?php }
 	}
 
 }

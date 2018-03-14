@@ -23,8 +23,8 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_PostBase {
 		}
 		?>
 
-		<!-- Category To Tag Start-->
-		<h4><?php _e( 'On the left side, select the category whose post you want to move. In the right side select the tag to which you want the posts to be moved.', 'bulk-move' ); ?></h4>
+        <!-- Category To Tag Start-->
+        <h4><?php _e( 'On the left side, select the category whose post you want to move. In the right side select the tag to which you want the posts to be moved.', 'bulk-move' ); ?></h4>
 
 		<fieldset class="options">
 			<table class="optiontable">
@@ -38,16 +38,16 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_PostBase {
 					</td>
 				</tr>
 
-			</table>
-			<p>
+            </table>
+            <p>
 				<?php _e( 'If the post contains other tags, then', 'bulk-move' ); ?>
 				<?php $this->render_overwrite_filters(); ?>
-			</p>
-		</fieldset>
+            </p>
+        </fieldset>
 
 		<?php $this->render_submit(); ?>
 
-		<!-- Category To Tag end-->
+        <!-- Category To Tag end-->
 		<?php
 	}
 
@@ -64,13 +64,11 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_PostBase {
 	public function move( $options ) {
 		$wp_query = new WP_Query();
 
-		$posts = $wp_query->query(
-			array(
-				'category__in' => array( $options['cat'] ),
-				'post_type'    => 'post',
-				'nopaging'     => 'true',
-			)
-		);
+		$posts = $wp_query->query( array(
+			'category__in' => array( $options['cat'] ),
+			'post_type'    => 'post',
+			'nopaging'     => 'true',
+		) );
 
 		foreach ( $posts as $post ) {
 
@@ -95,12 +93,10 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_PostBase {
 				$current_cats = array( get_option( 'default_category' ) );
 			}
 
-			wp_update_post(
-				array(
-					'ID'            => $post->ID,
-					'post_category' => $current_cats,
-				)
-			);
+			wp_update_post( array(
+				'ID'            => $post->ID,
+				'post_category' => $current_cats,
+			) );
 		}
 
 		return count( $posts );

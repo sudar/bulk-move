@@ -62,9 +62,9 @@ class BM_Metabox_Users_Role extends BM_Metabox_UserBase {
 	}
 
 	protected function convert_user_input_to_options( $request ) {
-		$options             = array();
-		$options['old_role'] = $request[ $this->meta_box_slug . '-from-roles-list' ];
-		$options['new_role'] = $request[ $this->meta_box_slug . '-to-roles-list' ];
+		$options              = array();
+		$options['old_role']  = $request[ $this->meta_box_slug . '-from-roles-list' ];
+		$options['new_role']  = $request[ $this->meta_box_slug . '-to-roles-list' ];
 
 		return $options;
 	}

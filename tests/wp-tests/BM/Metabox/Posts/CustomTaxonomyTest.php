@@ -29,18 +29,8 @@ class CustomTaxonomyTest extends WPCoreUnitTestCase {
 		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
 
 		// Create two posts in one category.
-		$post1 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post1',
-				'post_category' => array( $cat1 ),
-			)
-		);
-		$post2 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post2',
-				'post_category' => array( $cat1 ),
-			)
-		);
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $cat1 ) ) );
+		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat1 ) ) );
 
 		// Assert the count of posts in each category.
 		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
@@ -51,10 +41,10 @@ class CustomTaxonomyTest extends WPCoreUnitTestCase {
 
 		// call our method.
 		$options = array(
-			'old_term'   => $cat1,
-			'new_term'   => $cat2,
-			'taxonomy'   => 'category',
-			'overwrite'  => false,
+			'old_term'  => $cat1,
+			'new_term'  => $cat2,
+			'taxonomy'  => 'category',
+			'overwrite' => false,
 			'post_types' => array( 'post' ),
 		);
 		$this->custom_taxonomy_metabox->move( $options );
@@ -74,18 +64,8 @@ class CustomTaxonomyTest extends WPCoreUnitTestCase {
 		$cat4 = $this->factory->category->create( array( 'name' => 'cat4' ) );
 
 		// Create two posts in one category.
-		$post1 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post1',
-				'post_category' => array( $cat3 ),
-			)
-		);
-		$post2 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post2',
-				'post_category' => array( $cat3 ),
-			)
-		);
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $cat3 ) ) );
+		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat3 ) ) );
 
 		// Assert the count of posts in each category.
 		$posts_in_cat3 = $this->get_posts_by_category( $cat3 );
@@ -96,10 +76,10 @@ class CustomTaxonomyTest extends WPCoreUnitTestCase {
 
 		// call our method.
 		$options = array(
-			'old_term'   => $cat3,
-			'new_term'   => $cat4,
-			'taxonomy'   => 'category',
-			'overwrite'  => true,
+			'old_term'  => $cat3,
+			'new_term'  => $cat4,
+			'taxonomy'  => 'category',
+			'overwrite' => true,
 			'post_types' => array( 'post' ),
 		);
 		$this->custom_taxonomy_metabox->move( $options );
@@ -118,32 +98,12 @@ class CustomTaxonomyTest extends WPCoreUnitTestCase {
 		$post_type = 'docs';
 
 		// Create two categories.
-		$term1 = $this->factory->term->create(
-			array(
-				'name'     => 'term1',
-				'taxonomy' => $taxonomy,
-			)
-		);
-		$term2 = $this->factory->term->create(
-			array(
-				'name'     => 'term2',
-				'taxonomy' => $taxonomy,
-			)
-		);
+		$term1 = $this->factory->term->create( array( 'name' => 'term1', 'taxonomy' => $taxonomy ) );
+		$term2 = $this->factory->term->create( array( 'name' => 'term2', 'taxonomy' => $taxonomy ) );
 
 		// Create two posts and assign the term.
-		$post1 = $this->factory->post->create(
-			array(
-				'post_title' => 'post1',
-				'post_type'  => $post_type,
-			)
-		);
-		$post2 = $this->factory->post->create(
-			array(
-				'post_title' => 'post2',
-				'post_type'  => $post_type,
-			)
-		);
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_type' => $post_type ) );
+		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_type' => $post_type ) );
 
 		wp_set_object_terms( $post1, $term1, $taxonomy );
 		wp_set_object_terms( $post2, $term1, $taxonomy );
@@ -179,32 +139,12 @@ class CustomTaxonomyTest extends WPCoreUnitTestCase {
 		$post_type = 'docs';
 
 		// Create two categories.
-		$term3 = $this->factory->term->create(
-			array(
-				'name'     => 'term3',
-				'taxonomy' => $taxonomy,
-			)
-		);
-		$term4 = $this->factory->term->create(
-			array(
-				'name'     => 'term4',
-				'taxonomy' => $taxonomy,
-			)
-		);
+		$term3 = $this->factory->term->create( array( 'name' => 'term3', 'taxonomy' => $taxonomy ) );
+		$term4 = $this->factory->term->create( array( 'name' => 'term4', 'taxonomy' => $taxonomy ) );
 
 		// Create two posts and assign the term.
-		$post3 = $this->factory->post->create(
-			array(
-				'post_title' => 'post3',
-				'post_type'  => $post_type,
-			)
-		);
-		$post4 = $this->factory->post->create(
-			array(
-				'post_title' => 'post4',
-				'post_type'  => $post_type,
-			)
-		);
+		$post3 = $this->factory->post->create( array( 'post_title' => 'post3', 'post_type' => $post_type ) );
+		$post4 = $this->factory->post->create( array( 'post_title' => 'post4', 'post_type' => $post_type ) );
 
 		wp_set_object_terms( $post3, $term3, $taxonomy );
 		wp_set_object_terms( $post4, $term3, $taxonomy );

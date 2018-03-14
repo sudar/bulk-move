@@ -25,28 +25,18 @@ class CategoryTest extends WPCoreUnitTestCase {
 	 */
 	public function test_move_posts_from_one_cat_to_another_with_overwrite() {
 		// Create two categories and a common category.
-		$cat1       = $this->factory->category->create( array( 'name' => 'cat1' ) );
-		$cat2       = $this->factory->category->create( array( 'name' => 'cat2' ) );
+		$cat1 = $this->factory->category->create( array( 'name' => 'cat1' ) );
+		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
 		$common_cat = $this->factory->category->create( array( 'name' => 'common_cat' ) );
 
 		// Create one post in each category.
 		// The first post will also have the common category.
-		$post1 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post1',
-				'post_category' => array( $cat1, $common_cat ),
-			)
-		);
-		$post2 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post2',
-				'post_category' => array( $cat2 ),
-			)
-		);
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $cat1, $common_cat ) ) );
+		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat2 ) ) );
 
 		// Assert that each category has one post.
-		$posts_in_cat1       = $this->get_posts_by_category( $cat1 );
-		$posts_in_cat2       = $this->get_posts_by_category( $cat2 );
+		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
 		$this->assertEquals( 1, count( $posts_in_cat1 ) );
@@ -79,28 +69,18 @@ class CategoryTest extends WPCoreUnitTestCase {
 	 */
 	public function test_move_posts_from_one_cat_to_another_without_overwrite() {
 		// Create two categories and a common category.
-		$cat1       = $this->factory->category->create( array( 'name' => 'cat1' ) );
-		$cat2       = $this->factory->category->create( array( 'name' => 'cat2' ) );
+		$cat1 = $this->factory->category->create( array( 'name' => 'cat1' ) );
+		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
 		$common_cat = $this->factory->category->create( array( 'name' => 'common_cat' ) );
 
 		// Create one post in each category.
 		// The first post will also have the common category.
-		$post1 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post1',
-				'post_category' => array( $cat1, $common_cat ),
-			)
-		);
-		$post2 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post2',
-				'post_category' => array( $cat2 ),
-			)
-		);
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $cat1, $common_cat ) ) );
+		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat2 ) ) );
 
 		// Assert that each category has one post.
-		$posts_in_cat1       = $this->get_posts_by_category( $cat1 );
-		$posts_in_cat2       = $this->get_posts_by_category( $cat2 );
+		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
 		$this->assertEquals( 1, count( $posts_in_cat1 ) );
@@ -127,34 +107,24 @@ class CategoryTest extends WPCoreUnitTestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
-
+	
 	/**
 	 * Test remove category from post without overwrite.
 	 */
 	public function test_remove_category_from_posts_without_overwrite() {
 		// Create two categories and a common category.
-		$cat1       = $this->factory->category->create( array( 'name' => 'cat1' ) );
-		$cat2       = $this->factory->category->create( array( 'name' => 'cat2' ) );
+		$cat1 = $this->factory->category->create( array( 'name' => 'cat1' ) );
+		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
 		$common_cat = $this->factory->category->create( array( 'name' => 'common_cat' ) );
 
 		// Create one post in each category.
 		// The first post will also have the common category.
-		$post1 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post1',
-				'post_category' => array( $cat1, $common_cat ),
-			)
-		);
-		$post2 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post2',
-				'post_category' => array( $cat2 ),
-			)
-		);
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $cat1, $common_cat ) ) );
+		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat2 ) ) );
 
 		// Assert that each category has one post.
-		$posts_in_cat1       = $this->get_posts_by_category( $cat1 );
-		$posts_in_cat2       = $this->get_posts_by_category( $cat2 );
+		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
 		$this->assertEquals( 1, count( $posts_in_cat1 ) );
@@ -187,28 +157,18 @@ class CategoryTest extends WPCoreUnitTestCase {
 	 */
 	public function test_remove_category_from_posts_with_overwrite() {
 		// Create two categories and a common category.
-		$cat1       = $this->factory->category->create( array( 'name' => 'cat1' ) );
-		$cat2       = $this->factory->category->create( array( 'name' => 'cat2' ) );
+		$cat1 = $this->factory->category->create( array( 'name' => 'cat1' ) );
+		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
 		$common_cat = $this->factory->category->create( array( 'name' => 'common_cat' ) );
 
 		// Create one post in each category.
 		// The first post will also have the common category.
-		$post1 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post1',
-				'post_category' => array( $cat1, $common_cat ),
-			)
-		);
-		$post2 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post2',
-				'post_category' => array( $cat2 ),
-			)
-		);
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $cat1, $common_cat ) ) );
+		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat2 ) ) );
 
 		// Assert that each category has one post.
-		$posts_in_cat1       = $this->get_posts_by_category( $cat1 );
-		$posts_in_cat2       = $this->get_posts_by_category( $cat2 );
+		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
 		$this->assertEquals( 1, count( $posts_in_cat1 ) );
@@ -235,35 +195,25 @@ class CategoryTest extends WPCoreUnitTestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 1, count( $posts_in_cat2 ) );
 	}
-
+	
 	/**
 	 * Test basic case of moving default category with overwrite.
 	 */
 	public function test_move_posts_from_default_cat_to_another_with_overwrite() {
 		// Create two categories and get default category.
 		$default_cat = get_option( 'default_category' );
-		$cat2        = $this->factory->category->create( array( 'name' => 'cat2' ) );
-		$common_cat  = $this->factory->category->create( array( 'name' => 'common_cat' ) );
+		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
+		$common_cat = $this->factory->category->create( array( 'name' => 'common_cat' ) );
 
 		// Create one post in each category.
 		// The first post will also have the common category.
-		$post1 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post1',
-				'post_category' => array( $default_cat, $common_cat ),
-			)
-		);
-		$post2 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post2',
-				'post_category' => array( $cat2 ),
-			)
-		);
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $default_cat, $common_cat ) ) );
+		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat2 ) ) );
 
 		// Assert that each category has one post.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$posts_in_cat2        = $this->get_posts_by_category( $cat2 );
-		$posts_in_common_cat  = $this->get_posts_by_category( $common_cat );
+		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
 		$this->assertEquals( 1, count( $posts_in_default_cat ) );
 		$this->assertEquals( 1, count( $posts_in_cat2 ) );
@@ -296,28 +246,18 @@ class CategoryTest extends WPCoreUnitTestCase {
 	public function test_move_posts_from_default_cat_to_another_without_overwrite() {
 		// Create two categories and get default category.
 		$default_cat = get_option( 'default_category' );
-		$cat2        = $this->factory->category->create( array( 'name' => 'cat2' ) );
-		$common_cat  = $this->factory->category->create( array( 'name' => 'common_cat' ) );
+		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
+		$common_cat = $this->factory->category->create( array( 'name' => 'common_cat' ) );
 
 		// Create one post in each category.
 		// The first post will also have the common category.
-		$post1 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post1',
-				'post_category' => array( $default_cat, $common_cat ),
-			)
-		);
-		$post2 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post2',
-				'post_category' => array( $cat2 ),
-			)
-		);
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $default_cat, $common_cat ) ) );
+		$post2 = $this->factory->post->create( array( 'post_title' => 'post2', 'post_category' => array( $cat2 ) ) );
 
 		// Assert that each category has one post.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$posts_in_cat2        = $this->get_posts_by_category( $cat2 );
-		$posts_in_common_cat  = $this->get_posts_by_category( $common_cat );
+		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
 		$this->assertEquals( 1, count( $posts_in_default_cat ) );
 		$this->assertEquals( 1, count( $posts_in_cat2 ) );
@@ -343,27 +283,22 @@ class CategoryTest extends WPCoreUnitTestCase {
 		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
 		$this->assertEquals( 2, count( $posts_in_cat2 ) );
 	}
-
+	
 	/**
 	 * Test remove default category from post with overwrite.
 	 */
-	public function test_remove_default_category_from_posts_with_overwrite() {
+	public function test_remove_default_category_from_posts_with_overwrite(){
 		// Get default category and create common category.
 		$default_cat = get_option( 'default_category' );
-		$common_cat  = $this->factory->category->create( array( 'name' => 'common_cat' ) );
+		$common_cat = $this->factory->category->create( array( 'name' => 'common_cat' ) );
 
 		// Create one post.
 		// The post will have both categories.
-		$post1 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post1',
-				'post_category' => array( $default_cat, $common_cat ),
-			)
-		);
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $default_cat, $common_cat ) ) );
 
 		// Assert that each category has one post.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$posts_in_common_cat  = $this->get_posts_by_category( $common_cat );
+		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
 		$this->assertEquals( 1, count( $posts_in_default_cat ) );
 		$this->assertEquals( 1, count( $posts_in_common_cat ) );
@@ -388,23 +323,18 @@ class CategoryTest extends WPCoreUnitTestCase {
 	/**
 	 * Test remove default category from post without overwrite.
 	 */
-	public function test_remove_default_category_from_posts_without_overwrite() {
+	public function test_remove_default_category_from_posts_without_overwrite(){
 		// Get default category and create common category.
 		$default_cat = get_option( 'default_category' );
-		$common_cat  = $this->factory->category->create( array( 'name' => 'common_cat' ) );
+		$common_cat = $this->factory->category->create( array( 'name' => 'common_cat' ) );
 
 		// Create one post.
 		// The post will have both categories.
-		$post1 = $this->factory->post->create(
-			array(
-				'post_title'    => 'post1',
-				'post_category' => array( $default_cat, $common_cat ),
-			)
-		);
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $default_cat, $common_cat ) ) );
 
 		// Assert that each category has one post.
 		$posts_in_default_cat = $this->get_posts_by_category( $default_cat );
-		$posts_in_common_cat  = $this->get_posts_by_category( $common_cat );
+		$posts_in_common_cat = $this->get_posts_by_category( $common_cat );
 
 		$this->assertEquals( 1, count( $posts_in_default_cat ) );
 		$this->assertEquals( 1, count( $posts_in_common_cat ) );

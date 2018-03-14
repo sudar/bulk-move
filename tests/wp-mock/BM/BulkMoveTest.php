@@ -25,11 +25,9 @@ class BulkMoveTest extends WPMockTestCase {
 	}
 
 	function test_if_cone_is_not_supported() {
-		\WP_Mock::userFunction(
-			'_doing_it_wrong', array(
-				'times' => 1,
-			)
-		);
+		\WP_Mock::userFunction( '_doing_it_wrong', array(
+			'times' => 1,
+		) );
 
 		$bulk_move = \BM_BulkMove::get_instance();
 		clone $bulk_move;
@@ -38,11 +36,9 @@ class BulkMoveTest extends WPMockTestCase {
 	}
 
 	function test_if_wakeup_is_not_supported() {
-		\WP_Mock::userFunction(
-			'_doing_it_wrong', array(
-				'times' => 1,
-			)
-		);
+		\WP_Mock::userFunction( '_doing_it_wrong', array(
+			'times' => 1,
+		) );
 
 		$bulk_move = \BM_BulkMove::get_instance();
 		unserialize( serialize( $bulk_move ) );
@@ -67,12 +63,10 @@ class BulkMoveTest extends WPMockTestCase {
 	public function test_translation_is_loaded() {
 		self::markTestSkipped( 'Skipping this for now.' );
 
-		\WP_Mock::userFunction(
-			'load_plugin_textdomain', array(
-				'times' => 1,
-				'args'  => array( 'bulk-move', false, \WP_Mock\Functions::type( 'string' ) ),
-			)
-		);
+		\WP_Mock::userFunction( 'load_plugin_textdomain', array(
+			'times' => 1,
+			'args' => array( 'bulk-move', false, \WP_Mock\Functions::type( 'string' ) )
+		) );
 
 		$bulk_move = \BM_BulkMove::get_instance();
 		$bulk_move->on_init();
