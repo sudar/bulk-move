@@ -26,25 +26,17 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_PostBase {
         <!-- Category To Tag Start-->
         <h4><?php _e( 'On the left side, select the category whose post you want to move. In the right side select the tag to which you want the posts to be moved.', 'bulk-move' ); ?></h4>
 
-        <fieldset class="options">
-            <table class="optiontable">
-                <tr>
-                    <td scope="row">
-						<?php
-						wp_dropdown_categories( array(
-							'name'         => 'smbm_mct_cat',
-							'show_count'   => true,
-							'hierarchical' => true,
-							'orderby'      => 'NAME',
-							'hide_empty'   => false,
-						) );
-						?>
-                        ==>
-                    </td>
-                    <td scope="row">
+		<fieldset class="options">
+			<table class="optiontable">
+				<tr>
+					<td scope="row">
+						<?php $this->render_categories_dropdown( 'smbm_mct_cat' ); ?>
+						==>
+					</td>
+					<td scope="row">
 						<?php $this->render_tags_dropdown( 'smbm_mct_tag', $tags ); ?>
-                    </td>
-                </tr>
+					</td>
+				</tr>
 
             </table>
             <p>
@@ -89,8 +81,8 @@ class BM_Metabox_Posts_CategoryToTag extends BM_Metabox_PostBase {
 
 			$current_cats = array_diff( wp_get_post_categories( $post->ID ), array( $options['cat'] ) );
 			if ( $options['overwrite'] ) {
-				// Override is set, so remove all common tags.
-				$current_tags = array();
+				// Override is set, so remove all common categories.
+				$current_cats = array();
 			}
 
 			$current_tags[] = $options['tag'];

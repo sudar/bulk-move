@@ -27,7 +27,7 @@ final class BM_BulkMove {
 	/**
 	 * Plugin version.
 	 */
-	const VERSION = '1.3.0';
+	const VERSION = '2.0.0';
 
 	/**
 	 * Flag to track if the plugin is loaded.
@@ -171,8 +171,8 @@ final class BM_BulkMove {
 	private function get_ajax_handlers() {
 		if ( empty( $this->ajax_handlers ) ) {
 			$this->ajax_handlers[] = new BM_Request_CustomTaxonomyAction();
+			$this->ajax_handlers[] = new BM_Request_LoadTaxonomyTerm();
 		}
-
 		/**
 		 * List of ajax handlers.
 		 *
@@ -322,4 +322,5 @@ final class BM_BulkMove {
 
 		return $users_page;
 	}
+
 }

@@ -26,7 +26,6 @@ class BM_Metabox_Posts_CustomTaxonomy extends BM_Metabox_PostBase {
 					<td scope="row" colspan="2">
 						<?php _e( 'Select the post type to show its custom taxonomy.', 'bulk-move' ); ?>
 					</td>
-					<td scope="row">
 				</tr>
 
 				<tr>
@@ -39,7 +38,6 @@ class BM_Metabox_Posts_CustomTaxonomy extends BM_Metabox_PostBase {
 					<td scope="row" colspan="2">
 						<?php _e( 'Select taxonomy to show its terms.', 'bulk-move' ); ?>
 					</td>
-					<td scope="row">
 				</tr>
 
 				<tr class="taxonomy-select-row">
@@ -54,7 +52,6 @@ class BM_Metabox_Posts_CustomTaxonomy extends BM_Metabox_PostBase {
 					<td scope="row" colspan="2">
 						<?php _e( 'Select terms to move its posts.', 'bulk-move' ); ?>
 					</td>
-					<td scope="row">
 				</tr>
 
 				<tr class="term-select-row">
