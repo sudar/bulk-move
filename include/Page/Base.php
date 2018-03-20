@@ -229,7 +229,7 @@ abstract class BM_Page_Base {
 	 * Enqueue JavaScript.
 	 */
 	public function enqueue_script() {
-		wp_register_script( 'select2', $this->get_plugin_dir_url() . 'assets/js/select2.min.js' );
+		wp_register_script( 'select2', $this->get_plugin_dir_url() . 'assets/js/select2.min.js', array( 'jquery' ), '4.0.5', true );
 		wp_enqueue_script( 'bulk-move', $this->get_plugin_dir_url() . 'assets/js/src/bulk-move.js', array( 'jquery', 'postbox', 'select2' ), BM_BulkMove::VERSION, true );
 
 		$msg = array(

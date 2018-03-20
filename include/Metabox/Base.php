@@ -220,7 +220,8 @@ abstract class BM_Metabox_Base {
 	 * @return array List of tags.
 	 */
 	protected function get_tags_or_fail() {
-		$tags = get_tags( array( 'hide_empty' => false ) );
+		$bm_select2_ajax_limit_tags = apply_filters( 'bm_select2_ajax_limit_tags', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
+		$tags                       = get_tags( array( 'hide_empty' => false, 'number' => $bm_select2_ajax_limit_tags ) );
 		?>
 
 		<?php if ( empty( $tags ) ) : ?>
@@ -244,13 +245,9 @@ abstract class BM_Metabox_Base {
 	 */
 	protected function render_tags_dropdown( $name, $tags = array(), $show_option_none = false ) {
 		$bm_select2_ajax_limit_tags = apply_filters( 'bm_select2_ajax_limit_tags', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
-		if ( empty( $tags ) ){
-			$tags = get_tags(
-				array(
-					'hide_empty'    => false,
-					'number'        => $bm_select2_ajax_limit_tags,
-				)
-			);
+
+		if ( empty( $tags ) ) {
+			$tags = $this->get_tags_or_fail();
 		}
 
 		if( count($tags) >= $bm_select2_ajax_limit_tags){?>
