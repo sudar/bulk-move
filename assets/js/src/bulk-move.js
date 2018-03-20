@@ -1,14 +1,47 @@
 /**
- * JavaScript for Bulk move Plugin
- *
- * http://sudarmuthu.com/wordpress/bulk-move
- *
- * @author: Sudar <http://sudarmuthu.com>
+ * Bulk Move JavaScript file.
  */
 
 /*jslint browser: true, devel: true*/
 /*global BULK_MOVE, jQuery, document, postboxes, pagenow, ajaxurl*/
 jQuery(document).ready(function () {
+	/**
+	 * Enable select2
+	 */
+	jQuery( '.select2' ).select2();
+
+	jQuery( '.select2Ajax' ).select2({
+		ajax: {
+    			url: ajaxurl,
+    			dataType: 'json',
+    			delay: 250,
+    			data: function (params) {
+    				var term = jQuery(this).attr('data-term');
+      				return {
+        				'q': params.term,
+        				'term': term,
+        				'action': BULK_MOVE.bulk_move_posts_taxonomy.load_taxonomy_action,
+        				'nonce': BULK_MOVE.bulk_move_posts_taxonomy.nonce,
+      				};
+    			},
+    			processResults: function( data ) {
+				var options = [];
+				if ( data ) {
+
+					jQuery.each( data, function( index, text ) {
+						options.push( { id: text[0], text: text[1] } );
+					});
+
+				}
+				return {
+					results: options
+				};
+			},
+			cache: true
+		},
+		minimumInputLength: 2 // the minimum of symbols to input before perform a search
+	});
+
     /**
      * Gets the value of the selected element & trims the value.
      *
@@ -139,6 +172,39 @@ jQuery(document).ready(function () {
 
 			return;
 		}
+		jQuery( 'tr.term-select-row' ).show();
+		jQuery( '#smbm_mbct_selected_term, #smbm_mbct_mapped_term' ).select2({
+			ajax: {
+    			url: ajaxurl,
+    			dataType: 'json',
+    			delay: 250,
+    			data: function (params) {
+    				var term = selectedTaxonomy;
+      				return {
+        				'q': params.term,
+        				'term': term,
+        				'action': BULK_MOVE.bulk_move_posts_taxonomy.load_taxonomy_action,
+        				'nonce': BULK_MOVE.bulk_move_posts_taxonomy.nonce,
+      				};
+    			},
+    			processResults: function( data ) {
+					var options = [];
+					if ( data ) {
+
+						jQuery.each( data, function( index, text ) {
+							options.push( { id: text[0], text: text[1] } );
+						});
+
+					}
+					return {
+						results: options
+					};
+				},
+				cache: true
+			},
+			width: '300px',
+			minimumInputLength: 2 // the minimum of symbols to input before perform a search
+		});
 
 		jQuery.ajaxSetup( { async: false } );
 

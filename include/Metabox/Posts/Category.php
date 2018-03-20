@@ -30,28 +30,11 @@ class BM_Metabox_Posts_Category extends BM_Metabox_PostBase {
 			<table class="optiontable">
 				<tr>
 					<td scope="row" >
-						<?php
-						wp_dropdown_categories( array(
-							'name'         => 'smbm_mc_selected_cat',
-							'show_count'   => true,
-							'hierarchical' => true,
-							'orderby'      => 'NAME',
-							'hide_empty'   => false,
-						) );
-						?>
+						<?php $this->render_categories_dropdown( 'smbm_mc_selected_cat' ); ?>
 						==>
 					</td>
 					<td scope="row" >
-						<?php
-						wp_dropdown_categories( array(
-							'name'             => 'smbm_mc_mapped_cat',
-							'show_count'       => true,
-							'hierarchical'     => true,
-							'orderby'          => 'NAME',
-							'hide_empty'       => false,
-							'show_option_none' => __( 'Remove Category', 'bulk-move' ),
-						) );
-						?>
+						<?php $this->render_categories_dropdown( 'smbm_mc_mapped_cat' ); ?>
 					</td>
 				</tr>
 			</table>

@@ -34,7 +34,7 @@ class BM_Metabox_Posts_Tag extends BM_Metabox_PostBase {
 						==>
 					</td>
 					<td scope="row" >
-						<?php $this->render_tags_dropdown( 'smbm_mt_new_tag', $tags, true ); ?>
+						<?php $this->render_tags_dropdown( 'smbm_mt_new_tag', $tags ); ?>
 					</td>
 				</tr>
 
