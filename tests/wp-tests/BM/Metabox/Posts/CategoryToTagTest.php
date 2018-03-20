@@ -113,8 +113,8 @@ class CategoryToTagTest extends WPCoreUnitTestCase {
 		$posts_in_cat = $this->get_posts_by_category( $cat );
 		$this->assertEquals( 0, count( $posts_in_cat ) );
 
-		// Assert that common tag has one posts.
+		// Assert that common tag has two posts.
 		$posts_in_common_tag = $this->get_posts_by_tag( $common_tag );
-		$this->assertEquals( 1, count( $posts_in_common_tag ) );
+		$this->assertEquals( 2, count( $posts_in_common_tag ) );
 	}
 }

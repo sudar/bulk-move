@@ -81,7 +81,7 @@ class BM_Metabox_Posts_TagToCategory extends BM_Metabox_PostBase {
             $current_tags = array_diff( $current_tags, array( $options['tag'] ) );
             if ( $options['overwrite'] ) {
                 // Override is set, so remove all common tags.
-	            $current_cats = array();
+	            $current_tags = array();
             }
 
 	        $current_cats[]  = $options['cat'];
