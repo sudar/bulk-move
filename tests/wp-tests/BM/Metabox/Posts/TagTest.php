@@ -17,7 +17,7 @@ class TagTest extends WPCoreUnitTestCase {
 
 		$this->tag_metabox = new \BM_Metabox_Posts_Tag();
     }
-    
+
     /**
 	 * Test moving posts from one tag to another with overwrite.
 	 */
