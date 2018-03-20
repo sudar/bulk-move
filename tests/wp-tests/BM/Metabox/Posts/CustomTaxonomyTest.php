@@ -174,4 +174,72 @@ class CustomTaxonomyTest extends WPCoreUnitTestCase {
 		$posts_in_term4 = $this->get_posts_by_custom_term( $term4, $taxonomy, $post_type );
 		$this->assertEquals( count( $posts_in_term4 ), 2 );
 	}
+
+	public function test_remove_term_with_overwrite() {
+		// Create two categories.
+		$cat1 = $this->factory->category->create( array( 'name' => 'cat1' ) );
+		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
+
+		// Create one post in two categories.
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $cat1, $cat2 ) ) );
+
+		// Assert the count of posts in each category.
+		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+
+		$this->assertEquals( count( $posts_in_cat1 ), 1 );
+		$this->assertEquals( count( $posts_in_cat2 ), 1 );
+
+		// call our method.
+		$options = array(
+			'old_term'  => $cat1,
+			'new_term'  => -1,
+			'taxonomy'  => 'category',
+			'overwrite' => true,
+			'post_types' => array( 'post' ),
+		);
+		$this->custom_taxonomy_metabox->move( $options );
+
+		// Assert that category 1 has no post.
+		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+		$this->assertEquals( count( $posts_in_cat1 ), 0 );
+
+		// Assert that category 2 has one post.
+		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+		$this->assertEquals( count( $posts_in_cat2 ), 1 );
+	}
+
+	public function test_remove_term_without_overwrite() {
+		// Create two categories.
+		$cat1 = $this->factory->category->create( array( 'name' => 'cat1' ) );
+		$cat2 = $this->factory->category->create( array( 'name' => 'cat2' ) );
+
+		// Create one post in two categories.
+		$post1 = $this->factory->post->create( array( 'post_title' => 'post1', 'post_category' => array( $cat1, $cat2 ) ) );
+
+		// Assert the count of posts in each category.
+		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+
+		$this->assertEquals( count( $posts_in_cat1 ), 1 );
+		$this->assertEquals( count( $posts_in_cat2 ), 1 );
+
+		// call our method.
+		$options = array(
+			'old_term'  => $cat1,
+			'new_term'  => -1,
+			'taxonomy'  => 'category',
+			'overwrite' => false,
+			'post_types' => array( 'post' ),
+		);
+		$this->custom_taxonomy_metabox->move( $options );
+
+		// Assert that category 1 has no post.
+		$posts_in_cat1 = $this->get_posts_by_category( $cat1 );
+		$this->assertEquals( count( $posts_in_cat1 ), 0 );
+
+		// Assert that category 2 has one post.
+		$posts_in_cat2 = $this->get_posts_by_category( $cat2 );
+		$this->assertEquals( count( $posts_in_cat2 ), 1 );
+	}
 }
