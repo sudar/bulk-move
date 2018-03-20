@@ -247,7 +247,7 @@ abstract class BM_Metabox_Base {
 		$bm_select2_ajax_limit_tags = apply_filters( 'bm_select2_ajax_limit_tags', BM_Request_LoadTaxonomyTerm::BM_MAX_SELECT2_LIMIT );
 
 		if ( empty( $tags ) ){
-			$tags = get_tags_or_fail();
+			$tags = $this->get_tags_or_fail();
 		}
 
 		if( count($tags) >= $bm_select2_ajax_limit_tags){?>
