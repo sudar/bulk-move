@@ -405,6 +405,7 @@ abstract class BM_Page_Base {
 
 		return $links;
 	}
+
 	/**
 	 * Modify the user meta field that determines if a metabox is hidden by user or not.
 	 *
