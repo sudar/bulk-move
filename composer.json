@@ -1,5 +1,5 @@
 {
-    "name": "sudar/bulk-move",
+    "name": "bulk-wp/bulk-move",
     "description": "Bulk Move WordPress plugin",
     "license": "GPL-2.0-or-later",
     "type": "wordpress-plugin",
@@ -12,14 +12,18 @@
     "config": {
         "sort-packages": true
     },
+    "require": {
+        "php": ">=5.6"
+    },
     "require-dev": {
-        "squizlabs/php_codesniffer": "<4.0",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.4",
-        "wimg/php-compatibility": "^8.0",
-        "wp-coding-standards/wpcs": "0.14",
-        "10up/wp_mock": "0.3.0",
-        "phpunit/phpcov": "^4.0",
+        "10up/wp_mock": "0.4.0",
         "codedungeon/phpunit-result-printer": "<=1.0",
-        "sudar/wp-plugin-test-tools": "dev-master#ea5cadc"
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.5",
+        "phpcompatibility/phpcompatibility-wp": "^2.0",
+        "phpunit/phpcov": "^5.0",
+        "squizlabs/php_codesniffer": "<4.0",
+        "sudar/wp-plugin-test-tools": "dev-master",
+        "phpunit/phpunit": "^7.0",
+        "wp-coding-standards/wpcs": "^2.1"
     }
 }

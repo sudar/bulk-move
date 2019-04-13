@@ -1,9 +1,9 @@
 # Bulk Move #
 **Contributors:** sudar  
 **Tags:** bulk, mass, move, post, category  
-**Requires PHP:** 5.2  
-**Requires at least:** 3.8  
-**Tested up to:** 4.9  
+**Requires PHP:** 5.6  
+**Requires at least:** 4.5  
+**Tested up to:** 5.2  
 **Stable tag:** 1.3.0  
 [![Plugin Version](https://img.shields.io/wordpress/plugin/v/bulk-move.svg)]() [![Total Downloads](https://img.shields.io/wordpress/plugin/dt/bulk-move.svg)]() [![Plugin Rating](https://img.shields.io/wordpress/plugin/r/bulk-move.svg)]() [![WordPress Compatibility](https://img.shields.io/wordpress/v/bulk-move.svg)]() [![Build Status](https://scrutinizer-ci.com/g/sudar/bulk-move/badges/build.png?b=master)](https://scrutinizer-ci.com/g/sudar/bulk-move/build-status/master) [![Code Coverage](https://scrutinizer-ci.com/g/sudar/bulk-move/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/sudar/bulk-move/?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sudar/bulk-move/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sudar/bulk-move/?branch=master) [![StyleCI](https://styleci.io/repos/7822849/shield?branch=master)](https://styleci.io/repos/7822849) [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://wordpress.org/about/license/)
 
