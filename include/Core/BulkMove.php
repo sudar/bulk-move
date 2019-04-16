@@ -332,11 +332,11 @@ final class BulkMove {
 	private function get_post_admin_page() {
 		$posts_page = new MovePostPage();
 
-		$posts_page->add_metabox( new MoveCategoryModule() );
-		$posts_page->add_metabox( new MoveTagModule() );
-		$posts_page->add_metabox( new MoveCustomTaxonomyModule() );
-		$posts_page->add_metabox( new MoveTagToCategoryModule() );
-		$posts_page->add_metabox( new MoveCategoryToTagModule() );
+		$posts_page->add_module( new MoveCategoryModule() );
+		$posts_page->add_module( new MoveTagModule() );
+		$posts_page->add_module( new MoveCustomTaxonomyModule() );
+		$posts_page->add_module( new MoveTagToCategoryModule() );
+		$posts_page->add_module( new MoveCategoryToTagModule() );
 
 		/**
 		 * Triggered after the modules are added to a page.
@@ -359,7 +359,7 @@ final class BulkMove {
 	private function get_user_admin_page() {
 		$users_page = new MoveUserPage();
 
-		$users_page->add_metabox( new MoveRoleModule() );
+		$users_page->add_module( new MoveRoleModule() );
 
 		/**
 		 * Triggered after the modules are added to a page.

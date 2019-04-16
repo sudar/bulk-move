@@ -58,7 +58,7 @@ abstract class BaseMovePage {
 	 *
 	 * @var \BulkWP\BulkMove\Core\Modules\BaseModule[]
 	 */
-	protected $metaboxes = array();
+	protected $modules = array();
 
 	/**
 	 * Current page.
@@ -98,7 +98,7 @@ abstract class BaseMovePage {
 	public function register() {
 		$this->register_page();
 		$this->register_hooks();
-		$this->register_metaboxes();
+		$this->register_modules();
 	}
 
 	/**
@@ -310,22 +310,22 @@ abstract class BaseMovePage {
 	/**
 	 * Add a metabox to page.
 	 *
-	 * @param \BulkWP\BulkMove\Core\Modules\BaseModule $metabox Metabox to add.
+	 * @param \BulkWP\BulkMove\Core\Modules\BaseModule $module Metabox to add.
 	 */
-	public function add_metabox( $metabox ) {
-		if ( in_array( $metabox, $this->metaboxes ) ) {
+	public function add_module( $module ) {
+		if ( in_array( $module, $this->modules ) ) {
 			return;
 		}
 
-		$this->metaboxes[] = $metabox;
+		$this->modules[] = $module;
 	}
 
 	/**
-	 * Load all the registered metaboxes.
+	 * Load all the registered modules.
 	 */
-	public function register_metaboxes() {
-		foreach ( $this->metaboxes as $metabox ) {
-			$metabox->register( $this->hook_suffix, $this->slug );
+	public function register_modules() {
+		foreach ( $this->modules as $module ) {
+			$module->register( $this->hook_suffix, $this->slug );
 		}
 	}
 

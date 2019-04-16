@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 class MoveTagModule extends PostModule {
 
 	protected function initialize() {
-		$this->meta_box_slug         = 'bm-posts-by-tag';
+		$this->module_slug           = 'bm-posts-by-tag';
 		$this->messages['box_label'] = __( 'Move Posts By Tag', 'bulk-move' );
 		$this->action                = 'move_tag';
 	}

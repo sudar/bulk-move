@@ -30,7 +30,7 @@ abstract class BaseModule {
 	/**
 	 * @var string Slug of the meta box.
 	 */
-	protected $meta_box_slug;
+	protected $module_slug;
 
 	/**
 	 * @var string Action in which the move operation should be performed.
@@ -119,7 +119,7 @@ abstract class BaseModule {
 	 */
 	public function setup_metabox() {
 		add_meta_box(
-			$this->meta_box_slug,
+			$this->module_slug,
 			$this->messages['box_label'],
 			array( $this, 'render_box' ),
 			$this->page_hook_suffix,
@@ -133,7 +133,7 @@ abstract class BaseModule {
 	public function render_box() {
 		if ( $this->is_hidden() ) {
 			printf(
-			/* translators: 1 module url */
+				/* translators: 1 module url */
 				__( 'This section just got enabled. Kindly <a href = "%1$s">refresh</a> the page to fully enable it.', 'bulk-move' ),
 				'admin.php?page=' . $this->page_slug
 			);
@@ -165,7 +165,7 @@ abstract class BaseModule {
 		$user_meta_field = $this->get_hidden_box_user_meta_field();
 		$hidden_boxes    = get_user_meta( $current_user->ID, $user_meta_field, true );
 
-		return is_array( $hidden_boxes ) && in_array( $this->meta_box_slug, $hidden_boxes );
+		return is_array( $hidden_boxes ) && in_array( $this->module_slug, $hidden_boxes );
 	}
 
 	/**

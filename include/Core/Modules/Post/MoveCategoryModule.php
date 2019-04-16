@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 class MoveCategoryModule extends PostModule {
 
 	protected function initialize() {
-		$this->meta_box_slug         = 'bm-posts-by-category';
+		$this->module_slug           = 'bm-posts-by-category';
 		$this->messages['box_label'] = __( 'Move Posts By Category', 'bulk-move' );
 		$this->action                = 'move_category';
 	}

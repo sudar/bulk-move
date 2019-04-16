@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 class MoveTagToCategoryModule extends PostModule {
 
 	protected function initialize() {
-		$this->meta_box_slug         = 'bm-posts-tag-to-category';
+		$this->module_slug           = 'bm-posts-tag-to-category';
 		$this->messages['box_label'] = __( 'Move Posts from Tag to Category', 'bulk-move' );
 		$this->action                = 'move_tag_to_category';
 	}

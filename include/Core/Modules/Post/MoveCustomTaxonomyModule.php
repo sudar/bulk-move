@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 class MoveCustomTaxonomyModule extends PostModule {
 
 	protected function initialize() {
-		$this->meta_box_slug         = 'bm-posts-by-custom-taxonomy';
+		$this->module_slug           = 'bm-posts-by-custom-taxonomy';
 		$this->messages['box_label'] = __( 'Move Posts By Custom Taxonomy', 'bulk-move' );
 		$this->action                = 'move_custom_taxonomy';
 	}

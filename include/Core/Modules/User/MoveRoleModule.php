@@ -58,15 +58,15 @@ class MoveRoleModule extends UserModule {
 	}
 
 	protected function initialize() {
-		$this->meta_box_slug         = 'bm-users-by-role';
+		$this->module_slug           = 'bm-users-by-role';
 		$this->messages['box_label'] = __( 'Move Users By Role', 'bulk-move' );
 		$this->action                = 'move_users_by_role';
 	}
 
 	protected function convert_user_input_to_options( $request ) {
 		$options             = array();
-		$options['old_role'] = $request[ $this->meta_box_slug . '-from-roles-list' ];
-		$options['new_role'] = $request[ $this->meta_box_slug . '-to-roles-list' ];
+		$options['old_role'] = $request[ $this->module_slug . '-from-roles-list' ];
+		$options['new_role'] = $request[ $this->module_slug . '-to-roles-list' ];
 
 		return $options;
 	}

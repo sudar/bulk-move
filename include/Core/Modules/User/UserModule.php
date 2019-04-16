@@ -34,7 +34,7 @@ abstract class UserModule extends BaseModule {
 
 		$users_by_roles = $this->get_users_count_by_roles( $users, $roles );
 
-		$field_name = $this->meta_box_slug;
+		$field_name = $this->module_slug;
 		$field_name .= ! empty( $name ) ? '-' . $name : $name;
 		$field_name .= '-roles-list';
 
