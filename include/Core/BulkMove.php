@@ -338,6 +338,16 @@ final class BulkMove {
 		$posts_page->add_metabox( new MoveTagToCategoryModule() );
 		$posts_page->add_metabox( new MoveCategoryToTagModule() );
 
+		/**
+		 * Triggered after the modules are added to a page.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param \BulkWP\BulkMove\Core\Pages\BaseMovePage The page for which modules are added.
+		 */
+		do_action( 'bm_after_modules', $posts_page );
+		do_action( 'bm_after_modules_' . $posts_page->get_slug(), $posts_page );
+
 		return $posts_page;
 	}
 
@@ -350,6 +360,16 @@ final class BulkMove {
 		$users_page = new MoveUserPage();
 
 		$users_page->add_metabox( new MoveRoleModule() );
+
+		/**
+		 * Triggered after the modules are added to a page.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param \BulkWP\BulkMove\Core\Pages\BaseMovePage The page for which modules are added.
+		 */
+		do_action( 'bm_after_modules', $users_page );
+		do_action( 'bm_after_modules_' . $users_page->get_slug(), $users_page );
 
 		return $users_page;
 	}
