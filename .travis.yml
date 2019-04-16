@@ -22,21 +22,16 @@ matrix:
     # Run trunk in nightly and PHP 7.2
     - php: nightly
       env: WP_VERSION=trunk
-    - php: 7.2
+    - php: 7.3
       env: WP_VERSION=trunk
+    - php: 7.2
+      env: WP_VERSION=trunk WP_MULTISITE=1 # For PHP 7.2 also run Multisite
     - php: 7.1
       env: WP_VERSION=latest
     - php: 7.0
       env: WP_VERSION=latest
     - php: 5.6
-      env: WP_VERSION=latest WP_MULTISITE=1 # For PHP 5.6 also run Multisite
-    - php: 5.5
       env: WP_VERSION=latest
-    - php: 5.4
-      env: WP_VERSION=latest
-    - php: 5.3
-      env: WP_VERSION=latest WP_MULTISITE=1 # For PHP 5.3 also run Multisite
-      dist: precise
   allow_failures:
     - php: nightly
   fast_finish: true
@@ -55,8 +50,8 @@ install:
 before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - |
-    if [[ $TRAVIS_PHP_VERSION != 7.1 ]]; then
-      # Disable x-debug to increase performance. x-debug is enabled only for PHP 7.1 to run code-coverage reports.
+    if [[ $TRAVIS_PHP_VERSION != 7.3 ]]; then
+      # Disable x-debug to increase performance. x-debug is enabled only for PHP 7.3 to run code-coverage reports.
       if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
         phpenv config-rm xdebug.ini
       else
@@ -71,7 +66,7 @@ before_script:
 
 script:
   - |
-    if [[ $TRAVIS_PHP_VERSION == 7.1 ]]; then
+    if [[ $TRAVIS_PHP_VERSION == 7.3 ]]; then
       npm run travis
     else
       phpunit
@@ -83,7 +78,7 @@ script:
 
 after_success:
   - |
-    if [[ $TRAVIS_PHP_VERSION == 7.1 ]]; then
+    if [[ $TRAVIS_PHP_VERSION == 7.3 ]]; then
       wget https://scrutinizer-ci.com/ocular.phar
       php ocular.phar code-coverage:upload --format=php-clover code-coverage/bulk-move.clover
     fi
