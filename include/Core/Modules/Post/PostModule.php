@@ -2,8 +2,8 @@
 
 namespace BulkWP\BulkMove\Core\Modules\Post;
 
-use BulkWP\BulkMove\Core\Modules\BaseModule;
 use BulkWP\BulkMove\Core\Actions\LoadTaxonomyTermAction;
+use BulkWP\BulkMove\Core\Modules\BaseModule;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 

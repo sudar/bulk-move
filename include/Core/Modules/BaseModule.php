@@ -1,6 +1,7 @@
 <?php
 
 namespace BulkWP\BulkMove\Core\Modules;
+
 use BulkWP\BulkMove\Core\Actions\LoadTaxonomyTermAction;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
@@ -171,6 +172,7 @@ abstract class BaseModule {
 	 * Get the user meta field that stores the status of the hidden meta boxes.
 	 *
 	 * @return string Name of the User Meta field.
+	 *
 	 * @since 5.5
 	 *
 	 */
@@ -196,6 +198,7 @@ abstract class BaseModule {
 	 * @param array $js_array JavaScript Array.
 	 *
 	 * @return array Modified JavaScript Array
+	 *
 	 * @since 5.5
 	 *
 	 */
@@ -220,6 +223,7 @@ abstract class BaseModule {
 	 * Ideally this method should be included in a trait. This is added here since PHP 5.2 needs to be supported.
 	 *
 	 * @return array List of tags.
+	 *
 	 * @since 1.3.0
 	 *
 	 */
@@ -227,7 +231,7 @@ abstract class BaseModule {
 		$bm_select2_ajax_limit_tags = apply_filters( 'bm_select2_ajax_limit_tags', LoadTaxonomyTermAction::BM_MAX_SELECT2_LIMIT );
 		$tags                       = get_tags( array(
 			'hide_empty' => false,
-			'number'     => $bm_select2_ajax_limit_tags
+			'number'     => $bm_select2_ajax_limit_tags,
 		) );
 		?>
 
