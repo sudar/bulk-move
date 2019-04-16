@@ -36,6 +36,10 @@ This module allows you to move posts from one category to another tag.
 
 This module allows you to move posts from one custom taxonomy to another. This module supports custom post types as well.
 
+### PHP Support
+
+Bulk Move plugin requires at least PHP 5.6.20 and is compatible upto PHP 7.3
+
 ### Development
 
 The development of the Plugin happens over at [github][4]. If you want to contribute to the Plugin, fork the [project at github][4] and send me a pull request.

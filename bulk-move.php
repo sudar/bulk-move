@@ -33,59 +33,44 @@
  */
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-/**
- * Bulk Move autoloader.
- *
- * Ideally we should use psr-4 autoloading, but since this plugin supports PHP 5.2,
- * namespace are out of question. Hence this plugin uses PEAR coding standard.
- *
- * Eventually this will be upgraded to psr-4 standard once support for PHP 5.2 is dropped.
- *
- * @param string $class_name The name of the class that should be autoloaded.
- */
-function bm_autoloader( $class_name ) {
-	if ( false !== strpos( $class_name, 'BM' ) ) {
-		$base_dir = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'include' . DIRECTORY_SEPARATOR;
-
-		$class_path = str_replace( 'BM_', '', $class_name );
-		$class_path = str_replace( '_', DIRECTORY_SEPARATOR, $class_path ) . '.php';
-
-		$class_file = $base_dir . $class_path;
-
-		if ( file_exists( $class_file ) ) {
-			require_once $class_file;
-		}
+if ( version_compare( PHP_VERSION, '5.6.20', '<' ) ) {
+	/**
+	 * Version 2.0.0 of the Bulk Move plugin increased the minimum required version of PHP to 5.6
+	 * If you are still struck with PHP less than 5.6 and can't update, then use v1.3.0 of the plugin.
+	 *
+	 * @see   http://sudarmuthu.com/blog/why-i-am-dropping-support-for-php-5-2-in-my-wordpress-plugins/
+	 * @see   https://wordpress.org/news/2019/04/minimum-php-version-update/
+	 * @since 2.0.0
+	 */
+	function bulk_move_compatibility_notice() {
+		?>
+		<div class="error">
+			<p>
+				<?php
+				printf(
+					__( 'Bulk Move requires at least PHP 5.6.20 to function properly. Please upgrade PHP or use <a href="%s">v1.3.0 of Bulk Move</a>.', 'bulk-move' ), // @codingStandardsIgnoreLine
+					'https://downloads.wordpress.org/plugin/bulk-move.1.3.0.zip'
+				);
+				?>
+			</p>
+		</div>
+		<?php
 	}
+	add_action( 'admin_notices', 'bulk_move_compatibility_notice' );
+
+	/**
+	 * Deactivate Bulk Move.
+	 *
+	 * @since 2.0.0
+	 */
+	function bulk_move_deactivate() {
+		deactivate_plugins( plugin_basename( __FILE__ ) );
+	}
+	add_action( 'admin_init', 'bulk_move_deactivate' );
+
+	return;
 }
-spl_autoload_register( 'bm_autoloader' );
 
-/**
- * Load Bulk Move plugin.
- *
- * @since 2.0.0
- */
-function load_bulk_move() {
-	$bulk_move = bulk_move();
-	$bulk_move->set_plugin_file( __FILE__ );
-
-	add_action( 'plugins_loaded', array( $bulk_move, 'load' ), 101 );
-}
-
-load_bulk_move();
-
-/**
- * The main function responsible for returning the one true BM_BulkMove
- * Instance to functions everywhere.
- *
- * Use this function like you would a global variable, except without needing
- * to declare the global.
- *
- * Example: `$bulk_move = bulk_move();`
- *
- * @since  1.2.0
- *
- * @return \BM_BulkMove The one true BulkMove Instance.
- */
-function bulk_move() {
-	return BM_BulkMove::get_instance();
-}
+// PHP is at least 5.6.20, so we can safely include namespace code.
+require_once 'load-bulk-move.php';
+bulk_move_load( __FILE__ );

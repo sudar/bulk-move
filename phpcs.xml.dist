@@ -2,15 +2,15 @@
 <ruleset name="Bulk Move">
 	<description>Bulk Move coding standard</description>
 
+	<!-- Show progress and sniff codes in all reports -->
+	<arg value="ps"/>
+
 	<file>./</file>
 
-    <!-- Show sniff codes in all reports -->
-    <arg value="s"/>
-
  	<!-- Non code directories -->
-	<exclude-pattern>docs/*</exclude-pattern>
-	<exclude-pattern>dist/*</exclude-pattern>
 	<exclude-pattern>code-coverage/*</exclude-pattern>
+	<exclude-pattern>dist/*</exclude-pattern>
+	<exclude-pattern>docs/*</exclude-pattern>
  	<exclude-pattern>node_modules/*</exclude-pattern>
  	<exclude-pattern>vendor/*</exclude-pattern>
  	<exclude-pattern>Gruntfile.js</exclude-pattern>
@@ -26,29 +26,57 @@
  	<exclude-pattern>assets/js/*.min.js</exclude-pattern>
 
 	<!-- PHP Compatibility -->
-	<config name="testVersion" value="5.2-"/>
-	<rule ref="PHPCompatibility">
-		<exclude-pattern>*/tests/*</exclude-pattern>
+	<config name="testVersion" value="5.6-"/>
+	<rule ref="PHPCompatibilityWP">
 	</rule>
 
 	<!--Code-->
 	<rule ref="WordPress-Extra">
 		<!-- Exclude suggestion to use esc_html__() instead of _e() -->
-		<exclude name="WordPress.XSS.EscapeOutput.UnsafePrintingFunction"/>
+		<exclude name="WordPress.Security.EscapeOutput.UnsafePrintingFunction"/>
 
 		<!-- Allow File names with psr-2 structure -->
 		<exclude name="Generic.Files.LowercasedFilename.NotFound"/>
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
-
-        <!-- Even arrays that have one item are getting flagged -->
-		<exclude name="WordPress.Arrays.ArrayDeclarationSpacing.AssociativeKeyFound"/>
 	</rule>
 
 	<!--Docs-->
 	<rule ref="WordPress-Docs">
-        <!-- Since we are using namespace, no need to include package -->
+		<!-- Since we are using namespace, no need to include package -->
 		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
 		<exclude name="Squiz.Commenting.FileComment.Missing"/>
+	</rule>
+
+	<!-- Properties -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array" value="bulk-move" />
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array" value="bm,BM,BulkWP,BulkMove,bulk_move" />
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.WP.GlobalVariablesOverride">
+		<properties>
+			<property name="custom_test_class_whitelist" type="array" value="WPCoreUnitTestCase" />
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.Files.FileName">
+		<exclude-pattern>tests/*</exclude-pattern>
+		<properties>
+			<property name="strict_class_file_names" value="false" />
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.Security.EscapeOutput">
+		<properties>
+			<property name="customAutoEscapedFunctions" type="array" value="__" />
+		</properties>
 	</rule>
 </ruleset>
