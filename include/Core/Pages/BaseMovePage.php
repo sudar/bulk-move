@@ -133,7 +133,7 @@ abstract class BaseMovePage {
 		add_filter( 'bm_plugin_action_links', array( $this, 'append_to_plugin_action_links' ) );
 		add_filter( 'bm_metabox_user_meta_field', array(
 			$this,
-			'modify_metabox_user_meta_field_if_bulk_delete_is_installed'
+			'modify_metabox_user_meta_field_if_bulk_delete_is_installed',
 		), 10, 2 );
 	}
 
@@ -240,7 +240,7 @@ abstract class BaseMovePage {
 		wp_enqueue_script( 'bulk-move', $this->get_plugin_dir_url() . 'assets/js/src/bulk-move.js', array(
 			'jquery',
 			'postbox',
-			'select2'
+			'select2',
 		), BulkMove::VERSION, true );
 
 		$msg = array(

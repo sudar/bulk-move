@@ -65,7 +65,7 @@ class LoadTaxonomyAction {
 		if ( ! is_wp_error( $wp_terms ) ) {
 			foreach ( $wp_terms as $wp_term ) {
 				$terms[ $wp_term->term_id ] = array( 'term_name'  => esc_html( $wp_term->name ),
-				                                     'term_count' => absint( $wp_term->count )
+				                                     'term_count' => absint( $wp_term->count ),
 				);
 			}
 		}
@@ -89,6 +89,7 @@ class LoadTaxonomyAction {
 	 * @param $translation_array
 	 *
 	 * @return array $translation_array
+	 *
 	 * @since 2.0.0
 	 *
 	 */

@@ -36,15 +36,15 @@ class LoadTaxonomyTermAction {
 		$return = array();
 
 		$terms = get_terms( array(
-			'taxonomy' => sanitize_text_field( $_GET['term'] ),
+			'taxonomy'   => sanitize_text_field( $_GET['term'] ),
 			'hide_empty' => false,
-			'search' => sanitize_text_field( $_GET['q'] ),
+			'search'     => sanitize_text_field( $_GET['q'] ),
 		) );
 
 		foreach ( $terms as $term ) {
 			$return[] = array(
 				absint( $term->term_id ),
-				$term->name . ' (' . $term->count . __( ' Posts', 'bulk-move' ) . ')'
+				$term->name . ' (' . $term->count . __( ' Posts', 'bulk-move' ) . ')',
 			);
 		}
 
