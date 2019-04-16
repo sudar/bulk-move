@@ -90,7 +90,7 @@ final class BulkMove {
 	/**
 	 * Singleton instance of the Plugin.
 	 *
-	 * @var \BulkMove
+	 * @var BulkMove
 	 */
 	private static $instance = null;
 

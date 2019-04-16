@@ -45,9 +45,9 @@ function bulk_move_load( $plugin_file ) {
  *
  * Example: `$bulk_move = bulk_move();`
  *
- * @return \BulkMove The one true BulkMove Instance.
- *@since  1.2.0
+ * @since  1.2.0
  *
+ * @return BulkMove The one true BulkMove Instance.
  */
 function bulk_move() {
 	return BulkMove::get_instance();
