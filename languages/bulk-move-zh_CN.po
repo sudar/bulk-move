@@ -1,0 +1,353 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Bulk Move\n"
+"POT-Creation-Date: 2020-05-01 20:10+0800\n"
+"PO-Revision-Date: 2020-05-01 20:55+0800\n"
+"Last-Translator: WordPress大学 <<support@wpdaxue.com>>\n"
+"Language-Team: WordPress大学 <<support@wpdaxue.com>>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.4\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: bulk-move.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: bulk-move.php:129 bulk-move.php:142
+msgid "Cheatin&#8217; huh?"
+msgstr "您在和我开玩笑？"
+
+#. Plugin Name of the plugin/theme
+#: bulk-move.php:210
+msgid "Bulk Move"
+msgstr "批量移动"
+
+#: bulk-move.php:236
+msgid "About Plugin"
+msgstr "关于插件"
+
+#: bulk-move.php:238
+msgid ""
+"This plugin allows you to move posts in bulk from selected categories to "
+"another category"
+msgstr "此插件可让您将文章从选定的分类中批量移动到另一个分类"
+
+#: bulk-move.php:244
+msgid "More information"
+msgstr "更多信息"
+
+#: bulk-move.php:245
+msgid "Plugin Homepage/support"
+msgstr "插件首页/支持"
+
+#: bulk-move.php:246
+msgid "Plugin author's blog"
+msgstr "插件作者的博客"
+
+#: bulk-move.php:247
+msgid "Other Plugin's by Author"
+msgstr "作者的其他插件"
+
+#: bulk-move.php:263
+msgid "Bulk Move By Category"
+msgstr "通过分类批量移动"
+
+#: bulk-move.php:264
+msgid "Bulk Move By Tag"
+msgstr "通过标签批量移动"
+
+#: bulk-move.php:265
+msgid "Bulk Move Category By Tag"
+msgstr "通过标签批量移动分类"
+
+#: bulk-move.php:266
+msgid "Bulk Move By Custom Taxonomy"
+msgstr "通过自定义分类批量移动"
+
+#: bulk-move.php:267
+msgid "Debug Information"
+msgstr "调试信息"
+
+#: bulk-move.php:276
+msgid "Bulk Move Posts"
+msgstr "批量移动文章"
+
+#: bulk-move.php:291
+msgid "WARNING: Posts moved once cannot be retrieved back. Use with caution."
+msgstr "警告：文章一旦移动将无法撤回，请谨慎使用。"
+
+#: bulk-move.php:316
+msgid "plugin"
+msgstr "插件"
+
+#: bulk-move.php:316
+msgid "Version"
+msgstr "版本"
+
+#: bulk-move.php:316
+msgid "by"
+msgstr "作者"
+
+#: bulk-move.php:326
+msgid "Are you sure you want to move all the selected posts"
+msgstr "您确定要移动所有选中的文章吗"
+
+#: bulk-move.php:330
+msgid "Please select least one option"
+msgstr "请至少选择一个选项"
+
+#: bulk-move.php:401
+msgid "Manage"
+msgstr "管理"
+
+#: include/class-bulk-move-posts.php:19 include/class-bulk-move-posts.php:134
+#: include/class-bulk-move-posts.php:233 include/class-bulk-move-posts.php:506
+#, php-format
+msgid ""
+"This section just got enabled. Kindly <a href = \"%1$s\">refresh</a> the "
+"page to fully enable it."
+msgstr "本部分刚刚启用。请<a href = \"%1$s\">刷新</a>页面以完全启用它。"
+
+#: include/class-bulk-move-posts.php:25
+msgid ""
+"On the left side, select the category whose post you want to move. In the "
+"right side select the category to which you want the posts to be moved."
+msgstr ""
+"在左侧，选择要从哪个分类移动文章。在右侧，选择要将文章移动到哪个分类。"
+
+#: include/class-bulk-move-posts.php:50
+msgid "Remove Category"
+msgstr "删除分类"
+
+#: include/class-bulk-move-posts.php:58 include/class-bulk-move-posts.php:273
+msgid "If the post contains other categories, then"
+msgstr "如果文章包含其他分类，则"
+
+#: include/class-bulk-move-posts.php:59 include/class-bulk-move-posts.php:164
+#: include/class-bulk-move-posts.php:274 include/class-bulk-move-posts.php:578
+msgid "Remove them"
+msgstr "删除它们"
+
+#: include/class-bulk-move-posts.php:60 include/class-bulk-move-posts.php:165
+#: include/class-bulk-move-posts.php:275 include/class-bulk-move-posts.php:579
+msgid "Don't remove them"
+msgstr "不要删除它们"
+
+#: include/class-bulk-move-posts.php:65 include/class-bulk-move-posts.php:169
+#: include/class-bulk-move-posts.php:279 include/class-bulk-move-posts.php:585
+msgid "Bulk Move "
+msgstr "批量移动 "
+
+#: include/class-bulk-move-posts.php:120
+#, php-format
+msgid "Moved %d post from the selected category"
+msgid_plural "Moved %d posts from the selected category"
+msgstr[0] "已将%d个文章从所选分类中移出"
+msgstr[1] "已将%d个文章从所选分类中移出"
+
+#: include/class-bulk-move-posts.php:147
+msgid ""
+"On the left side, select the tag whose post you want to move. In the right "
+"side select the tag to which you want the posts to be moved."
+msgstr ""
+"在左侧，选择要从哪个标签移动文章。在右侧，选择要将文章移动到哪个标签。"
+
+#: include/class-bulk-move-posts.php:163
+msgid "If the post contains other tags, then"
+msgstr "如果文章中包含其他标签，则"
+
+#: include/class-bulk-move-posts.php:219
+#, php-format
+msgid "Moved %d post from the selected tag"
+msgid_plural "Moved %d posts from the selected tag"
+msgstr[0] "已将%d个文章从所选标签中移出"
+msgstr[1] "已将%d个文章从所选标签中移出"
+
+#: include/class-bulk-move-posts.php:247
+msgid ""
+"On the left side, select the tag whose post you want to move. In the right "
+"side select the category to which you want the posts to be moved."
+msgstr ""
+"在左侧，选择要从哪个标签移动文章。在右侧，选择要将文章移动到哪个分类。"
+
+#: include/class-bulk-move-posts.php:265
+msgid "Choose Category"
+msgstr "选择分类"
+
+#: include/class-bulk-move-posts.php:334
+#, php-format
+msgid "Moved %d post from the selected tag to the new category."
+msgid_plural "Moved %d posts from the selected tag to the new category."
+msgstr[0] "已将%d个文章从所选标签移动到新分类。"
+msgstr[1] "已将%d个文章从所选标签移动到新分类。"
+
+#: include/class-bulk-move-posts.php:356
+msgid ""
+"If you are seeing a blank page after clicking the Bulk Move button, then "
+msgstr "如果单击批量移动通过钮后看到空白页，则 "
+
+#: include/class-bulk-move-posts.php:357
+msgid "check out this FAQ"
+msgstr "查看常见问题解答"
+
+#: include/class-bulk-move-posts.php:358
+msgid "You also need need the following debug information."
+msgstr "您还可以查看以下调试信息。"
+
+#: include/class-bulk-move-posts.php:362
+msgid "PHP Version "
+msgstr "PHP版本 "
+
+#: include/class-bulk-move-posts.php:366
+msgid "WordPress Version "
+msgstr "WordPress 版本 "
+
+#: include/class-bulk-move-posts.php:370
+msgid "Plugin Version "
+msgstr "插件版本 "
+
+#: include/class-bulk-move-posts.php:374
+msgid "Available memory size "
+msgstr "可用内存大小 "
+
+#: include/class-bulk-move-posts.php:378
+msgid "Script time out "
+msgstr "脚本超时 "
+
+#: include/class-bulk-move-posts.php:379
+msgid "In php.ini"
+msgstr "在 php.ini 中"
+
+#: include/class-bulk-move-posts.php:379
+msgid "Custom value: "
+msgstr "自定义值： "
+
+#: include/class-bulk-move-posts.php:379
+msgid "Save"
+msgstr "保存"
+
+#: include/class-bulk-move-posts.php:382
+msgid "Script input time "
+msgstr "脚本输入时间 "
+
+#: include/class-bulk-move-posts.php:387
+msgid "If you are looking to delete posts in bulk, try out my "
+msgstr "如果您要批量删除文章，请尝试我的 "
+
+#: include/class-bulk-move-posts.php:387
+msgid "Bulk Delete Plugin"
+msgstr "批量删除插件"
+
+#: include/class-bulk-move-posts.php:410
+#, php-format
+msgid "Max execution time was successfully saved as %s seconds."
+msgstr "最大执行时间已成功保存为%s秒。"
+
+#: include/class-bulk-move-posts.php:413
+msgid "An unknown error occurred while saving your options."
+msgstr "保存您的选项时发生未知错误。"
+
+#: include/class-bulk-move-posts.php:417
+#, php-format
+msgid ""
+"Could not update the max execution time to %s, it was not numeric.  Enter "
+"the max number of seconds this script should run."
+msgstr "无法将最大执行时间更新为%s，它不是数字。输入此脚本应运行的最大秒数。"
+
+#: include/class-bulk-move-posts.php:450
+#, php-format
+msgid "There are no taxonomies associated with \"%s\" post type."
+msgstr "没有与“%s”文章类型相关的分类法。"
+
+#: include/class-bulk-move-posts.php:456 include/class-bulk-move-posts.php:549
+msgid "Select Taxonomy"
+msgstr "选择分类法"
+
+#: include/class-bulk-move-posts.php:486
+#, php-format
+msgid "There are no terms associated with \"%s\" taxonomy."
+msgstr "没有与“%s”分类法相关的分类。"
+
+#: include/class-bulk-move-posts.php:492
+msgid "Select Term"
+msgstr "选择分类"
+
+#: include/class-bulk-move-posts.php:493
+msgid "Remove Term"
+msgstr "删除分类"
+
+#: include/class-bulk-move-posts.php:518
+msgid "Select the post type to show its custom taxonomy."
+msgstr "选择文章类型以便显示它的自定义分类法。"
+
+#: include/class-bulk-move-posts.php:526
+msgid "Select Post type"
+msgstr "选择文章类型"
+
+#: include/class-bulk-move-posts.php:541
+msgid "Select taxonomy to show its terms."
+msgstr "选择分类法以显示它的分类。"
+
+#: include/class-bulk-move-posts.php:556
+msgid "Select terms to move its posts."
+msgstr "选择分类以便移动它的文章。"
+
+#: include/class-bulk-move-posts.php:564
+msgid " Select Term&nbsp;&nbsp;"
+msgstr " 选择分类&nbsp;&nbsp;"
+
+#: include/class-bulk-move-posts.php:570
+msgid "Remove Term&nbsp;&nbsp;"
+msgstr "删除分类&nbsp;&nbsp;"
+
+#: include/class-bulk-move-posts.php:577
+msgid "If the post contains other terms, then"
+msgstr "如果文章中包含其他分类，则"
+
+#. translators: 1 number of posts deleted, 2 the taxonomy from which the posts were deleted
+#: include/class-bulk-move-posts.php:649
+#, php-format
+msgid "Moved %1$d post from the selected %2$s taxonomy"
+msgid_plural "Moved %1$d posts from the selected %2$s taxonomy"
+msgstr[0] "已将%1$d个文章从所选的%2$s分类中移出"
+msgstr[1] "已将%1$d个文章从所选的%2$s分类中移出"
+
+#: include/class-bulk-move-util.php:57
+msgid "There are no tags present. Add some tags to move posts based on tags."
+msgstr "目前还没有标签。添加一些标签以基于标签移动文章。"
+
+#: include/class-bulk-move-util.php:76
+msgid "Remove Tag"
+msgstr "删除标签"
+
+#: include/class-bulk-move-util.php:81
+msgid "Posts"
+msgstr "文章"
+
+#. Plugin URI of the plugin/theme
+msgid "http://sudarmuthu.com/wordpress/bulk-move"
+msgstr "http://sudarmuthu.com/wordpress/bulk-move"
+
+#. Description of the plugin/theme
+msgid ""
+"Move or remove posts in bulk from one category, tag or custom taxonomy to "
+"another"
+msgstr ""
+"将文章从一个分类、标签或自定义分类法中批量移动或删除到另一个。感谢 WordPress"
+"大学 https://www.wpdaxue.com 提供简体中文支持"
+
+#. Author of the plugin/theme
+msgid "Sudar"
+msgstr "Sudar"
+
+#. Author URI of the plugin/theme
+msgid "http://sudarmuthu.com/"
+msgstr "http://sudarmuthu.com/"
